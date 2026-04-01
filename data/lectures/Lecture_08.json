@@ -1,0 +1,1820 @@
+{
+  "lectureId": "Lecture_08",
+  "lectureTitle": "Medical Imaging — Lecture 08",
+  "totalSlides": 43,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Hello everyone, in this lecture, we’ll continue our foundational story and focus",
+      "bullets": [
+        "The content you see here is part of a larger foundation in medical imaging. Once you have a solid grasp of these concepts, it will be much easier to understand advanced topics like X-ray tomography, nuclear imaging, and MRI.",
+        "Fourier analysis is central to all of these areas. We’ll use it to analyze and process signals in both continuous and discrete forms, and to move back and forth between the time or spatial domain and the frequency domain, in either a continuous or discrete form.",
+        "In practice, we digitize signals and then perform operations such as convolution, Fourier transforms, and inverse Fourier transforms in one dimension, two dimensions, and beyond. This lecture will begin building the tools you need for that process."
+      ],
+      "fullText": "Hello everyone, in this lecture, we’ll continue our foundational story and focus on understanding the discrete Fourier transform, or DFT, and its inverse, the IDFT. These slides and my book draft will be your main reference, and they provide a clear, step-by-step path for following the key steps and get the main idea.\n\nThe content you see here is part of a larger foundation in medical imaging. Once you have a solid grasp of these concepts, it will be much easier to understand advanced topics like X-ray tomography, nuclear imaging, and MRI.\n\nFourier analysis is central to all of these areas. We’ll use it to analyze and process signals in both continuous and discrete forms, and to move back and forth between the time or spatial domain and the frequency domain, in either a continuous or discrete form.\n\nIn practice, we digitize signals and then perform operations such as convolution, Fourier transforms, and inverse Fourier transforms in one dimension, two dimensions, and beyond. This lecture will begin building the tools you need for that process.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide1.JPG",
+      "script": "Hello everyone, in this lecture, we'll continue our foundational story and focus on understanding the discrete Fourier transform, or DFT, and its inverse, the IDFT. These slides and my book draft will be your main reference, and they provide a clear, step-by-step path for following the key steps and getting the main idea.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Lecture Focus"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Key Concepts"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Signal Analysis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "We’re moving along right on track in our journey through this course.",
+      "bullets": [
+        "If you’ve had the chance to preview the reading materials for today, that’s great — it will help you connect the concepts more quickly. If not, that’s fine too.",
+        "Just follow along closely, and make time afterward to review the main ideas. Building this habit of reinforcing concepts as we go will make your understanding stronger and more intuitive, especially as the topics become more mathematical."
+      ],
+      "fullText": "We’re moving along right on track in our journey through this course.\u000b\nIf you’ve had the chance to preview the reading materials for today, that’s great — it will help you connect the concepts more quickly. If not, that’s fine too.\n\nJust follow along closely, and make time afterward to review the main ideas. Building this habit of reinforcing concepts as we go will make your understanding stronger and more intuitive, especially as the topics become more mathematical.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide2.JPG",
+      "script": "We're moving along right on track in our journey through this course. If you've had the chance to preview the reading materials for today, that's great – it will help you connect the concepts more quickly. If not, that's fine too. Just follow along closely, and make time afterward to review the main ideas.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Preview reading materials"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Follow along closely"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Reinforce concepts as you go"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "In our last lecture, we examined the sampling theorem in detail, focusing on key",
+      "bullets": [
+        "Here’s the key idea:",
+        "We start with a continuous signal, f of t, shown here. When we sample it at regular time intervals — let's call that interval delta-t — we obtain a discrete sequence of values. The sampling theorem tells us that, if certain conditions are met, we can reconstruct the original continuous signal from these samples without losing any information.",
+        "That’s remarkable — because even though we only record values at specific time points, and there’s “missing” information in between, the theorem guarantees perfect recovery. But this only works if the original signal’s Fourier transform is band-limited. That means its frequency spectrum is essentially zero outside a certain range, from minus w to plus w.",
+        "In the frequency domain, sampling corresponds to a convolution between the original continuous Fourier spectrum and a periodic train of delta functions. This delta train in frequency comes from the Fourier transform of the impulse train in time. The spacing between the deltas in frequency — which we’ll call P — is the reciprocal of the sampling interval delta-t.",
+        "To avoid any distortion, P must be at least 2 W. This ensures there is no overlap between the repeated copies of the spectrum in the frequency domain. You can think of each delta function as a “copying machine” — each one shifts and reproduces the original spectrum at regular intervals. If the copies don’t overlap, the original information is preserved perfectly.",
+        "In practice, we can apply a low-pass filter to keep only the central copy of the spectrum, then perform an inverse Fourier transform to reconstruct the exact original signal.",
+        "Now, a small note about the special case where P equals exactly 2 W: here, the copies just touch at a single point. This doesn’t cause problems unless that single point is a delta function with a finite value — in which case it could contribute to the result. But in most practical signals, that single point has no significant effect."
+      ],
+      "fullText": "In our last lecture, we examined the sampling theorem in detail, focusing on key concepts such as the sampling rate and the Nyquist rate. By now, you should have a clear idea of why, under certain conditions, we can perfectly recover a continuous signal from its sampled version.\n\nHere’s the key idea:\u000bWe start with a continuous signal, f of t, shown here. When we sample it at regular time intervals — let's call that interval delta-t — we obtain a discrete sequence of values. The sampling theorem tells us that, if certain conditions are met, we can reconstruct the original continuous signal from these samples without losing any information.\n\nThat’s remarkable — because even though we only record values at specific time points, and there’s “missing” information in between, the theorem guarantees perfect recovery. But this only works if the original signal’s Fourier transform is band-limited. That means its frequency spectrum is essentially zero outside a certain range, from minus w to plus w.\n\nIn the frequency domain, sampling corresponds to a convolution between the original continuous Fourier spectrum and a periodic train of delta functions. This delta train in frequency comes from the Fourier transform of the impulse train in time. The spacing between the deltas in frequency — which we’ll call P — is the reciprocal of the sampling interval delta-t.\n\nTo avoid any distortion, P must be at least 2 W. This ensures there is no overlap between the repeated copies of the spectrum in the frequency domain. You can think of each delta function as a “copying machine” — each one shifts and reproduces the original spectrum at regular intervals. If the copies don’t overlap, the original information is preserved perfectly.\n\nIn practice, we can apply a low-pass filter to keep only the central copy of the spectrum, then perform an inverse Fourier transform to reconstruct the exact original signal.\n\nNow, a small note about the special case where P equals exactly 2 W: here, the copies just touch at a single point. This doesn’t cause problems unless that single point is a delta function with a finite value — in which case it could contribute to the result. But in most practical signals, that single point has no significant effect.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide3.JPG",
+      "script": "In our last lecture, we dug deep into the sampling theorem, exploring its core concepts, including the sampling rate and the Nyquist rate. By now, you should have a solid understanding of why, under specific conditions, we can accurately recover a continuous signal from its sampled version. This is all about taking a continuous signal, like f of t, and turning it into a discrete sequence of values by sampling it at regular intervals, delta-t. The sampling theorem provides the conditions under which we can perfectly reconstruct the original continuous signal from its sampled version.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Sampling Theorem"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Band-Limited Signal"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Delta Train in Frequency"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "Now let’s look at the special case where P equals exactly 2 w.",
+      "bullets": [
+        "Suppose our continuous signal is a pure sine wave with a frequency of 1 hertz. That means it completes exactly one cycle in one second. In the frequency domain, this is a band-limited signal — its maximum frequency is 1 hertz.",
+        "If we sample at exactly twice that frequency — so at 2 hertz — we meet the Nyquist rate exactly. In this case, we take two samples within each cycle. For a pure sinusoid, two unknowns fully describe it: the amplitude and the phase. In theory, two samples per cycle should be enough to determine those two unknowns.",
+        "However, here’s the problem. Depending on where the samples fall, we might end up with the exact same sample value each time — for example, always sampling at the zero crossings of the sine wave. In that case, all our samples would be zero, and we would have no reliable way to determine the original signal.",
+        "In the Fourier domain, a pure sine wave corresponds to a pair of delta functions located at its positive and negative frequency components. When we sample at exactly 2 w, the duplicated spectra in the frequency domain just touch each other. If the touching points happen to be delta functions, those deltas overlap, and we can no longer separate the contributions from each one. Mathematically, it’s like having the equation X plus Y equals C — you know the sum, but not the individual values. This is an aliasing problem.",
+        "That’s why, in practice, sampling exactly at 2 w is risky. To be safe, we require PPP — the spacing between repeated spectra in frequency — to be slightly greater than 2 w. In other words, the sampling rate should be a little higher than twice the maximum frequency in the signal. This extra margin ensures that no overlap occurs, and reconstruction remains reliable."
+      ],
+      "fullText": "Now let’s look at the special case where P equals exactly 2 w.\n\nSuppose our continuous signal is a pure sine wave with a frequency of 1 hertz. That means it completes exactly one cycle in one second. In the frequency domain, this is a band-limited signal — its maximum frequency is 1 hertz.\nIf we sample at exactly twice that frequency — so at 2 hertz — we meet the Nyquist rate exactly. In this case, we take two samples within each cycle. For a pure sinusoid, two unknowns fully describe it: the amplitude and the phase. In theory, two samples per cycle should be enough to determine those two unknowns.\n\nHowever, here’s the problem. Depending on where the samples fall, we might end up with the exact same sample value each time — for example, always sampling at the zero crossings of the sine wave. In that case, all our samples would be zero, and we would have no reliable way to determine the original signal.\n\nIn the Fourier domain, a pure sine wave corresponds to a pair of delta functions located at its positive and negative frequency components. When we sample at exactly 2 w, the duplicated spectra in the frequency domain just touch each other. If the touching points happen to be delta functions, those deltas overlap, and we can no longer separate the contributions from each one. Mathematically, it’s like having the equation X plus Y equals C — you know the sum, but not the individual values. This is an aliasing problem.\n\nThat’s why, in practice, sampling exactly at 2 w is risky. To be safe, we require PPP — the spacing between repeated spectra in frequency — to be slightly greater than 2 w. In other words, the sampling rate should be a little higher than twice the maximum frequency in the signal. This extra margin ensures that no overlap occurs, and reconstruction remains reliable.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide4.JPG",
+      "script": "Suppose our continuous signal is a pure sine wave with a frequency of 1 hertz. That means it completes exactly one cycle in one second. In the frequency domain, this is a band-limited signal — its maximum frequency is 1 hertz. If we sample at exactly twice that frequency — so at 2 hertz — we meet the Nyquist rate exactly. In this case, we take two samples within each cycle. For a pure sinusoid, two unknowns fully describe it: the amplitude and the phase. In theory, two samples per cycle should be enough to determine those two unknowns, allowing us to reconstruct the original signal perfectly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 24000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 3000,
+          "label": "Pure sine wave example"
+        },
+        {
+          "timeMs": 27000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Two samples per cycle"
+        },
+        {
+          "timeMs": 33000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Aliasing problem"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Here, we have the whole derivation of the sampling theorem summarized on one pag",
+      "bullets": [
+        "You see a few steps underlined in red. These are the important turning points in the math — the places where something key happens. In a detailed lecture, we would walk through each of them slowly, but here, I want to focus on the big picture.",
+        "We start in the frequency domain, where the spectrum of our signal is multiplied by a periodic train of impulses. When we bring this back to the time domain, that multiplication turns into a convolution. The result of that convolution involves a special function called “sinc,” which naturally appears when you take the Fourier transform of a rectangular shape in frequency.",
+        "Next, when we write out the convolution, we see it as an infinite sum — a series of shifted sinc functions. Each one is scaled by the value of our signal at a sample point. The distance between these samples is delta-t, and that’s simply one over P, the spacing in the frequency domain.",
+        "The final line is the famous Shannon interpolation formula. In words, it says: take each sample of your signal, put a sinc function centered at that sample, scale it by the sample’s value, and then add them all together. Do this for every sample — stretching infinitely in both directions — and you get your original continuous signal back exactly, as long as the sampling conditions are satisfied.",
+        "This is a beautiful result. It tells us that perfect reconstruction is not just possible — it’s a direct consequence of the sampling theorem. And this formula is one of the core foundations of all digital signal processing."
+      ],
+      "fullText": "Here, we have the whole derivation of the sampling theorem summarized on one page.\n\nYou see a few steps underlined in red. These are the important turning points in the math — the places where something key happens. In a detailed lecture, we would walk through each of them slowly, but here, I want to focus on the big picture.\nWe start in the frequency domain, where the spectrum of our signal is multiplied by a periodic train of impulses. When we bring this back to the time domain, that multiplication turns into a convolution. The result of that convolution involves a special function called “sinc,” which naturally appears when you take the Fourier transform of a rectangular shape in frequency.\n\nNext, when we write out the convolution, we see it as an infinite sum — a series of shifted sinc functions. Each one is scaled by the value of our signal at a sample point. The distance between these samples is delta-t, and that’s simply one over P, the spacing in the frequency domain.\n\nThe final line is the famous Shannon interpolation formula. In words, it says: take each sample of your signal, put a sinc function centered at that sample, scale it by the sample’s value, and then add them all together. Do this for every sample — stretching infinitely in both directions — and you get your original continuous signal back exactly, as long as the sampling conditions are satisfied.\n\nThis is a beautiful result. It tells us that perfect reconstruction is not just possible — it’s a direct consequence of the sampling theorem. And this formula is one of the core foundations of all digital signal processing.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide5.JPG",
+      "script": "Here, we have the whole derivation of the sampling theorem summarized on one page. You see a few steps underlined in red, which are the important turning points in the math, where something key happens. Let's focus on the big picture, rather than getting bogged down in the details.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Important turning points"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Sinc function"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Shannon interpolation formula"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Let’s look at a good case — when our sampling rate is high enough to meet the sa",
+      "bullets": [
+        "The black curve here is our original, continuous signal. Think of it as the “true” signal. The blue points show where we took our samples — a limited number of values, spaced evenly in time.",
+        "Here’s the magic: if the sampling rate is greater than twice the maximum frequency in the signal — the Nyquist rate — then we can take these discrete samples and use the Shannon interpolation formula to reconstruct the original signal perfectly.",
+        "When we do that here, the reconstructed signal (shown in red) lies exactly on top of the original black curve. They match so perfectly that you can’t even see the difference.",
+        "This is the sampling theorem in action. For band-limited signals, as long as we sample fast enough, we can go back and forth between continuous and discrete forms without losing information. You can repeat this process over and over, with different sample sets, and it will work every time.",
+        "In short — with the right sampling rate, theory and practice agree perfectly."
+      ],
+      "fullText": "Let’s look at a good case — when our sampling rate is high enough to meet the sampling theorem’s requirement.\n\nThe black curve here is our original, continuous signal. Think of it as the “true” signal. The blue points show where we took our samples — a limited number of values, spaced evenly in time.\n\nHere’s the magic: if the sampling rate is greater than twice the maximum frequency in the signal — the Nyquist rate — then we can take these discrete samples and use the Shannon interpolation formula to reconstruct the original signal perfectly.\nWhen we do that here, the reconstructed signal (shown in red) lies exactly on top of the original black curve. They match so perfectly that you can’t even see the difference.\n\nThis is the sampling theorem in action. For band-limited signals, as long as we sample fast enough, we can go back and forth between continuous and discrete forms without losing information. You can repeat this process over and over, with different sample sets, and it will work every time.\nIn short — with the right sampling rate, theory and practice agree perfectly.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide6.JPG",
+      "script": "Let's look at a good case where our sampling rate is high enough to meet the sampling theorem's requirement. The black curve represents the original, continuous signal, while the blue points mark the sampled values. If the sampling rate exceeds the Nyquist rate, which is twice the maximum frequency in the signal, we can use the Shannon interpolation formula to perfectly reconstruct the original signal from the discrete samples. This is a beautiful example of how the sampling theorem works.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Sampling Theorem"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Nyquist Rate"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Shannon Interpolation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "Now, here’s a bad case — when the sampling rate is too low.",
+      "bullets": [
+        "The black curve is again our original, continuous signal. The blue points are where we took our samples. And the red curve is what we get when we try to reconstruct the signal from those samples.",
+        "At the sample locations, the reconstructed red curve passes exactly through the blue points — so it matches the original at those specific spots. But between the sample points, the red curve drifts far away from the true black signal.",
+        "This mismatch is caused by aliasing. Because our sampling rate is less than twice the maximum frequency in the signal, the repeated spectra in the frequency domain overlap. That overlap distorts the information, and once it happens, no amount of interpolation can recover the original shape.",
+        "So, while the reconstruction looks fine exactly at the sampled points, the continuous waveform in between is completely wrong. This is why respecting the sampling theorem is essential — if you don’t sample fast enough, the damage is permanent."
+      ],
+      "fullText": "Now, here’s a bad case — when the sampling rate is too low.\n\nThe black curve is again our original, continuous signal. The blue points are where we took our samples. And the red curve is what we get when we try to reconstruct the signal from those samples.\nAt the sample locations, the reconstructed red curve passes exactly through the blue points — so it matches the original at those specific spots. But between the sample points, the red curve drifts far away from the true black signal.\n\nThis mismatch is caused by aliasing. Because our sampling rate is less than twice the maximum frequency in the signal, the repeated spectra in the frequency domain overlap. That overlap distorts the information, and once it happens, no amount of interpolation can recover the original shape.\n\nSo, while the reconstruction looks fine exactly at the sampled points, the continuous waveform in between is completely wrong. This is why respecting the sampling theorem is essential — if you don’t sample fast enough, the damage is permanent.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide7.JPG",
+      "script": "When the sampling rate is too low, the reconstructed signal drifts away from the original signal between sample points, resulting in a significant mismatch. This is due to aliasing, which occurs because our sampling rate is less than twice the maximum frequency in the signal. The reconstructed signal cannot accurately capture the original shape of the signal, leading to a loss of information. This highlights the importance of choosing a sufficient sampling rate to prevent aliasing and ensure accurate signal representation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 53000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Original Signal"
+        },
+        {
+          "timeMs": 53000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.35,
+          "durationMs": 2000,
+          "label": "Sampled Points"
+        },
+        {
+          "timeMs": 53000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.55,
+          "durationMs": 2000,
+          "label": "Reconstructed Signal"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "Let’s step back and see the big picture.",
+      "bullets": [
+        "There are really two parts here. On the top half, we have discretized the signal in the time domain. This means we start with a continuous signal, sample it at regular intervals, and get a discrete set of values — something we can store and process in a digital computer. If the sampling theorem is satisfied, this step causes no information loss.",
+        "But the story doesn’t end there. Even though our signal is now discrete in time, its Fourier spectrum is still continuous. And a continuous spectrum cannot be stored directly in a computer either.",
+        "That’s where the second part comes in — discretizing the spectrum. This is the central topic of this lecture. The idea is to take the continuous Fourier spectrum and multiply it by a periodic train of delta functions in the frequency domain. This multiplication in frequency corresponds to convolution in the time domain, which effectively copies our time-domain signal over and over again, spaced apart by a fixed period t.",
+        "In other words, sampling in one domain causes repetition — or duplication — in the other domain. When we discretize both the time-domain signal and the frequency-domain spectrum, we end up with a periodic structure in both domains.",
+        "The key point here is that now, both our signal in time and its spectrum in frequency are discrete and periodic. This makes them fully compatible with digital processing. And this is the foundation for moving toward the discrete Fourier transform."
+      ],
+      "fullText": "Let’s step back and see the big picture.\n\nThere are really two parts here. On the top half, we have discretized the signal in the time domain. This means we start with a continuous signal, sample it at regular intervals, and get a discrete set of values — something we can store and process in a digital computer. If the sampling theorem is satisfied, this step causes no information loss.\nBut the story doesn’t end there. Even though our signal is now discrete in time, its Fourier spectrum is still continuous. And a continuous spectrum cannot be stored directly in a computer either.\n\nThat’s where the second part comes in — discretizing the spectrum. This is the central topic of this lecture. The idea is to take the continuous Fourier spectrum and multiply it by a periodic train of delta functions in the frequency domain. This multiplication in frequency corresponds to convolution in the time domain, which effectively copies our time-domain signal over and over again, spaced apart by a fixed period t.\n\nIn other words, sampling in one domain causes repetition — or duplication — in the other domain. When we discretize both the time-domain signal and the frequency-domain spectrum, we end up with a periodic structure in both domains.\nThe key point here is that now, both our signal in time and its spectrum in frequency are discrete and periodic. This makes them fully compatible with digital processing. And this is the foundation for moving toward the discrete Fourier transform.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide8.JPG",
+      "script": "Let's step back and see the big picture. We have two parts: discretizing the signal in the time domain and dealing with the continuous Fourier spectrum. Discretizing the signal in the time domain involves sampling a continuous signal at regular intervals, resulting in a discrete set of values that can be stored and processed in a digital computer, as long as the sampling theorem is satisfied. However, the Fourier spectrum remains continuous, which cannot be stored directly in a computer.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Discretizing the signal"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Sampling theorem"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 2500,
+          "label": "Discretizing the spectrum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Signal sampling is a fundamental concept, but it can be confusing if you only lo",
+      "bullets": [
+        "At the top, we have our continuous signal, f x. This is defined for every value of x and could represent anything — a sound wave, an image profile, or a measured signal.",
+        "Next, we have what’s called a Shah function, or an impulse train. This is simply a series of delta functions, each spaced t units apart. Mathematically, it’s written as the sum of delta functions, where each one is located at x equals n T, with n being an integer. You can think of this impulse train as a ruler that marks the exact points where we’ll take our samples.",
+        "When we multiply the continuous signal f of x by this impulse train, we get the sampled function. This multiplication is done point-by-point: at each delta function’s location, we keep the value of f of x; everywhere else, the result is zero.",
+        "So the sampled signal is really the original signal’s values, “attached” to the impulses in the train. The impulses mark the positions, and the heights of the impulses carry the signal’s values at those positions.",
+        "In other words, the sampled function is just the original function, but only at discrete, regularly spaced points. This is the first step in moving from the continuous world to the digital world."
+      ],
+      "fullText": "Signal sampling is a fundamental concept, but it can be confusing if you only look at it quickly. So let’s slow down and really understand it.\nAt the top, we have our continuous signal, f x. This is defined for every value of x and could represent anything — a sound wave, an image profile, or a measured signal.\n\nNext, we have what’s called a Shah function, or an impulse train. This is simply a series of delta functions, each spaced t units apart. Mathematically, it’s written as the sum of delta functions, where each one is located at x equals n T, with n being an integer. You can think of this impulse train as a ruler that marks the exact points where we’ll take our samples.\n\nWhen we multiply the continuous signal f of x by this impulse train, we get the sampled function. This multiplication is done point-by-point: at each delta function’s location, we keep the value of f of x; everywhere else, the result is zero.\nSo the sampled signal is really the original signal’s values, “attached” to the impulses in the train. The impulses mark the positions, and the heights of the impulses carry the signal’s values at those positions.\n\nIn other words, the sampled function is just the original function, but only at discrete, regularly spaced points. This is the first step in moving from the continuous world to the digital world.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide9.JPG",
+      "script": "Let's break down the concept of signal sampling step by step. The continuous signal, f x, is defined for every value of x and could represent various physical quantities. The Shah function, or impulse train, is a series of delta functions spaced t units apart, located at x equals n T, where n is an integer. This impulse train marks the exact points where we sample the continuous signal, creating a discrete set of data points.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Continuous Signal"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Shah Function"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 2500,
+          "label": "Sampled Function"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "When we sample a signal in the time domain — or the spatial domain — it creates ",
+      "bullets": [
+        "Let’s walk through it.",
+        "We start with our original spectrum, which we’ll call F of u. Here, u represents frequency, and u-max is the highest frequency present in the signal — its bandwidth.",
+        "When we multiply our signal in time by an impulse train — a set of regularly spaced spikes — that multiplication turns into a convolution in frequency. The result is that the original spectrum gets repeated again and again, spaced apart by the sampling frequency.",
+        "In this diagram, the middle shape is the original spectrum. To the left and right, you can see identical copies. The spacing between them is one over capital T, where capital T is the sampling interval in time.",
+        "If our sampling frequency — which is one over T — is at least twice the maximum frequency in the signal, then these repeated copies don’t touch each other. In that case, we can simply keep the central copy and reconstruct the original signal perfectly.",
+        "But if we sample too slowly, the copies overlap. This overlap distorts the spectrum, and once that happens, there’s no way to separate the original from the distortion. That’s the aliasing problem we saw in the earlier “bad case” example."
+      ],
+      "fullText": "When we sample a signal in the time domain — or the spatial domain — it creates a very specific effect in the frequency domain. Sampling in one domain is equivalent to performing a convolution in the other domain.\n\nLet’s walk through it.\u000bWe start with our original spectrum, which we’ll call F of u. Here, u represents frequency, and u-max is the highest frequency present in the signal — its bandwidth.\nWhen we multiply our signal in time by an impulse train — a set of regularly spaced spikes — that multiplication turns into a convolution in frequency. The result is that the original spectrum gets repeated again and again, spaced apart by the sampling frequency.\n\nIn this diagram, the middle shape is the original spectrum. To the left and right, you can see identical copies. The spacing between them is one over capital T, where capital T is the sampling interval in time.\nIf our sampling frequency — which is one over T — is at least twice the maximum frequency in the signal, then these repeated copies don’t touch each other. In that case, we can simply keep the central copy and reconstruct the original signal perfectly.\n\nBut if we sample too slowly, the copies overlap. This overlap distorts the spectrum, and once that happens, there’s no way to separate the original from the distortion. That’s the aliasing problem we saw in the earlier “bad case” example.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide10.JPG",
+      "script": "When we sample a signal in the time domain, it creates a very specific effect in the frequency domain. This effect is due to the multiplication of the signal by an impulse train, which is equivalent to performing a convolution in the frequency domain. This convolution results in the original spectrum being modified, producing repeated copies or \"aliases\" of the original signal. These aliases are spaced apart by the sampling frequency and repeat indefinitely.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Sampling Effect"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Convolution in Frequency"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Repeated Spectrum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Here’s the Nyquist theorem in action.",
+      "bullets": [
+        "In the diagram, you can see the original spectrum and its repeated copies created by sampling. If our sampling rate is too low, these copies start to overlap. When that happens, the frequency components from one copy mix with those from another. This is aliasing — and once it occurs, we can’t tell which part of the spectrum came from the original signal and which part came from the overlap.",
+        "To avoid aliasing, we must make sure that the highest frequency in the signal — we call it u-max — is less than one divided by twice the sampling interval. In spoken terms, the sampling frequency must be greater than twice u-max. This threshold is called the Nyquist frequency.",
+        "When the condition is satisfied, we can use a rectangular filter — often called a gate function — to select just the central copy of the spectrum. That single copy contains all the information needed to perfectly reconstruct the original signal.",
+        "It’s like DNA testing — you don’t need the whole organism, just a small sample, because it contains the complete blueprint. In the same way, one clean copy of the spectrum contains everything we need.",
+        "But if the sampling rate is too low and overlap happens, no filter can separate the mixed components. The information is lost forever."
+      ],
+      "fullText": "Here’s the Nyquist theorem in action.\n\nIn the diagram, you can see the original spectrum and its repeated copies created by sampling. If our sampling rate is too low, these copies start to overlap. When that happens, the frequency components from one copy mix with those from another. This is aliasing — and once it occurs, we can’t tell which part of the spectrum came from the original signal and which part came from the overlap.\n\nTo avoid aliasing, we must make sure that the highest frequency in the signal — we call it u-max — is less than one divided by twice the sampling interval. In spoken terms, the sampling frequency must be greater than twice u-max. This threshold is called the Nyquist frequency.\n\nWhen the condition is satisfied, we can use a rectangular filter — often called a gate function — to select just the central copy of the spectrum. That single copy contains all the information needed to perfectly reconstruct the original signal.\nIt’s like DNA testing — you don’t need the whole organism, just a small sample, because it contains the complete blueprint. In the same way, one clean copy of the spectrum contains everything we need.\n\nBut if the sampling rate is too low and overlap happens, no filter can separate the mixed components. The information is lost forever.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide11.JPG",
+      "script": "The Nyquist theorem is in action when we see the original spectrum and its repeated copies created by sampling. If the sampling rate is too low, these copies start to overlap, causing aliasing. This overlap mixes frequency components from one copy with those from another, making it impossible to distinguish the original signal from the overlap. To avoid aliasing, the highest frequency in the signal, u-max, must be less than one divided by twice the sampling interval.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Nyquist theorem"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "aliasing"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.8,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Nyquist frequency"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Now let’s see why aliasing makes recovery non-unique.",
+      "bullets": [
+        "In this diagram, the red and blue curves represent two different sets of frequency components. When aliasing happens, these components overlap in the frequency domain. At the points where they overlap, what we measure is just the sum of their values.",
+        "For example, imagine that at a certain frequency, the blue component has a value of A, and the red component also has some value. When they overlap, all we see is their sum. That means many different combinations of blue and red could produce the exact same total.",
+        "In other words, you can’t tell exactly how much came from the blue curve and how much came from the red one. The information about their contributions is lost.",
+        "This is why aliasing is such a problem — once two spectra overlap, there is no unique way to separate them. No matter how you process the data, you can’t reconstruct the original spectrum with certainty.",
+        "That’s why the Nyquist theorem’s condition — sampling faster than twice the highest frequency — is so important. It prevents this kind of overlap, keeping the spectrum unique and recoverable."
+      ],
+      "fullText": "Now let’s see why aliasing makes recovery non-unique.\n\nIn this diagram, the red and blue curves represent two different sets of frequency components. When aliasing happens, these components overlap in the frequency domain. At the points where they overlap, what we measure is just the sum of their values.\nFor example, imagine that at a certain frequency, the blue component has a value of A, and the red component also has some value. When they overlap, all we see is their sum. That means many different combinations of blue and red could produce the exact same total.\n\nIn other words, you can’t tell exactly how much came from the blue curve and how much came from the red one. The information about their contributions is lost.\nThis is why aliasing is such a problem — once two spectra overlap, there is no unique way to separate them. No matter how you process the data, you can’t reconstruct the original spectrum with certainty.\n\nThat’s why the Nyquist theorem’s condition — sampling faster than twice the highest frequency — is so important. It prevents this kind of overlap, keeping the spectrum unique and recoverable.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide12.JPG",
+      "script": "When aliasing occurs, the overlapping components in the frequency domain make it impossible to tell which one contributed to the measured signal, resulting in non-uniqueness. This is because multiple combinations of blue and red components could produce the same total value, making it impossible to determine the correct underlying signal.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Aliasing causes non-uniqueness"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Overlapping components in frequency domain"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Many combinations produce same total value"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "Up to this point, we’ve been talking about aliasing and how to avoid it. Let’s n",
+      "bullets": [
+        "On the top row, you see our original continuous-time signal on the left. On the right, it’s been sampled — we now have a series of discrete values at regular time intervals.",
+        "On the bottom row, you see what this means in the frequency domain. On the left is the original spectrum, limited to a maximum frequency, u-max. On the right is the sampled spectrum — multiple, non-overlapping copies, spaced apart by the sampling frequency, which is one over capital T.",
+        "So yes, the signal is now discrete in time, and its spectrum is nicely replicated without overlap. But our job isn’t finished yet. The spectrum is still continuous in frequency. And if we want to fully digitize the signal — so that both the time domain and the frequency domain are discrete — we still have another step to go.",
+        "That step is discretizing the spectrum, which is exactly where we’re heading next."
+      ],
+      "fullText": "Up to this point, we’ve been talking about aliasing and how to avoid it. Let’s now assume we’ve done that — our sampling rate is always high enough, and the spectra are well separated. Aliasing is no longer an issue.\n\nOn the top row, you see our original continuous-time signal on the left. On the right, it’s been sampled — we now have a series of discrete values at regular time intervals.\n\nOn the bottom row, you see what this means in the frequency domain. On the left is the original spectrum, limited to a maximum frequency, u-max. On the right is the sampled spectrum — multiple, non-overlapping copies, spaced apart by the sampling frequency, which is one over capital T.\n\nSo yes, the signal is now discrete in time, and its spectrum is nicely replicated without overlap. But our job isn’t finished yet. The spectrum is still continuous in frequency. And if we want to fully digitize the signal — so that both the time domain and the frequency domain are discrete — we still have another step to go.\nThat step is discretizing the spectrum, which is exactly where we’re heading next.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide13.JPG",
+      "script": "Now that we've ensured our sampling rate is high enough to avoid aliasing, we can move forward with confidence. With well-separated spectra, we can reconstruct the original signal perfectly. This is because the discrete sampling process doesn't distort the frequency content of the signal.",
+      "spotlightEvents": []
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Now that our signal is discrete in time and aliasing is avoided, the next step i",
+      "bullets": [
+        "On the right, we start with the continuous, periodic Fourier spectrum of our sampled signal. The peaks are separated because our time-domain sampling rate was high enough. That’s good — no overlap here.",
+        "Our goal is to make the frequency domain discrete as well. To do that, we multiply the spectrum by a periodic train of impulses — shown here in green. This is just like what we did before in the time domain, but now we’re applying it in the frequency domain.",
+        "Multiplication in the frequency domain corresponds to convolution in the time domain. So, when we apply this green impulse train to the spectrum, the effect in the time domain is that our discrete signal gets duplicated at regular intervals, spaced by capital T.",
+        "Here, delta-u — the spacing between impulses in the frequency domain — equals one over capital T, where capital T is the period of each repeated signal in the time domain.",
+        "As before, we must choose our frequency-domain sampling rate carefully. The impulses in frequency must be close enough together — in other words, our spacing delta-u must be small enough — to avoid overlaps in the time domain. This is the same logic as before, just in the other domain.",
+        "By doing this, we end up with a signal that is discrete in both the time domain and the frequency domain. This is the essential step that brings us to the discrete Fourier transform, or DFT."
+      ],
+      "fullText": "Now that our signal is discrete in time and aliasing is avoided, the next step is to discretize the Fourier spectrum.\nOn the right, we start with the continuous, periodic Fourier spectrum of our sampled signal. The peaks are separated because our time-domain sampling rate was high enough. That’s good — no overlap here.\n\nOur goal is to make the frequency domain discrete as well. To do that, we multiply the spectrum by a periodic train of impulses — shown here in green. This is just like what we did before in the time domain, but now we’re applying it in the frequency domain.\nMultiplication in the frequency domain corresponds to convolution in the time domain. So, when we apply this green impulse train to the spectrum, the effect in the time domain is that our discrete signal gets duplicated at regular intervals, spaced by capital T.\nHere, delta-u — the spacing between impulses in the frequency domain — equals one over capital T, where capital T is the period of each repeated signal in the time domain.\n\nAs before, we must choose our frequency-domain sampling rate carefully. The impulses in frequency must be close enough together — in other words, our spacing delta-u must be small enough — to avoid overlaps in the time domain. This is the same logic as before, just in the other domain.\n\nBy doing this, we end up with a signal that is discrete in both the time domain and the frequency domain. This is the essential step that brings us to the discrete Fourier transform, or DFT.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide14.JPG",
+      "script": "Now that our signal is discrete in time and aliasing is avoided, the next step is to discretize the Fourier spectrum. We start with the continuous, periodic Fourier spectrum of our sampled signal, which has peaks that are separated because our time-domain sampling rate was high enough. To make the frequency domain discrete, we multiply the spectrum by a periodic train of impulses, which is a discrete set of delta functions spaced apart by delta-u equals one over T. This is similar to what we did in the time domain, but now applied in the frequency domain.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Discrete Fourier Spectrum"
+        },
+        {
+          "timeMs": 46000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Impulse Train in Frequency"
+        },
+        {
+          "timeMs": 49000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 2000,
+          "label": "Convolution in Time Domain"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "Let’s restate the big idea in another way.",
+      "bullets": [
+        "We start with a continuous function in the time domain, which we’ll call f of t. It has a continuous Fourier transform, capital F of u, in the frequency domain. These two are perfectly related — one can be transformed into the other with no loss of information.",
+        "Now, if we sample f of t at the Nyquist rate or higher, we get a discrete version of the signal — here shown as g of t. And because our sampling rate satisfies the theorem, there’s no loss of information in moving from the continuous signal to its discrete version.",
+        "That discrete-time signal, g of t, also has its own Fourier transform — here represented as capital G of u. And again, as long as we have sampled properly, this discrete spectrum contains the same information as the continuous spectrum, capital F of u.",
+        "The key point is that the Fourier transform is an invertible process. That means moving from f of t to capital F of u, or from g of t to capital G of u, can be done in either direction without losing information — as long as the sampling theorem is respected.",
+        "So whether we choose to work in the continuous domain or in the discrete domain, we can perform equivalent signal analysis. The difference is that in the real world, our computers are digital. That means we do everything in the discrete domain — but thanks to the theory, we can be confident that our results match what we would get in the continuous world."
+      ],
+      "fullText": "Let’s restate the big idea in another way.\n\nWe start with a continuous function in the time domain, which we’ll call f of t. It has a continuous Fourier transform, capital F of u, in the frequency domain. These two are perfectly related — one can be transformed into the other with no loss of information.\n\nNow, if we sample f of t at the Nyquist rate or higher, we get a discrete version of the signal — here shown as g of t. And because our sampling rate satisfies the theorem, there’s no loss of information in moving from the continuous signal to its discrete version.\nThat discrete-time signal, g of t, also has its own Fourier transform — here represented as capital G of u. And again, as long as we have sampled properly, this discrete spectrum contains the same information as the continuous spectrum, capital F of u.\n\nThe key point is that the Fourier transform is an invertible process. That means moving from f of t to capital F of u, or from g of t to capital G of u, can be done in either direction without losing information — as long as the sampling theorem is respected.\n\nSo whether we choose to work in the continuous domain or in the discrete domain, we can perform equivalent signal analysis. The difference is that in the real world, our computers are digital. That means we do everything in the discrete domain — but thanks to the theory, we can be confident that our results match what we would get in the continuous world.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide15.JPG",
+      "script": "We can apply the Fourier transform again, and because the sampling rate is high enough, the result is a discrete Fourier transform, capital G of u, that matches the original continuous Fourier transform, capital F of u. This means we can move back and forth between the time and frequency domains without losing any information, as long as the sampling rate meets the Nyquist theorem.",
+      "spotlightEvents": [
+        {
+          "timeMs": 32000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Sampling Theorem"
+        },
+        {
+          "timeMs": 35000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "No Information Loss"
+        },
+        {
+          "timeMs": 38000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 4000,
+          "label": "Invertible Process"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Let’s now bring everything together in one big picture, but with a bit more deta",
+      "bullets": [
+        "We start with a continuous function, f of t, and its continuous Fourier spectrum, capital F of u. Our goal is to sample both the time domain and the frequency domain in a way that makes sense for digital processing.",
+        "First, let’s ask: how many samples will we have in the time domain?",
+        "This depends on two things:",
+        "The sampling interval in time, delta-t. This is equal to one over capital P, where capital P is the spacing in the frequency domain. The smaller the delta-t, the more data points we collect.",
+        "The total duration of the signal, capital T. The longer we record, the more samples we have.",
+        "The total number of samples in the time domain — call it N — is simply the total duration T divided by delta-t. Since delta-t is one over P.",
+        "We can write:",
+        "N equals T multiplied by P.",
+        "Now let’s switch to the frequency domain.",
+        "Here, the total span of one period in frequency is capital P. The sampling interval in frequency, delta-u, is equal to one over capital T. So the total number of samples in frequency over one period — call it M — is the total span P divided by delta-u. That’s again P multiplied by T.",
+        "This symmetry is important:",
+        "The number of data points in the time domain and the number of data points in the frequency domain are the same — both equal to P multiplied by T.",
+        "So whether we’re sampling in time or in frequency, the total number of samples is determined by the product of the total span in one domain and the sampling density in the other.",
+        "This is the balanced relationship that underlies the discrete Fourier transform, and it’s why we can move between time and frequency representations so efficiently in digital signal processing."
+      ],
+      "fullText": "Let’s now bring everything together in one big picture, but with a bit more detail.\n\nWe start with a continuous function, f of t, and its continuous Fourier spectrum, capital F of u. Our goal is to sample both the time domain and the frequency domain in a way that makes sense for digital processing.\n\nFirst, let’s ask: how many samples will we have in the time domain?\nThis depends on two things:\nThe sampling interval in time, delta-t. This is equal to one over capital P, where capital P is the spacing in the frequency domain. The smaller the delta-t, the more data points we collect.\nThe total duration of the signal, capital T. The longer we record, the more samples we have.\nThe total number of samples in the time domain — call it N — is simply the total duration T divided by delta-t. Since delta-t is one over P.\n\nWe can write:\u000bN equals T multiplied by P.\nNow let’s switch to the frequency domain.\nHere, the total span of one period in frequency is capital P. The sampling interval in frequency, delta-u, is equal to one over capital T. So the total number of samples in frequency over one period — call it M — is the total span P divided by delta-u. That’s again P multiplied by T.\nThis symmetry is important:\u000bThe number of data points in the time domain and the number of data points in the frequency domain are the same — both equal to P multiplied by T.\n\nSo whether we’re sampling in time or in frequency, the total number of samples is determined by the product of the total span in one domain and the sampling density in the other.\n\nThis is the balanced relationship that underlies the discrete Fourier transform, and it’s why we can move between time and frequency representations so efficiently in digital signal processing.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide16.JPG",
+      "script": "Let's bring everything together in one big picture, but with a bit more detail. We start with a continuous function, f of t, and its continuous Fourier spectrum, capital F of u. Our goal is to sample both the time domain and the frequency domain in a way that makes sense for digital processing. The number of samples in the time domain depends on two things: the sampling interval in time, delta-t, and the total duration of the signal, capital T.",
+      "spotlightEvents": [
+        {
+          "timeMs": 6500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Sampling in Time and Frequency"
+        },
+        {
+          "timeMs": 7500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Delta-t and Capital P"
+        },
+        {
+          "timeMs": 8500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "More Data Points"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Now let’s highlight the key variables and the important relationship between the",
+      "bullets": [
+        "In the time domain, the total number of samples is T times P. Here, capital T is the total duration of the signal, and capital P is the spacing in the frequency domain. So we have N equal to T multiplied by P.",
+        "In the frequency domain, we have the exact same number of samples, also T multiplied by P. We call this number M, and here P is the total span of one period in frequency, while T controls the sampling density in frequency.",
+        "If we take the reciprocal of N, we get a very useful relationship:",
+        "1 over N equals delta-t times delta-u,",
+        "where delta-t is the sampling step size in time, and delta-u is the sampling step size in frequency.",
+        "This is an expression of the duality between time and frequency. If we fix the total number of samples N, making delta-t smaller — meaning we sample more finely in time — will make delta-u larger, meaning the frequency samples are spaced farther apart. And the reverse is also true.",
+        "In simple terms: if you zoom in more on one domain, you automatically zoom out in the other. This balance is built into the mathematics of the Fourier transform and is something we’ll use later when we look at applications."
+      ],
+      "fullText": "Now let’s highlight the key variables and the important relationship between them.\n\nIn the time domain, the total number of samples is T times P. Here, capital T is the total duration of the signal, and capital P is the spacing in the frequency domain. So we have N equal to T multiplied by P.\nIn the frequency domain, we have the exact same number of samples, also T multiplied by P. We call this number M, and here P is the total span of one period in frequency, while T controls the sampling density in frequency.\n\nIf we take the reciprocal of N, we get a very useful relationship:\u000b1 over N equals delta-t times delta-u,\u000bwhere delta-t is the sampling step size in time, and delta-u is the sampling step size in frequency.\nThis is an expression of the duality between time and frequency. If we fix the total number of samples N, making delta-t smaller — meaning we sample more finely in time — will make delta-u larger, meaning the frequency samples are spaced farther apart. And the reverse is also true.\n\nIn simple terms: if you zoom in more on one domain, you automatically zoom out in the other. This balance is built into the mathematics of the Fourier transform and is something we’ll use later when we look at applications.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide17.JPG",
+      "script": "Now let's highlight the key variables and the important relationship between them. In the time domain, the total number of samples is T times P, where capital T is the total duration of the signal and capital P is the spacing in the frequency domain. In the frequency domain, we have the exact same number of samples, also T times P, which we call M, with P being the total span of one period in frequency and T controlling the sampling density in frequency. If we take the reciprocal of N, we get a very useful relationship: one over N equals T over M.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Key variables"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.6,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Relationship between T and P"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Reciprocal of N"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Now we’re ready to move from the continuous Fourier transform to the discrete Fo",
+      "bullets": [
+        "When we sample a continuous signal, it stops being a smooth curve that exists at every moment in time. Instead, it becomes the product of the original signal and a series of equally spaced spikes — what we call delta functions. These spikes occur at time intervals of delta-t, which means each spike is separated by one divided by capital P in time. In other words, we only keep the signal’s value at these regular time points, and everywhere else is zero.",
+        "We can describe this mathematically as a sum of delta spikes. Each spike occurs at a time equal to n divided by P, where n goes from zero up to N minus one. The height of each spike is simply the value of the original signal at that time. You can imagine it as a row of vertical lines, each carrying the amplitude of the signal at its sampling point.",
+        "This gives us the discrete version of the signal in the time domain. Even though it’s just a set of separate values, it still represents a function of time, so we can take its Fourier transform.",
+        "When we do that, the Fourier transform turns into a sum over all the sampled points. The oscillating factor — what we call the kernel — still has the form “e to the power of minus j times two-pi times the frequency u times n divided by P,” but now we only evaluate it at those sampled time points.",
+        "The outcome is what we call the direct Fourier transform of the sampled signal. This is how we connect the continuous theory to the practical, digital form of the discrete Fourier transform that we use in computation."
+      ],
+      "fullText": "Now we’re ready to move from the continuous Fourier transform to the discrete Fourier transform.\n\nWhen we sample a continuous signal, it stops being a smooth curve that exists at every moment in time. Instead, it becomes the product of the original signal and a series of equally spaced spikes — what we call delta functions. These spikes occur at time intervals of delta-t, which means each spike is separated by one divided by capital P in time. In other words, we only keep the signal’s value at these regular time points, and everywhere else is zero.\n\nWe can describe this mathematically as a sum of delta spikes. Each spike occurs at a time equal to n divided by P, where n goes from zero up to N minus one. The height of each spike is simply the value of the original signal at that time. You can imagine it as a row of vertical lines, each carrying the amplitude of the signal at its sampling point.\nThis gives us the discrete version of the signal in the time domain. Even though it’s just a set of separate values, it still represents a function of time, so we can take its Fourier transform.\n\nWhen we do that, the Fourier transform turns into a sum over all the sampled points. The oscillating factor — what we call the kernel — still has the form “e to the power of minus j times two-pi times the frequency u times n divided by P,” but now we only evaluate it at those sampled time points.\n\nThe outcome is what we call the direct Fourier transform of the sampled signal. This is how we connect the continuous theory to the practical, digital form of the discrete Fourier transform that we use in computation.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide18.JPG",
+      "script": "Now we're ready to move from the continuous Fourier transform to the discrete Fourier transform. When we sample a continuous signal, it stops being a smooth curve that exists at every moment in time and becomes the product of the original signal and a series of equally spaced spikes, which are delta functions. These spikes occur at time intervals of delta-t, meaning each spike is separated by one over capital P in time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Sampling in Time"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Delta Functions"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Discrete Fourier Transform"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "The discrete Fourier transform we just discussed is actually a periodic function",
+      "bullets": [
+        "Think back to the Fourier series. In the time domain, a Fourier series is built from sinusoidal components — each one a sine or cosine wave. And by definition, each of these components is periodic. Whether we have just one frequency or many, the result will still be periodic.",
+        "Now, in this expression at the top, the left-hand side shows the Fourier series in the time domain, with terms involving t over capital T. On the right-hand side, we have an almost identical formula — but here the variable t has been replaced by u, and T has been replaced by P. This tells us that in the frequency domain, we also get a periodic function.",
+        "The periodicity comes directly from the fact that the Fourier transform of a sampled signal is made up of these repeating sinusoidal components. Each one repeats over and over, giving us a continuous function in the frequency domain that is also periodic.",
+        "This is exactly what we saw in the big picture earlier: when we sample in one domain, the Fourier transform becomes periodic in the other domain."
+      ],
+      "fullText": "The discrete Fourier transform we just discussed is actually a periodic function. Let’s understand why.\n\nThink back to the Fourier series. In the time domain, a Fourier series is built from sinusoidal components — each one a sine or cosine wave. And by definition, each of these components is periodic. Whether we have just one frequency or many, the result will still be periodic.\n\nNow, in this expression at the top, the left-hand side shows the Fourier series in the time domain, with terms involving t over capital T. On the right-hand side, we have an almost identical formula — but here the variable t has been replaced by u, and T has been replaced by P. This tells us that in the frequency domain, we also get a periodic function.\n\nThe periodicity comes directly from the fact that the Fourier transform of a sampled signal is made up of these repeating sinusoidal components. Each one repeats over and over, giving us a continuous function in the frequency domain that is also periodic.\nThis is exactly what we saw in the big picture earlier: when we sample in one domain, the Fourier transform becomes periodic in the other domain.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide19.JPG",
+      "script": "The discrete Fourier transform we just discussed is actually a periodic function because it's built from sinusoidal components, each of which is periodic, and when we combine many of these components, the result remains periodic. This periodicity is a fundamental property of the Fourier series and its discrete counterpart. It's essential to understand this connection to the Fourier series, as it provides valuable insights into the nature of the discrete Fourier transform.",
+      "spotlightEvents": [
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Periodicity in the Fourier Series"
+        },
+        {
+          "timeMs": 50000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Periodicity in the Frequency Domain"
+        },
+        {
+          "timeMs": 55000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Sampling and Periodicity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Up to now, we’ve mostly talked about sampling in the time domain. But we can als",
+      "bullets": [
+        "Let’s start with the Fourier transform of our signal, f-hat of u. If we multiply this spectrum by a train of delta functions in the frequency domain — just like we did earlier in the time domain — we get a sampled version of the spectrum. That means we only keep its values at certain frequency points, which we can label as u-zero, u-one, all the way up to u (N minus 1).",
+        "Here, the spacing between these frequency samples is 1 over capital T, where capital T is the period in the time domain. The index m runs from zero to N minus one, just like it did in the time-domain case. And the total number of samples in the frequency domain is the same as in the time domain — both equal to capital N.",
+        "Mathematically, we can write the sampled spectrum at position u m as a sum over all the time-domain samples f of n over P, multiplied by a complex exponential. The exponent has a nice symmetry: it’s e to the power of minus j, 2 pi, n times m, divided by capital N.",
+        "This symmetry is important — it shows that sampling in the Fourier domain has exactly the same mathematical structure as sampling in the time domain. The formulas look almost identical, just with the roles of time and frequency swapped.",
+        "This parallel is one of the reasons the discrete Fourier transform is so elegant — it’s the same process, whether you’re thinking in terms of time samples or frequency samples."
+      ],
+      "fullText": "Up to now, we’ve mostly talked about sampling in the time domain. But we can also sample directly in the Fourier domain.\n\nLet’s start with the Fourier transform of our signal, f-hat of u. If we multiply this spectrum by a train of delta functions in the frequency domain — just like we did earlier in the time domain — we get a sampled version of the spectrum. That means we only keep its values at certain frequency points, which we can label as u-zero, u-one, all the way up to u (N minus 1).\nHere, the spacing between these frequency samples is 1 over capital T, where capital T is the period in the time domain. The index m runs from zero to N minus one, just like it did in the time-domain case. And the total number of samples in the frequency domain is the same as in the time domain — both equal to capital N.\n\nMathematically, we can write the sampled spectrum at position u m as a sum over all the time-domain samples f of n over P, multiplied by a complex exponential. The exponent has a nice symmetry: it’s e to the power of minus j, 2 pi, n times m, divided by capital N.\n\nThis symmetry is important — it shows that sampling in the Fourier domain has exactly the same mathematical structure as sampling in the time domain. The formulas look almost identical, just with the roles of time and frequency swapped.\n\nThis parallel is one of the reasons the discrete Fourier transform is so elegant — it’s the same process, whether you’re thinking in terms of time samples or frequency samples.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide20.JPG",
+      "script": "We've been focusing on sampling in the time domain, but we can also sample directly in the Fourier domain. To do this, we start with the Fourier transform of our signal, which we'll call f-hat of u. We then multiply this spectrum by a train of delta functions in the frequency domain, just like we did in the time domain, to get a sampled version of the spectrum. The spacing between these frequency samples is determined by the period in the time domain, which we'll call capital T.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Fourier transform of our signal"
+        },
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Sampling in the frequency domain"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Symmetry in the formulas"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Now we can state the discrete Fourier transform",
+      "bullets": [
+        "We’ve sampled the signal at times",
+        "t n equals to n divided by capital P, for n equals to 0, 1, …, N minus 1.",
+        "We’ll read the spectrum at frequencies",
+        "u m equals to m divided by capital T, for m equals to 0, 1, …, N minus 1,",
+        "with N equals to T times P.",
+        "The DFT value at u m is",
+        "“sum from n equals zero to N minus one, f of n over P, into e to the power of minus j, two pi, m n over N.”",
+        "This is just an inner product with a complex sinusoid of frequency index m.",
+        "Each output is complex: its magnitude tells us how much of that frequency is present, and its angle (the phase) tells us the shift.",
+        "A few quick anchors:",
+        "t n equals to n over P are the time samples.",
+        "u m equals to m over T are the frequency samples.",
+        "The exponential “e to the minus j two pi m n over N” is the rotating basis wave.",
+        "Next, we’ll write the inverse DFT and see why a factor of one over N naturally appears so we can reconstruct the time samples exactly."
+      ],
+      "fullText": "Now we can state the discrete Fourier transform \n\nWe’ve sampled the signal at times\u000bt n equals to n divided by capital P, for n equals to 0, 1, …, N minus 1.\u000bWe’ll read the spectrum at frequencies\u000bu m equals to m divided by capital T, for m equals to 0, 1, …, N minus 1,\u000bwith N equals to T times P.\n\nThe DFT value at u m is\n“sum from n equals zero to N minus one, f of n over P, into e to the power of minus j, two pi, m n over N.”\nThis is just an inner product with a complex sinusoid of frequency index m.\u000bEach output is complex: its magnitude tells us how much of that frequency is present, and its angle (the phase) tells us the shift.\n\nA few quick anchors:\nt n equals to n over P are the time samples.\nu m equals to m over T are the frequency samples.\nThe exponential “e to the minus j two pi m n over N” is the rotating basis wave.\n\nNext, we’ll write the inverse DFT and see why a factor of one over N naturally appears so we can reconstruct the time samples exactly.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide21.JPG",
+      "script": "Now we can state the discrete Fourier transform, which is built from sampled data in both time and frequency. The DFT value at u m is the sum of the product of each sampled signal value and a complex exponential basis wave at frequency index m, across all N sampled points. This is a clean, mathematical expression that connects the sampled signal in time to the sampled spectrum in frequency.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Discrete Fourier Transform"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Sampling in Time and Frequency"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "DFT Value and Basis Wave"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "Up to now, we’ve been writing our time samples as t-zero, t-one, t-two, and so o",
+      "bullets": [
+        "So, to make things simpler, we’ll label them using integers in square brackets. For example:",
+        "f of zero means the value of the function at time sample t-zero.",
+        "f of one means the value at time sample t-one.",
+        "f of N minus one means the value at the last time sample, t N minus one.",
+        "We do the same in the frequency domain:",
+        "f-hat of zero means the Fourier transform value at frequency sample u-zero.",
+        "f-hat of one is at u-one.",
+        "And so on, up to f-hat of N minus one.",
+        "With this notation, the discrete Fourier transform reads like this:",
+        "f-hat of m  equals the sum from n equals zero to N minus one of f of n, multiplied by e to the power of minus j, two pi, m times n divided by N.",
+        "Here, n is the index for time-domain samples, and m is the index for frequency components.",
+        "Each term is just the sample value f of n  multiplied by a sinusoidal basis wave at frequency index m. Adding all those terms together gives the strength of that frequency in the signal — that’s our Fourier coefficient.",
+        "We can also see this as a matrix multiplication:",
+        "The time samples f of zero, f of one, …, f of N minus one form a column vector.",
+        "They are multiplied by an N-by-N matrix whose entries are these complex exponentials e to the power of minus j, two pi, m times n divided by N.",
+        "The result is another vector containing all the frequency samples f-hat of zero, f-hat of one, …, f-hat of N minus one.",
+        "For the first frequency index, m equals zero, every exponential equals one, so the first Fourier coefficient is simply the sum of all the time samples.",
+        "Later, we’ll talk about scaling factors to account for the sampling step size, but for now this integer-index form keeps the DFT definition clean and easy to use."
+      ],
+      "fullText": "Up to now, we’ve been writing our time samples as t-zero, t-one, t-two, and so on, and our frequency samples as u-zero, u-one, u-two, and so on. But when we work with sampled data, what really matters are the integer positions of these samples.\n\nSo, to make things simpler, we’ll label them using integers in square brackets. For example:\nf of zero means the value of the function at time sample t-zero.\nf of one means the value at time sample t-one.\nf of N minus one means the value at the last time sample, t N minus one.\nWe do the same in the frequency domain:\nf-hat of zero means the Fourier transform value at frequency sample u-zero.\nf-hat of one is at u-one.\nAnd so on, up to f-hat of N minus one.\n\nWith this notation, the discrete Fourier transform reads like this:\nf-hat of m  equals the sum from n equals zero to N minus one of f of n, multiplied by e to the power of minus j, two pi, m times n divided by N.\nHere, n is the index for time-domain samples, and m is the index for frequency components.\nEach term is just the sample value f of n  multiplied by a sinusoidal basis wave at frequency index m. Adding all those terms together gives the strength of that frequency in the signal — that’s our Fourier coefficient.\n\nWe can also see this as a matrix multiplication:\nThe time samples f of zero, f of one, …, f of N minus one form a column vector.\nThey are multiplied by an N-by-N matrix whose entries are these complex exponentials e to the power of minus j, two pi, m times n divided by N.\nThe result is another vector containing all the frequency samples f-hat of zero, f-hat of one, …, f-hat of N minus one.\nFor the first frequency index, m equals zero, every exponential equals one, so the first Fourier coefficient is simply the sum of all the time samples.\n\nLater, we’ll talk about scaling factors to account for the sampling step size, but for now this integer-index form keeps the DFT definition clean and easy to use.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide22.JPG",
+      "script": "Let's simplify the notation by using integer indices for both time and frequency samples. We'll label each sample position using integers in square brackets, like this: f of zero for the value at time sample t-zero, f of one for the value at time sample t-one, and so on. We'll do the same in the frequency domain, using f-hat of zero for the Fourier coefficient at the zeroth frequency sample, f-hat of one for the coefficient at the first frequency sample, and so on. This makes the notation more compact and easier to work with.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Simplifying Notation"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.4,
+          "y": 0.3,
+          "durationMs": 500,
+          "label": "Integer Indices"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.6,
+          "y": 0.45,
+          "durationMs": 500,
+          "label": "Labeling Sample Positions"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "Once we have all the discrete Fourier coefficients — that is, f-hat of m  for m ",
+      "bullets": [
+        "In words, the formula says:",
+        "f of n  equals one over capital N, times the sum from m equals zero to N minus one of f-hat of m, multiplied by e to the power of plus j, two pi, m times n divided by N.",
+        "Here, n is the time-sample index, and m is the frequency-sample index.",
+        "The plus sign in the exponent is important — it’s the opposite of the minus sign we used in the forward discrete Fourier transform. This sign change is what allows us to reverse the process.",
+        "The factor of one over capital N also plays a key role. When we computed f-hat of zero in the forward transform, we were summing all the time samples, but we didn’t average them. This factor in the inverse transform takes care of that averaging, so we get the correct values back.",
+        "Some people prefer a symmetric version: instead of putting all the scaling in the inverse transform, they split it evenly — using one over the square root of N in both the forward and inverse formulas. This is purely a matter of definition; the math works either way.",
+        "You can also see this in matrix form:",
+        "In the forward transform, we multiply the time-sample vector by the Fourier matrix of complex exponentials.",
+        "In the inverse transform, we multiply the frequency-sample vector by the inverse of that matrix, which has the plus sign in the exponent and the one over N factor out front.",
+        "With these two formulas — forward and inverse — we can move back and forth between a discretized time-domain signal and its discretized frequency-domain spectrum, with no information loss, as long as the sampling theorem was satisfied in the first place."
+      ],
+      "fullText": "Once we have all the discrete Fourier coefficients — that is, f-hat of m  for m equals zero up to N minus one — we can recover the original sampled signal values f of n  by using the inverse discrete Fourier transform.\n\nIn words, the formula says:\nf of n  equals one over capital N, times the sum from m equals zero to N minus one of f-hat of m, multiplied by e to the power of plus j, two pi, m times n divided by N.\nHere, n is the time-sample index, and m is the frequency-sample index.\nThe plus sign in the exponent is important — it’s the opposite of the minus sign we used in the forward discrete Fourier transform. This sign change is what allows us to reverse the process.\n\nThe factor of one over capital N also plays a key role. When we computed f-hat of zero in the forward transform, we were summing all the time samples, but we didn’t average them. This factor in the inverse transform takes care of that averaging, so we get the correct values back.\nSome people prefer a symmetric version: instead of putting all the scaling in the inverse transform, they split it evenly — using one over the square root of N in both the forward and inverse formulas. This is purely a matter of definition; the math works either way.\n\nYou can also see this in matrix form:\nIn the forward transform, we multiply the time-sample vector by the Fourier matrix of complex exponentials.\nIn the inverse transform, we multiply the frequency-sample vector by the inverse of that matrix, which has the plus sign in the exponent and the one over N factor out front.\n\nWith these two formulas — forward and inverse — we can move back and forth between a discretized time-domain signal and its discretized frequency-domain spectrum, with no information loss, as long as the sampling theorem was satisfied in the first place.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide23.JPG",
+      "script": "Now that we have all the discrete Fourier coefficients, we can put them together to recover the original sampled signal values using the inverse discrete Fourier transform. This formula looks a bit complicated, but essentially it's taking each frequency component, multiplying it by a complex exponential, and adding them all together to reconstruct the original signal. The key point is that the exponent in the inverse transform has a plus sign, which is the opposite of the minus sign used in the forward transform.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2600,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Inverse Discrete Fourier Transform"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Complex Exponent"
+        },
+        {
+          "timeMs": 3200,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Sign Change"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "Let’s talk about why we have this factor of one over capital N in the inverse di",
+      "bullets": [
+        "Earlier, I mentioned that 1 over N is equal to delta-t times delta-u. Here, delta-t is the sampling interval in the time domain, and delta-u is the sampling interval in the frequency domain.",
+        "Think of it this way: when we move from the continuous Fourier transform to the discrete version, we’re replacing continuous integrals with sums. In the time domain, we can picture our original continuous function as being approximated by a collection of rectangles — each rectangle has a height equal to the sample value f of n , and a width of delta-t.",
+        "Likewise, in the frequency domain, the Fourier spectrum is also represented as a collection of rectangles — each one has a height equal to f-hat of m  and a width of delta-u.",
+        "When we go from the spectrum back to the signal, we’re essentially adding up all of these little rectangular pieces. The factor of delta-t times delta-u captures the combined effect of this discretization in both domains. And since 1 over N equals delta-t times delta-u, that’s why the factor appears in the inverse DFT.",
+        "This is the discrete equivalent of what happens in the continuous Fourier transform, where we also have a scaling factor in the inverse formula. The difference is that here, the scaling is tied directly to our sampling steps in both domains."
+      ],
+      "fullText": "Let’s talk about why we have this factor of one over capital N in the inverse discrete Fourier transform.\nEarlier, I mentioned that 1 over N is equal to delta-t times delta-u. Here, delta-t is the sampling interval in the time domain, and delta-u is the sampling interval in the frequency domain.\n\nThink of it this way: when we move from the continuous Fourier transform to the discrete version, we’re replacing continuous integrals with sums. In the time domain, we can picture our original continuous function as being approximated by a collection of rectangles — each rectangle has a height equal to the sample value f of n , and a width of delta-t.\nLikewise, in the frequency domain, the Fourier spectrum is also represented as a collection of rectangles — each one has a height equal to f-hat of m  and a width of delta-u.\n\nWhen we go from the spectrum back to the signal, we’re essentially adding up all of these little rectangular pieces. The factor of delta-t times delta-u captures the combined effect of this discretization in both domains. And since 1 over N equals delta-t times delta-u, that’s why the factor appears in the inverse DFT.\nThis is the discrete equivalent of what happens in the continuous Fourier transform, where we also have a scaling factor in the inverse formula. The difference is that here, the scaling is tied directly to our sampling steps in both domains.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide24.JPG",
+      "script": "Let's talk about why we have this factor of one over capital N in the inverse discrete Fourier transform. This factor is a result of the discretization process, where we replace continuous integrals with sums. It's related to the sampling intervals in both the time and frequency domains, which are represented by delta-t and delta-u, respectively.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Discretization"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Sampling Intervals"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Delta-T and Delta-U"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "The factor of 1 over capital N comes directly from how the continuous Fourier tr",
+      "bullets": [
+        "In the continuous world, both the forward and inverse Fourier transforms are integrals. But when we digitize the process, we replace those integrals with sums. That’s what we see in this figure — the smooth area under the curve is replaced by a set of thin rectangular strips. Each strip has a height equal to the function value at a sample point, and a width equal to the sampling interval.",
+        "In the time domain, that width is delta-t, the spacing between time samples. In the frequency domain, it’s delta-u, the spacing between frequency samples.",
+        "When we perform a forward Fourier transform, the discretization introduces a factor of delta-t. When we perform the inverse transform, the discretization introduces a factor of delta-u. Multiply those together, and you get delta-t times delta-u — which we know is equal to one over capital N.",
+        "This is why, in the inverse discrete Fourier transform, we include the 1 over N factor — it accounts for both steps of discretization: first in time, then in frequency.",
+        "And remember, there’s one more difference between the forward and inverse formulas: the forward transform uses a minus sign in the exponent, and the inverse transform uses a plus sign. This sign change is what lets the two operations perfectly undo each other.",
+        "So, the 1 over N is there because of how sampling replaces integrals with sums in both domains. It’s the scaling factor that ensures the forward and inverse transforms work together exactly."
+      ],
+      "fullText": "The factor of 1 over capital N comes directly from how the continuous Fourier transform becomes a discrete one when we sample.\n\nIn the continuous world, both the forward and inverse Fourier transforms are integrals. But when we digitize the process, we replace those integrals with sums. That’s what we see in this figure — the smooth area under the curve is replaced by a set of thin rectangular strips. Each strip has a height equal to the function value at a sample point, and a width equal to the sampling interval.\nIn the time domain, that width is delta-t, the spacing between time samples. In the frequency domain, it’s delta-u, the spacing between frequency samples.\n\nWhen we perform a forward Fourier transform, the discretization introduces a factor of delta-t. When we perform the inverse transform, the discretization introduces a factor of delta-u. Multiply those together, and you get delta-t times delta-u — which we know is equal to one over capital N.\nThis is why, in the inverse discrete Fourier transform, we include the 1 over N factor — it accounts for both steps of discretization: first in time, then in frequency.\n\nAnd remember, there’s one more difference between the forward and inverse formulas: the forward transform uses a minus sign in the exponent, and the inverse transform uses a plus sign. This sign change is what lets the two operations perfectly undo each other.\nSo, the 1 over N is there because of how sampling replaces integrals with sums in both domains. It’s the scaling factor that ensures the forward and inverse transforms work together exactly.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide25.JPG",
+      "script": "The factor of 1 over capital N comes directly from how the continuous Fourier transform becomes a discrete one when we sample. This happens because we replace the smooth area under the curve with a set of thin rectangular strips, each representing a sampled value. The width of these strips is delta-t, the spacing between time samples.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Delta-t in time domain"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Delta-u in frequency domain"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Multiplying delta-t and delta-u"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "The second way to look at the discrete Fourier transform is from the perspective",
+      "bullets": [
+        "When we do a forward DFT, we can think of it as multiplying our vector of time samples by a square matrix of complex exponentials. This matrix acts like a rotation in a high-dimensional space — it changes our coordinates from the time-domain representation to the frequency-domain representation.",
+        "The set of Fourier basis functions — the sinusoids at different discrete frequencies — form an orthonormal basis. That means they are all perpendicular to each other in this mathematical space. The forward transform rotates our coordinates from the “time axis” basis to the “frequency axis” basis. The inverse transform simply rotates them back.",
+        "This idea generalizes. In one dimension, the Fourier basis is just sines and cosines. But in two or three dimensions, or on a sphere, we can define more complex sinusoidal patterns, called harmonics. On a sphere, these are the spherical harmonics — each one corresponding to a certain “frequency” pattern over the surface.",
+        "The key property is the same: if you take two different harmonics and compute their inner product, the result is zero — they are orthogonal. If you take one harmonic and do an inner product with itself, you get one — it’s normalized.",
+        "So whether we are talking about simple sines and cosines, or more complex spherical harmonics, the Fourier transform is still just expressing a signal in terms of an orthogonal set of basis functions, then rotating between these bases."
+      ],
+      "fullText": "The second way to look at the discrete Fourier transform is from the perspective of harmonics.\nWhen we do a forward DFT, we can think of it as multiplying our vector of time samples by a square matrix of complex exponentials. This matrix acts like a rotation in a high-dimensional space — it changes our coordinates from the time-domain representation to the frequency-domain representation.\n\nThe set of Fourier basis functions — the sinusoids at different discrete frequencies — form an orthonormal basis. That means they are all perpendicular to each other in this mathematical space. The forward transform rotates our coordinates from the “time axis” basis to the “frequency axis” basis. The inverse transform simply rotates them back.\n\nThis idea generalizes. In one dimension, the Fourier basis is just sines and cosines. But in two or three dimensions, or on a sphere, we can define more complex sinusoidal patterns, called harmonics. On a sphere, these are the spherical harmonics — each one corresponding to a certain “frequency” pattern over the surface.\n\nThe key property is the same: if you take two different harmonics and compute their inner product, the result is zero — they are orthogonal. If you take one harmonic and do an inner product with itself, you get one — it’s normalized.\nSo whether we are talking about simple sines and cosines, or more complex spherical harmonics, the Fourier transform is still just expressing a signal in terms of an orthogonal set of basis functions, then rotating between these bases.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide26.JPG",
+      "script": "The forward DFT can be seen as a rotation of our signal from the time-domain to the frequency-domain, where the Fourier basis functions act like an orthonormal basis, being perpendicular to each other. This rotation allows us to express our signal in a new coordinate system, revealing its frequency components. The orthonormal property of the Fourier basis functions makes this transformation elegant and efficient.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Forward DFT as Rotation"
+        },
+        {
+          "timeMs": 6000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Orthonormal Basis"
+        },
+        {
+          "timeMs": 9000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Generalization to Higher Dimensions"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "Here we’re looking at a particular orthonormal basis used in Fourier analysis.",
+      "bullets": [
+        "Our basis functions have the form:",
+        "e to the power of j, two pi, m times t divided by capital T",
+        "where m is the frequency index.",
+        "If we take two of these basis functions, one with index m and the other with index n, and compute their inner product — meaning we integrate the product of one and the complex conjugate of the other over the full interval from zero to capital T — two things can happen:",
+        "If m and n are different, the integral is zero. That means the functions are orthogonal — they share no common component.",
+        "If m and n are the same, the integral is one. That means each basis function has a unit norm, or length equal to one.",
+        "This is exactly what “orthonormal” means: the functions are orthogonal to each other, and each one has length one.",
+        "Because the Fourier basis has this orthonormal property, we can represent any signal as a sum of these basis functions without losing information. And we can go back and forth between the time-domain representation and the frequency-domain representation using the discrete Fourier transform and its inverse, knowing that the relationship is exact when the sampling theorem is satisfied."
+      ],
+      "fullText": "Here we’re looking at a particular orthonormal basis used in Fourier analysis.\n\nOur basis functions have the form:\ne to the power of j, two pi, m times t divided by capital T\nwhere m is the frequency index.\nIf we take two of these basis functions, one with index m and the other with index n, and compute their inner product — meaning we integrate the product of one and the complex conjugate of the other over the full interval from zero to capital T — two things can happen:\n\nIf m and n are different, the integral is zero. That means the functions are orthogonal — they share no common component.\nIf m and n are the same, the integral is one. That means each basis function has a unit norm, or length equal to one.\nThis is exactly what “orthonormal” means: the functions are orthogonal to each other, and each one has length one.\n\nBecause the Fourier basis has this orthonormal property, we can represent any signal as a sum of these basis functions without losing information. And we can go back and forth between the time-domain representation and the frequency-domain representation using the discrete Fourier transform and its inverse, knowing that the relationship is exact when the sampling theorem is satisfied.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide27.JPG",
+      "script": "When we compute the inner product of two basis functions with different frequency indices, m and n, the result is zero, indicating that they are orthogonal and share no common component. This property of orthogonality is essential for the Fourier analysis to work properly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 23000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Orthogonality"
+        },
+        {
+          "timeMs": 24000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Inner Product"
+        },
+        {
+          "timeMs": 25000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Orthogonal Basis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "What we see here is just another way to write the discrete Fourier transform and",
+      "bullets": [
+        "Let’s say we have N data points in the time domain. We’ll call them h k, where k runs from zero to N minus one. These are our measured samples — they could represent anything, such as temperature values taken at different times.",
+        "To get the frequency-domain representation, we compute H n, the Fourier coefficients, using the formula:",
+        "H n equals the sum from k equals zero to N minus one of h k times e to the power of minus j, two pi, k n divided by N.",
+        "This is the forward discrete Fourier transform. The minus sign in the exponent tells us we’re rotating our coordinates in one direction in this N-dimensional space.",
+        "The inverse transform takes us back from the frequency coefficients H n to the time samples h k:",
+        "h k equals one over N, times the sum from n equals zero to N minus one of H n times e to the power of plus j, two pi, k n divided by N.",
+        "Here, the plus sign in the exponent means we’re rotating back, and the factor of one over N is the scaling we discussed earlier — it accounts for the sampling steps in both time and frequency. Some definitions split the scaling evenly between the forward and inverse transforms to make them look perfectly symmetric, but that’s just a matter of convention.",
+        "The key points:",
+        "We have N samples, so we only need N orthogonal basis functions.",
+        "Those basis functions are harmonics whose frequencies differ by a constant increment.",
+        "The forward and inverse transforms are nearly symmetric — the main difference is the sign in the exponent and where we put the scaling factor.",
+        "From a computational point of view, each row of the Fourier transform matrix has N elements. To compute one Fourier coefficient, we do N multiplications and N additions. Since we have N coefficients to compute, the total work is proportional to N-squared.",
+        "This N-squared growth in computations was a big deal in the early days of signal processing, when N could be very large. That’s why the development of the Fast Fourier Transform, or FFT, was such a breakthrough — it reduced this cost dramatically."
+      ],
+      "fullText": "What we see here is just another way to write the discrete Fourier transform and its inverse — same math, just different symbols. You’ll often see different papers or books use different notations, so it’s important to recognize that they all mean the same thing.\n\nLet’s say we have N data points in the time domain. We’ll call them h k, where k runs from zero to N minus one. These are our measured samples — they could represent anything, such as temperature values taken at different times.\n\nTo get the frequency-domain representation, we compute H n, the Fourier coefficients, using the formula:\nH n equals the sum from k equals zero to N minus one of h k times e to the power of minus j, two pi, k n divided by N.\nThis is the forward discrete Fourier transform. The minus sign in the exponent tells us we’re rotating our coordinates in one direction in this N-dimensional space.\n\nThe inverse transform takes us back from the frequency coefficients H n to the time samples h k:\nh k equals one over N, times the sum from n equals zero to N minus one of H n times e to the power of plus j, two pi, k n divided by N.\nHere, the plus sign in the exponent means we’re rotating back, and the factor of one over N is the scaling we discussed earlier — it accounts for the sampling steps in both time and frequency. Some definitions split the scaling evenly between the forward and inverse transforms to make them look perfectly symmetric, but that’s just a matter of convention.\n\nThe key points:\nWe have N samples, so we only need N orthogonal basis functions.\nThose basis functions are harmonics whose frequencies differ by a constant increment.\nThe forward and inverse transforms are nearly symmetric — the main difference is the sign in the exponent and where we put the scaling factor.\n\nFrom a computational point of view, each row of the Fourier transform matrix has N elements. To compute one Fourier coefficient, we do N multiplications and N additions. Since we have N coefficients to compute, the total work is proportional to N-squared.\nThis N-squared growth in computations was a big deal in the early days of signal processing, when N could be very large. That’s why the development of the Fast Fourier Transform, or FFT, was such a breakthrough — it reduced this cost dramatically.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide28.JPG",
+      "script": "What we see here is just another way to write the discrete Fourier transform and its inverse — same math, just different symbols. You'll often see different papers or books use different notations, so it's essential to recognize that they all mean the same thing. This notation might look different, but it represents the same mathematical operations.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Same math, different symbols"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Different notations in papers/books"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Forward discrete Fourier transform"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "The Fast Fourier Transform, or FFT, is an efficient algorithm for computing the ",
+      "bullets": [
+        "To give you an idea of its impact, in 1969, analyzing 2,048 data points from a seismic trace using the standard DFT took more than 13 hours. Using the FFT on the exact same machine, the same analysis took just 2.4 seconds. That’s an enormous improvement.",
+        "I remember when I was in primary school, a 2,000-point seismic data analysis could take more than a full day to process. But with FFT, the same task could be finished in under three seconds.",
+        "This kind of speedup is critical in many applications, especially those that need real-time results — whether it’s analyzing signals from an airplane’s sensors, monitoring seismic activity, or performing real-time image reconstruction.",
+        "The reason FFT is so powerful is that it reduces the computational complexity.",
+        "A naive DFT requires about N-squared operations — that’s N multiplications and additions for each of the N outputs.",
+        "The FFT reduces this to N times log-base-2 of N operations.",
+        "That’s a huge difference. For example, if N is 1,000, the log-base-2 of N is about 10. So instead of doing a million operations, we only need about ten thousand. The larger N gets, the more dramatic the savings become.",
+        "Because of this efficiency, FFT still plays an essential role in modern signal processing, and it’s also widely used in areas like medical imaging, machine learning, and convolution-based computations."
+      ],
+      "fullText": "The Fast Fourier Transform, or FFT, is an efficient algorithm for computing the discrete Fourier transform. It was published by Cooley and Tukey in 1965, and it completely changed the way we do signal processing.\n\nTo give you an idea of its impact, in 1969, analyzing 2,048 data points from a seismic trace using the standard DFT took more than 13 hours. Using the FFT on the exact same machine, the same analysis took just 2.4 seconds. That’s an enormous improvement.\nI remember when I was in primary school, a 2,000-point seismic data analysis could take more than a full day to process. But with FFT, the same task could be finished in under three seconds.\n\nThis kind of speedup is critical in many applications, especially those that need real-time results — whether it’s analyzing signals from an airplane’s sensors, monitoring seismic activity, or performing real-time image reconstruction.\nThe reason FFT is so powerful is that it reduces the computational complexity.\n\nA naive DFT requires about N-squared operations — that’s N multiplications and additions for each of the N outputs.\nThe FFT reduces this to N times log-base-2 of N operations.\nThat’s a huge difference. For example, if N is 1,000, the log-base-2 of N is about 10. So instead of doing a million operations, we only need about ten thousand. The larger N gets, the more dramatic the savings become.\n\nBecause of this efficiency, FFT still plays an essential role in modern signal processing, and it’s also widely used in areas like medical imaging, machine learning, and convolution-based computations.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide29.JPG",
+      "script": "The Fast Fourier Transform, or FFT, is a game-changer in signal processing, allowing us to compute the discrete Fourier transform much more efficiently. Its impact is staggering, reducing computation time from 13 hours to just 2.4 seconds for the same analysis. This algorithm has been a cornerstone in medical imaging and beyond, and its influence continues to grow.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "FFT's impact"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Computational complexity"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Real-time applications"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "Because the inverse discrete Fourier transform is so similar to the forward tran",
+      "bullets": [
+        "In MATLAB, the fft function computes the forward FFT, and the ifft function computes the inverse FFT. For example, fft of X, N computes an N-point FFT. If the vector X has fewer than N points, it pads with zeros; if it has more, it truncates. The IFFT works the same way, just in reverse.",
+        "If we were to implement the Fourier transform exactly as in the mathematical definition, we would do a summation for each frequency index k. Each summation is essentially an inner product — it requires N multiplications and N additions. And we need to do this for each of the N output points. That’s N times N operations — N squared in total.",
+        "The FFT and IFFT are like built-in shortcuts. You don’t need to know all the details of how they work to use them — just like you don’t need to know how your phone connects to your friend when you press the call button. You can treat FFT and IFFT as black boxes: you give them the data, and they give you the result quickly and efficiently.",
+        "With FFT and IFFT, Fourier analysis becomes practical for real-time work. Once we can efficiently move between the time domain and the frequency domain, we can use this power for many applications — performing convolution, estimating spectra, removing noise, detecting patterns or contours in images, and much more."
+      ],
+      "fullText": "Because the inverse discrete Fourier transform is so similar to the forward transform, we can design a fast algorithm for it as well. This is called the inverse FFT, or IFFT.\n\nIn MATLAB, the fft function computes the forward FFT, and the ifft function computes the inverse FFT. For example, fft of X, N computes an N-point FFT. If the vector X has fewer than N points, it pads with zeros; if it has more, it truncates. The IFFT works the same way, just in reverse.\n\nIf we were to implement the Fourier transform exactly as in the mathematical definition, we would do a summation for each frequency index k. Each summation is essentially an inner product — it requires N multiplications and N additions. And we need to do this for each of the N output points. That’s N times N operations — N squared in total.\nThe FFT and IFFT are like built-in shortcuts. You don’t need to know all the details of how they work to use them — just like you don’t need to know how your phone connects to your friend when you press the call button. You can treat FFT and IFFT as black boxes: you give them the data, and they give you the result quickly and efficiently.\n\nWith FFT and IFFT, Fourier analysis becomes practical for real-time work. Once we can efficiently move between the time domain and the frequency domain, we can use this power for many applications — performing convolution, estimating spectra, removing noise, detecting patterns or contours in images, and much more.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide30.JPG",
+      "script": "Because the inverse discrete Fourier transform is so similar to the forward transform, we can design a fast algorithm for it as well, called the inverse FFT, or IFFT. This allows us to compute the inverse transform efficiently, just like the forward transform. In MATLAB, the fft function computes the forward FFT, and the ifft function computes the inverse FFT, following similar rules for padding and truncation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Inverse FFT"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "MATLAB functions"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 500,
+          "label": "Practical applications"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "Let’s look at our first example: how to compute convolution using the Fast Fouri",
+      "bullets": [
+        "You already know the direct method — the one we practiced in class. You take one sequence, flip it, shift it, multiply corresponding terms, and sum them up. Then you repeat for each shift. This gives the convolution directly in the time domain.",
+        "If the first sequence has length n and the second has length m, the convolution result has n plus m minus 1 points. That’s how many shifts we need to perform. And in terms of computation, this direct method takes time proportional to n squares, where n is roughly the size of the data.",
+        "But there’s a much faster, indirect method. Instead of doing the convolution directly in the time domain, we switch to the frequency domain using the FFT.",
+        "Here’s the MATLAB approach:",
+        "First, compute the FFT of x — that gives us its frequency spectrum.",
+        "Then, compute the FFT of y — the spectrum of the filter or second sequence.",
+        "In the frequency domain, convolution turns into multiplication. So we simply multiply the two spectra, element by element.",
+        "Finally, apply the inverse FFT to that product to return to the time domain.",
+        "This works because of the convolution theorem — it says convolution in the time domain is equivalent to multiplication in the frequency domain.",
+        "If you compare the results from the direct method and the FFT-based method in MATLAB, you’ll see they match exactly. The key difference is efficiency:",
+        "Direct convolution: about N square operations.",
+        "FFT-based convolution: about n log n operations — much faster for large n.",
+        "One small detail: in discrete Fourier analysis, both the time domain and the frequency domain are treated as periodic. That means this FFT-based convolution actually performs circular convolution unless you handle padding carefully."
+      ],
+      "fullText": "Let’s look at our first example: how to compute convolution using the Fast Fourier Transform, or FFT.\n\nYou already know the direct method — the one we practiced in class. You take one sequence, flip it, shift it, multiply corresponding terms, and sum them up. Then you repeat for each shift. This gives the convolution directly in the time domain.\nIf the first sequence has length n and the second has length m, the convolution result has n plus m minus 1 points. That’s how many shifts we need to perform. And in terms of computation, this direct method takes time proportional to n squares, where n is roughly the size of the data.\nBut there’s a much faster, indirect method. Instead of doing the convolution directly in the time domain, we switch to the frequency domain using the FFT.\n\nHere’s the MATLAB approach:\nFirst, compute the FFT of x — that gives us its frequency spectrum.\nThen, compute the FFT of y — the spectrum of the filter or second sequence.\nIn the frequency domain, convolution turns into multiplication. So we simply multiply the two spectra, element by element.\nFinally, apply the inverse FFT to that product to return to the time domain.\nThis works because of the convolution theorem — it says convolution in the time domain is equivalent to multiplication in the frequency domain.\nIf you compare the results from the direct method and the FFT-based method in MATLAB, you’ll see they match exactly. The key difference is efficiency:\n\nDirect convolution: about N square operations.\nFFT-based convolution: about n log n operations — much faster for large n.\nOne small detail: in discrete Fourier analysis, both the time domain and the frequency domain are treated as periodic. That means this FFT-based convolution actually performs circular convolution unless you handle padding carefully.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide31.JPG",
+      "script": "Let's look at our first example: how to compute convolution using the Fast Fourier Transform, or FFT. You already know the direct method, which involves flipping, shifting, multiplying, and summing corresponding terms for each shift. This direct method takes time proportional to n squared, where n is the length of the first sequence.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Direct Method"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Time Complexity"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Indirect Method"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Let’s look at a second example, and here’s where things get interesting.",
+      "bullets": [
+        "We again compute convolution in two ways:",
+        "First, the direct method in the time domain.",
+        "Second, the FFT-based method, multiplying in the frequency domain and taking the inverse FFT.",
+        "This time, the results are different. Why?",
+        "It comes down to the fact that in discrete Fourier analysis, our signals are treated as periodic, not single, isolated sequences, but infinitely repeated copies.",
+        "Imagine x as one segment in time, and y as another. In the continuous world, when we shift one relative to the other, we only overlap the part that exists in the original copy. But in the discrete Fourier model, when you shift, parts of one copy can wrap around and overlap with the start of the other copy.",
+        "It’s as if your “neighbor” signal is spilling into your yard — and at the same time, you’re spilling into your other neighbor’s yard on the left.",
+        "That wrap-around interaction is exactly what circular convolution means:",
+        "The signals are treated as if arranged around a circle.",
+        "When you slide one past the end, it reappears at the other side.",
+        "The FFT-based convolution performs this circular convolution by default, which is why the result here doesn’t match the direct, linear convolution.",
+        "Later, we’ll see how to avoid this wrap-around effect so the FFT method matches the true linear convolution."
+      ],
+      "fullText": "Let’s look at a second example, and here’s where things get interesting.\n\nWe again compute convolution in two ways:\nFirst, the direct method in the time domain.\nSecond, the FFT-based method, multiplying in the frequency domain and taking the inverse FFT.\n\nThis time, the results are different. Why?\nIt comes down to the fact that in discrete Fourier analysis, our signals are treated as periodic, not single, isolated sequences, but infinitely repeated copies.\nImagine x as one segment in time, and y as another. In the continuous world, when we shift one relative to the other, we only overlap the part that exists in the original copy. But in the discrete Fourier model, when you shift, parts of one copy can wrap around and overlap with the start of the other copy.\nIt’s as if your “neighbor” signal is spilling into your yard — and at the same time, you’re spilling into your other neighbor’s yard on the left.\n\nThat wrap-around interaction is exactly what circular convolution means:\nThe signals are treated as if arranged around a circle.\nWhen you slide one past the end, it reappears at the other side.\nThe FFT-based convolution performs this circular convolution by default, which is why the result here doesn’t match the direct, linear convolution.\nLater, we’ll see how to avoid this wrap-around effect so the FFT method matches the true linear convolution.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide32.JPG",
+      "script": "Let's look at a second example, and here's where things get interesting. We again compute convolution in two ways: the direct method in the time domain and the FFT-based method in the frequency domain. This time, the results are different, and it's because our signals are treated as periodic in discrete Fourier analysis, not single, isolated sequences. This periodicity affects the convolution result, leading to the discrepancy between the two methods.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Direct method in time domain"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.35,
+          "y": 0.35,
+          "durationMs": 2000,
+          "label": "FFT-based method in frequency domain"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 1000,
+          "label": "Why are the results different?"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "We just saw that FFT-based convolution gives us circular convolution by default,",
+      "bullets": [
+        "The simplest way to avoid that wrap-around is to make sure those neighbors are far enough away so they can’t overlap during the shift. That’s what zero padding does.",
+        "We take our original signals and append enough zeros to both so that the total length is at least N plus M minus 1, where N and M are the original lengths of the two sequences.",
+        "In this example, each signal is only 5 samples long, but we pad them out to length 16. Now, when we perform the FFT, multiply in the frequency domain, and take the inverse FFT, the “wrap-around” region is all zeros — so the result matches the direct, linear convolution exactly.",
+        "In other words, zero padding is like making your yard so wide that your neighbors are too far away to cause any trouble."
+      ],
+      "fullText": "We just saw that FFT-based convolution gives us circular convolution by default, where the “neighboring” copies wrap around and interfere.\n\nThe simplest way to avoid that wrap-around is to make sure those neighbors are far enough away so they can’t overlap during the shift. That’s what zero padding does.\nWe take our original signals and append enough zeros to both so that the total length is at least N plus M minus 1, where N and M are the original lengths of the two sequences.\nIn this example, each signal is only 5 samples long, but we pad them out to length 16. Now, when we perform the FFT, multiply in the frequency domain, and take the inverse FFT, the “wrap-around” region is all zeros — so the result matches the direct, linear convolution exactly.\n\nIn other words, zero padding is like making your yard so wide that your neighbors are too far away to cause any trouble.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide33.JPG",
+      "script": "We just saw that FFT-based convolution gives us circular convolution by default, where the “neighboring” copies wrap around and interfere. The simplest way to avoid that wrap-around is to make sure those neighbors are far enough away so they can’t overlap during the shift. This is achieved by zero padding, where we append enough zeros to both signals to make their total length at least N plus M minus 1.",
+      "spotlightEvents": [
+        {
+          "timeMs": 36000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Zero padding solution"
+        },
+        {
+          "timeMs": 38000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Padding to avoid wrap-around"
+        },
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Yard analogy for zero padding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "This picture shows the idea of zero padding in a visual way.",
+      "bullets": [
+        "On top, the red triangles represent one signal, and the blue triangles represent the other. Without padding, these shapes are repeated periodically, so when you slide them for convolution, parts from the “neighboring copies” wrap around and interfere — that’s the circular convolution effect we saw earlier.",
+        "Now, by adding enough zeros, we artificially extend the period. This pushes the neighboring copies farther apart, so when we perform the convolution, only the single red copy and the single blue copy overlap. The neighbors never get close enough to contribute.",
+        "The result is that our circular convolution now matches the linear convolution exactly — because there’s no wrap-around. The earlier mismatch happened simply because we didn’t have enough zeros, so the neighbors still overlapped.",
+        "This is the essence of zero padding: make the “yard” wide enough so your neighbors can’t mess up your calculation."
+      ],
+      "fullText": "This picture shows the idea of zero padding in a visual way.\n\nOn top, the red triangles represent one signal, and the blue triangles represent the other. Without padding, these shapes are repeated periodically, so when you slide them for convolution, parts from the “neighboring copies” wrap around and interfere — that’s the circular convolution effect we saw earlier.\n\nNow, by adding enough zeros, we artificially extend the period. This pushes the neighboring copies farther apart, so when we perform the convolution, only the single red copy and the single blue copy overlap. The neighbors never get close enough to contribute.\nThe result is that our circular convolution now matches the linear convolution exactly — because there’s no wrap-around. The earlier mismatch happened simply because we didn’t have enough zeros, so the neighbors still overlapped.\n\nThis is the essence of zero padding: make the “yard” wide enough so your neighbors can’t mess up your calculation.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide34.JPG",
+      "script": "This picture illustrates the concept of zero padding by visualizing the process of convolution. It shows how the red and blue triangles, representing two signals, overlap when padded with zeros, resulting in a clean and accurate convolution output. The added zeros create a buffer zone, preventing the wrap-around effect and circular convolution. This allows us to perform the convolution correctly and obtain the desired output.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Zero Padding Concept"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Visualizing Zero Padding"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 3000,
+          "label": "Zero Padding Result"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "If you’d like to explore these ideas further, MathWorks has some excellent tutor",
+      "bullets": [
+        "This particular page walks through the relationship between linear and circular convolution in MATLAB. It explains the key conditions under which the two are equivalent, and shows how zero padding can be used to make circular convolution behave like linear convolution.",
+        "You’ll also find clear MATLAB examples here — creating vectors, padding them to the right length, applying the FFT, multiplying in the frequency domain, and using the inverse FFT to get back to the time domain.",
+        "So, if you want to reinforce what we’ve just covered or see it implemented step-by-step, this is a great place to start."
+      ],
+      "fullText": "If you’d like to explore these ideas further, MathWorks has some excellent tutorials and examples in its documentation.\n\nThis particular page walks through the relationship between linear and circular convolution in MATLAB. It explains the key conditions under which the two are equivalent, and shows how zero padding can be used to make circular convolution behave like linear convolution.\n\nYou’ll also find clear MATLAB examples here — creating vectors, padding them to the right length, applying the FFT, multiplying in the frequency domain, and using the inverse FFT to get back to the time domain.\nSo, if you want to reinforce what we’ve just covered or see it implemented step-by-step, this is a great place to start.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide35.JPG",
+      "script": "If you'd like to dive deeper into the relationship between linear and circular convolution, MathWorks offers excellent tutorials and examples in their documentation. Specifically, this page provides a step-by-step explanation of when linear and circular convolution are equivalent, and how zero padding can be used to make circular convolution act like linear convolution. You can follow along with clear MATLAB examples to solidify your understanding.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 500,
+          "label": "MathWorks tutorials"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "linear and circular convolution"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "zero padding and equivalence"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "Our second example is spectral analysis.",
+      "bullets": [
+        "Here, we use an important relationship: one divided by capital N is equal to delta t multiplied by delta nu.",
+        "In words, delta t is the sampling interval in the time domain, and delta nu — sometimes called delta u — is the spacing between frequency samples in the Fourier domain.",
+        "What this tells us is that if we keep delta t fixed and the total number of samples N fixed, then our frequency spacing delta nu is also fixed. That means, if a signal contains two frequencies that are very close together, the spectrum may not have enough resolution to separate them.",
+        "One way to improve the resolution is called zero padding. This means we add zeros to the end of the time-domain signal, which increases the total number of samples N. Increasing N makes the spacing in the frequency domain, delta nu, smaller — giving us a finer frequency grid and better spectral resolution.",
+        "In this MATLAB example, we create a signal by adding two sinusoids.",
+        "The first term is the cosine of two times pi times one hundred times t.",
+        "The second term is the sine of two times pi times two-hundred two point five times t.",
+        "We sample t from zero to one second in steps of zero point zero zero one seconds, which corresponds to a sampling frequency of one kilohertz.",
+        "Without zero padding, the frequency step size may be too large to clearly separate the peaks at one hundred hertz and one-hundred two point five hertz.",
+        "With zero padding, the peaks become distinct.",
+        "If you want the full MATLAB walkthrough, you can follow the link at the bottom of the slide."
+      ],
+      "fullText": "Our second example is spectral analysis.\nHere, we use an important relationship: one divided by capital N is equal to delta t multiplied by delta nu.\u000bIn words, delta t is the sampling interval in the time domain, and delta nu — sometimes called delta u — is the spacing between frequency samples in the Fourier domain.\n\nWhat this tells us is that if we keep delta t fixed and the total number of samples N fixed, then our frequency spacing delta nu is also fixed. That means, if a signal contains two frequencies that are very close together, the spectrum may not have enough resolution to separate them.\n\nOne way to improve the resolution is called zero padding. This means we add zeros to the end of the time-domain signal, which increases the total number of samples N. Increasing N makes the spacing in the frequency domain, delta nu, smaller — giving us a finer frequency grid and better spectral resolution.\n\nIn this MATLAB example, we create a signal by adding two sinusoids.\u000bThe first term is the cosine of two times pi times one hundred times t.\u000bThe second term is the sine of two times pi times two-hundred two point five times t.\nWe sample t from zero to one second in steps of zero point zero zero one seconds, which corresponds to a sampling frequency of one kilohertz.\u000bWithout zero padding, the frequency step size may be too large to clearly separate the peaks at one hundred hertz and one-hundred two point five hertz.\u000bWith zero padding, the peaks become distinct.\n\nIf you want the full MATLAB walkthrough, you can follow the link at the bottom of the slide.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide36.JPG",
+      "script": "Spectral analysis is our second example, and it uses the relationship one divided by capital N equals delta t multiplied by delta nu. This relationship tells us that if we keep the sampling interval delta t fixed and the total number of samples N fixed, then the frequency spacing delta nu is also fixed. This means that if a signal contains two frequencies that are very close together, the spectrum may not have enough resolution to separate them.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Spectral Analysis"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Delta T"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Zero Padding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Now, let’s see what happens when we perform the Fourier transform without using ",
+      "bullets": [
+        "We take our signal x and compute its discrete Fourier transform using the FFT function.",
+        "We keep only the first half of the spectrum, because for a real-valued signal, the second half is just the mirror image.",
+        "Then we normalize by dividing by the length of x, and scale the amplitudes appropriately.",
+        "The frequency axis is calculated from zero to half the sampling rate, in steps of the frequency resolution.",
+        "On the plot, you see two peaks in blue. The first peak is at exactly one hundred hertz — that one is well captured because it matches the frequency grid.",
+        "The second component, however, is at one hundred two point five hertz, which does not align neatly with the frequency samples.",
+        "As a result, the peak is lower than it should be — you can see that it only reaches about half of its true amplitude — and it spreads into nearby frequency bins.",
+        "This illustrates the limitation of the frequency resolution when we don’t use zero padding."
+      ],
+      "fullText": "Now, let’s see what happens when we perform the Fourier transform without using zero padding.\n\nWe take our signal x and compute its discrete Fourier transform using the FFT function.\u000bWe keep only the first half of the spectrum, because for a real-valued signal, the second half is just the mirror image.\u000bThen we normalize by dividing by the length of x, and scale the amplitudes appropriately.\u000bThe frequency axis is calculated from zero to half the sampling rate, in steps of the frequency resolution.\n\nOn the plot, you see two peaks in blue. The first peak is at exactly one hundred hertz — that one is well captured because it matches the frequency grid.\u000bThe second component, however, is at one hundred two point five hertz, which does not align neatly with the frequency samples.\u000b\nAs a result, the peak is lower than it should be — you can see that it only reaches about half of its true amplitude — and it spreads into nearby frequency bins.\n\nThis illustrates the limitation of the frequency resolution when we don’t use zero padding.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide37.JPG",
+      "script": "Now, let's see what happens when we perform the Fourier transform without using zero padding. We take our signal x, compute its discrete Fourier transform using the FFT function, and keep only the first half of the spectrum, because for a real-valued signal, the second half is just the mirror image. We then normalize by dividing by the length of x, and scale the amplitudes appropriately. The frequency axis is calculated from zero to half the sampling rate, in steps of the frequency resolution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Signal x"
+        },
+        {
+          "timeMs": 1800,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.35,
+          "durationMs": 500,
+          "label": "Discrete Fourier Transform"
+        },
+        {
+          "timeMs": 2300,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.55,
+          "durationMs": 500,
+          "label": "Frequency Axis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Now, let’s see what happens when we use zero padding.",
+      "bullets": [
+        "We take our original signal and extend it in the time domain by adding a large number of zeros at the end.",
+        "This does not change the actual information in the signal, but it does increase the total number of samples.",
+        "When we compute the Fourier transform of this longer sequence, the frequency spacing between the points in the spectrum becomes smaller.",
+        "This means we get a finer frequency grid — more points between zero and the Nyquist frequency.",
+        "As a result, when we plot the spectrum, both peaks — the one at one hundred hertz and the one at one hundred two point five hertz — are now represented much more accurately.",
+        "You can see that their amplitudes are correctly estimated, and the peaks are sharper.",
+        "So, zero padding is a simple but powerful trick for improving the visual resolution of your spectrum.",
+        "It doesn’t actually add new information, but it lets you see the frequency components more clearly."
+      ],
+      "fullText": "Now, let’s see what happens when we use zero padding.\u000b\nWe take our original signal and extend it in the time domain by adding a large number of zeros at the end.\u000bThis does not change the actual information in the signal, but it does increase the total number of samples.\nWhen we compute the Fourier transform of this longer sequence, the frequency spacing between the points in the spectrum becomes smaller.\u000b\nThis means we get a finer frequency grid — more points between zero and the Nyquist frequency.\nAs a result, when we plot the spectrum, both peaks — the one at one hundred hertz and the one at one hundred two point five hertz — are now represented much more accurately.\u000b\nYou can see that their amplitudes are correctly estimated, and the peaks are sharper.\nSo, zero padding is a simple but powerful trick for improving the visual resolution of your spectrum.\u000bIt doesn’t actually add new information, but it lets you see the frequency components more clearly.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide38.JPG",
+      "script": "Now, let's see what happens when we use zero padding. We take our original signal and extend it in the time domain by adding a large number of zeros at the end. This does not change the actual information in the signal, but it does increase the total number of samples. When we compute the Fourier transform of this longer sequence, the frequency spacing between the points in the spectrum becomes smaller. This means we get a finer frequency grid — more points between zero and the Nyquist frequency. As a result, when we plot the spectrum, both peaks — the one at one hundred hertz and the one at zero hertz — become separate and distinct.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Zero padding"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Finer frequency grid"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "More points in the spectrum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "Before we wrap up, I want to highlight something that often feels like magic in ",
+      "bullets": [
+        "A signal cannot be both time-limited and band-limited at the same time.",
+        "If a signal is strictly limited in time — meaning it exists only within a certain interval — its frequency spectrum will stretch infinitely.",
+        "And if a signal is strictly limited in frequency — meaning it contains only a finite range of frequencies — then it must extend infinitely in time.",
+        "In practice, we often work with signals that are approximately time-limited and approximately band-limited.",
+        "This approximation, along with clever techniques like sampling, zero padding, and windowing, allows us to do what might seem impossible — turning the “impossible” into something that works perfectly well for our needs.",
+        "That’s the kind of “magic” you see every day in signal processing"
+      ],
+      "fullText": "Before we wrap up, I want to highlight something that often feels like magic in signal processing.\u000b\nA signal cannot be both time-limited and band-limited at the same time.\nIf a signal is strictly limited in time — meaning it exists only within a certain interval — its frequency spectrum will stretch infinitely.\u000bAnd if a signal is strictly limited in frequency — meaning it contains only a finite range of frequencies — then it must extend infinitely in time.\n\nIn practice, we often work with signals that are approximately time-limited and approximately band-limited.\u000bThis approximation, along with clever techniques like sampling, zero padding, and windowing, allows us to do what might seem impossible — turning the “impossible” into something that works perfectly well for our needs.\u000bThat’s the kind of “magic” you see every day in signal processing",
+      "imageURL": "/lectures/Lecture_08/Images/Slide39.JPG",
+      "script": "The concept of a signal being both time-limited and band-limited is fundamentally contradictory, but in practice, we work with signals that are approximately time-limited and approximately band-limited, which is a common and useful approximation. This balance between time and frequency is what allows us to process and analyze signals effectively in medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 36000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Approximation in Practice"
+        },
+        {
+          "timeMs": 37000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Balance in Signal Processing"
+        },
+        {
+          "timeMs": 38000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Contradiction in Theory"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "Now let’s step back and look at the big picture.",
+      "bullets": [
+        "Everything we’ve discussed so far seems to work perfectly — but there’s an important approximation hidden here.",
+        "We often say: if a signal is finite in time — meaning it has a limited duration — then its Fourier spectrum is also limited to a finite interval.",
+        "In reality, that’s not strictly true.",
+        "If a signal is perfectly finite in the time domain, its spectrum will actually extend infinitely. It will get smaller and smaller as you move away from the center, but it never truly stops.",
+        "You might argue that if we take the frequency range from minus W to plus W, and make W large enough, the parts outside this range become so small that they can be ignored.",
+        "And yes, in practical engineering, we often do that. But from a mathematical point of view, we have to be careful.",
+        "Why?",
+        "Because when we discretize, the spectrum is periodically repeated — we get infinitely many copies of it.",
+        "Even if a single copy has very small values far away from the center, those small values from every copy can add up.",
+        "The further away a copy is, the less it contributes — but since there are infinitely many of them, the sum of all those tiny contributions might still be significant.",
+        "This is why convergence is not always guaranteed and why mathematical rigor is important when making these approximations."
+      ],
+      "fullText": "Now let’s step back and look at the big picture.\u000bEverything we’ve discussed so far seems to work perfectly — but there’s an important approximation hidden here.\nWe often say: if a signal is finite in time — meaning it has a limited duration — then its Fourier spectrum is also limited to a finite interval.\u000b\nIn reality, that’s not strictly true.\u000bIf a signal is perfectly finite in the time domain, its spectrum will actually extend infinitely. It will get smaller and smaller as you move away from the center, but it never truly stops.\nYou might argue that if we take the frequency range from minus W to plus W, and make W large enough, the parts outside this range become so small that they can be ignored.\u000bAnd yes, in practical engineering, we often do that. But from a mathematical point of view, we have to be careful.\n\nWhy?\u000bBecause when we discretize, the spectrum is periodically repeated — we get infinitely many copies of it.\u000bEven if a single copy has very small values far away from the center, those small values from every copy can add up.\u000bThe further away a copy is, the less it contributes — but since there are infinitely many of them, the sum of all those tiny contributions might still be significant.\nThis is why convergence is not always guaranteed and why mathematical rigor is important when making these approximations.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide40.JPG",
+      "script": "As we zoom in closer to the continuous case, we notice that the discrete spectrum becomes a continuous distribution, and the spacing between frequency bins becomes smaller and smaller.",
+      "spotlightEvents": [
+        {
+          "timeMs": 60000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Important Approximation"
+        },
+        {
+          "timeMs": 62000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Finite Time Domain"
+        },
+        {
+          "timeMs": 64000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Infinite Frequency Interval"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "Let me give you a simple example to show why “getting smaller” isn’t always enou",
+      "bullets": [
+        "Imagine a curve where the height at any point is equal to one divided by the position along the horizontal axis. As you move farther to the right, the values get smaller and smaller — for example, at position one the value is one, at position two it’s one-half, at position three it’s one-third, at position four it’s one-fourth, and so on.",
+        "You might think: “These numbers are tiny — if we keep adding them, the total should stay small.”",
+        "But here’s the surprising fact: even if you start far out, like at one over one million, and then keep adding one over two million, one over three million, and so on, the total will still grow without limit.",
+        "In other words, an infinite number of tiny contributions can still add up to something infinitely large.",
+        "And this is exactly the kind of situation we face in Fourier analysis: very small contributions from infinitely many frequency copies can still combine into something significant."
+      ],
+      "fullText": "Let me give you a simple example to show why “getting smaller” isn’t always enough.\n\nImagine a curve where the height at any point is equal to one divided by the position along the horizontal axis. As you move farther to the right, the values get smaller and smaller — for example, at position one the value is one, at position two it’s one-half, at position three it’s one-third, at position four it’s one-fourth, and so on.\n\nYou might think: “These numbers are tiny — if we keep adding them, the total should stay small.”\nBut here’s the surprising fact: even if you start far out, like at one over one million, and then keep adding one over two million, one over three million, and so on, the total will still grow without limit.\n\nIn other words, an infinite number of tiny contributions can still add up to something infinitely large.\nAnd this is exactly the kind of situation we face in Fourier analysis: very small contributions from infinitely many frequency copies can still combine into something significant.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide41.JPG",
+      "script": "Let me give you a simple example to show why 'getting smaller' isn't always enough. Imagine a curve where the height at any point is equal to one divided by the position along the horizontal axis. As you move farther to the right, the values get smaller and smaller, like one, one-half, one-third, one-fourth, and so on. You might think that adding these tiny numbers will keep the total small, but surprisingly, even starting far out, like at one over n, the sum can still grow unexpectedly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Example Curve"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Tiny Contributions"
+        },
+        {
+          "timeMs": 21000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.4,
+          "durationMs": 1000,
+          "label": "Infinite Sum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "This idea connects to the famous wheat and chessboard problem, which is a classi",
+      "bullets": [
+        "Imagine a chessboard with sixty-four squares. On the first square, you place one grain of wheat. On the next square, you double it — two grains. On the third square, you double it again — four grains. Then eight, sixteen, thirty-two, and so on. By the time you fill all the squares, the total number of grains becomes unimaginably large — enough to cover the Earth with a thick layer of wheat.",
+        "This illustrates how quickly exponential growth can get out of control.",
+        "Now, in our Fourier problem, for our approximation trick to work, the leftover terms — those tiny contributions from far-away frequencies — must shrink faster than one divided by the position number. That means the function must be smooth enough so that its spectrum decays quickly.",
+        "In fact, for most practical functions, after some pre-processing and smoothing, the decay is even faster — often like one divided by the position number squared. And in that case, adding up all the small contributions still gives you a small total. This is what allows our approach to work."
+      ],
+      "fullText": "This idea connects to the famous wheat and chessboard problem, which is a classic example of exponential growth.\n\nImagine a chessboard with sixty-four squares. On the first square, you place one grain of wheat. On the next square, you double it — two grains. On the third square, you double it again — four grains. Then eight, sixteen, thirty-two, and so on. By the time you fill all the squares, the total number of grains becomes unimaginably large — enough to cover the Earth with a thick layer of wheat.\nThis illustrates how quickly exponential growth can get out of control.\n\nNow, in our Fourier problem, for our approximation trick to work, the leftover terms — those tiny contributions from far-away frequencies — must shrink faster than one divided by the position number. That means the function must be smooth enough so that its spectrum decays quickly.\n\nIn fact, for most practical functions, after some pre-processing and smoothing, the decay is even faster — often like one divided by the position number squared. And in that case, adding up all the small contributions still gives you a small total. This is what allows our approach to work.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide42.JPG",
+      "script": "The idea of doubling the number of samples in each dimension leads to an exponential increase in the total number of data points, similar to the wheat and chessboard problem. This illustrates the importance of considering the trade-off between resolution and data size in medical imaging. As we increase the sampling rate or resolution, the amount of data to process and store grows exponentially.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Wheat and Chessboard Problem"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Exponential Growth"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 3000,
+          "label": "Function Smoothness"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "So, at this point, we have completed the main part of our discussion on Fourier ",
+      "bullets": [
+        "This textbook is designed for a full semester, and it’s quite comprehensive. My goal here has been to distill the most essential concepts for our biomedical engineering context. I’ve also added examples and explanations from other sources, as well as my own understanding, to create what I like to think of as a “BME version” of linear systems and Fourier analysis.",
+        "So far, you have all the core material. In the next lecture, our teaching assistant will go over some homework problems to help reinforce your understanding and sharpen your skills. After that, we’ll move on to our next major topic — network image quality.",
+        "That means the most mathematically challenging part of the course — Fourier analysis — is now behind us."
+      ],
+      "fullText": "So, at this point, we have completed the main part of our discussion on Fourier analysis. In preparing these lectures, I’ve drawn from multiple resources — including this excellent textbook from Stanford University’s course “The Fourier Transform and Its Applications” — as well as my own insights and examples.\n\nThis textbook is designed for a full semester, and it’s quite comprehensive. My goal here has been to distill the most essential concepts for our biomedical engineering context. I’ve also added examples and explanations from other sources, as well as my own understanding, to create what I like to think of as a “BME version” of linear systems and Fourier analysis.\n\nSo far, you have all the core material. In the next lecture, our teaching assistant will go over some homework problems to help reinforce your understanding and sharpen your skills. After that, we’ll move on to our next major topic — network image quality.\nThat means the most mathematically challenging part of the course — Fourier analysis — is now behind us.",
+      "imageURL": "/lectures/Lecture_08/Images/Slide43.JPG",
+      "script": "So, at this point, we've covered the main part of Fourier analysis, and I've drawn from various resources, including the Stanford University textbook, to create a clear and practical understanding of the topic. This textbook is comprehensive, but I've focused on the most essential concepts for our biomedical engineering context, adding examples and explanations to help make it more accessible.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": ""
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": ""
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": ""
+        }
+      ]
+    }
+  ]
+}

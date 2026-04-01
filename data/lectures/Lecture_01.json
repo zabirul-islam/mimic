@@ -1,0 +1,2032 @@
+{
+  "lectureId": "Lecture_01",
+  "lectureTitle": "Medical Imaging — Lecture 01",
+  "totalSlides": 50,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Hi everyone, and welcome to this online course on medical imaging.",
+      "bullets": [
+        "I’m Professor Ge Wang, and I’ll be guiding you through the course.",
+        "Medical imaging is a fascinating and powerful field.",
+        "It brings together science, engineering, and medicine to help us see what is happening inside the human body,",
+        "without making a single cut.",
+        "And one thing I like about this area is that it naturally connects many backgrounds.",
+        "If you come from engineering, physics, computer science, or biology,",
+        "you will find familiar ideas here,",
+        "and you will also see how those ideas come together in a very practical way.",
+        "So over the semester, we will build the foundations,",
+        "learn the major imaging modalities,",
+        "and develop the intuition to understand how these systems work",
+        "and why they work.",
+        "Alright, let’s begin."
+      ],
+      "fullText": "Hi everyone, and welcome to this online course on medical imaging.\n\nI’m Professor Ge Wang, and I’ll be guiding you through the course.\n\nMedical imaging is a fascinating and powerful field.\nIt brings together science, engineering, and medicine to help us see what is happening inside the human body,\nwithout making a single cut.\n\nAnd one thing I like about this area is that it naturally connects many backgrounds.\nIf you come from engineering, physics, computer science, or biology,\nyou will find familiar ideas here,\nand you will also see how those ideas come together in a very practical way.\n\nSo over the semester, we will build the foundations,\nlearn the major imaging modalities,\nand develop the intuition to understand how these systems work\nand why they work.\n\nAlright, let’s begin.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide1.JPG",
+      "script": "Welcome to this online course on medical imaging. I'm Professor Ge Wang, and I'll be guiding you through the course. Medical imaging is a fascinating and powerful field that brings together science, engineering, and medicine to help us see what's happening inside the human body without making a single cut. It's a field that naturally connects many backgrounds, making it a great fit for students with diverse skill sets.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Welcome to Medical Imaging"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Professor Ge Wang"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Fascinating Field"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "We’ll begin with the fundamentals — systems, Fourier analysis, signal processing",
+      "bullets": [],
+      "fullText": "We’ll begin with the fundamentals — systems, Fourier analysis, signal processing — and hands-on MATLAB sessions. Then we’ll explore major imaging techniques: X-ray and radiography, CT, PET, SPECT, MRI, ultrasound, optical, and deep imaging.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide2.JPG",
+      "script": "We'll start with the building blocks of medical imaging, which are systems, Fourier analysis, and signal processing. These fundamentals will give us a solid foundation for understanding how imaging systems work and how they produce images. We'll also have hands-on experience with MATLAB to reinforce our understanding of these concepts.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Fundamentals"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "MATLAB"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Imaging Systems"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "So, to kick things off, I want to frame today’s introduction around four simple ",
+      "bullets": [
+        "First: What is this course about?",
+        "At its core, medical imaging is about inner vision. It’s the set of ideas and tools that lets us “see” inside the body, not by opening it up, but by using physics, computation, and instrumentation to form images from measured signals.",
+        "Second: Why study medical imaging?",
+        "There are two big reasons. One is health-related knowledge. Medical imaging sits right at the center of modern diagnosis, treatment planning, and disease monitoring, so understanding it gives you a practical way to connect engineering and science to real clinical impact.",
+        "The other is career requirements. If you plan to work in biomedical engineering, radiology-related technology, AI for healthcare, medical devices, or research labs, imaging literacy is not optional. It’s a foundational skill set.",
+        "Third: Who is this course for?",
+        "There are two sides here. We, the instructors, will guide you through the fundamentals and help you build the right intuition. But the other “who” is you. Your effort matters a lot in this course, because imaging becomes clear only when you actively work through the concepts and practice applying them.",
+        "Finally: How are we going to learn this?",
+        "We’ll build things up from the foundation, and then move through the major modalities one by one, so you understand both the common principles and what makes each imaging method unique.",
+        "You’ll also do hands-on work in MATLAB, because imaging is something you learn by doing, not just reading. And along the way, we’ll use books and online resources, including targeted searches, to help you develop the habit of learning and verifying information the way real researchers and engineers do.",
+        "That’s the roadmap: inner vision, why it matters, who’s involved, and how we’ll approach it step by step."
+      ],
+      "fullText": "So, to kick things off, I want to frame today’s introduction around four simple questions: What, Why, Who, and How.\n\nFirst: What is this course about?\nAt its core, medical imaging is about inner vision. It’s the set of ideas and tools that lets us “see” inside the body, not by opening it up, but by using physics, computation, and instrumentation to form images from measured signals.\n\nSecond: Why study medical imaging?\nThere are two big reasons. One is health-related knowledge. Medical imaging sits right at the center of modern diagnosis, treatment planning, and disease monitoring, so understanding it gives you a practical way to connect engineering and science to real clinical impact.\nThe other is career requirements. If you plan to work in biomedical engineering, radiology-related technology, AI for healthcare, medical devices, or research labs, imaging literacy is not optional. It’s a foundational skill set.\n\nThird: Who is this course for?\nThere are two sides here. We, the instructors, will guide you through the fundamentals and help you build the right intuition. But the other “who” is you. Your effort matters a lot in this course, because imaging becomes clear only when you actively work through the concepts and practice applying them.\n\nFinally: How are we going to learn this?\nWe’ll build things up from the foundation, and then move through the major modalities one by one, so you understand both the common principles and what makes each imaging method unique.\nYou’ll also do hands-on work in MATLAB, because imaging is something you learn by doing, not just reading. And along the way, we’ll use books and online resources, including targeted searches, to help you develop the habit of learning and verifying information the way real researchers and engineers do.\n\nThat’s the roadmap: inner vision, why it matters, who’s involved, and how we’ll approach it step by step.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide3.JPG",
+      "script": "So, to kick things off, I want to frame today’s introduction around four simple questions: What, Why, Who, and How. What is this course about? At its core, medical imaging is about inner vision, the set of ideas and tools that lets us “see” inside the body without opening it up, using physics, computation, and instrumentation to form images from measured signals. Why study medical imaging? There are two big reasons: health-related knowledge and the growing demand for imaging technology in fields like biomedical engineering.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "What is medical imaging?"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Why study medical imaging?"
+        },
+        {
+          "timeMs": 7000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Health-related knowledge"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "Let’s build on this idea of medical imaging as inner vision, but now I want to p",
+      "bullets": [
+        "As humans, our natural vision is impressive, but it has a hard limit. We can see surfaces and appearances, but we cannot directly see what’s hidden inside most objects, and certainly not inside the body. If something is behind a wall, inside a closed box, or deep within tissue, visible light does not help us much.",
+        "Medical imaging is our way of breaking that limitation. It gives us a principled, scientific way to “see the unseen”, to recover internal structure and function from measurements, without cutting the body open. That’s why this slide calls it mystery vision: we are turning hidden internal reality into something observable and measurable.",
+        "And notice the line on the slide: IT = Industrial, Info, Imaging, Intelligent Tech.",
+        "This is a reminder that what we are doing in this course is not only medicine. Medical imaging sits at the intersection of:",
+        "Industrial tech: the hardware, sensors, scanners, and real systems that must work reliably.",
+        "Information tech: signals, data, computation, and how we process measurements into images.",
+        "Imaging tech: the physics and mathematics of image formation and reconstruction.",
+        "Intelligent tech: algorithms and AI that help interpret images, improve quality, and support decisions.",
+        "So when a patient has symptoms and a physician needs answers, imaging becomes a kind of extended vision, a controlled way to look beneath the surface, quantify what’s happening, and guide care.",
+        "That is the big message here: medical imaging is mystery vision made scientific, and it lives at the crossroads of industrial systems, information, imaging physics, and intelligent computation."
+      ],
+      "fullText": "Let’s build on this idea of medical imaging as inner vision, but now I want to phrase it a little differently: think of it as mystery vision.\n\nAs humans, our natural vision is impressive, but it has a hard limit. We can see surfaces and appearances, but we cannot directly see what’s hidden inside most objects, and certainly not inside the body. If something is behind a wall, inside a closed box, or deep within tissue, visible light does not help us much.\n\nMedical imaging is our way of breaking that limitation. It gives us a principled, scientific way to “see the unseen”, to recover internal structure and function from measurements, without cutting the body open. That’s why this slide calls it mystery vision: we are turning hidden internal reality into something observable and measurable.\n\nAnd notice the line on the slide: IT = Industrial, Info, Imaging, Intelligent Tech.\nThis is a reminder that what we are doing in this course is not only medicine. Medical imaging sits at the intersection of:\n\nIndustrial tech: the hardware, sensors, scanners, and real systems that must work reliably.\n\nInformation tech: signals, data, computation, and how we process measurements into images.\n\nImaging tech: the physics and mathematics of image formation and reconstruction.\n\nIntelligent tech: algorithms and AI that help interpret images, improve quality, and support decisions.\n\nSo when a patient has symptoms and a physician needs answers, imaging becomes a kind of extended vision, a controlled way to look beneath the surface, quantify what’s happening, and guide care.\n\nThat is the big message here: medical imaging is mystery vision made scientific, and it lives at the crossroads of industrial systems, information, imaging physics, and intelligent computation.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide4.JPG",
+      "script": "Let's build on the idea of medical imaging as inner vision, but now I want to phrase it a little differently: think of it as mystery vision. Our natural vision is impressive, but it has a hard limit, allowing us to see surfaces and appearances, but not what's hidden inside most objects or deep within tissue. Medical imaging helps us overcome this limitation by giving us a scientific way to \"see the unseen\".",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Mystery Vision"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Limitations of Natural Vision"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Principled Way to See the Unseen"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Let me push this idea one step further. If “mystery vision” is about seeing what",
+      "bullets": [
+        "Think about the superhero idea on this slide: X-ray vision. The fantasy is that you can look through the body and immediately understand what’s going on inside. In real life, we obviously do not have magical eyes, but medical imaging gives us the next best thing: technology-assisted vision that can reveal internal anatomy and, in many cases, function, without surgery.",
+        "And what’s important is that this “super vision” is not one single tool. It comes in different forms, depending on what you want to see. Some modalities are best for structure, like bones or organs. Others are better for soft tissue detail, blood flow, metabolism, or motion. Each modality gives you a different kind of window into the body.",
+        "So the goal of this course is to understand how we achieve that super vision in a scientific way: what we measure, how we form an image from those measurements, what the limitations are, and how clinicians use the results to make decisions.",
+        "What once sounded like science fiction is now routine clinical practice. Imaging helps detect disease earlier, guide treatment more precisely, and monitor changes over time. And as we go through the course, you’ll see how those capabilities became possible, and why they matter in real healthcare."
+      ],
+      "fullText": "Let me push this idea one step further. If “mystery vision” is about seeing what’s hidden, then medical imaging is also a kind of super vision.\n\nThink about the superhero idea on this slide: X-ray vision. The fantasy is that you can look through the body and immediately understand what’s going on inside. In real life, we obviously do not have magical eyes, but medical imaging gives us the next best thing: technology-assisted vision that can reveal internal anatomy and, in many cases, function, without surgery.\n\nAnd what’s important is that this “super vision” is not one single tool. It comes in different forms, depending on what you want to see. Some modalities are best for structure, like bones or organs. Others are better for soft tissue detail, blood flow, metabolism, or motion. Each modality gives you a different kind of window into the body.\n\nSo the goal of this course is to understand how we achieve that super vision in a scientific way: what we measure, how we form an image from those measurements, what the limitations are, and how clinicians use the results to make decisions.\n\nWhat once sounded like science fiction is now routine clinical practice. Imaging helps detect disease earlier, guide treatment more precisely, and monitor changes over time. And as we go through the course, you’ll see how those capabilities became possible, and why they matter in real healthcare.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide5.JPG",
+      "script": "Let me push this idea one step further. If \"mystery vision\" is about seeing what's hidden, then medical imaging is also a kind of super vision. We can think of medical imaging as a combination of technologies that work together to provide a more complete understanding of the body. This 'super vision' is not just about seeing internal anatomy, but also about understanding how tissues and organs function, and what's happening inside the body in real-time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Super Vision"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Combination of Technologies"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Different Modalities for Different Views"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Now, let’s go back to where it all began. In 1895, a German physicist named Wilh",
+      "bullets": [
+        "To test his discovery, he took the first X-ray image—a picture of his wife’s hand. You could clearly see the bones, and even her wedding ring. It was the first time humans saw inside the body without surgery. That moment changed medicine forever.",
+        "X-rays could depict dense structures like bones and metal with incredible clarity. This breakthrough was so significant that Roentgen received a Nobel Prize in 1901.",
+        "That single discovery launched the field of radiology—and over a century later, we’re still building on it."
+      ],
+      "fullText": "Now, let’s go back to where it all began. In 1895, a German physicist named Wilhelm Conrad Roentgen was experimenting with cathode rays when he discovered something totally unexpected—an invisible form of radiation that could pass through solid objects. He called them X-rays because he didn’t quite know what they were.\n\nTo test his discovery, he took the first X-ray image—a picture of his wife’s hand. You could clearly see the bones, and even her wedding ring. It was the first time humans saw inside the body without surgery. That moment changed medicine forever.\n\nX-rays could depict dense structures like bones and metal with incredible clarity. This breakthrough was so significant that Roentgen received a Nobel Prize in 1901.\n\nThat single discovery launched the field of radiology—and over a century later, we’re still building on it.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide6.JPG",
+      "script": "Wilhelm Conrad Roentgen's discovery of X-rays in 1895 revolutionized medicine by allowing us to see inside the body without surgery. He accidentally discovered X-rays while experimenting with cathode rays and named them X-rays because he didn't know what they were. The first X-ray image was taken of his wife's hand, revealing the bones and even her wedding ring, and this moment changed the course of medical history.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Roentgen's discovery"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "First X-ray image"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Impact on medicine"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "Fast forward to today, and X-ray imaging—specifically X-ray radiography—is one o",
+      "bullets": [
+        "Let’s say someone falls and hurts their arm. An X-ray can quickly show whether there's a fracture. Or in breast cancer screening, mammography—a specialized type of X-ray radiography—can reveal tiny calcifications or early tumors that might not be detectable by touch. Early detection like this can save lives.",
+        "But there’s a limitation with X-ray radiographs. They’re 2D projections, so everything in the body along the X-ray path gets stacked into one image. That makes it hard to see soft tissues clearly or to isolate specific structures.",
+        "So, the next logical step was to ask—what if we could look from multiple directions and reconstruct a full 3D view of what’s inside? That question led to the development of Computed Tomography, or CT, which we’ll get into next."
+      ],
+      "fullText": "Fast forward to today, and X-ray imaging—specifically X-ray radiography—is one of the most common tools used in hospitals and clinics around the world. It’s fast, affordable, and incredibly useful.\n\nLet’s say someone falls and hurts their arm. An X-ray can quickly show whether there's a fracture. Or in breast cancer screening, mammography—a specialized type of X-ray radiography—can reveal tiny calcifications or early tumors that might not be detectable by touch. Early detection like this can save lives.\n\nBut there’s a limitation with X-ray radiographs. They’re 2D projections, so everything in the body along the X-ray path gets stacked into one image. That makes it hard to see soft tissues clearly or to isolate specific structures.\n\nSo, the next logical step was to ask—what if we could look from multiple directions and reconstruct a full 3D view of what’s inside? That question led to the development of Computed Tomography, or CT, which we’ll get into next.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide7.JPG",
+      "script": "X-ray radiography is a fundamental tool in hospitals and clinics due to its speed, affordability, and effectiveness. It's used to quickly diagnose conditions like fractures or early signs of breast cancer, such as tiny calcifications or tumors. However, X-ray radiographs have a limitation, as they are 2D projections, showing superimposed structures that can make it difficult to interpret the image.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "X-ray radiography"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Limitation of X-ray radiographs"
+        },
+        {
+          "timeMs": 4500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Question leading to CT"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "Alright, so earlier we talked about how regular X-rays give us a flat, two-dimen",
+      "bullets": [
+        "Now imagine if we could take many X-ray radiographs around the body—virtually, of course—and figure out what’s happening on transverse sections. That’s exactly what computed tomography, or CT, allows us to do.",
+        "The word \"tomography\" comes from Greek—\"tomos\" means slice, and \"graphy\" means writing or drawing. So, we're basically drawing slices of the body. With CT, we collect X-ray projections from many angles, then use a computer to reconstruct a cross-sectional image.",
+        "The result? A crystal-clear view of internal anatomy, without overlapping tissues. Today’s CT scanners are incredibly precise—some can even resolve features smaller than a millimeter. Think of it like slicing a watermelon and looking inside but doing it without a knife—just scanning. It’s an amazing tool, and one that has completely transformed modern medicine."
+      ],
+      "fullText": "Alright, so earlier we talked about how regular X-rays give us a flat, two-dimensional view of the body. But there’s a catch—everything in that path gets layered on top of each other. It’s like looking at shadows overlapped together.\n\nNow imagine if we could take many X-ray radiographs around the body—virtually, of course—and figure out what’s happening on transverse sections. That’s exactly what computed tomography, or CT, allows us to do.\n\nThe word \"tomography\" comes from Greek—\"tomos\" means slice, and \"graphy\" means writing or drawing. So, we're basically drawing slices of the body. With CT, we collect X-ray projections from many angles, then use a computer to reconstruct a cross-sectional image.\n\nThe result? A crystal-clear view of internal anatomy, without overlapping tissues. Today’s CT scanners are incredibly precise—some can even resolve features smaller than a millimeter. Think of it like slicing a watermelon and looking inside but doing it without a knife—just scanning. It’s an amazing tool, and one that has completely transformed modern medicine.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide8.JPG",
+      "script": "So, regular X-rays give us a flat, two-dimensional view of the body, but everything in that path gets layered on top of each other, like shadows overlapped together. Computed tomography, or CT, allows us to take many X-ray radiographs around the body and figure out what's happening on transverse sections. The word \"tomography\" comes from Greek, where \"tomos\" means slice and \"graphy\" means writing or drawing, so we're basically drawing slices of the body.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "CT explained"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Tomography meaning"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Precision of CT"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Now, if you want to get a fun and visual explanation of how X-rays work, there’s",
+      "bullets": [
+        "In just a few minutes, it walks you through how X-rays are produced, how they interact with the body, and how detected signals are turned into a cross-sectional image. It’s a great refresher, especially if you’re a visual learner.",
+        "You’ll also see how this technology became the foundation for other types of imaging we’ll cover—like PET, SPECT, and MRI. The video’s optional, but I really recommend checking it out when you have a moment."
+      ],
+      "fullText": "Now, if you want to get a fun and visual explanation of how X-rays work, there’s a great animated video I did for TED-Ed. It’s called “How X-rays See Through Your Skin.”\n\nIn just a few minutes, it walks you through how X-rays are produced, how they interact with the body, and how detected signals are turned into a cross-sectional image. It’s a great refresher, especially if you’re a visual learner.\n\nYou’ll also see how this technology became the foundation for other types of imaging we’ll cover—like PET, SPECT, and MRI. The video’s optional, but I really recommend checking it out when you have a moment.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide9.JPG",
+      "script": "If you're looking for a fun and visual explanation of how X-rays work, I created an animated video for TED-Ed called 'How X-rays See Through Your Skin.' This video provides a concise and engaging explanation of X-ray production, interaction with the body, and image formation, making it a great refresher for visual learners. It's also a great way to see how X-ray technology laid the foundation for other imaging modalities like PET, SPECT, and MRI. The video is optional, but I highly recommend checking it out for a deeper understanding of X-ray imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "TED-Ed Video"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "X-ray Production"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Image Formation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "So far, we've focused on X-rays—but medical imaging goes way beyond that. In fac",
+      "bullets": [
+        "Depending on what part of the spectrum you use, you get different kinds of information. For example:",
+        "Gamma rays are used in nuclear imaging, like PET and SPECT",
+        "Radio waves are instrumental in MRI",
+        "Visible and infrared light are for optical imaging",
+        "And even ultrasound, though not part of the EM spectrum, gives us mechanical wave-based imaging, referred to as ultrasound imaging.",
+        "Each imaging modality has its own strengths and weaknesses. Some are great for structure, others for function. Some are good at seeing bones, others at detecting molecular processes like metabolism or gene expression.",
+        "In fact, no single technique gives us the whole picture. That’s why modern medicine often combines them—what we call multimodal imaging. When we link them together, we get a rather rich view of what’s going on inside the body."
+      ],
+      "fullText": "So far, we've focused on X-rays—but medical imaging goes way beyond that. In fact, it covers almost the entire electromagnetic spectrum.\n\nDepending on what part of the spectrum you use, you get different kinds of information. For example:\n\nGamma rays are used in nuclear imaging, like PET and SPECT\n\nRadio waves are instrumental in MRI\n\nVisible and infrared light are for optical imaging\n\nAnd even ultrasound, though not part of the EM spectrum, gives us mechanical wave-based imaging, referred to as ultrasound imaging.\n\nEach imaging modality has its own strengths and weaknesses. Some are great for structure, others for function. Some are good at seeing bones, others at detecting molecular processes like metabolism or gene expression.\n\nIn fact, no single technique gives us the whole picture. That’s why modern medicine often combines them—what we call multimodal imaging. When we link them together, we get a rather rich view of what’s going on inside the body.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide10.JPG",
+      "script": "So far, we've focused on X-rays, but medical imaging is a broad field that uses almost the entire electromagnetic spectrum, depending on the application. Different parts of the spectrum provide different kinds of information, such as gamma rays for nuclear imaging, radio waves for MRI, visible and infrared light for optical imaging, and ultrasound for mechanical wave-based imaging. Each modality has its own strengths and weaknesses, making them suitable for specific uses.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Gamma rays in nuclear imaging"
+        },
+        {
+          "timeMs": 15500,
+          "type": "spotlight",
+          "x": 0.35,
+          "y": 0.25,
+          "durationMs": 3000,
+          "label": "Radio waves in MRI"
+        },
+        {
+          "timeMs": 17500,
+          "type": "spotlight",
+          "x": 0.45,
+          "y": 0.35,
+          "durationMs": 2000,
+          "label": "Visible and infrared light in optical imaging"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Let’s talk a bit more about what makes tomography special.",
+      "bullets": [
+        "When you take a regular photo with your phone, you get a picture—that’s it. It’s a direct result of what the camera sees. But tomographic imaging is different. You don’t directly capture the image you want. Instead, you collect data from many different angles, and that data is a kind of indirect measurement—a projection of what's inside.",
+        "Now here’s the key part: to get a cross-sectional image, we need to do something called inversion. In other words, we take the measurements and reverse-engineer the internal structure that produced them.",
+        "This is an inverse problem. It’s different from the more familiar forward problem, where you know all the inputs, and a forward model, and calculate the outcome. Like in physics: you know the force and the mass, so you calculate how something moves.",
+        "In tomography, it’s the opposite. You see the outcome—the measurement—and you ask: what could have caused this? That’s a lot harder.",
+        "Here’s a fun analogy: think of boiling an egg. That’s a straightforward process. But what if someone gave you a boiled egg and said, “Unboil it”? That’s the inverse problem. Sounds impossible—but researchers have found ways to reverse that process under specific conditions. It’s challenging, but not hopeless. And that’s what makes inversion in imaging both difficult and exciting."
+      ],
+      "fullText": "Let’s talk a bit more about what makes tomography special.\n\nWhen you take a regular photo with your phone, you get a picture—that’s it. It’s a direct result of what the camera sees. But tomographic imaging is different. You don’t directly capture the image you want. Instead, you collect data from many different angles, and that data is a kind of indirect measurement—a projection of what's inside.\n\nNow here’s the key part: to get a cross-sectional image, we need to do something called inversion. In other words, we take the measurements and reverse-engineer the internal structure that produced them.\n\nThis is an inverse problem. It’s different from the more familiar forward problem, where you know all the inputs, and a forward model, and calculate the outcome. Like in physics: you know the force and the mass, so you calculate how something moves.\n\nIn tomography, it’s the opposite. You see the outcome—the measurement—and you ask: what could have caused this? That’s a lot harder.\n\nHere’s a fun analogy: think of boiling an egg. That’s a straightforward process. But what if someone gave you a boiled egg and said, “Unboil it”? That’s the inverse problem. Sounds impossible—but researchers have found ways to reverse that process under specific conditions. It’s challenging, but not hopeless. And that’s what makes inversion in imaging both difficult and exciting.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide11.JPG",
+      "script": "Tomographic imaging is special because it involves collecting data from many angles and performing an inversion to reconstruct the internal structure. This process takes the indirect measurements and turns them into a direct image of the body's interior. It's a clever trick that allows us to see inside the body without cutting it open.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "What makes tomography special?"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Direct vs. indirect measurement"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Inversion in tomography"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Here’s another example that might feel a bit more familiar.",
+      "bullets": [
+        "Let’s say you take a photo with your phone, but it turns out a little blurry—maybe the camera shook, or the focus was off, or the camera is cheap and of poor quality. What you get is not the true image, but a version that’s been blurred in several ways.",
+        "Now, how do we describe that blurring? In image processing, we model it using something called a point spread function—or PSF for short. This describes how a single point of light spreads out in the image.",
+        "The process that causes blurring is called convolution. It’s a mathematical operation that combines the original image with the PSF. Convolution is sort of like multiplication—but in the so-called Fourier space that we will explain later in this course. Indeed, in the Fourier domain, convolution becomes regular multiplication. The Fourier transform is often performed using a fast algorithm, FFT in short. That simplifies a lot of computations.",
+        "But now comes the hard part: what if all you have is the blurry image? Can you work backward and recover the original, sharp version?",
+        "That’s another inverse problem. And just like with tomography, it’s tricky. You're trying to undo the effect of the blur, based on your knowledge of the system. It takes clever algorithms and good models—but it can be done. And that’s the kind of thinking we’ll develop throughout this course."
+      ],
+      "fullText": "Here’s another example that might feel a bit more familiar.\n\nLet’s say you take a photo with your phone, but it turns out a little blurry—maybe the camera shook, or the focus was off, or the camera is cheap and of poor quality. What you get is not the true image, but a version that’s been blurred in several ways.\n\nNow, how do we describe that blurring? In image processing, we model it using something called a point spread function—or PSF for short. This describes how a single point of light spreads out in the image.\n\nThe process that causes blurring is called convolution. It’s a mathematical operation that combines the original image with the PSF. Convolution is sort of like multiplication—but in the so-called Fourier space that we will explain later in this course. Indeed, in the Fourier domain, convolution becomes regular multiplication. The Fourier transform is often performed using a fast algorithm, FFT in short. That simplifies a lot of computations.\n\nBut now comes the hard part: what if all you have is the blurry image? Can you work backward and recover the original, sharp version?\n\nThat’s another inverse problem. And just like with tomography, it’s tricky. You're trying to undo the effect of the blur, based on your knowledge of the system. It takes clever algorithms and good models—but it can be done. And that’s the kind of thinking we’ll develop throughout this course.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide12.JPG",
+      "script": "Let's break down the blurring process step by step. When a point of light passes through the camera's lens, it gets smeared out, forming a blurry spot. This spot is the point spread function, or PSF. The PSF is then applied to every pixel in the image through a process called convolution, which combines the PSF with the original image to produce the final, blurry result. Convolution is a fundamental concept in image processing, and it's used to model all sorts of image degradation, from motion blur to noise.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Blurring Process"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "PSF and Convolution"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2500,
+          "label": "Recovering the Original Image"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "Let’s take a step back for a moment and think about how mathematics builds over ",
+      "bullets": [
+        "Start with addition. At this level, we’re not just adding a few numbers. We might be adding up contributions continuously over space or time. That’s what integration is: a continuous version of addition, like the “area under the curve” idea shown here.",
+        "Next, instead of simple subtraction, we start focusing on change. In calculus, that leads to derivatives, where we look at how a quantity changes locally. Geometrically, that’s why you see the picture of a curve with a tangent line: the derivative is the slope of that tangent, capturing local behavior at a point.",
+        "Now take multiplication, but in imaging and signal processing. A key idea is that an imaging system often “spreads” or “mixes” information from nearby points, and we model that using convolution. That’s why one of the pictures shows a blurred image: blur is a typical result of convolution with a system response. And under standard assumptions for linear, shift-invariant systems, convolution in the spatial domain corresponds to multiplication in the Fourier domain.",
+        "Finally, we get to division, and this is the main point of the slide: division is harder. In imaging, “division” often means trying to reverse a forward process, like deblurring. You are given a blurred measurement and asked to recover the original, and that becomes an inverse problem. It is typically sensitive to noise and may not have a unique solution unless we add constraints or regularization.",
+        "And that’s exactly the mindset behind many medical imaging methods, especially tomography: we measure indirect data, then solve an inverse problem to reconstruct what’s actually inside."
+      ],
+      "fullText": "Let’s take a step back for a moment and think about how mathematics builds over time. When you were in school, you learned the basics: addition, subtraction, multiplication, division. These are the building blocks. But once you reach higher levels, like where we are now, those same operations don’t disappear, they just take on more advanced forms.\n\nStart with addition. At this level, we’re not just adding a few numbers. We might be adding up contributions continuously over space or time. That’s what integration is: a continuous version of addition, like the “area under the curve” idea shown here.\n\nNext, instead of simple subtraction, we start focusing on change. In calculus, that leads to derivatives, where we look at how a quantity changes locally. Geometrically, that’s why you see the picture of a curve with a tangent line: the derivative is the slope of that tangent, capturing local behavior at a point.\n\nNow take multiplication, but in imaging and signal processing. A key idea is that an imaging system often “spreads” or “mixes” information from nearby points, and we model that using convolution. That’s why one of the pictures shows a blurred image: blur is a typical result of convolution with a system response. And under standard assumptions for linear, shift-invariant systems, convolution in the spatial domain corresponds to multiplication in the Fourier domain.\n\nFinally, we get to division, and this is the main point of the slide: division is harder. In imaging, “division” often means trying to reverse a forward process, like deblurring. You are given a blurred measurement and asked to recover the original, and that becomes an inverse problem. It is typically sensitive to noise and may not have a unique solution unless we add constraints or regularization.\n\nAnd that’s exactly the mindset behind many medical imaging methods, especially tomography: we measure indirect data, then solve an inverse problem to reconstruct what’s actually inside.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide13.JPG",
+      "script": "As we build upon basic math concepts, they don't disappear, but rather evolve into more advanced forms, like integration, which is a continuous version of addition, representing the accumulation of contributions over space or time. This idea is visualized as the 'area under the curve', illustrating the concept of integration as a fundamental operation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Integration"
+        },
+        {
+          "timeMs": 35000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 3000,
+          "label": "Derivatives"
+        },
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Convolution"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.1,
+          "y": 0.75,
+          "durationMs": 3000,
+          "label": "Division"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Now, here’s the key message of this slide: inversion is hard, much harder than t",
+      "bullets": [
+        "Look at the pictures. On the left, you see the Eiffel Tower the normal way, upright and familiar. That’s like a forward problem: you start with a known object and a known physical process, and you can predict what you will observe. Forward modeling is usually stable and straightforward because you control the rules.",
+        "On the right, the tower is flipped and looks unnatural. That’s a simple visual reminder of what an inverse problem feels like. In an inverse problem, you start from what you observed, often incomplete and noisy, and you try to work backward to recover the underlying cause. And that backward step is where difficulties show up.",
+        "Why is it tricky? Because:",
+        "there may be many different causes that could explain similar observations,",
+        "real measurements include noise and missing information,",
+        "and small errors in the data can lead to big errors in the reconstructed result unless you add constraints.",
+        "So in practice, solving an inverse problem means you need more than one tool. You combine mathematics, algorithms, and physics-based models, and you often need some form of prior knowledge or regularization to guide the solution toward something realistic.",
+        "And that’s why this course is not just about definitions. It’s about learning how to think quantitatively about these forward and inverse relationships, because medical imaging is full of inversion problems. It’s challenging, but once you get the intuition, it’s also one of the most powerful ideas in modern engineering and medicine."
+      ],
+      "fullText": "Now, here’s the key message of this slide: inversion is hard, much harder than the forward process.\n\nLook at the pictures. On the left, you see the Eiffel Tower the normal way, upright and familiar. That’s like a forward problem: you start with a known object and a known physical process, and you can predict what you will observe. Forward modeling is usually stable and straightforward because you control the rules.\n\nOn the right, the tower is flipped and looks unnatural. That’s a simple visual reminder of what an inverse problem feels like. In an inverse problem, you start from what you observed, often incomplete and noisy, and you try to work backward to recover the underlying cause. And that backward step is where difficulties show up.\n\nWhy is it tricky? Because:\n\nthere may be many different causes that could explain similar observations,\n\nreal measurements include noise and missing information,\n\nand small errors in the data can lead to big errors in the reconstructed result unless you add constraints.\n\nSo in practice, solving an inverse problem means you need more than one tool. You combine mathematics, algorithms, and physics-based models, and you often need some form of prior knowledge or regularization to guide the solution toward something realistic.\n\nAnd that’s why this course is not just about definitions. It’s about learning how to think quantitatively about these forward and inverse relationships, because medical imaging is full of inversion problems. It’s challenging, but once you get the intuition, it’s also one of the most powerful ideas in modern engineering and medicine.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide14.JPG",
+      "script": "Inversion is hard because it's like trying to unscramble an egg, where the solution is not unique and small errors in the data can lead to big mistakes in the reconstructed image. This is because the inverse problem is mathematically ill-posed, meaning it doesn't have a unique or stable solution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Why inversion is hard"
+        },
+        {
+          "timeMs": 6000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Non-uniqueness of solution"
+        },
+        {
+          "timeMs": 8000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Small errors lead to big mistakes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "Now let’s take a moment to appreciate just how interdisciplinary medical imaging",
+      "bullets": [
+        "We’re combining mathematics, physics, chemistry, biology, and engineering—all in one field. Think about that. Whether we’re modeling how X-rays interact with tissue, analyzing ultrasound signals, or designing contrast agents for optical imaging—we’re pulling from all corners of science and technology.",
+        "This means that medical imaging isn’t just about one skill set. It’s about thinking broadly and connecting the dots between different fields. And if you enjoy solving complex problems, this is one of the best places to be.",
+        "So by now, you should have a pretty good sense of what this course is about—and what makes it so special. We’ll focus on modern biomedical imaging technologies, and we’ll build the knowledge and tools needed to understand how they work, and how they’re used to help people.",
+        "And honestly, it’s really cool stuff."
+      ],
+      "fullText": "Now let’s take a moment to appreciate just how interdisciplinary medical imaging really is.\n\nWe’re combining mathematics, physics, chemistry, biology, and engineering—all in one field. Think about that. Whether we’re modeling how X-rays interact with tissue, analyzing ultrasound signals, or designing contrast agents for optical imaging—we’re pulling from all corners of science and technology.\n\nThis means that medical imaging isn’t just about one skill set. It’s about thinking broadly and connecting the dots between different fields. And if you enjoy solving complex problems, this is one of the best places to be.\n\nSo by now, you should have a pretty good sense of what this course is about—and what makes it so special. We’ll focus on modern biomedical imaging technologies, and we’ll build the knowledge and tools needed to understand how they work, and how they’re used to help people.\n\nAnd honestly, it’s really cool stuff.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide15.JPG",
+      "script": "Medical imaging is a true melting pot of disciplines, where math, physics, chemistry, biology, and engineering all come together to help us understand and develop new imaging technologies. We're not just applying one skill set, but rather combining multiple perspectives to tackle complex problems. This interdisciplinary approach is what makes medical imaging so rich and rewarding.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Interdisciplinary"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Combining Perspectives"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Solving Complex Problems"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "So by now, you might be thinking—this is all very cool, but why do I really need",
+      "bullets": [
+        "Well, I’d say there are at least two solid reasons.",
+        "First—and perhaps most importantly—it gives you essential health-related knowledge. Whether you pursue a career in engineering, medicine, or something entirely different, understanding how imaging works can help you make sense of your own health and the health of those around you, during your hospital visits and afterwards.",
+        "The second reason is career-related. We’ll get to that more. But for now, just keep in mind—this is cool knowledge for a niche group of people. It’s personal and extremely useful in several ways; to say the least, it is a required course for your college education."
+      ],
+      "fullText": "So by now, you might be thinking—this is all very cool, but why do I really need to learn medical imaging?\n\nWell, I’d say there are at least two solid reasons.\n\nFirst—and perhaps most importantly—it gives you essential health-related knowledge. Whether you pursue a career in engineering, medicine, or something entirely different, understanding how imaging works can help you make sense of your own health and the health of those around you, during your hospital visits and afterwards.\n\nThe second reason is career-related. We’ll get to that more. But for now, just keep in mind—this is cool knowledge for a niche group of people. It’s personal and extremely useful in several ways; to say the least, it is a required course for your college education.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide16.JPG",
+      "script": "So by now, you might be thinking—this is all very cool, but why do I really need to learn medical imaging? Well, I'd say there are at least two solid reasons. First, it gives you essential health-related knowledge that can help you make sense of your own health and the health of those around you, during hospital visits and afterwards. This knowledge is valuable regardless of your future career path.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Two solid reasons"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Essential health-related knowledge"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Career-related"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Let me share something personal with you.",
+      "bullets": [
+        "A couple of years ago, I had a kidney stone. Not fun. I ended up in the hospital, they injected a contrast agent, ran a CT scan, and just like that—they could see the size and location of the stone.",
+        "Now, because I understood what was going on, I wasn’t worried or confused. I could follow the diagnosis, and I knew what the doctors were looking for.",
+        "And honestly, sooner or later, most of us will have a medical scan—whether it’s an X-ray, a CT, or an MRI. And perhaps, all of them and multiple times. It could be you, or someone you love. When that happens, wouldn’t it be helpful to understand what those images mean?",
+        "That’s why this knowledge matters—not just in theory, but in real life."
+      ],
+      "fullText": "Let me share something personal with you.\n\nA couple of years ago, I had a kidney stone. Not fun. I ended up in the hospital, they injected a contrast agent, ran a CT scan, and just like that—they could see the size and location of the stone.\n\nNow, because I understood what was going on, I wasn’t worried or confused. I could follow the diagnosis, and I knew what the doctors were looking for.\n\nAnd honestly, sooner or later, most of us will have a medical scan—whether it’s an X-ray, a CT, or an MRI. And perhaps, all of them and multiple times. It could be you, or someone you love. When that happens, wouldn’t it be helpful to understand what those images mean?\n\nThat’s why this knowledge matters—not just in theory, but in real life.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide17.JPG",
+      "script": "Let me share something personal with you. A couple of years ago, I had a kidney stone, which was not a fun experience. However, thanks to a CT scan with contrast, the doctors were able to accurately diagnose the stone's size and location. This experience taught me the value of understanding medical imaging and being able to follow a diagnosis.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Personal experience"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Value of understanding medical imaging"
+        },
+        {
+          "timeMs": 22000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Real-life importance of medical imaging knowledge"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Let’s shift to a more personal motivation, which is what this slide is pointing ",
+      "bullets": [
+        "At some point, many of you will have a family, or you already do. And sooner or later, someone close to you may need an X-ray, a CT, an MRI, an ultrasound, or some kind of imaging test. When that happens, it helps a lot if you can understand the basic idea of what the scan is for, what information it can and cannot provide, and what the report language generally means.",
+        "Even if you never become a radiologist or an imaging researcher, this course can still empower you. You will be able to communicate more effectively with clinicians, ask better questions, and avoid being completely lost when imaging results come up in a real medical situation.",
+        "So that’s one reason to study medical imaging: personal and practical value.",
+        "Now let’s move to the second reason, which is your career."
+      ],
+      "fullText": "Let’s shift to a more personal motivation, which is what this slide is pointing at. The title is a bit informal, but the message is clear: this knowledge matters for real life and for the people you care about.\n\nAt some point, many of you will have a family, or you already do. And sooner or later, someone close to you may need an X-ray, a CT, an MRI, an ultrasound, or some kind of imaging test. When that happens, it helps a lot if you can understand the basic idea of what the scan is for, what information it can and cannot provide, and what the report language generally means.\n\nEven if you never become a radiologist or an imaging researcher, this course can still empower you. You will be able to communicate more effectively with clinicians, ask better questions, and avoid being completely lost when imaging results come up in a real medical situation.\n\nSo that’s one reason to study medical imaging: personal and practical value.\nNow let’s move to the second reason, which is your career.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide18.JPG",
+      "script": "Understanding medical imaging concepts is not just about academic knowledge, but also about being able to communicate effectively with clinicians and make sense of imaging results when it matters most, such as when a loved one needs a scan. This personal motivation is a practical and relatable reason to learn medical imaging, making it a valuable skill for everyday life.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Personal Motivation"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Communicate with Clinicians"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 2000,
+          "label": "Imaging Results"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "Let’s zoom out for a moment and look at biomedical engineering as a field.",
+      "bullets": [
+        "It’s one of the newest branches of engineering. Engineering started with disciplines like civil and mechanical, then moved into electrical, chemical, and aerospace. More recently, biomedical engineering emerged to bridge the gap between technology and medicine.",
+        "And it’s grown fast—because it’s relevant, it’s interdisciplinary, and it’s impactful.",
+        "In many universities, biomedical engineering includes at least two major focus areas. One is imaging, which is what we’re covering here. The other is tissue engineering and regenerative medicine, often called TERM.",
+        "Whether or not you plan to specialize in imaging, this course plays a foundational role. It builds your technical knowledge, strengthens your systems thinking, and helps you understand one of the most important technologies in healthcare today.",
+        "So if you’re here as part of your degree requirements—great. But don’t just treat it like a checkbox. Learn it well. It will pay off, academically, professionally, and personally."
+      ],
+      "fullText": "Let’s zoom out for a moment and look at biomedical engineering as a field.\n\nIt’s one of the newest branches of engineering. Engineering started with disciplines like civil and mechanical, then moved into electrical, chemical, and aerospace. More recently, biomedical engineering emerged to bridge the gap between technology and medicine.\n\nAnd it’s grown fast—because it’s relevant, it’s interdisciplinary, and it’s impactful.\n\nIn many universities, biomedical engineering includes at least two major focus areas. One is imaging, which is what we’re covering here. The other is tissue engineering and regenerative medicine, often called TERM.\n\nWhether or not you plan to specialize in imaging, this course plays a foundational role. It builds your technical knowledge, strengthens your systems thinking, and helps you understand one of the most important technologies in healthcare today.\n\nSo if you’re here as part of your degree requirements—great. But don’t just treat it like a checkbox. Learn it well. It will pay off, academically, professionally, and personally.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide19.JPG",
+      "script": "Biomedical engineering is a relatively new field that has grown rapidly due to its relevance, interdisciplinary nature, and impact. It's a bridge between technology and medicine, and it's one of the newest branches of engineering.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Biomedical engineering"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Engineering history"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Imaging focus"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Now let’s talk about the second motivation: your career, which is exactly what t",
+      "bullets": [
+        "Look at this image. This is not a research lab. It’s an industry setting, a company showcase, with a clinical imaging system on display, in this case a CT scanner. The point is simple: medical imaging is a real, large-scale industry, and it needs people who understand both the engineering and the medical context.",
+        "If you take this course seriously, it opens multiple career paths. You could work on the hardware side, like detectors, system design, and instrumentation. You could work on the software side, like reconstruction algorithms, signal processing, and image analysis. And increasingly, you could work on AI for imaging: improving image quality, helping with triage, or supporting clinical decision-making. Hospitals, medical device companies, and research groups all need these skills.",
+        "So even though medical imaging is technical, that’s exactly why it is valuable. If you can explain how an imaging system produces an image, what its limitations are, and how to validate performance, you become useful in industry, healthcare technology, and research.",
+        "And yes, biomedical engineering and imaging-related work is a strong professional direction because it naturally sits at the intersection of medicine, life science, and engineering, and those intersections are where many high-impact jobs are created."
+      ],
+      "fullText": "Now let’s talk about the second motivation: your career, which is exactly what this slide is about.\n\nLook at this image. This is not a research lab. It’s an industry setting, a company showcase, with a clinical imaging system on display, in this case a CT scanner. The point is simple: medical imaging is a real, large-scale industry, and it needs people who understand both the engineering and the medical context.\n\nIf you take this course seriously, it opens multiple career paths. You could work on the hardware side, like detectors, system design, and instrumentation. You could work on the software side, like reconstruction algorithms, signal processing, and image analysis. And increasingly, you could work on AI for imaging: improving image quality, helping with triage, or supporting clinical decision-making. Hospitals, medical device companies, and research groups all need these skills.\n\nSo even though medical imaging is technical, that’s exactly why it is valuable. If you can explain how an imaging system produces an image, what its limitations are, and how to validate performance, you become useful in industry, healthcare technology, and research.\n\nAnd yes, biomedical engineering and imaging-related work is a strong professional direction because it naturally sits at the intersection of medicine, life science, and engineering, and those intersections are where many high-impact jobs are created.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide20.JPG",
+      "script": "Now let's talk about the second motivation: your career, which is exactly what this slide is about. This image shows an industry setting with a clinical imaging system on display, highlighting the real-world application of medical imaging. The course can open multiple career paths, including hardware development, system design, and instrumentation, as well as software and AI-related opportunities. By taking this course seriously, you can position yourself for a wide range of career possibilities in the medical imaging industry.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Career paths"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Hardware side"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Software side"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "This slide is making a career-point using a specific snapshot in time. It’s an i",
+      "bullets": [
+        "Now, the exact numbers in the job market change over time, but the bigger message is still important: healthcare has been steadily becoming more technology-driven. Devices, imaging systems, sensors, and data-driven medicine all create demand for people who can connect biology, medicine, and engineering.",
+        "At the same time, it’s also worth being honest about the present-day outlook. The U.S. Bureau of Labor Statistics currently projects employment for bioengineers and biomedical engineers to grow 5% from 2024 to 2034, which is still faster than average, but not the explosive growth shown in that older 2008–2018 projection.",
+        "So the takeaway is: biomedical engineering can be a strong path because it sits where medicine and technology meet, and it tends to offer solid compensation as well. For context, BLS wage data for this occupation reports a median around $99,550 (May 2022)"
+      ],
+      "fullText": "This slide is making a career-point using a specific snapshot in time. It’s an infographic about the ten fastest-growing jobs, and it’s based on projected growth from 2008 to 2018. In that projection, biomedical engineers were listed at the top with +72% growth.\n\nNow, the exact numbers in the job market change over time, but the bigger message is still important: healthcare has been steadily becoming more technology-driven. Devices, imaging systems, sensors, and data-driven medicine all create demand for people who can connect biology, medicine, and engineering.\n\nAt the same time, it’s also worth being honest about the present-day outlook. The U.S. Bureau of Labor Statistics currently projects employment for bioengineers and biomedical engineers to grow 5% from 2024 to 2034, which is still faster than average, but not the explosive growth shown in that older 2008–2018 projection.\n\nSo the takeaway is: biomedical engineering can be a strong path because it sits where medicine and technology meet, and it tends to offer solid compensation as well. For context, BLS wage data for this occupation reports a median around $99,550 (May 2022)",
+      "imageURL": "/lectures/Lecture_01/Images/Slide21.JPG",
+      "script": "The slide highlights a career point using a specific snapshot in time, showing the growth of biomedical engineering jobs from 2008 to 2018. According to the projection, biomedical engineers experienced a 72% growth rate, ranking them as one of the fastest-growing jobs. This trend indicates a steady increase in demand for professionals who can bridge the gap between biology, medicine, and engineering.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Career growth in biomedical engineering"
+        },
+        {
+          "timeMs": 15500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Job market demand"
+        },
+        {
+          "timeMs": 18000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Median salary in the field"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "Now let’s zoom out to the market scale, because medical imaging is not only a sc",
+      "bullets": [
+        "This figure is a country-level market view broken into services and products, and it compares an earlier baseline year (2019) with a projected later year (2027). Even from this simplified snapshot, you can see the same pattern across the examples shown here, like the U.S., Japan, and Germany: both the services side and the product side are expected to be larger in 2027 than in 2019.",
+        "That split is important. “Products” are the scanners and equipment, but “services” include installation, maintenance, clinical workflows, software support, and the operational ecosystem that keeps imaging running day to day. In practice, imaging is an end-to-end system, not just a machine.",
+        "So the takeaway for you is: this is a global, expanding space, and it creates opportunities across many roles, from hardware engineering to reconstruction and algorithms, to clinical deployment and software. If you are interested in industry, academia, or even building new tools, medical imaging is a field with real scale and continued demand."
+      ],
+      "fullText": "Now let’s zoom out to the market scale, because medical imaging is not only a scientific field, it is also a large global industry.\n\nThis figure is a country-level market view broken into services and products, and it compares an earlier baseline year (2019) with a projected later year (2027). Even from this simplified snapshot, you can see the same pattern across the examples shown here, like the U.S., Japan, and Germany: both the services side and the product side are expected to be larger in 2027 than in 2019.\n\nThat split is important. “Products” are the scanners and equipment, but “services” include installation, maintenance, clinical workflows, software support, and the operational ecosystem that keeps imaging running day to day. In practice, imaging is an end-to-end system, not just a machine.\n\nSo the takeaway for you is: this is a global, expanding space, and it creates opportunities across many roles, from hardware engineering to reconstruction and algorithms, to clinical deployment and software. If you are interested in industry, academia, or even building new tools, medical imaging is a field with real scale and continued demand.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide22.JPG",
+      "script": "As we zoom out to the market scale, we see that medical imaging is not only a scientific field, but also a large global industry. The market size is expected to grow, with both services and products increasing in value. This growth is driven by the demand for medical imaging technologies and services. The split between products and services is significant, with products including scanners and equipment, and services encompassing software support, maintenance, and clinical workflows.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Market size and growth"
+        },
+        {
+          "timeMs": 25000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Services and products"
+        },
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Clinical workflows and software support"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "Now let’s connect the medical imaging market to the major modalities you’ll lear",
+      "bullets": [
+        "This chart breaks the global market down by Ultrasound, CT, MRI, X-ray, and Other types, and it shows a steady increase over time. The total market size grows from about $29.2B in 2022 to a projected $48.8B by 2032, with a stated CAGR of 5.4%.",
+        "What I want you to notice is not just the total growth, but the fact that every major modality contributes to the overall expansion. Ultrasound, CT, MRI, and X-ray are all foundational technologies in clinical care, and the market growth reflects how broadly they are used across different departments and patient needs.",
+        "And “Other types” is a useful reminder that imaging is not limited to the big four. As the field evolves, new techniques and specialized systems continue to emerge, and they gradually become part of the clinical and commercial ecosystem.",
+        "So the takeaway here is simple: medical imaging is not a niche area. Across modalities, there is sustained investment and long-term demand. That’s one more reason the fundamentals you learn in this course, physics, systems, reconstruction, and interpretation, stay highly relevant."
+      ],
+      "fullText": "Now let’s connect the medical imaging market to the major modalities you’ll learn in this course.\n\nThis chart breaks the global market down by Ultrasound, CT, MRI, X-ray, and Other types, and it shows a steady increase over time. The total market size grows from about $29.2B in 2022 to a projected $48.8B by 2032, with a stated CAGR of 5.4%.\n\nWhat I want you to notice is not just the total growth, but the fact that every major modality contributes to the overall expansion. Ultrasound, CT, MRI, and X-ray are all foundational technologies in clinical care, and the market growth reflects how broadly they are used across different departments and patient needs.\n\nAnd “Other types” is a useful reminder that imaging is not limited to the big four. As the field evolves, new techniques and specialized systems continue to emerge, and they gradually become part of the clinical and commercial ecosystem.\n\nSo the takeaway here is simple: medical imaging is not a niche area. Across modalities, there is sustained investment and long-term demand. That’s one more reason the fundamentals you learn in this course, physics, systems, reconstruction, and interpretation, stay highly relevant.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide23.JPG",
+      "script": "Now let's connect the medical imaging market to the major modalities you'll learn in this course. This chart shows the global market share of these modalities, with Ultrasound, CT, MRI, and X-ray being the main contributors to the overall growth. The market size is projected to increase from $29.2 billion in 2022 to $48.8 billion by 2032, with a compound annual growth rate of 5.4%.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Market share"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Ultrasound growth"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "X-ray contribution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "So far, we’ve talked about medical imaging in terms of impact and even market gr",
+      "bullets": [
+        "This slide summarizes a physician survey from 2001, where physicians ranked major medical innovations. And what’s striking is the number one choice: MRI and CT scanning.",
+        "In this exhibit, MRI and CT scanning are ranked #1, with a mean score of 0.878, and 75.6% of respondents selected it as the “most” important innovation. That is an unusually strong result, and it tells you something about how central these technologies are to modern medicine.",
+        "Why would CT and MRI stand out so clearly? Because they fundamentally changed diagnosis. They give us noninvasive, internal, cross-sectional views of the body, often with enough detail to localize disease, guide treatment decisions, and monitor progression over time. In many clinical scenarios, having CT or MRI is the difference between guessing and knowing.",
+        "And that’s the motivation for this course: we’re not just learning what these systems are. We’re going to learn how they produce images, what assumptions they rely on, what limitations they have, and why reconstruction, the inverse problem, is so important. Once you understand that, you can explain both the engineering and the clinical value with real confidence."
+      ],
+      "fullText": "So far, we’ve talked about medical imaging in terms of impact and even market growth. Now here’s a nice reality check from the clinical side.\n\nThis slide summarizes a physician survey from 2001, where physicians ranked major medical innovations. And what’s striking is the number one choice: MRI and CT scanning.\n\nIn this exhibit, MRI and CT scanning are ranked #1, with a mean score of 0.878, and 75.6% of respondents selected it as the “most” important innovation. That is an unusually strong result, and it tells you something about how central these technologies are to modern medicine.\n\nWhy would CT and MRI stand out so clearly? Because they fundamentally changed diagnosis. They give us noninvasive, internal, cross-sectional views of the body, often with enough detail to localize disease, guide treatment decisions, and monitor progression over time. In many clinical scenarios, having CT or MRI is the difference between guessing and knowing.\n\nAnd that’s the motivation for this course: we’re not just learning what these systems are. We’re going to learn how they produce images, what assumptions they rely on, what limitations they have, and why reconstruction, the inverse problem, is so important. Once you understand that, you can explain both the engineering and the clinical value with real confidence.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide24.JPG",
+      "script": "Physicians surveyed in 2001 ranked MRI and CT scanning as the most important innovation, with a mean score of 0.878 and 75.6% of respondents choosing it as the top pick. This strong result highlights the significance of these technologies in modern medicine.",
+      "spotlightEvents": [
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Strong result"
+        },
+        {
+          "timeMs": 50000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Fundamentally changed diagnosis"
+        },
+        {
+          "timeMs": 55000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Motivation for this course"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "Speaking of innovation, let’s look at a major name you’ll see again and again in",
+      "bullets": [
+        "This slide is basically a quick snapshot of GE’s scale and history. It highlights that GE was founded in 1892, and it emphasizes the size of the organization globally. It also lists big-picture corporate numbers like employees worldwide and annual revenue, and it notes GE’s long-standing presence in major U.S. industry indices. The exact values here are clearly “slide-era” statistics, but the message is what matters: this is a company with a long heritage of engineering and large-scale technology development.",
+        "And since we’re at RPI, I’ll add a local perspective: this region has strong ties to engineering and industry, and GE has historically been one of the major industrial research and healthcare technology players in the broader ecosystem around here.",
+        "Now, why do I bring GE up in an intro lecture? Because medical imaging is not just academic theory. It’s also a real industry, and companies like GE have built systems that turn physics, computation, and instrumentation into clinical tools. Over the decades, GE’s healthcare and imaging groups have contributed to imaging hardware, system engineering, and clinical platforms that many hospitals rely on.",
+        "So this slide is a reminder of the “real-world side” of the course: the concepts we learn are the same ones used inside major imaging systems, and they connect directly to how imaging technology is developed, deployed, and improved."
+      ],
+      "fullText": "Speaking of innovation, let’s look at a major name you’ll see again and again in medical technology: GE.\n\nThis slide is basically a quick snapshot of GE’s scale and history. It highlights that GE was founded in 1892, and it emphasizes the size of the organization globally. It also lists big-picture corporate numbers like employees worldwide and annual revenue, and it notes GE’s long-standing presence in major U.S. industry indices. The exact values here are clearly “slide-era” statistics, but the message is what matters: this is a company with a long heritage of engineering and large-scale technology development.\n\nAnd since we’re at RPI, I’ll add a local perspective: this region has strong ties to engineering and industry, and GE has historically been one of the major industrial research and healthcare technology players in the broader ecosystem around here.\n\nNow, why do I bring GE up in an intro lecture? Because medical imaging is not just academic theory. It’s also a real industry, and companies like GE have built systems that turn physics, computation, and instrumentation into clinical tools. Over the decades, GE’s healthcare and imaging groups have contributed to imaging hardware, system engineering, and clinical platforms that many hospitals rely on.\n\nSo this slide is a reminder of the “real-world side” of the course: the concepts we learn are the same ones used inside major imaging systems, and they connect directly to how imaging technology is developed, deployed, and improved.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide25.JPG",
+      "script": "GE is a major player in medical technology, and you'll see their name frequently in our course. They're a company with a rich history, founded in 1892, and a global presence with a large number of employees and significant revenue.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "GE's scale and history"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "local perspective on GE"
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "real-world connection to industry"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "Now, within GE, one of the most important innovation engines is their Global Res",
+      "bullets": [
+        "Their record speaks for itself—two Nobel Prizes, major contributions to physics, chemistry, materials, energy, and of course, medical imaging.",
+        "In 1984, they played a critical role in the development of MRI systems. And in 1999, digital X-ray systems came out of their labs. They’ve consistently been at the forefront of translating ideas into real-world technologies. My lab and Global Research Center has been closely collaborating on medical imaging over decades.",
+        "So when we say medical imaging sits at the cutting edge of innovation—we mean it."
+      ],
+      "fullText": "Now, within GE, one of the most important innovation engines is their Global Research Center. This is where long-term, high-impact R&D happens.\n\nTheir record speaks for itself—two Nobel Prizes, major contributions to physics, chemistry, materials, energy, and of course, medical imaging.\n\nIn 1984, they played a critical role in the development of MRI systems. And in 1999, digital X-ray systems came out of their labs. They’ve consistently been at the forefront of translating ideas into real-world technologies. My lab and Global Research Center has been closely collaborating on medical imaging over decades. \n\nSo when we say medical imaging sits at the cutting edge of innovation—we mean it.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide26.JPG",
+      "script": "The Global Research Center is a hub for long-term, high-impact R&D within GE, responsible for significant contributions to various fields, including medical imaging. Their work has led to major breakthroughs, such as the development of MRI systems and digital X-ray systems. This collaboration with my lab has been instrumental in advancing medical imaging technologies.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Global Research Center"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Nobel Prizes"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Digital X-ray Systems"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "One more point about innovation in imaging: it is not just happening in universi",
+      "bullets": [
+        "You can see sites spread across multiple regions: in the U.S. there are centers like Niskayuna, New York, plus locations such as San Ramon, California and Ann Arbor, Michigan. Internationally, the slide lists centers in Munich (Germany), Shanghai (China), Bangalore (India), and Rio de Janeiro (Brazil). The idea is that research and development is distributed globally, not concentrated in one place.",
+        "The slide also gives a sense of scale. For example, it notes that the Niskayuna site has 100 labs and about 1,800 technologists, and it reports 3,400 technologists globally, with 67% holding advanced degrees (Ph.D./M.S.). That’s a reminder that industrial research can look a lot like academic research in terms of expertise, except it is often tightly connected to building deployable systems.",
+        "It also highlights something important: this research supports all GE business segments, not only healthcare. So imaging sits in a broader technology ecosystem that includes software, manufacturing, and other engineering areas.",
+        "So, if you’re thinking about where imaging knowledge can take you, this is one example of the larger landscape: imaging connects to global R&D hubs, and the skills you learn in this course are directly relevant in those environments."
+      ],
+      "fullText": "One more point about innovation in imaging: it is not just happening in universities. Large companies also run serious research organizations, and this slide is showing GE’s global research centers.\n\nYou can see sites spread across multiple regions: in the U.S. there are centers like Niskayuna, New York, plus locations such as San Ramon, California and Ann Arbor, Michigan. Internationally, the slide lists centers in Munich (Germany), Shanghai (China), Bangalore (India), and Rio de Janeiro (Brazil). The idea is that research and development is distributed globally, not concentrated in one place.\n\nThe slide also gives a sense of scale. For example, it notes that the Niskayuna site has 100 labs and about 1,800 technologists, and it reports 3,400 technologists globally, with 67% holding advanced degrees (Ph.D./M.S.). That’s a reminder that industrial research can look a lot like academic research in terms of expertise, except it is often tightly connected to building deployable systems.\n\nIt also highlights something important: this research supports all GE business segments, not only healthcare. So imaging sits in a broader technology ecosystem that includes software, manufacturing, and other engineering areas.\n\nSo, if you’re thinking about where imaging knowledge can take you, this is one example of the larger landscape: imaging connects to global R&D hubs, and the skills you learn in this course are directly relevant in those environments.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide27.JPG",
+      "script": "GE has a strong research presence globally, with centers in the U.S. and internationally, including Munich, Shanghai, Bangalore, and Rio de Janeiro. This distributed research model allows for collaboration and innovation on a large scale. It's not just about universities driving innovation, but also about companies like GE investing heavily in R&D.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Global R&D centers"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "GE's distributed research model"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Expertise in industrial research"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "Before we wrap up this introduction,  I’ll also give you a simple task—just a br",
+      "bullets": [],
+      "fullText": "Before we wrap up this introduction,  I’ll also give you a simple task—just a brief introductory slide you can prepare. It’s not graded, but it helps me get a sense of who you are, what your background is, your GPA, research experience, and what you hope to learn. That way, I can adjust the flow of this course to better support your journey.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide28.JPG",
+      "script": "Before we wrap up this introduction, I'd like you to prepare a brief introductory slide that shares your background, academic performance, research experience, and learning goals. This will help me get to know you better and tailor the course to meet your needs. It's not graded, but it's a great way for me to understand your perspective and adjust the course accordingly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Your Background"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Academic Performance"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Research Experience"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "As we continue our journey into medical imaging, let me take a moment to introdu",
+      "bullets": [
+        "I’m Professor Ge Wang, and in addition to teaching this course, I’m deeply involved in research on medical imaging. My work spans both the theoretical and applied sides of the field. I’ve dedicated much of my career to advancing medical imaging science so that we can better diagnose and treat disease.",
+        "If you’re interested in exploring more about my work, feel free to check out my home page and lab’s website, where we share updates on our latest projects."
+      ],
+      "fullText": "As we continue our journey into medical imaging, let me take a moment to introduce myself in a little more depth.\n\nI’m Professor Ge Wang, and in addition to teaching this course, I’m deeply involved in research on medical imaging. My work spans both the theoretical and applied sides of the field. I’ve dedicated much of my career to advancing medical imaging science so that we can better diagnose and treat disease.\n\nIf you’re interested in exploring more about my work, feel free to check out my home page and lab’s website, where we share updates on our latest projects.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide29.JPG",
+      "script": "As we continue our journey into medical imaging, let me take a moment to introduce myself in a little more depth. I’m Professor Ge Wang, and in addition to teaching this course, I’m deeply involved in research on medical imaging. My work spans both the theoretical and applied sides of the field, aiming to advance medical imaging science for better diagnosis and treatment.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Professor Ge Wang"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Research Background"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Career Focus"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "Now let me share a bit more about the imaging program at RPI.",
+      "bullets": [
+        "My main interests are in X-ray imaging and optical imaging. I direct our Biomedical Imaging Center, where we work on advancing these technologies. One exciting direction is how artificial intelligence can help improve imaging—making it faster, more accurate, and more insightful.",
+        "This work doesn’t happen in isolation. I collaborate with outstanding colleagues like Professor Xavier Intes, a leader in optical molecular tomography, Professor Pingkun Yan, a leader in AI-based image analysis and healthcare analytics, and many others. Together, we team up with world-class researchers from GE, Yale, Wake Forest, MGH, Stanford, FDA, and other top institutions. Our shared goal is to create imaging solutions that are innovative, influential, and that truly make differences in patient care."
+      ],
+      "fullText": "Now let me share a bit more about the imaging program at RPI.\n\nMy main interests are in X-ray imaging and optical imaging. I direct our Biomedical Imaging Center, where we work on advancing these technologies. One exciting direction is how artificial intelligence can help improve imaging—making it faster, more accurate, and more insightful.\n\nThis work doesn’t happen in isolation. I collaborate with outstanding colleagues like Professor Xavier Intes, a leader in optical molecular tomography, Professor Pingkun Yan, a leader in AI-based image analysis and healthcare analytics, and many others. Together, we team up with world-class researchers from GE, Yale, Wake Forest, MGH, Stanford, FDA, and other top institutions. Our shared goal is to create imaging solutions that are innovative, influential, and that truly make differences in patient care.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide30.JPG",
+      "script": "I'm passionate about X-ray imaging and optical imaging, and I lead the Biomedical Imaging Center in exploring ways to make imaging smarter and more effective using artificial intelligence. We're exploring how AI can enhance imaging, making it faster, more accurate, and more insightful. I'm fortunate to collaborate with talented colleagues who share my enthusiasm for innovation and excellence.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Professor's Interests"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Collaboration"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 500,
+          "label": "Research Partnerships"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "These collaborations all come together in a fantastic building—the Center for Bi",
+      "bullets": [
+        "CBIS is more than just a building. It’s a hub where experts from biology, engineering, and computing come together to tackle big problems in science and healthcare. It’s where our imaging center is rooted, and where much of the work that I’ve been describing happens.",
+        "Over the past decade, CBIS has been at the forefront of interdisciplinary research, and it continues to grow in both scope and impact."
+      ],
+      "fullText": "These collaborations all come together in a fantastic building—the Center for Biotechnology and Interdisciplinary Studies, or CBIS.\n\nCBIS is more than just a building. It’s a hub where experts from biology, engineering, and computing come together to tackle big problems in science and healthcare. It’s where our imaging center is rooted, and where much of the work that I’ve been describing happens.\n\nOver the past decade, CBIS has been at the forefront of interdisciplinary research, and it continues to grow in both scope and impact.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide31.JPG",
+      "script": "CBIS is a hub where experts from biology, engineering, and computing collaborate to tackle big problems in science and healthcare, and it's the root of our imaging center. Over the past decade, CBIS has been at the forefront of interdisciplinary research and continues to grow in both scope and impact. This collaboration has led to significant contributions to medical imaging and beyond.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "CBIS Hub"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Interdisciplinary Research"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "CBIS Impact"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Now, I often like to say: if CBIS were a coordinate system, my office would be r",
+      "bullets": [
+        "Of course, for this online course, we’re not meeting in person. But the idea is the same—I’m here as a resource for you. The lectures, materials, and any additional resources I share are all designed to help you succeed and make the most of this learning experience."
+      ],
+      "fullText": "Now, I often like to say: if CBIS were a coordinate system, my office would be right at the origin!\n\nOf course, for this online course, we’re not meeting in person. But the idea is the same—I’m here as a resource for you. The lectures, materials, and any additional resources I share are all designed to help you succeed and make the most of this learning experience.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide32.JPG",
+      "script": "I'm here as a resource for you, and the lectures, materials, and additional resources are all designed to help you succeed and make the most of this online learning experience.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Online Learning Experience"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "Let me show you how the course is organized, using this schedule as our roadmap.",
+      "bullets": [
+        "You can see two big phases.",
+        "First is the foundation phase, shown here in the dark blue block. This is where we build the mathematical and conceptual toolkit that almost every imaging method depends on. We start with System, then Fourier Series, Signal Processing, Convolution, Fourier Transform, and Discrete Fourier Transform and FFT. We also include topics like Network, because modern imaging systems are not just physics and math, they are also data pipelines and interconnected components.",
+        "We structure it this way because students come in with different backgrounds. Some of you have already seen linear systems and Fourier analysis. Others may be seeing these ideas for the first time. That’s completely normal in an interdisciplinary field like medical imaging. The goal of the foundation phase is to get everyone to the point where these core ideas feel clear and usable, not mysterious.",
+        "You’ll notice MATLAB sessions highlighted in yellow. Early on we have MatLab I (Basics), and later we have MatLab II (Homework) and MatLab III (CT). These are placed intentionally, because imaging is something you learn by doing. MATLAB gives us a practical way to simulate systems, visualize signals, and later connect the math directly to reconstruction problems.",
+        "You’ll also notice a No Class day on 2/20, and then Exam I on 2/23, which marks a natural checkpoint right after the foundation block.",
+        "After that, we move into the modality phase, shown in green. This is where we apply the foundation ideas to real imaging technologies: X-ray and Radiography, CT Reconstruction, CT Scanner, then Nuclear Physics leading into PET and SPECT. After that we cover MRI I, MRI II, MRI III, followed by Ultrasound I and II, and finally Optical Imaging I and II.",
+        "And just like you see on the schedule, there are additional checkpoints: Exam II on 4/03, and Exam III on 4/27.",
+        "So the main message of this slide is: we’re not jumping straight into scanners on day one. We start by building the “language” of imaging, systems, convolution, and Fourier ideas, and then we use that language to understand each modality in a much deeper and more connected way.",
+        "As we go, keep an eye on the early foundation topics, especially Fourier concepts. They show up repeatedly later, particularly in CT and MRI, and the students who do best are usually the ones who invest early in making those fundamentals solid."
+      ],
+      "fullText": "Let me show you how the course is organized, using this schedule as our roadmap.\n\nYou can see two big phases.\n\nFirst is the foundation phase, shown here in the dark blue block. This is where we build the mathematical and conceptual toolkit that almost every imaging method depends on. We start with System, then Fourier Series, Signal Processing, Convolution, Fourier Transform, and Discrete Fourier Transform and FFT. We also include topics like Network, because modern imaging systems are not just physics and math, they are also data pipelines and interconnected components.\n\nWe structure it this way because students come in with different backgrounds. Some of you have already seen linear systems and Fourier analysis. Others may be seeing these ideas for the first time. That’s completely normal in an interdisciplinary field like medical imaging. The goal of the foundation phase is to get everyone to the point where these core ideas feel clear and usable, not mysterious.\n\nYou’ll notice MATLAB sessions highlighted in yellow. Early on we have MatLab I (Basics), and later we have MatLab II (Homework) and MatLab III (CT). These are placed intentionally, because imaging is something you learn by doing. MATLAB gives us a practical way to simulate systems, visualize signals, and later connect the math directly to reconstruction problems.\n\nYou’ll also notice a No Class day on 2/20, and then Exam I on 2/23, which marks a natural checkpoint right after the foundation block.\n\nAfter that, we move into the modality phase, shown in green. This is where we apply the foundation ideas to real imaging technologies: X-ray and Radiography, CT Reconstruction, CT Scanner, then Nuclear Physics leading into PET and SPECT. After that we cover MRI I, MRI II, MRI III, followed by Ultrasound I and II, and finally Optical Imaging I and II.\n\nAnd just like you see on the schedule, there are additional checkpoints: Exam II on 4/03, and Exam III on 4/27.\n\nSo the main message of this slide is: we’re not jumping straight into scanners on day one. We start by building the “language” of imaging, systems, convolution, and Fourier ideas, and then we use that language to understand each modality in a much deeper and more connected way.\n\nAs we go, keep an eye on the early foundation topics, especially Fourier concepts. They show up repeatedly later, particularly in CT and MRI, and the students who do best are usually the ones who invest early in making those fundamentals solid.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide33.JPG",
+      "script": "Let me show you how the course is organized, using this schedule as our roadmap. You can see two big phases. The first phase, the foundation phase, is where we build the mathematical and conceptual toolkit that almost every imaging method depends on. This includes topics like System, Fourier Series, Signal Processing, Convolution, Fourier Transform, and Discrete Fourier Transform and FFT. We also include Network, because modern imaging systems are not just physics and math, they are also data pipelines and interconnected components.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Two big phases"
+        },
+        {
+          "timeMs": 4500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Foundation phase"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Mathematical and conceptual toolkit"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "For the modality-specific portion of the course—the dark green section—we’ll be ",
+      "bullets": [
+        "This book isn’t very thick, but it’s well-structured and written with clarity. Even though it was published a while ago, the fundamental principles it covers haven’t changed. Physics is timeless in that way. We’ll supplement the book with more recent findings, particularly in areas like deep learning for image reconstruction, low-dose imaging, and multi-modal fusion—advances that have significantly shaped the field over past several years.",
+        "The textbook will guide your learning, especially in the second part of the course. For the foundation topics like linear systems and Fourier theory, we’ll use tailored lecture notes and curated readings, because unfortunately, there’s no single book that explains everything in a concise and consistent manner for students from all backgrounds.",
+        "So, keep this in mind: while you may rely on the textbook for the modality section, the theoretical part of the course will require close attention to lecture materials and exercises. That’s where most students need the extra help—and that’s why we’re here to support you."
+      ],
+      "fullText": "For the modality-specific portion of the course—the dark green section—we’ll be using the green textbook: Introduction to Biomedical Imaging by Andrew Webb. It’s available online or through our university bookstore.\n\nThis book isn’t very thick, but it’s well-structured and written with clarity. Even though it was published a while ago, the fundamental principles it covers haven’t changed. Physics is timeless in that way. We’ll supplement the book with more recent findings, particularly in areas like deep learning for image reconstruction, low-dose imaging, and multi-modal fusion—advances that have significantly shaped the field over past several years.\n\nThe textbook will guide your learning, especially in the second part of the course. For the foundation topics like linear systems and Fourier theory, we’ll use tailored lecture notes and curated readings, because unfortunately, there’s no single book that explains everything in a concise and consistent manner for students from all backgrounds.\n\nSo, keep this in mind: while you may rely on the textbook for the modality section, the theoretical part of the course will require close attention to lecture materials and exercises. That’s where most students need the extra help—and that’s why we’re here to support you.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide34.JPG",
+      "script": "For the modality-specific portion of the course, we'll be using the green textbook, Introduction to Biomedical Imaging by Andrew Webb, which covers the fundamental principles of biomedical imaging in a clear and well-structured way. Although published a while ago, the physics behind it remains timeless, and we'll supplement it with recent advances like deep learning for image reconstruction and multi-modal fusion. This will give us a solid foundation in the core concepts of medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Green Textbook"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.65,
+          "durationMs": 300,
+          "label": "Well-Structured"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.9,
+          "durationMs": 700,
+          "label": "Supplemental Materials"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "In addition to our course materials, I’d like to mention a particularly helpful ",
+      "bullets": [
+        "Stanford University offers an excellent course titled 'EE261: The Fourier Transform and Its Applications'. It’s taught by Professor Brad Osgood, and the best part is that it is freely available online through Stanford’s SEE platform. You can access the full textbook there and watch high-quality lecture videos.",
+        "Now, a quick word of caution: the Stanford course spans an entire semester. The book is over 400 pages long. Don’t feel overwhelmed. You absolutely do not need to cover all of it. Think of it as a reference companion to our course. In fact, for our purposes, reading even 80–100 pages from selected sections will be more than enough to reinforce your understanding.",
+        "What makes this resource valuable is the clarity and consistency of its explanations and mathematical treatment. It builds the theory from the ground up, with elegant examples and a style that’s both rigorous and readable. If you ever find yourself puzzled by a concept I introduce—say, the derivation of the Fourier series, or the intuition behind convolution—this book can offer a second viewpoint. Sometimes, a slightly different presentation is all you need for clarity.",
+        "However, please note that we will follow our own structured path in this course. For example, I introduce linear systems before Fourier transforms, because in imaging, systems thinking provides the conceptual grounding. The Stanford course takes the reverse order. Both are valid—but here, we start with linear systems to better prepare for their applications in imaging modalities like CT and MRI.",
+        "Please use this Stanford material as a valuable supplement, not a replacement. You’ll benefit most by following our course flow carefully and referring to the Stanford book only when you want to go deeper or review challenging topics.",
+        "Lastly, although I have reached out for formal permission, the material seems publicly accessible and openly shared for educational use. So, feel free to explore it from your own dorm room, your library, or anywhere you study.",
+        "This is an exciting time to learn these topics—tools like ChatGPT make it easier than ever to gain a deeper understanding. Let’s use them wisely."
+      ],
+      "fullText": "In addition to our course materials, I’d like to mention a particularly helpful supplementary resource that aligns well with the foundation we’re covering—especially Fourier transforms and linear systems.\n\nStanford University offers an excellent course titled 'EE261: The Fourier Transform and Its Applications'. It’s taught by Professor Brad Osgood, and the best part is that it is freely available online through Stanford’s SEE platform. You can access the full textbook there and watch high-quality lecture videos.\n\nNow, a quick word of caution: the Stanford course spans an entire semester. The book is over 400 pages long. Don’t feel overwhelmed. You absolutely do not need to cover all of it. Think of it as a reference companion to our course. In fact, for our purposes, reading even 80–100 pages from selected sections will be more than enough to reinforce your understanding.\n\nWhat makes this resource valuable is the clarity and consistency of its explanations and mathematical treatment. It builds the theory from the ground up, with elegant examples and a style that’s both rigorous and readable. If you ever find yourself puzzled by a concept I introduce—say, the derivation of the Fourier series, or the intuition behind convolution—this book can offer a second viewpoint. Sometimes, a slightly different presentation is all you need for clarity.\n\nHowever, please note that we will follow our own structured path in this course. For example, I introduce linear systems before Fourier transforms, because in imaging, systems thinking provides the conceptual grounding. The Stanford course takes the reverse order. Both are valid—but here, we start with linear systems to better prepare for their applications in imaging modalities like CT and MRI.\n\nPlease use this Stanford material as a valuable supplement, not a replacement. You’ll benefit most by following our course flow carefully and referring to the Stanford book only when you want to go deeper or review challenging topics.\n\nLastly, although I have reached out for formal permission, the material seems publicly accessible and openly shared for educational use. So, feel free to explore it from your own dorm room, your library, or anywhere you study.\n\nThis is an exciting time to learn these topics—tools like ChatGPT make it easier than ever to gain a deeper understanding. Let’s use them wisely.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide35.JPG",
+      "script": "I'd like to mention a helpful supplementary resource that aligns well with our foundation, especially Fourier transforms and linear systems. Stanford University offers an excellent course titled 'EE261: The Fourier Transform and Its Applications', taught by Professor Brad Osgood, which is freely available online through Stanford's SEE platform. You can access the full textbook and watch high-quality lecture videos there. However, keep in mind that this course spans an entire semester, so be sure to focus on the parts that directly support our course material.",
+      "spotlightEvents": [
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Stanford course"
+        },
+        {
+          "timeMs": 42000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Caution"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Resource value"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "In this course, you’ll have access to a complete set of digital resources to sup",
+      "bullets": [
+        "We’ve included professionally recorded video lectures, so you can review key concepts anytime. All PowerPoint slides used in the course are also available for download and review.",
+        "For the modality sections, the textbook is available as hardcopy and PDF, making it easy to follow along even to search specific topics digitally. The course schedule follows a well-structured plan from previous offerings, with minor updates to reflect some latest progress in imaging science.",
+        "These materials are here to help you succeed—use them actively as we explore the foundation materials and modalities of medical imaging."
+      ],
+      "fullText": "In this course, you’ll have access to a complete set of digital resources to support your learning.\n\nWe’ve included professionally recorded video lectures, so you can review key concepts anytime. All PowerPoint slides used in the course are also available for download and review.\n\nFor the modality sections, the textbook is available as hardcopy and PDF, making it easy to follow along even to search specific topics digitally. The course schedule follows a well-structured plan from previous offerings, with minor updates to reflect some latest progress in imaging science.\n\nThese materials are here to help you succeed—use them actively as we explore the foundation materials and modalities of medical imaging.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide36.JPG",
+      "script": "We've put together a comprehensive set of digital resources to help you succeed in this course. You'll have access to professionally recorded video lectures, which you can review anytime to reinforce your understanding of key concepts. Additionally, all the PowerPoint slides used in the course are available for download and review, so you can refer back to them easily. This will help you stay on track and reinforce your understanding of the material.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Comprehensive resources"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Video lectures"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "PowerPoint slides"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Continuing from our previous discussions, let’s dive into the physics of X-ray i",
+      "bullets": [
+        "In X-ray imaging, we start with the concept of a line integral. Essentially, the X-rays pass through the object, and what we measure is the energy of penetrated x-ray photons and then compute the line integral along the x-ray path. Such line integrals together form the Radon transform. To make it simpler, imagine you have an object, and you put all line integrals from a specific direction to form an x-ray projection. This projection is a one-dimensional profile, which is the information you can get along all the X-ray paths passing through the object in that direction.",
+        "Now, let’s take this idea into the realm of mathematics. We start with a 2D image, denoted as",
+        "f(x,y). When we have all x-ray projections or the Radon transform, we get a new 2D function  p(θ,t), where  t is the coordinate along the 1D detector array and  θ is the projection orientation. By changing the angle θ, we rotate the data acquisition system to gather x-ray projections.",
+        "Now, the magic happens when we flip the process around. Given this collected projection dataset, our goal is to reconstruct the original 2D image f(x,y). This is the inverse process, and here’s where things get interesting: by perform the 1D Fourier trans of each and every of the 1D projections, we move into the Fourier domain.",
+        "To put it simply, the 1D projections we collect represent profiles in the frequency domain. By rotating the data acquisition system, we eventually capture the entire Fourier space. And once we have all the data in the Fourier space, we can apply the inverse Fourier transform to reconstruct the original image. This process connects the data from the physical object to the Fourier spectrum of the underlying image, and from the Fourier spectrum, we can reconstruct the original image.",
+        "While this overview gives you the fundamental idea, later in the course, we’ll dive deeper into the Fourier transform, why they can be inverted, and how this mathematical framework ties directly to the imaging process. But for now, keep in mind that the forward process (how we collect data) and the inverse process (how we reconstruct the image) are two sides of the same coin, closely linked by Fourier analysis."
+      ],
+      "fullText": "Continuing from our previous discussions, let’s dive into the physics of X-ray imaging and how we can collect and process data to reconstruct an image.\n\nIn X-ray imaging, we start with the concept of a line integral. Essentially, the X-rays pass through the object, and what we measure is the energy of penetrated x-ray photons and then compute the line integral along the x-ray path. Such line integrals together form the Radon transform. To make it simpler, imagine you have an object, and you put all line integrals from a specific direction to form an x-ray projection. This projection is a one-dimensional profile, which is the information you can get along all the X-ray paths passing through the object in that direction.\n\nNow, let’s take this idea into the realm of mathematics. We start with a 2D image, denoted as \nf(x,y). When we have all x-ray projections or the Radon transform, we get a new 2D function  p(θ,t), where  t is the coordinate along the 1D detector array and  θ is the projection orientation. By changing the angle θ, we rotate the data acquisition system to gather x-ray projections.\n\nNow, the magic happens when we flip the process around. Given this collected projection dataset, our goal is to reconstruct the original 2D image f(x,y). This is the inverse process, and here’s where things get interesting: by perform the 1D Fourier trans of each and every of the 1D projections, we move into the Fourier domain.\n\nTo put it simply, the 1D projections we collect represent profiles in the frequency domain. By rotating the data acquisition system, we eventually capture the entire Fourier space. And once we have all the data in the Fourier space, we can apply the inverse Fourier transform to reconstruct the original image. This process connects the data from the physical object to the Fourier spectrum of the underlying image, and from the Fourier spectrum, we can reconstruct the original image.\n\nWhile this overview gives you the fundamental idea, later in the course, we’ll dive deeper into the Fourier transform, why they can be inverted, and how this mathematical framework ties directly to the imaging process. But for now, keep in mind that the forward process (how we collect data) and the inverse process (how we reconstruct the image) are two sides of the same coin, closely linked by Fourier analysis.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide37.JPG",
+      "script": "Let's dive into the physics of X-ray imaging and how we can collect and process data to reconstruct an image. We start with the concept of a line integral, where X-rays pass through the object, and we measure the energy of penetrated X-ray photons to compute the line integral along the X-ray path. These line integrals together form the Radon transform, which is a mathematical representation of the X-ray projections.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Line Integral"
+        },
+        {
+          "timeMs": 25000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Radon Transform"
+        },
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Inverse Process"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Continuing with our exploration of imaging modalities, let’s now discuss Positro",
+      "bullets": [
+        "So, how does it work? Well, the key to PET is the introduction of radioactive tracers into the body. These tracers are typically radioactive chemicals that participate in your body’s metabolic processes. For example, tumors tend to consume a lot of glucose. If we couple glucose molecules with a radioactive tracer, we can track how much glucose the tumor is using, which directly correlates with its activity. Tumors, which are often highly metabolic, will naturally absorb more of this tracer.",
+        "Once the PET tracer is in the body, it begins to emit gamma ray photons in pairs, and two photons in a pair will travel in opposite directions. Gamma rays, much like X-rays, can penetrate through tissues and be detected externally. When we receive gamma ray photons from two different detector locations, we know they originated from the same event somewhere on the line connecting the two detectors.",
+        "This process is similar to the measurement of line integrals used for CT. Then, we can apply Fourier analysis to reconstruct the images. In PET, Fourier transforms help us create detailed, functional images of the body’s processes. The goal here is to understand how much activities are happening at specific locations. So, while we’ve seen how CT gives us anatomical details, PET allows us to observe the biological functions—like metabolism—within those structures.",
+        "This modality is especially useful for identifying cancerous tissues, studying brain function, and even monitoring heart conditions. Later, we’ll explain how the gamma ray photons are detected and processed to reconstruct these functional images. But for now, remember that PET imaging provides us with a way to look inside the body not just for its structure, but also for how physiology is actively working."
+      ],
+      "fullText": "Continuing with our exploration of imaging modalities, let’s now discuss Positron Emission Tomography, or PET. While the previous imaging techniques focused on capturing the anatomical structure, PET offers a powerful way to visualize the functional activity in the human body.\n\nSo, how does it work? Well, the key to PET is the introduction of radioactive tracers into the body. These tracers are typically radioactive chemicals that participate in your body’s metabolic processes. For example, tumors tend to consume a lot of glucose. If we couple glucose molecules with a radioactive tracer, we can track how much glucose the tumor is using, which directly correlates with its activity. Tumors, which are often highly metabolic, will naturally absorb more of this tracer.\n\nOnce the PET tracer is in the body, it begins to emit gamma ray photons in pairs, and two photons in a pair will travel in opposite directions. Gamma rays, much like X-rays, can penetrate through tissues and be detected externally. When we receive gamma ray photons from two different detector locations, we know they originated from the same event somewhere on the line connecting the two detectors.\nThis process is similar to the measurement of line integrals used for CT. Then, we can apply Fourier analysis to reconstruct the images. In PET, Fourier transforms help us create detailed, functional images of the body’s processes. The goal here is to understand how much activities are happening at specific locations. So, while we’ve seen how CT gives us anatomical details, PET allows us to observe the biological functions—like metabolism—within those structures.\n\nThis modality is especially useful for identifying cancerous tissues, studying brain function, and even monitoring heart conditions. Later, we’ll explain how the gamma ray photons are detected and processed to reconstruct these functional images. But for now, remember that PET imaging provides us with a way to look inside the body not just for its structure, but also for how physiology is actively working.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide38.JPG",
+      "script": "PET is a functional imaging modality that visualizes the body's activity by introducing radioactive tracers, which participate in metabolic processes, allowing us to track the body's functional activity. These tracers accumulate in areas of high metabolic activity, such as tumors, enabling us to observe the body's functional processes. The most common tracer used in PET is fluorodeoxyglucose, or FDG, which accumulates in tumors due to their high glucose consumption.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "PET tracer introduction"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.4,
+          "durationMs": 300,
+          "label": "Gamma ray detection"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Fourier analysis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "Now let’s look at a closely related nuclear medicine modality: Single Photon Emi",
+      "bullets": [
+        "The key idea is in the name: single-photon emission. In SPECT, a radiotracer inside the body emits gamma photons one at a time, in random directions. That is different from PET, where the physics produces two photons that are emitted nearly back-to-back, and we can use coincidence detection to define a line of response more directly.",
+        "In SPECT, because the photons are not paired, we need another way to estimate where they came from. That’s why SPECT systems use a collimator, which is basically a physical filter in front of the detector that only allows photons traveling in certain directions to pass through. So when the detector records a photon, we don’t know its exact origin, but we do know it most likely traveled along a specific direction set by the collimator geometry.",
+        "If you look at the slide, you can see both sides of the story:",
+        "on the left, an example of the functional image you get from tracer uptake, and",
+        "on the right, the SPECT scanner, essentially a gamma camera system that rotates around the patient to collect many projection views.",
+        "Just like CT, the workflow is: collect projections from multiple angles, then use tomographic reconstruction to estimate the 3D distribution of tracer activity. The reconstruction details differ from PET because the measurement physics differs, but the overall inverse-problem flavor is the same.",
+        "A practical takeaway is this: SPECT is widely used clinically and can be more accessible than PET in many settings, but because it relies on collimation, it typically sacrifices a lot of photons, which often means lower sensitivity and resolution compared to PET. Still, it provides extremely valuable functional information, and that’s why it remains a major workhorse in nuclear medicine."
+      ],
+      "fullText": "Now let’s look at a closely related nuclear medicine modality: Single Photon Emission Computed Tomography, or SPECT.\n\nThe key idea is in the name: single-photon emission. In SPECT, a radiotracer inside the body emits gamma photons one at a time, in random directions. That is different from PET, where the physics produces two photons that are emitted nearly back-to-back, and we can use coincidence detection to define a line of response more directly.\n\nIn SPECT, because the photons are not paired, we need another way to estimate where they came from. That’s why SPECT systems use a collimator, which is basically a physical filter in front of the detector that only allows photons traveling in certain directions to pass through. So when the detector records a photon, we don’t know its exact origin, but we do know it most likely traveled along a specific direction set by the collimator geometry.\n\nIf you look at the slide, you can see both sides of the story:\n\non the left, an example of the functional image you get from tracer uptake, and\n\non the right, the SPECT scanner, essentially a gamma camera system that rotates around the patient to collect many projection views.\n\nJust like CT, the workflow is: collect projections from multiple angles, then use tomographic reconstruction to estimate the 3D distribution of tracer activity. The reconstruction details differ from PET because the measurement physics differs, but the overall inverse-problem flavor is the same.\n\nA practical takeaway is this: SPECT is widely used clinically and can be more accessible than PET in many settings, but because it relies on collimation, it typically sacrifices a lot of photons, which often means lower sensitivity and resolution compared to PET. Still, it provides extremely valuable functional information, and that’s why it remains a major workhorse in nuclear medicine.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide39.JPG",
+      "script": "SPECT is a closely related nuclear medicine modality that uses single-photon emission, where a radiotracer inside the body emits gamma photons one at a time, in random directions. Unlike PET, where paired photons are emitted, SPECT relies on a collimator to guide the photons toward the detector, estimating their origin. This is because the single-photon emission in SPECT does not provide the same level of directional information as the paired photons in PET.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "SPECT principle"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Collimator"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "SPECT image example"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "Now, let’s turn our attention to the third major imaging modality: Magnetic Reso",
+      "bullets": [
+        "Here’s how it works: First, we subject the patient to a very strong magnetic field. This magnetic field aligns the hydrogen nuclei—which are abundant in water molecules in your body. Then, we introduce a radio frequency (RF) signal that briefly disrupts this alignment, causing the hydrogen nuclei to emit their own radio frequency signals as they return to their original stable state.",
+        "The key advantage of MRI is that it is sensitive to the water content in different tissues and interactions of hydrogen nuclei with their micro-environments, which makes MRI extremely useful for imaging soft tissues like the brain, muscles, and organs. The signal we collect can give us a lot of valuable information, such as chemical shifts in tissues, which help us distinguish between different types of tissues and even detect abnormalities like tumors or inflammation.",
+        "MRI is also great for studying brain activity, as the technique can be used to observe changes in blood flow over time. This makes MRI not only a structural imaging tool but also a functional one, adding a layer of depth to our understanding of the body.",
+        "Together with CT and nuclear imaging techniques, MRI forms the trio of most important imaging modalities. While CT focuses on capturing detailed anatomical structures using X-rays, and nuclear imaging provides insight into physiological functions, MRI offers unmatched soft tissue contrast and the ability to examine both structure and function in a non-invasive way, even into our thinking processes."
+      ],
+      "fullText": "Now, let’s turn our attention to the third major imaging modality: Magnetic Resonance Imaging, or MRI. MRI uses a completely different approach compared to X-ray and nuclear imaging techniques including PET and SPECT. In MRI, we utilize radio frequency signals to gather detailed images of the body.\n\nHere’s how it works: First, we subject the patient to a very strong magnetic field. This magnetic field aligns the hydrogen nuclei—which are abundant in water molecules in your body. Then, we introduce a radio frequency (RF) signal that briefly disrupts this alignment, causing the hydrogen nuclei to emit their own radio frequency signals as they return to their original stable state.\n\nThe key advantage of MRI is that it is sensitive to the water content in different tissues and interactions of hydrogen nuclei with their micro-environments, which makes MRI extremely useful for imaging soft tissues like the brain, muscles, and organs. The signal we collect can give us a lot of valuable information, such as chemical shifts in tissues, which help us distinguish between different types of tissues and even detect abnormalities like tumors or inflammation.\n\nMRI is also great for studying brain activity, as the technique can be used to observe changes in blood flow over time. This makes MRI not only a structural imaging tool but also a functional one, adding a layer of depth to our understanding of the body.\n\nTogether with CT and nuclear imaging techniques, MRI forms the trio of most important imaging modalities. While CT focuses on capturing detailed anatomical structures using X-rays, and nuclear imaging provides insight into physiological functions, MRI offers unmatched soft tissue contrast and the ability to examine both structure and function in a non-invasive way, even into our thinking processes.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide40.JPG",
+      "script": "Now, let's turn our attention to the third major imaging modality: Magnetic Resonance Imaging, or MRI. MRI uses a completely different approach compared to X-ray and nuclear imaging techniques, including PET and SPECT. In MRI, we utilize radio frequency signals to gather detailed images of the body. We subject the patient to a very strong magnetic field, which aligns the hydrogen nuclei, abundant in water molecules in your body. Then, we introduce a radio frequency signal that briefly disrupts this alignment, causing the hydrogen nuclei to emit their own radio frequency signals, which we detect and use to reconstruct images.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Magnetic Resonance Imaging"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Radio Frequency Signals"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 2500,
+          "label": "Key Advantage of MRI"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "Now, let's look at Ultrasound Imaging. While it might not be as widely discussed",
+      "bullets": [
+        "So, how does ultrasound work? It operates based on the principle of mechanical vibrations. In ultrasound imaging, we use a device called a transducer, which contains piezoelectric materials. These materials can generate high-frequency sound waves when subjected to an electric current. These sound waves are then sent into the body.",
+        "As the sound waves travel through tissues, they interact with various structures inside the body. Some waves are reflected, and others continue through the tissues. The reflected waves are detected by the transducer, and from this data, we can reconstruct an image of the internal structures. Essentially, we’re mapping the body’s anatomy based on how sound waves bounce off tissues.",
+        "One of the greatest benefits of ultrasound is that it’s non-invasive and completely safe—unlike X-rays or CT scans, ultrasound doesn't involve ionizing radiation. It’s also incredibly cost-effective and high-speed, which makes it a go-to tool for many real-time imaging tasks. You’ll often see it used during fetal imaging in pregnancy, as well as in blood flow monitoring and guiding biopsies.",
+        "While it may not provide the same level of detail as MRI or CT, ultrasound’s affordability, speed, and safety make it a valuable tool for many clinical applications. Coupled with AI methods, ultrasound imaging has yet more to offer."
+      ],
+      "fullText": "Now, let's look at Ultrasound Imaging. While it might not be as widely discussed or as advanced as the big three—CT, nuclear imaging, and MRI—ultrasound remains a powerful, affordable, and safe imaging tool in medical practice, and seems playing an increasingly important role for point of care imaging.\n\nSo, how does ultrasound work? It operates based on the principle of mechanical vibrations. In ultrasound imaging, we use a device called a transducer, which contains piezoelectric materials. These materials can generate high-frequency sound waves when subjected to an electric current. These sound waves are then sent into the body.\n\nAs the sound waves travel through tissues, they interact with various structures inside the body. Some waves are reflected, and others continue through the tissues. The reflected waves are detected by the transducer, and from this data, we can reconstruct an image of the internal structures. Essentially, we’re mapping the body’s anatomy based on how sound waves bounce off tissues.\n\nOne of the greatest benefits of ultrasound is that it’s non-invasive and completely safe—unlike X-rays or CT scans, ultrasound doesn't involve ionizing radiation. It’s also incredibly cost-effective and high-speed, which makes it a go-to tool for many real-time imaging tasks. You’ll often see it used during fetal imaging in pregnancy, as well as in blood flow monitoring and guiding biopsies.\n\nWhile it may not provide the same level of detail as MRI or CT, ultrasound’s affordability, speed, and safety make it a valuable tool for many clinical applications. Coupled with AI methods, ultrasound imaging has yet more to offer.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide41.JPG",
+      "script": "Ultrasound imaging relies on mechanical vibrations to operate, using a transducer with piezoelectric materials that convert electrical signals into high-frequency sound waves. When these sound waves hit tissue boundaries, they produce echoes, which are then detected by the same transducer, converting the mechanical vibrations back into electrical signals. This process allows for the formation of images based on the echoes received.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Ultrasound principle"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Transducer explanation"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Ultrasound benefits"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "Now let’s talk about optical imaging, a family of techniques that use visible an",
+      "bullets": [
+        "A key idea is that optical methods can capture biological signatures. For example, with bioluminescence imaging, we use a biological reporter system that produces light inside the body. You can think of it like a firefly: the light is generated by the biology itself, so from the imaging system’s point of view it’s essentially a passive signal that we detect from outside.",
+        "Now look at the workflow on this slide. At the bottom, we start with bioluminescence imaging of an animal and collect multiple external views from different angles. Those surface images are useful, but the real goal is harder: we want to recover the 3D distribution of the internal light sources.",
+        "That is where optical tomography comes in, and it immediately becomes an inverse problem.",
+        "The forward problem is: if we knew the internal light sources and we knew the tissue’s optical properties, we could predict what the camera would measure outside.",
+        "The inverse problem is the challenge: given only the external measurements, how do we reconstruct where the sources are inside?",
+        "The slide also shows why we often combine optical imaging with computed tomography. CT provides an individualized volume and a shape model of the animal, which tells us the geometry of organs and tissues. From that, we build an optical model that approximates how light scatters and is absorbed through different structures. Once we have that forward model, we can “invert” it to produce a 3D mapping of the bioluminescent sources inside the body.",
+        "So the big lesson is the same one you’ve seen across modalities: optical imaging is powerful, but reconstruction is difficult because light scatters strongly in tissue, and that makes the inverse problem sensitive and nontrivial.",
+        "Finally, optical imaging is a broad area. Bioluminescence tomography is one example. There is also fluorescence tomography, where we excite a probe with an external light source and detect the emitted signal. And clinically, one of the most important optical techniques is optical coherence tomography (OCT), which is widely used in eye clinics, for example in retinal imaging.",
+        "So in summary: optical imaging gives us a unique window into biology, often at the molecular level, and when we push it into 3D, it becomes a classic tomography problem built on forward modeling plus inversion."
+      ],
+      "fullText": "Now let’s talk about optical imaging, a family of techniques that use visible and near-infrared light to probe biology. Compared with CT or MRI, optical imaging is often used to study molecular and cellular-level activity, especially in preclinical research.\n\nA key idea is that optical methods can capture biological signatures. For example, with bioluminescence imaging, we use a biological reporter system that produces light inside the body. You can think of it like a firefly: the light is generated by the biology itself, so from the imaging system’s point of view it’s essentially a passive signal that we detect from outside.\n\nNow look at the workflow on this slide. At the bottom, we start with bioluminescence imaging of an animal and collect multiple external views from different angles. Those surface images are useful, but the real goal is harder: we want to recover the 3D distribution of the internal light sources.\n\nThat is where optical tomography comes in, and it immediately becomes an inverse problem.\n\nThe forward problem is: if we knew the internal light sources and we knew the tissue’s optical properties, we could predict what the camera would measure outside.\n\nThe inverse problem is the challenge: given only the external measurements, how do we reconstruct where the sources are inside?\n\nThe slide also shows why we often combine optical imaging with computed tomography. CT provides an individualized volume and a shape model of the animal, which tells us the geometry of organs and tissues. From that, we build an optical model that approximates how light scatters and is absorbed through different structures. Once we have that forward model, we can “invert” it to produce a 3D mapping of the bioluminescent sources inside the body.\n\nSo the big lesson is the same one you’ve seen across modalities: optical imaging is powerful, but reconstruction is difficult because light scatters strongly in tissue, and that makes the inverse problem sensitive and nontrivial.\n\nFinally, optical imaging is a broad area. Bioluminescence tomography is one example. There is also fluorescence tomography, where we excite a probe with an external light source and detect the emitted signal. And clinically, one of the most important optical techniques is optical coherence tomography (OCT), which is widely used in eye clinics, for example in retinal imaging.\n\nSo in summary: optical imaging gives us a unique window into biology, often at the molecular level, and when we push it into 3D, it becomes a classic tomography problem built on forward modeling plus inversion.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide42.JPG",
+      "script": "Optical imaging is a family of techniques that use visible and near-infrared light to probe biology, often focusing on molecular and cellular-level activity, especially in preclinical research. This approach allows us to capture biological signatures, such as the light emitted by bioluminescence, which is generated by the biology itself. This means the imaging system is essentially observing a passive signal produced by the biological reporter system.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Bioluminescence example"
+        },
+        {
+          "timeMs": 2200,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Workflow: bioluminescence imaging"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.8,
+          "durationMs": 400,
+          "label": "Inverse problem: optical tomography"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "Now that we’ve talked about how different modalities create images, the next ste",
+      "bullets": [
+        "Take a look at the picture on this slide. You’re not just seeing a raw scan. You’re seeing anatomy with colored regions overlaid, which is a classic output of image analysis. Those colors usually represent structures that have been identified and separated, for example different organs, vessels, or regions of interest. That process is called segmentation.",
+        "Segmentation is one of the core tasks in medical image analysis because it turns an image into something you can measure. Once a structure is segmented, you can compute its volume, shape, location, boundaries, and how those change over time. That is what enables things like tracking a tumor, quantifying organ size, or planning a procedure.",
+        "A second common task is registration, where we align images from different time points or different modalities, so that “the same location” in the body matches up across scans. That is often how we combine information: anatomy from one scan, function from another, and then interpret them together.",
+        "We also use classification and detection to support decisions, for example identifying suspicious patterns or categorizing tissue types. And of course there are enhancement methods, such as denoising or deblurring, which can improve visibility, but we always have to be careful: enhancement should improve interpretability without creating misleading artifacts.",
+        "For this course, the main goal is to help you see how analysis fits into the full pipeline. Imaging is not only about forming an image. In practice, a lot of the clinical value comes from what we can extract and quantify from that image: structures, measurements, and interpretable information.",
+        "So we will cover the key ideas at a high level, especially the ones that connect directly to imaging systems and reconstruction, and you’ll leave with a clear picture of how acquisition, reconstruction, and analysis fit together in modern medical imaging."
+      ],
+      "fullText": "Now that we’ve talked about how different modalities create images, the next step is just as important: what do we do with the images once we have them? This is where image analysis comes in.\n\nTake a look at the picture on this slide. You’re not just seeing a raw scan. You’re seeing anatomy with colored regions overlaid, which is a classic output of image analysis. Those colors usually represent structures that have been identified and separated, for example different organs, vessels, or regions of interest. That process is called segmentation.\n\nSegmentation is one of the core tasks in medical image analysis because it turns an image into something you can measure. Once a structure is segmented, you can compute its volume, shape, location, boundaries, and how those change over time. That is what enables things like tracking a tumor, quantifying organ size, or planning a procedure.\n\nA second common task is registration, where we align images from different time points or different modalities, so that “the same location” in the body matches up across scans. That is often how we combine information: anatomy from one scan, function from another, and then interpret them together.\n\nWe also use classification and detection to support decisions, for example identifying suspicious patterns or categorizing tissue types. And of course there are enhancement methods, such as denoising or deblurring, which can improve visibility, but we always have to be careful: enhancement should improve interpretability without creating misleading artifacts.\n\nFor this course, the main goal is to help you see how analysis fits into the full pipeline. Imaging is not only about forming an image. In practice, a lot of the clinical value comes from what we can extract and quantify from that image: structures, measurements, and interpretable information.\n\nSo we will cover the key ideas at a high level, especially the ones that connect directly to imaging systems and reconstruction, and you’ll leave with a clear picture of how acquisition, reconstruction, and analysis fit together in modern medical imaging.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide43.JPG",
+      "script": "Now that we've talked about how different modalities create images, the next step is just as important: what do we do with the images once we have them? This is where image analysis comes in, allowing us to extract meaningful information from the images.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Segmentation"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Registration"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Classification and Detection"
+        }
+      ]
+    },
+    {
+      "slideIndex": 43,
+      "slideNumber": 44,
+      "title": "To put everything in perspective, let’s take a step back and look at the big pic",
+      "bullets": [
+        "Genotype refers to your genetic makeup—the DNA that gives rise to your traits. Meanwhile, phenotype refers to the observable characteristics of an individual, such as physical traits, biological functions, and disease states. Biomedical imaging plays a crucial role in studying the phenotype. Through imaging, we can visualize and analyze the biological structures and functions that define an individual’s phenotype.",
+        "Now, bioinformatics and genetic profiling give us a lot of information about the genotype—things like your genetic predispositions and variations. However, these genetic insights need to be connected to the physical manifestation of the genes—the phenotype. We can use biomedical imaging to observe and understand the effects of genetic factors on the body.",
+        "While we’re entering the world of imaging in this course, it’s important to recognize that we’re focusing primarily on phenotype—how imaging allows us to visualize and analyze the body's structures and functions. However, linking genotype (your genetic information) with phenotype (the observable traits and conditions) is an essential goal for personalized medicine. This connection between the two will allow for more accurate diagnosis, more effective treatment, and unprecedented prediction in the future."
+      ],
+      "fullText": "To put everything in perspective, let’s take a step back and look at the big picture. In understanding the human body, we often talk about two key concepts: phenotype and genotype.\n\nGenotype refers to your genetic makeup—the DNA that gives rise to your traits. Meanwhile, phenotype refers to the observable characteristics of an individual, such as physical traits, biological functions, and disease states. Biomedical imaging plays a crucial role in studying the phenotype. Through imaging, we can visualize and analyze the biological structures and functions that define an individual’s phenotype.\n\nNow, bioinformatics and genetic profiling give us a lot of information about the genotype—things like your genetic predispositions and variations. However, these genetic insights need to be connected to the physical manifestation of the genes—the phenotype. We can use biomedical imaging to observe and understand the effects of genetic factors on the body.\n\nWhile we’re entering the world of imaging in this course, it’s important to recognize that we’re focusing primarily on phenotype—how imaging allows us to visualize and analyze the body's structures and functions. However, linking genotype (your genetic information) with phenotype (the observable traits and conditions) is an essential goal for personalized medicine. This connection between the two will allow for more accurate diagnosis, more effective treatment, and unprecedented prediction in the future.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide44.JPG",
+      "script": "Let's take a step back and look at the big picture of understanding the human body. We have two key concepts: genotype, which is your genetic makeup, and phenotype, which are the observable characteristics, physical traits, biological functions, and disease states. Biomedical imaging focuses on the phenotype, allowing us to visualize and analyze the biological structures and functions that define an individual. This is a fundamental perspective that connects imaging directly to the human experience.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Genotype vs Phenotype"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Genetic Predispositions"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Linking Genotype and Phenotype"
+        }
+      ]
+    },
+    {
+      "slideIndex": 44,
+      "slideNumber": 45,
+      "title": "Looking ahead, our next lecture will focus on building a solid foundation in MAT",
+      "bullets": [
+        "MATLAB is widely used in biomedical engineering and medical imaging for modeling, simulation, and algorithm development, so it will be a practical tool throughout this course. If you do not have MATLAB set up yet, please check your university’s software access options. Many campuses provide MATLAB through a site license, and if you run into installation issues, the university IT resources can usually help.",
+        "To prepare, I strongly recommend completing the MATLAB Onramp tutorial. It’s a short, interactive introduction, typically around a couple of hours, and it covers the basics you’ll need: the interface, variables, arrays, plotting, and simple scripts.",
+        "So here is your task before the next lecture: finish MATLAB Onramp. By the end of it, you should feel comfortable navigating MATLAB and writing basic commands and scripts. Then, in the next session, we can spend our time applying MATLAB directly to the imaging concepts we care about, instead of getting stuck on the interface."
+      ],
+      "fullText": "Looking ahead, our next lecture will focus on building a solid foundation in MATLAB, because we’ll soon use it to explore topics like linear systems, convolution, and the Fourier transform. The goal is not just to hear the ideas, but to work with them. When you implement and visualize these concepts in MATLAB, they become much more concrete.\n\nMATLAB is widely used in biomedical engineering and medical imaging for modeling, simulation, and algorithm development, so it will be a practical tool throughout this course. If you do not have MATLAB set up yet, please check your university’s software access options. Many campuses provide MATLAB through a site license, and if you run into installation issues, the university IT resources can usually help.\n\nTo prepare, I strongly recommend completing the MATLAB Onramp tutorial. It’s a short, interactive introduction, typically around a couple of hours, and it covers the basics you’ll need: the interface, variables, arrays, plotting, and simple scripts.\n\nSo here is your task before the next lecture: finish MATLAB Onramp. By the end of it, you should feel comfortable navigating MATLAB and writing basic commands and scripts. Then, in the next session, we can spend our time applying MATLAB directly to the imaging concepts we care about, instead of getting stuck on the interface.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide45.JPG",
+      "script": "As we move forward, our next lecture will focus on building a solid foundation in MATLAB, which we'll use to explore essential concepts like linear systems, convolution, and the Fourier transform. The goal is to go beyond just hearing the ideas, but to actually work with them, making them more concrete through implementation and visualization. This practical tool will be used extensively in biomedical engineering and medical imaging for modeling, simulation, and algorithm development.",
+      "spotlightEvents": [
+        {
+          "timeMs": 60000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "MATLAB foundation"
+        },
+        {
+          "timeMs": 70000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "practical tool"
+        },
+        {
+          "timeMs": 80000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "MATLAB Onramp tutorial"
+        }
+      ]
+    },
+    {
+      "slideIndex": 45,
+      "slideNumber": 46,
+      "title": "You’ll notice that we’re not treating MATLAB as a side topic in this course. We’",
+      "bullets": [
+        "This slide is just a simple reminder: MATLAB Onramp is a very effective starting point. It walks you through the core skills you will repeatedly need here, things like working with vectors and matrices, indexing, importing data, plotting, and writing basic scripts. Those are not “extra” skills. They are exactly what you use when you start experimenting with signals, convolution, and Fourier transforms.",
+        "The bigger point is this: I’m not expecting anyone to learn MATLAB through complicated tricks. The goal is the opposite. If you’re comfortable with the basics, then when we get to homework and projects, you can focus on the imaging concepts instead of struggling with syntax.",
+        "One more practical tip: when you’re writing MATLAB code, tools like ChatGPT can be helpful for brainstorming or debugging small pieces of code. But use it wisely, you still need to understand what the code is doing and be able to explain it. Treat it like a support tool, not a replacement for learning.",
+        "So, keep building that MATLAB foundation now. The earlier you get comfortable, the smoother everything else in the course will feel."
+      ],
+      "fullText": "You’ll notice that we’re not treating MATLAB as a side topic in this course. We’re using it as a practical tool to turn ideas into something you can test, visualize, and truly understand.\n\nThis slide is just a simple reminder: MATLAB Onramp is a very effective starting point. It walks you through the core skills you will repeatedly need here, things like working with vectors and matrices, indexing, importing data, plotting, and writing basic scripts. Those are not “extra” skills. They are exactly what you use when you start experimenting with signals, convolution, and Fourier transforms.\n\nThe bigger point is this: I’m not expecting anyone to learn MATLAB through complicated tricks. The goal is the opposite. If you’re comfortable with the basics, then when we get to homework and projects, you can focus on the imaging concepts instead of struggling with syntax.\n\nOne more practical tip: when you’re writing MATLAB code, tools like ChatGPT can be helpful for brainstorming or debugging small pieces of code. But use it wisely, you still need to understand what the code is doing and be able to explain it. Treat it like a support tool, not a replacement for learning.\n\nSo, keep building that MATLAB foundation now. The earlier you get comfortable, the smoother everything else in the course will feel.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide46.JPG",
+      "script": "MATLAB is not a side topic, but a practical tool to bring ideas to life, allowing you to test, visualize, and truly understand them. We're using it to build a hands-on understanding of medical imaging concepts. The MATLAB Onramp is an effective starting point, covering essential skills like vector and matrix operations, indexing, data import, plotting, and basic scripting, which are crucial for experimentation with signals, convolution, and Fourier transforms.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "MATLAB as a practical tool"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "MATLAB Onramp"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "importance of basic skills"
+        }
+      ]
+    },
+    {
+      "slideIndex": 46,
+      "slideNumber": 47,
+      "title": "Now let’s zoom out and talk about something that has been reshaping medical imag",
+      "bullets": [
+        "This slide is using a well-known AI milestone as a symbol, the idea that machine learning systems reached a point where they could compete with, and even outperform, top human performance in a complex task. The reason I bring this up is not to talk about that specific event, but to highlight what it represents: a turning point in what data-driven models can do.",
+        "In medical imaging, this wave shows up everywhere. AI is helping with:",
+        "image reconstruction (making better images from limited or noisy measurements),",
+        "image analysis (segmentation, detection, classification),",
+        "workflow support (triage and prioritization),",
+        "and even robotics and image-guided procedures.",
+        "But here is the key message for this course: deep learning is powerful, but it does not replace fundamentals. The best results usually happen when you combine physics, systems thinking, and inverse problems with data-driven models. If you understand the foundations, you will be able to evaluate AI methods critically and use them responsibly, rather than treating them like magic.",
+        "So yes, AI is transforming imaging. And that is exactly why learning the core principles still matters."
+      ],
+      "fullText": "Now let’s zoom out and talk about something that has been reshaping medical imaging in a major way: deep learning and modern AI.\n\nThis slide is using a well-known AI milestone as a symbol, the idea that machine learning systems reached a point where they could compete with, and even outperform, top human performance in a complex task. The reason I bring this up is not to talk about that specific event, but to highlight what it represents: a turning point in what data-driven models can do.\n\nIn medical imaging, this wave shows up everywhere. AI is helping with:\n\nimage reconstruction (making better images from limited or noisy measurements),\n\nimage analysis (segmentation, detection, classification),\n\nworkflow support (triage and prioritization),\n\nand even robotics and image-guided procedures.\n\nBut here is the key message for this course: deep learning is powerful, but it does not replace fundamentals. The best results usually happen when you combine physics, systems thinking, and inverse problems with data-driven models. If you understand the foundations, you will be able to evaluate AI methods critically and use them responsibly, rather than treating them like magic.\n\nSo yes, AI is transforming imaging. And that is exactly why learning the core principles still matters.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide47.JPG",
+      "script": "Deep learning and modern AI have been reshaping medical imaging by enabling data-driven models to tackle complex tasks, leading to improved accuracy and efficiency. This wave of AI is not just a tool, but a fundamental aspect of modern medical imaging, appearing in various areas such as image reconstruction, segmentation, and analysis. It's a turning point in how we approach medical imaging, allowing us to tap into the power of machine learning and artificial intelligence.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Turning point in medical imaging"
+        },
+        {
+          "timeMs": 11000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "AI in medical imaging"
+        },
+        {
+          "timeMs": 12000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Image reconstruction, analysis, and more"
+        }
+      ]
+    },
+    {
+      "slideIndex": 47,
+      "slideNumber": 48,
+      "title": "As we move into modern trends, this slide gives a simple but powerful picture of",
+      "bullets": [
+        "What you’re seeing here is the number of papers over time, based on a topic search in Web of Knowledge, over roughly the past 20 years. The blue curve represents medical imaging, and the orange curve represents machine learning.",
+        "Both curves are rising, which tells you that medical imaging has been an active and growing research area for a long time. But what’s especially striking is the machine learning curve: it accelerates rapidly and, toward the later years shown on this plot, it begins to catch up with and even surpass medical imaging in publication volume.",
+        "The takeaway is not that “one field replaces the other.” The real takeaway is that the intersection is becoming increasingly important. When machine learning, especially deep learning, meets medical imaging, it affects multiple stages of the pipeline:",
+        "reconstruction (turning measurements into images more efficiently or with fewer artifacts),",
+        "analysis (segmentation, detection, classification),",
+        "and interpretation and workflow support (helping clinicians prioritize and quantify).",
+        "This is exactly the motivation behind the term “deep imaging”, and that’s why the slide cites the perspective article:",
+        "Wang G: “Perspective on Deep Imaging,” IEEE Access, 2016.",
+        "The point of that reference is to signal that deep learning is not just an add-on. It has the potential to reshape how we think about both imaging systems and imaging algorithms.",
+        "Now, for this course, our priority is still the fundamentals: physics, systems, Fourier ideas, and inverse problems. But if you’re interested in going further, one natural extension is a project where you connect these imaging fundamentals with machine learning ideas in a careful, grounded way. That’s optional, but it can be a great path for students who want a deeper challenge."
+      ],
+      "fullText": "As we move into modern trends, this slide gives a simple but powerful picture of where the field has been heading.\n\nWhat you’re seeing here is the number of papers over time, based on a topic search in Web of Knowledge, over roughly the past 20 years. The blue curve represents medical imaging, and the orange curve represents machine learning.\n\nBoth curves are rising, which tells you that medical imaging has been an active and growing research area for a long time. But what’s especially striking is the machine learning curve: it accelerates rapidly and, toward the later years shown on this plot, it begins to catch up with and even surpass medical imaging in publication volume.\n\nThe takeaway is not that “one field replaces the other.” The real takeaway is that the intersection is becoming increasingly important. When machine learning, especially deep learning, meets medical imaging, it affects multiple stages of the pipeline:\n\nreconstruction (turning measurements into images more efficiently or with fewer artifacts),\n\nanalysis (segmentation, detection, classification),\n\nand interpretation and workflow support (helping clinicians prioritize and quantify).\n\nThis is exactly the motivation behind the term “deep imaging”, and that’s why the slide cites the perspective article:\nWang G: “Perspective on Deep Imaging,” IEEE Access, 2016.\nThe point of that reference is to signal that deep learning is not just an add-on. It has the potential to reshape how we think about both imaging systems and imaging algorithms.\n\nNow, for this course, our priority is still the fundamentals: physics, systems, Fourier ideas, and inverse problems. But if you’re interested in going further, one natural extension is a project where you connect these imaging fundamentals with machine learning ideas in a careful, grounded way. That’s optional, but it can be a great path for students who want a deeper challenge.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide48.JPG",
+      "script": "This slide gives a visual representation of the growth of medical imaging and machine learning research over the past 20 years, based on a search of academic papers. The blue curve for medical imaging shows a steady rise, while the orange curve for machine learning starts slower but accelerates rapidly, especially in recent years. This plot illustrates the growing importance of machine learning in medical imaging research.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Rise of Machine Learning"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Accelerating Machine Learning"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Intersection of Medical Imaging and Machine Learning"
+        }
+      ]
+    },
+    {
+      "slideIndex": 48,
+      "slideNumber": 49,
+      "title": "Building on what we have discussed so far about the intersection of medical imag",
+      "bullets": [
+        "I truly believe the future of medical imaging—and medicine in general—is full of incredible possibilities. As artificial intelligence continues to advance, we’re already seeing systems that can match or even surpass human performance in interpreting medical images. It’s very possible that, in the not-so-distant future, many of the tasks traditionally done by radiologists will be basically handled by AI.",
+        "And it goes beyond that. Imagine robotic surgeons, guided by multimodal imaging and machine learning, performing procedures with precision that’s hard for even the best human surgeon to match. Over time, we might see AI and robotics take on more and more roles in healthcare, not to replace professionals, but to enhance what we can achieve—and to make healthcare safer, faster, and more accessible.",
+        "This is the direction the field is moving in, and it’s one of the reasons why understanding imaging technologies today is so valuable and timely. You're not just learning how things work now—you’re preparing to shape the future."
+      ],
+      "fullText": "Building on what we have discussed so far about the intersection of medical imaging and machine learning, let’s take a moment to look further ahead.\n\nI truly believe the future of medical imaging—and medicine in general—is full of incredible possibilities. As artificial intelligence continues to advance, we’re already seeing systems that can match or even surpass human performance in interpreting medical images. It’s very possible that, in the not-so-distant future, many of the tasks traditionally done by radiologists will be basically handled by AI.\n\nAnd it goes beyond that. Imagine robotic surgeons, guided by multimodal imaging and machine learning, performing procedures with precision that’s hard for even the best human surgeon to match. Over time, we might see AI and robotics take on more and more roles in healthcare, not to replace professionals, but to enhance what we can achieve—and to make healthcare safer, faster, and more accessible.\n\nThis is the direction the field is moving in, and it’s one of the reasons why understanding imaging technologies today is so valuable and timely. You're not just learning how things work now—you’re preparing to shape the future.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide49.JPG",
+      "script": "As we build on the ideas we've discussed, let's look ahead to the exciting possibilities at the intersection of medical imaging and machine learning. The future of medical imaging is full of promise, with AI advancing to the point where systems can match or even surpass human performance in interpreting medical images. This could lead to a future where many tasks traditionally done by radiologists are handled by AI, freeing up human experts to focus on higher-level decision-making and patient care.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Future of Medical Imaging"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "AI Advancing Medical Imaging"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Robotic Surgeons and Multimodal Imaging"
+        }
+      ]
+    },
+    {
+      "slideIndex": 49,
+      "slideNumber": 50,
+      "title": "As we talk about deep learning, AI, and robotics in healthcare, it’s worth remem",
+      "bullets": [
+        "This slide uses Elysium as an example. On the left is the movie poster, and on the right you see that iconic futuristic medical device, basically a “one-stop” system that scans the body, identifies what is wrong, and then fixes it automatically. In the film, it represents an ideal: instant diagnosis, precise treatment, and fully personalized care.",
+        "Of course, we’re not there today. That machine is fiction. But the direction it points to is very real. Modern medical imaging is already the foundation of diagnosis. And when you combine imaging with computation, AI, and robotics, you start moving toward systems that are:",
+        "more comprehensive (integrating multiple types of information),",
+        "more quantitative (measuring instead of guessing),",
+        "and more actionable (guiding treatment and interventions).",
+        "So the point of this slide is motivation. The dream is not “magic technology.” The dream is building better tools step by step. And that starts with fundamentals: how images are formed, how reconstruction solves inverse problems, how we evaluate quality, and how we extract clinically meaningful information.",
+        "If this vision excites you, that’s great. Because by mastering the foundations in this course, you put yourself in a position to contribute to what comes next, turning parts of that dream into real engineering and real medicine."
+      ],
+      "fullText": "As we talk about deep learning, AI, and robotics in healthcare, it’s worth remembering that big scientific ideas often start as dreams, and sometimes science fiction is a useful way to express those dreams.\n\nThis slide uses Elysium as an example. On the left is the movie poster, and on the right you see that iconic futuristic medical device, basically a “one-stop” system that scans the body, identifies what is wrong, and then fixes it automatically. In the film, it represents an ideal: instant diagnosis, precise treatment, and fully personalized care.\n\nOf course, we’re not there today. That machine is fiction. But the direction it points to is very real. Modern medical imaging is already the foundation of diagnosis. And when you combine imaging with computation, AI, and robotics, you start moving toward systems that are:\n\nmore comprehensive (integrating multiple types of information),\n\nmore quantitative (measuring instead of guessing),\n\nand more actionable (guiding treatment and interventions).\n\nSo the point of this slide is motivation. The dream is not “magic technology.” The dream is building better tools step by step. And that starts with fundamentals: how images are formed, how reconstruction solves inverse problems, how we evaluate quality, and how we extract clinically meaningful information.\n\nIf this vision excites you, that’s great. Because by mastering the foundations in this course, you put yourself in a position to contribute to what comes next, turning parts of that dream into real engineering and real medicine.",
+      "imageURL": "/lectures/Lecture_01/Images/Slide50.JPG",
+      "script": "As we explore the intersection of technology and healthcare, it's essential to recognize that groundbreaking ideas often begin as imaginative concepts, and science fiction can serve as a catalyst for envisioning the future of medicine. The movie Elysium depicts a futuristic scenario where a single device can diagnose and treat diseases, inspiring us to strive for more efficient and effective healthcare solutions. While we're not yet at that level, this vision motivates us to push the boundaries of medical imaging and beyond.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Movie Elysium"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Futuristic Medical Device"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 4000,
+          "label": "Combining Imaging with Computation"
+        }
+      ]
+    }
+  ]
+}

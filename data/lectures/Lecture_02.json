@@ -1,0 +1,2049 @@
+{
+  "lectureId": "Lecture_02",
+  "lectureTitle": "Medical Imaging — Lecture 02",
+  "totalSlides": 50,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Welcome to this session, where we’ll begin exploring MATLAB — one of the most wi",
+      "bullets": [
+        "This will serve as your gateway to MATLAB: how it works, why we use it, and how it helps us handle real-world data. You don’t need any prior experience — we’ll start with the basics and build up step by step.",
+        "As we move forward, you’ll use MATLAB to generate signals, reconstruct images, and analyze datasets — all key tasks in medical imaging. The goal is not just to learn syntax, but to develop intuition and confidence in working with computational tools that are directly relevant to biomedical research and clinical practice."
+      ],
+      "fullText": "Welcome to this session, where we’ll begin exploring MATLAB — one of the most widely used computational platforms in science and engineering, especially in biomedical imaging.\nThis will serve as your gateway to MATLAB: how it works, why we use it, and how it helps us handle real-world data. You don’t need any prior experience — we’ll start with the basics and build up step by step.\nAs we move forward, you’ll use MATLAB to generate signals, reconstruct images, and analyze datasets — all key tasks in medical imaging. The goal is not just to learn syntax, but to develop intuition and confidence in working with computational tools that are directly relevant to biomedical research and clinical practice.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide1.JPG",
+      "script": "Welcome to this session, where we'll begin exploring MATLAB, one of the most widely used computational platforms in science and engineering, especially in biomedical imaging. This will serve as your gateway to MATLAB, where we'll cover how it works, why we use it, and how it helps us handle real-world data. Don't worry if you have no prior experience – we'll start with the basics and build up step by step. As we move forward, you'll use MATLAB to generate signals, reconstruct images, and analyze datasets, which are all key tasks in medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 5000,
+          "label": "MATLAB basics"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "gateway to MATLAB"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.3,
+          "durationMs": 4000,
+          "label": "real-world data"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "We are right on schedule in our journey through this material.",
+      "bullets": [
+        "If you’ve already previewed the reading materials related to today’s lecture, excellent! That head start will help you connect concepts more easily. If not, no worries. I do encourage you to follow along closely and review key ideas afterward. This habit of reinforcing concepts as you progress will help you build a stronger, more intuitive understanding, especially as the ideas become more mathematically involved."
+      ],
+      "fullText": "We are right on schedule in our journey through this material.\n\nIf you’ve already previewed the reading materials related to today’s lecture, excellent! That head start will help you connect concepts more easily. If not, no worries. I do encourage you to follow along closely and review key ideas afterward. This habit of reinforcing concepts as you progress will help you build a stronger, more intuitive understanding, especially as the ideas become more mathematically involved.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide2.JPG",
+      "script": "We're right on schedule in our journey through this material, and I'm glad to see everyone is keeping up. If you've already previewed the reading materials, that's great, as it will help you connect the concepts more easily. If not, don't worry, just follow along closely and review key ideas afterward to reinforce your understanding. This habit of reinforcing concepts as you progress will help you build a stronger, more intuitive understanding, especially as the ideas become more mathematically involved.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Following along closely"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Reinforcing concepts"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Building a stronger understanding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "Now let me address a common issue students often encounter early on — installati",
+      "bullets": [
+        "Here’s a message I received from a student. He was unable to install MATLAB on his computer because of authentication issues with CAS — something that happens occasionally, especially at the beginning of the semester. The good news is that this is fixable, and you’re not alone.",
+        "If you experience something similar, please reach out early. Visit the RPI Help Center, and they’ll assist you with installing MATLAB. And of course, please feel free to contact me or the teaching assistant — we’re here to help."
+      ],
+      "fullText": "Now let me address a common issue students often encounter early on — installation problems with MATLAB.\nHere’s a message I received from a student. He was unable to install MATLAB on his computer because of authentication issues with CAS — something that happens occasionally, especially at the beginning of the semester. The good news is that this is fixable, and you’re not alone.\nIf you experience something similar, please reach out early. Visit the RPI Help Center, and they’ll assist you with installing MATLAB. And of course, please feel free to contact me or the teaching assistant — we’re here to help.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide3.JPG",
+      "script": "Don't worry if you're experiencing installation problems with MATLAB – it's a common issue, especially at the beginning of the semester. If you're having trouble authenticating with CAS, you're not alone, and there's help available. Reach out to the RPI Help Center or contact me or the teaching assistant for assistance with installing MATLAB. We're here to support you.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Common Installation Issues"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "CAS Authentication Problems"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "RPI Help Center Assistance"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "If you're unable to install MATLAB on your own machine, don’t worry — you still ",
+      "bullets": [
+        "One solution is MATLAB Online, a browser-based version provided by MathWorks. You can access it from any modern browser without installing anything on your device. Just search “run MATLAB online,” and you’ll find the link right away.",
+        "Another option is Octave Online. It’s a free, open-source alternative that supports many MATLAB commands. While it doesn’t include all the advanced toolboxes, it’s good enough for our assignments.",
+        "So remember, lack of installation shouldn’t be a blocker preventing you from doing homework. There are various ways to stay engaged and complete your tasks — all you need is a browser and a willingness."
+      ],
+      "fullText": "If you're unable to install MATLAB on your own machine, don’t worry — you still have options.\nOne solution is MATLAB Online, a browser-based version provided by MathWorks. You can access it from any modern browser without installing anything on your device. Just search “run MATLAB online,” and you’ll find the link right away.\nAnother option is Octave Online. It’s a free, open-source alternative that supports many MATLAB commands. While it doesn’t include all the advanced toolboxes, it’s good enough for our assignments.\nSo remember, lack of installation shouldn’t be a blocker preventing you from doing homework. There are various ways to stay engaged and complete your tasks — all you need is a browser and a willingness.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide4.JPG",
+      "script": "Don't worry if you're unable to install MATLAB on your own machine – there are alternative options available. You can use MATLAB Online, a browser-based version provided by MathWorks, or Octave Online, a free and open-source alternative that supports many MATLAB commands. These options will allow you to access the necessary tools for our assignments.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "MATLAB Online"
+        },
+        {
+          "timeMs": 25000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Octave Online"
+        },
+        {
+          "timeMs": 30000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Browser-based"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Let’s take a closer look at Octave.",
+      "bullets": [
+        "Octave is a scientific programming language that mirrors MATLAB’s syntax and functionality. It’s free, open-source, and available for Windows, macOS, and Linux. You can run it in the browser using Octave Online.",
+        "The interface looks different, but under the hood, many of the same commands will work — especially those used for basic matrix operations, plotting, and simple scripts. This makes Octave a reliable backup if MATLAB access is delayed or limited.",
+        "While it might not support all specialized toolboxes or image processing features, it’s more than enough for getting started and building foundational skills, at least for this course."
+      ],
+      "fullText": "Let’s take a closer look at Octave.\nOctave is a scientific programming language that mirrors MATLAB’s syntax and functionality. It’s free, open-source, and available for Windows, macOS, and Linux. You can run it in the browser using Octave Online.\nThe interface looks different, but under the hood, many of the same commands will work — especially those used for basic matrix operations, plotting, and simple scripts. This makes Octave a reliable backup if MATLAB access is delayed or limited.\nWhile it might not support all specialized toolboxes or image processing features, it’s more than enough for getting started and building foundational skills, at least for this course.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide5.JPG",
+      "script": "Octave is a great alternative to MATLAB, especially when you need a backup or a free option. It has a similar syntax and supports basic matrix operations, plotting, and simple scripts, making it a reliable choice.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Octave as a backup option"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Basic syntax and functionality"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.8,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Free, open-source, and accessible"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Let me walk you through what we’ll cover in this lab module.",
+      "bullets": [
+        "We’ll start by getting MATLAB installed on your machine. Once it’s up and running, you’ll go through the module MATLAB On Ramp — an interactive tutorial that introduces the core features of the platform in a hands-on way.",
+        "Next, we’ll work through two examples that show MATLAB in action. First, we’ll look at spectral shifts of starlight — a great illustration of how MATLAB can be used in astrophysics. Then, we’ll switch gears to generate a 3D cone surface, which introduces MATLAB’s powerful graphics.",
+        "And once you’ve the basics, we can take steps further. As good examples, we can explore several advanced MATLAB toolboxes — like image processing, instrument control, optimization, statistics and machine learning, and symbolic computation. These toolboxes allow MATLAB to go far beyond basic math and become a most powerful scientific computing platform."
+      ],
+      "fullText": "Let me walk you through what we’ll cover in this lab module.\nWe’ll start by getting MATLAB installed on your machine. Once it’s up and running, you’ll go through the module MATLAB On Ramp — an interactive tutorial that introduces the core features of the platform in a hands-on way.\nNext, we’ll work through two examples that show MATLAB in action. First, we’ll look at spectral shifts of starlight — a great illustration of how MATLAB can be used in astrophysics. Then, we’ll switch gears to generate a 3D cone surface, which introduces MATLAB’s powerful graphics.\nAnd once you’ve the basics, we can take steps further. As good examples, we can explore several advanced MATLAB toolboxes — like image processing, instrument control, optimization, statistics and machine learning, and symbolic computation. These toolboxes allow MATLAB to go far beyond basic math and become a most powerful scientific computing platform.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide6.JPG",
+      "script": "Let me walk you through what we'll cover in this lab module. We'll start by getting MATLAB installed on your machine, then go through an interactive tutorial to introduce the core features of the platform. After that, we'll work through two examples: spectral shifts of starlight and generating a 3D cone surface, to show MATLAB in action and introduce its powerful graphics.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Lab Module Overview"
+        },
+        {
+          "timeMs": 2300,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "MATLAB Installation"
+        },
+        {
+          "timeMs": 3300,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Interactive Tutorial"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "The very first step is to install and activate MATLAB.",
+      "bullets": [
+        "If you’re at RPI, you can download MATLAB directly from the campus software portal: dotcio.rpi.edu/services/software-labs. Make sure to follow the installation instructions that match your operating system — whether you're on Windows, macOS, or Linux.",
+        "During the installation, you’ll be asked to enter a product key to activate the software. This key is provided by the institution, and it unlocks your licensed access.",
+        "If you run into any issues during the setup — like installation errors or activation trouble — don’t hesitate to reach out. You can consult the help center, or message me directly. We're here to help you get started smoothly.",
+        "Having MATLAB set up and ready prepares us well before diving into hands-on examples."
+      ],
+      "fullText": "The very first step is to install and activate MATLAB.\nIf you’re at RPI, you can download MATLAB directly from the campus software portal: dotcio.rpi.edu/services/software-labs. Make sure to follow the installation instructions that match your operating system — whether you're on Windows, macOS, or Linux.\nDuring the installation, you’ll be asked to enter a product key to activate the software. This key is provided by the institution, and it unlocks your licensed access.\nIf you run into any issues during the setup — like installation errors or activation trouble — don’t hesitate to reach out. You can consult the help center, or message me directly. We're here to help you get started smoothly.\nHaving MATLAB set up and ready prepares us well before diving into hands-on examples.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide7.JPG",
+      "script": "To get started with MATLAB, you need to install and activate it, which can be done directly from the campus software portal for RPI students. Follow the installation instructions specific to your operating system, whether Windows, macOS, or Linux. During installation, enter the product key provided by the institution to activate the software. If you encounter any issues, don't hesitate to ask for help.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Install MATLAB"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "RPI Software Portal"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Product Key Activation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "Now that you have MATLAB installed, let’s talk about how to launch it.",
+      "bullets": [
+        "If you’re using Windows, just go to your start menu or applications folder and open MATLAB like any other program. On Linux, you’ll typically launch it from the terminal by typing matlab.",
+        "Once MATLAB starts, you’ll see what’s called the MATLAB desktop — this is the main environment where everything happens. You’ll notice a command window for typing code, a workspace that keeps track of your variables, a file browser, and an editor where you can write and save scripts.",
+        "Take a few minutes to get familiar with this layout. Learning your way around now will help you feel more confident and efficient as we go forward."
+      ],
+      "fullText": "Now that you have MATLAB installed, let’s talk about how to launch it.\nIf you’re using Windows, just go to your start menu or applications folder and open MATLAB like any other program. On Linux, you’ll typically launch it from the terminal by typing matlab.\nOnce MATLAB starts, you’ll see what’s called the MATLAB desktop — this is the main environment where everything happens. You’ll notice a command window for typing code, a workspace that keeps track of your variables, a file browser, and an editor where you can write and save scripts.\nTake a few minutes to get familiar with this layout. Learning your way around now will help you feel more confident and efficient as we go forward.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide8.JPG",
+      "script": "Now that you have MATLAB installed, let's talk about how to launch it. If you're using Windows, just go to your start menu or applications folder and open MATLAB like any other program. On Linux, you'll typically launch it from the terminal by typing 'matlab'. Once MATLAB starts, you'll see the MATLAB desktop, which is the main environment where everything happens. Take a few minutes to get familiar with this layout, including the command window, workspace, file browser, and editor.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "MATLAB Desktop"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Command Window"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Workspace and File Browser"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "As you begin using MATLAB, you might occasionally wonder, “What does this functi",
+      "bullets": [
+        "Let’s say you want to understand how to create a plot. Just type help plot in the command window, and MATLAB will show you the syntax, arguments, and examples for that function.",
+        "If you don’t know the name of the function you need, use the lookfor command. For example, typing lookfor matrix will return a list of functions that relate to matrices.",
+        "These built-in tools are powerful and often overlooked. Knowing how to access documentation and search for functions will make you more independent and effective as you learn."
+      ],
+      "fullText": "As you begin using MATLAB, you might occasionally wonder, “What does this function do?” That’s where the built-in help system comes in.\nLet’s say you want to understand how to create a plot. Just type help plot in the command window, and MATLAB will show you the syntax, arguments, and examples for that function.\nIf you don’t know the name of the function you need, use the lookfor command. For example, typing lookfor matrix will return a list of functions that relate to matrices.\nThese built-in tools are powerful and often overlooked. Knowing how to access documentation and search for functions will make you more independent and effective as you learn.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide9.JPG",
+      "script": "As you start using MATLAB, you might find yourself wondering about a specific function, and that's where the built-in help system comes in. You can type 'help' followed by the function name in the command window to access detailed documentation, including syntax, arguments, and examples. If you're not sure what function you need, use the 'lookfor' command to search for functions related to a specific topic. These tools are essential for mastering MATLAB and should be used regularly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Accessing help"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Looking up functions"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Effective learning"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "Once you start writing code in MATLAB, you’ll be creating and manipulating varia",
+      "bullets": [
+        "The who and whos commands show you what variables are currently stored. who gives you a simple list, while whos gives more detail — like size, type, and memory usage.",
+        "You can save all your current variables to a file using the save command and later bring them back with load. If you want to start fresh, clear all wipes out everything in the workspace, clc clears the command window, and close all shuts any open figures.",
+        "These are simple but essential tools. Once you know how to manage your workspace, you’ll find MATLAB easier and more enjoyable to use."
+      ],
+      "fullText": "Once you start writing code in MATLAB, you’ll be creating and manipulating variables — and the workspace is used to hold them.\nThe who and whos commands show you what variables are currently stored. who gives you a simple list, while whos gives more detail — like size, type, and memory usage.\nYou can save all your current variables to a file using the save command and later bring them back with load. If you want to start fresh, clear all wipes out everything in the workspace, clc clears the command window, and close all shuts any open figures.\nThese are simple but essential tools. Once you know how to manage your workspace, you’ll find MATLAB easier and more enjoyable to use.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide10.JPG",
+      "script": "As you start writing code in MATLAB, you'll be creating and manipulating variables, which are stored in the workspace. You can use the who and whos commands to see what variables are currently stored, with who giving a simple list and whos providing more detail. You can also save and load variables using the save and load commands, and clear out the workspace using clear all. These tools are simple but essential for managing your variables and workspace effectively.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Workspace Management"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Who and Whos"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Saving and Loading"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Let’s take a moment to look at some fundamental syntax in MATLAB that you’ll see",
+      "bullets": [
+        "The percent symbol — % — is used for writing comments. Anything after that symbol is ignored by MATLAB, so it’s a great way to document your code.",
+        "A semicolon — ; — tells MATLAB not to display the output of a command, which keeps your console cleaner.",
+        "If a command is getting too long, you can break it across multiple lines using three dots — .... This helps keep your code readable.",
+        "MATLAB also includes a few important constants: eps stands for machine precision, inf is infinity, and NaN — which stands for “Not a Number” — appears when a calculation isn’t mathematically defined, like dividing some number by zero.",
+        "To control how numbers appear on your screen, use formatting commands. For example, format long shows more decimal places, and format short shows fewer.",
+        "You also have access to a large library of built-in functions — like sqrt for square roots, exp for exponentials, and trigonometric functions such as sin and cos.",
+        "Basic arithmetic is intuitive — you’ll use plus, minus, times, and divide symbols just as you'd expect. And for constants, MATLAB gives you pi, and Euler’s number, which you can access with exp 1.",
+        "Together, these form the foundation of all numerical work in MATLAB."
+      ],
+      "fullText": "Let’s take a moment to look at some fundamental syntax in MATLAB that you’ll see all the time.\nThe percent symbol — % — is used for writing comments. Anything after that symbol is ignored by MATLAB, so it’s a great way to document your code. \nA semicolon — ; — tells MATLAB not to display the output of a command, which keeps your console cleaner.\nIf a command is getting too long, you can break it across multiple lines using three dots — .... This helps keep your code readable.\nMATLAB also includes a few important constants: eps stands for machine precision, inf is infinity, and NaN — which stands for “Not a Number” — appears when a calculation isn’t mathematically defined, like dividing some number by zero.\nTo control how numbers appear on your screen, use formatting commands. For example, format long shows more decimal places, and format short shows fewer.\nYou also have access to a large library of built-in functions — like sqrt for square roots, exp for exponentials, and trigonometric functions such as sin and cos.\nBasic arithmetic is intuitive — you’ll use plus, minus, times, and divide symbols just as you'd expect. And for constants, MATLAB gives you pi, and Euler’s number, which you can access with exp 1.\nTogether, these form the foundation of all numerical work in MATLAB.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide11.JPG",
+      "script": "Let's take a moment to look at some fundamental syntax in MATLAB that you'll see all the time. The percent symbol — % — is used for writing comments, which helps document your code and make it easier to understand. A semicolon — ; — tells MATLAB not to display the output of a command, keeping your console cleaner. You can also break long commands across multiple lines using three dots — .... Additionally, MATLAB includes important constants like eps for machine precision, inf for infinity, and NaN for 'Not a Number'.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Comment syntax"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Semicolon for silent output"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Breaking long commands"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Suppose we define:",
+      "bullets": [
+        "v as a row vector equals negative two, three, zero, four point five, and negative one point five.",
+        "To make it a column, we write: v equals v prime — using the transpose.",
+        "To access elements:",
+        "v of one gives the first,",
+        "v of two to four gives the second to fourth,",
+        "and v of three and five gives just those two.",
+        "You can also create sequences.",
+        "For example: v equals four to two, stepping by negative one — gives four, three, two.",
+        "And combining vectors is easy.",
+        "If a equals one to three, and b equals two to three,",
+        "then c equals a b — gives one, two, three, two, three."
+      ],
+      "fullText": "Suppose we define:\u000bv as a row vector equals negative two, three, zero, four point five, and negative one point five.\u000bTo make it a column, we write: v equals v prime — using the transpose.\nTo access elements:\u000bv of one gives the first,\u000bv of two to four gives the second to fourth,\u000band v of three and five gives just those two.\nYou can also create sequences.\u000bFor example: v equals four to two, stepping by negative one — gives four, three, two.\nAnd combining vectors is easy.\u000bIf a equals one to three, and b equals two to three,\u000bthen c equals a b — gives one, two, three, two, three.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide12.JPG",
+      "script": "Let's review how to create and manipulate vectors in MATLAB. We can define a vector v as a row or column vector using the transpose symbol. To access specific elements, we use the 'of' operator, and to create sequences, we use the syntax 'start, step, end'. Combining vectors is straightforward using the 'times' symbol.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Define a vector v as a row or column vector"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Access specific elements using the 'of' operator"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Create sequences using the syntax 'start, step, end'"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "Let’s see how to create and work with matrices in MATLAB.",
+      "bullets": [
+        "To get evenly spaced numbers, use linspace.",
+        "For example:",
+        "x equals linspace from minus pi to pi, with 10 points — gives 10 values across that range.",
+        "For logarithmic spacing, use logspace.",
+        "To define a matrix, write:",
+        "A equals square bracket one two three; four five six — that gives a two-by-three matrix.",
+        "To access elements:",
+        "A of one, two gives the value in the first row, second column.",
+        "A colon, two returns the second column.",
+        "A two, colon gives the second row.",
+        "You can add, subtract, or scale matrices like:",
+        "A plus B, or two times A.",
+        "Use A star B for matrix multiplication,",
+        "and A dot star B for element-by-element.",
+        "Transpose with A prime,",
+        "and get the determinant using det of A."
+      ],
+      "fullText": "Let’s see how to create and work with matrices in MATLAB.\nTo get evenly spaced numbers, use linspace.\u000bFor example:\u000bx equals linspace from minus pi to pi, with 10 points — gives 10 values across that range.\u000bFor logarithmic spacing, use logspace.\nTo define a matrix, write:\u000bA equals square bracket one two three; four five six — that gives a two-by-three matrix.\nTo access elements:\u000bA of one, two gives the value in the first row, second column.\u000bA colon, two returns the second column.\u000bA two, colon gives the second row.\nYou can add, subtract, or scale matrices like:\u000bA plus B, or two times A.\nUse A star B for matrix multiplication,\u000band A dot star B for element-by-element.\nTranspose with A prime,\u000band get the determinant using det of A.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide13.JPG",
+      "script": "Let's see how to create and work with matrices in MATLAB. To get evenly spaced numbers, you can use linspace, which takes in the start, end, and number of points. For example, x equals linspace from minus pi to pi, with 10 points will give you 10 values across that range. For logarithmic spacing, use logspace. To define a matrix, write A equals square bracket one two three; four five six, and MATLAB will create a two-by-three matrix. You can access elements using A of i, j, or use A i, j to get the value in the ith row and jth column.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Linspace example"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Logspace example"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Matrix creation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "MATLAB also makes it easy to generate special-purpose matrices, which are often ",
+      "bullets": [
+        "For example, diag of v creates a diagonal matrix from a vector. You can also reverse it: diag of A pulls the diagonal elements from a matrix.",
+        "If you need an identity matrix — that’s a square matrix with ones on the diagonal and zeros elsewhere — just write eye of n.",
+        "To create a matrix full of zeros, use zeros of m and n. If you need one filled with ones, use ones of m and n.",
+        "These kinds of matrices are especially useful when initializing arrays before filling them with computed values."
+      ],
+      "fullText": "MATLAB also makes it easy to generate special-purpose matrices, which are often useful for setting up or testing algorithms.\nFor example, diag of v creates a diagonal matrix from a vector. You can also reverse it: diag of A pulls the diagonal elements from a matrix.\nIf you need an identity matrix — that’s a square matrix with ones on the diagonal and zeros elsewhere — just write eye of n.\nTo create a matrix full of zeros, use zeros of m and n. If you need one filled with ones, use ones of m and n.\nThese kinds of matrices are especially useful when initializing arrays before filling them with computed values.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide14.JPG",
+      "script": "MATLAB makes it easy to generate special-purpose matrices, which are often useful for setting up or testing algorithms. You can create diagonal matrices, identity matrices, and matrices filled with zeros or ones using simple functions like diag, eye, zeros, and ones. These matrices are especially useful when initializing arrays before filling them with data.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Diagonal matrix"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Identity matrix"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Zeros and ones matrices"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "Now let’s look at logical operations in MATLAB.",
+      "bullets": [
+        "You can compare values using operators like:",
+        "double equals, less than, greater than, or not equals, which is written as tilde equals.",
+        "The tilde symbol means not.",
+        "For combining conditions, use ampersand for AND, and vertical bar for OR.",
+        "To find specific values in an array, use the find function.",
+        "For example: find A equals three — gives you the positions where A is exactly three.",
+        "These logical tools are great for filtering data and writing conditional code."
+      ],
+      "fullText": "Now let’s look at logical operations in MATLAB.\nYou can compare values using operators like:\u000bdouble equals, less than, greater than, or not equals, which is written as tilde equals.\nThe tilde symbol means not.\u000bFor combining conditions, use ampersand for AND, and vertical bar for OR.\nTo find specific values in an array, use the find function.\u000bFor example: find A equals three — gives you the positions where A is exactly three.\nThese logical tools are great for filtering data and writing conditional code.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide15.JPG",
+      "script": "Now that we've covered basic math operations, let's move on to logical operations in MATLAB. We can compare values using operators like double equals for equality, less than, greater than, or not equals, which is written as tilde equals. The tilde symbol means not. For combining conditions, we use ampersand for AND and vertical bar for OR. These logical tools are essential for filtering data and writing conditional code.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Logical Operations"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1000,
+          "label": "Equality Operator"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Not Operator"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Alright, let’s shift gears and talk about solving systems of linear equations — ",
+      "bullets": [
+        "Suppose we’re working with a system like A times x equals b. Now, you might think — okay, just take the inverse of A and multiply it by b. So, x equals inv of A times b.",
+        "And sure, that’s mathematically valid — but in practice, it’s a bad idea. It’s slow, it’s unstable, and it can lead to all kinds of numerical issues, especially with large or ill-conditioned matrices.",
+        "Instead, MATLAB gives us a much better tool: the backslash operator. So we write x equals A backslash b. This tells MATLAB to choose the most efficient way to solve the system behind the scenes — no explicit inverse needed.",
+        "Later on, we’ll learn how to implement our own solvers, but for now, this built-in method is what you should use. It’s clean, fast, and accurate — everything we want."
+      ],
+      "fullText": "Alright, let’s shift gears and talk about solving systems of linear equations — something that comes up all the time in engineering, physics, and, yes, even in medical imaging.\nSuppose we’re working with a system like A times x equals b. Now, you might think — okay, just take the inverse of A and multiply it by b. So, x equals inv of A times b.\nAnd sure, that’s mathematically valid — but in practice, it’s a bad idea. It’s slow, it’s unstable, and it can lead to all kinds of numerical issues, especially with large or ill-conditioned matrices.\nInstead, MATLAB gives us a much better tool: the backslash operator. So we write x equals A backslash b. This tells MATLAB to choose the most efficient way to solve the system behind the scenes — no explicit inverse needed.\nLater on, we’ll learn how to implement our own solvers, but for now, this built-in method is what you should use. It’s clean, fast, and accurate — everything we want.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide16.JPG",
+      "script": "Let's shift gears and talk about solving systems of linear equations, which comes up frequently in engineering, physics, and medical imaging. When we have a system like A times x equals b, you might think to take the inverse of A and multiply it by b to solve for x. However, this approach is mathematically valid but practically flawed due to performance and numerical stability issues.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Why is taking the inverse of A a bad idea?"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "What is the purpose of the backslash operator in MATLAB?"
+        },
+        {
+          "timeMs": 21000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Why is it important to use the built-in solver in MATLAB?"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Now that we’ve seen how to work with equations, let’s take a moment to explore h",
+      "bullets": [
+        "To find out how long a vector is, just use length — so length of v tells you how many elements it has.",
+        "If you’re working with a matrix, and you want to know its shape — how many rows and columns — just use size of A.",
+        "Want to check if a matrix is full rank? That’s easy — rank of A will do the job.",
+        "And when we want to understand how large a matrix or vector is in terms of magnitude, we use the norm function. Just norm of A gives the 2-norm by default — that’s the square root of the sum of squares. You can also ask for specific norms like the 1-norm using norm of A, one, or the infinity norm with norm of A, inf.",
+        "These commands give you insight into the structure and stability of your data — and they’re especially useful when you’re preparing data for algorithms or interpreting results."
+      ],
+      "fullText": "Now that we’ve seen how to work with equations, let’s take a moment to explore how we can inspect the structure of the data we’re working with — vectors and matrices.\nTo find out how long a vector is, just use length — so length of v tells you how many elements it has.\nIf you’re working with a matrix, and you want to know its shape — how many rows and columns — just use size of A.\nWant to check if a matrix is full rank? That’s easy — rank of A will do the job.\nAnd when we want to understand how large a matrix or vector is in terms of magnitude, we use the norm function. Just norm of A gives the 2-norm by default — that’s the square root of the sum of squares. You can also ask for specific norms like the 1-norm using norm of A, one, or the infinity norm with norm of A, inf.\nThese commands give you insight into the structure and stability of your data — and they’re especially useful when you’re preparing data for algorithms or interpreting results.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide17.JPG",
+      "script": "Now that we've seen how to work with equations, let's take a moment to explore how we can inspect the structure of the data we're working with — vectors and matrices. To find out how long a vector is, just use the length function, which tells you how many elements it has. For matrices, the size function gives you the number of rows and columns. You can also check if a matrix is full rank using the rank function. And to understand the magnitude of a matrix or vector, use the norm function.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Length of a vector"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Size of a matrix"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Checking matrix rank"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Let’s talk about control flow — specifically, loops.",
+      "bullets": [
+        "Start with a for loop. Use it when you know how many times you want to repeat something.",
+        "For example:",
+        "Set x to zero.",
+        "Then, for i from 1 to 5 in steps of 2 — so, 1, 3, and 5 —",
+        "we add i to x.",
+        "At the end, x equals 9.",
+        "for loops are useful when working through a known sequence.",
+        "Now, a while loop runs as long as a condition is true.",
+        "In this example:",
+        "Start with x equal to 7.",
+        "While x is greater than or equal to zero, subtract 2 each time.",
+        "The loop stops when x becomes negative.",
+        "Just be careful — if the condition never becomes false, the loop won’t stop.",
+        "Finally, break lets you exit a loop early.",
+        "It’s useful if you find what you need before the loop finishes.",
+        "In nested loops, it only exits the innermost one.",
+        "Use it wisely — don’t skip steps that still matter."
+      ],
+      "fullText": "Let’s talk about control flow — specifically, loops.\nStart with a for loop. Use it when you know how many times you want to repeat something.\nFor example:\u000bSet x to zero.\u000bThen, for i from 1 to 5 in steps of 2 — so, 1, 3, and 5 —\u000bwe add i to x.\u000bAt the end, x equals 9.\nfor loops are useful when working through a known sequence.\nNow, a while loop runs as long as a condition is true.\nIn this example:\u000bStart with x equal to 7.\u000bWhile x is greater than or equal to zero, subtract 2 each time.\u000bThe loop stops when x becomes negative.\nJust be careful — if the condition never becomes false, the loop won’t stop.\nFinally, break lets you exit a loop early.\u000bIt’s useful if you find what you need before the loop finishes.\u000bIn nested loops, it only exits the innermost one.\u000bUse it wisely — don’t skip steps that still matter.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide18.JPG",
+      "script": "Let's talk about control flow, specifically loops. Loops are useful for repeating tasks, and there are two main types: for loops and while loops. A for loop is used when you know how many times you want to repeat something, and a while loop runs as long as a certain condition is true. If the condition becomes false, the loop stops.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "For loop"
+        },
+        {
+          "timeMs": 1200,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Repeating tasks"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "While loop"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "Let’s talk about how we make decisions in MATLAB.",
+      "bullets": [
+        "First, the if statement.",
+        "You might say:",
+        "“If x is equal to 3, display: the value of x is 3.",
+        "If x is equal to 5, display: the value of x is 5.",
+        "Otherwise, display: the value of x is not 3 or 5.”",
+        "This allows the program to choose what to do based on the value of x.",
+        "Now, when you want to check one variable against several specific values, a switch statement is better.",
+        "For example:",
+        "“If face is 1, say: rolled a one.",
+        "If face is 2, say: rolled a two.",
+        "Otherwise, say: rolled a number greater than or equal to three.”",
+        "This is easier to read than writing multiple if statements. And in MATLAB, the switch ends automatically — no need for a break."
+      ],
+      "fullText": "Let’s talk about how we make decisions in MATLAB.\n\nFirst, the if statement.\nYou might say:\u000b“If x is equal to 3, display: the value of x is 3.\u000bIf x is equal to 5, display: the value of x is 5.\u000bOtherwise, display: the value of x is not 3 or 5.”\nThis allows the program to choose what to do based on the value of x.\nNow, when you want to check one variable against several specific values, a switch statement is better.\n\nFor example:\u000b“If face is 1, say: rolled a one.\u000bIf face is 2, say: rolled a two.\u000bOtherwise, say: rolled a number greater than or equal to three.”\nThis is easier to read than writing multiple if statements. And in MATLAB, the switch ends automatically — no need for a break.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide19.JPG",
+      "script": "Let's talk about how we make decisions in MATLAB. We use if statements to choose what to do based on the value of a variable. For example, 'if x is equal to 3, display: the value of x is 3.' This allows the program to respond differently depending on the value of x. When we need to check one variable against several specific values, a switch statement is more convenient.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "If statement"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Decision-making"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Variable value"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Now let’s talk about vectorization — one of the most important habits in MATLAB ",
+      "bullets": [
+        "Here’s the idea. Instead of looping through each element one by one, we apply an operation to the whole array at once.",
+        "For example:",
+        "Let’s say x is the vector — one, two, three.",
+        "Using a loop, we would add five to each element, one at a time.",
+        "But with vectorization, we just say: x equals x plus five — and MATLAB does it all at once.",
+        "Same result, much faster, much cleaner.",
+        "Whenever you can, avoid loops. Use vectorized operations. MATLAB is built for that."
+      ],
+      "fullText": "Now let’s talk about vectorization — one of the most important habits in MATLAB programming.\nHere’s the idea. Instead of looping through each element one by one, we apply an operation to the whole array at once.\nFor example:\u000bLet’s say x is the vector — one, two, three.\u000bUsing a loop, we would add five to each element, one at a time.\u000bBut with vectorization, we just say: x equals x plus five — and MATLAB does it all at once.\nSame result, much faster, much cleaner.\nWhenever you can, avoid loops. Use vectorized operations. MATLAB is built for that.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide20.JPG",
+      "script": "Now let's talk about vectorization, one of the most important habits in MATLAB programming. Instead of looping through each element one by one, we apply an operation to the whole array at once. This makes the code faster, cleaner, and more efficient. For example, if we have a vector x with elements one, two, three, using a loop would add five to each element one at a time, but with vectorization, we simply say x equals x plus five, and MATLAB does it all at once.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Vectorization"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Looping vs Vectorization"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Cleaner Code"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Let’s look at how MATLAB handles basic plots.",
+      "bullets": [
+        "Start by generating x values from minus one to one using linspace. Then take the sine of x to get y.",
+        "Use plot x and y to create a basic line graph.",
+        "To change the appearance, you can specify style and color. For example, plot x, y, black line draws the line in black.",
+        "Use hold on if you want to overlay another plot on the same figure.",
+        "Use figure to open a new figure window for a separate plot.",
+        "Plotting helps visualize data — and it’s built into MATLAB as a core strength."
+      ],
+      "fullText": "Let’s look at how MATLAB handles basic plots.\nStart by generating x values from minus one to one using linspace. Then take the sine of x to get y.\nUse plot x and y to create a basic line graph.\nTo change the appearance, you can specify style and color. For example, plot x, y, black line draws the line in black.\nUse hold on if you want to overlay another plot on the same figure.\u000bUse figure to open a new figure window for a separate plot.\nPlotting helps visualize data — and it’s built into MATLAB as a core strength.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide21.JPG",
+      "script": "Let's dive into MATLAB's basic plotting capabilities. We'll start by generating x values from minus one to one using linspace, then take the sine of x to get y. We'll use the plot function to create a basic line graph, and can even specify style and color, like drawing the line in black. If we want to overlay another plot on the same figure, we can use hold on, and if we need a separate plot, we can open a new figure window using the figure command.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Basic Plotting"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Linspace"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 500,
+          "label": "Plotting in MATLAB"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "Sometimes, you want to show several plots in one window.",
+      "bullets": [
+        "Use the subplot command to divide the figure into a grid.",
+        "For example, subplot 2, 3, 1 creates two rows and three columns — and selects the first cell.",
+        "Each subplot acts like an independent plot. You can add titles, labels, and style just like a regular figure.",
+        "This is helpful when comparing outputs or organizing results cleanly on a single screen."
+      ],
+      "fullText": "Sometimes, you want to show several plots in one window.\nUse the subplot command to divide the figure into a grid.\u000bFor example, subplot 2, 3, 1 creates two rows and three columns — and selects the first cell.\nEach subplot acts like an independent plot. You can add titles, labels, and style just like a regular figure.\nThis is helpful when comparing outputs or organizing results cleanly on a single screen.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide22.JPG",
+      "script": "When you need to show multiple plots together, you can use the subplot command to divide the figure into a grid and create multiple subplots. This is done by specifying the number of rows and columns, and the position of the subplot. Each subplot can be customized with titles, labels, and styles, making it easy to compare and organize results. This feature is especially useful when you want to present multiple plots in a clean and organized way.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Subplots"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Grid"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Customization"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "Now let’s add a third dimension.",
+      "bullets": [
+        "Use plot 3 of x, y, z to make a 3D line plot.",
+        "For surfaces, use the mesh command — it draws a grid over the surface defined by z values.",
+        "If you want a contour plot — use contour z matrix. That shows level curves of a surface.",
+        "You can also control the axis limits with axis, add a title with title, and label the axes using x label and y label.",
+        "To explain the meaning of different curves, use legend."
+      ],
+      "fullText": "Now let’s add a third dimension.\nUse plot 3 of x, y, z to make a 3D line plot.\nFor surfaces, use the mesh command — it draws a grid over the surface defined by z values.\nIf you want a contour plot — use contour z matrix. That shows level curves of a surface.\nYou can also control the axis limits with axis, add a title with title, and label the axes using x label and y label.\nTo explain the meaning of different curves, use legend.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide23.JPG",
+      "script": "Now that we have a basic understanding of 2D plots, let's move on to adding a third dimension. We can create a 3D line plot using the plot3 function, and for surfaces, we use the mesh command to draw a grid over the surface defined by z values. We can also create contour plots to show level curves of a surface using the contour function. To customize the appearance of our plots, we can control the axis limits with the axis function, add titles with title, and label the axes using xlabel and ylabel. Finally, we can explain the meaning of different curves using the legend function.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "3D line plot"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Surface plot"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Contour plot"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "Here are a few examples of what you can do with MATLAB plots.",
+      "bullets": [
+        "You’ll see grouped bar charts, stacked bars, 2D lines, and 3D surfaces — all using basic commands.",
+        "Try different styles, colors, and layouts to get the look you want.",
+        "Good visualization tells a story — not just numbers, but patterns, relationships, and insights.",
+        "Use plots not just to check results, but to communicate them clearly."
+      ],
+      "fullText": "Here are a few examples of what you can do with MATLAB plots.\nYou’ll see grouped bar charts, stacked bars, 2D lines, and 3D surfaces — all using basic commands.\nTry different styles, colors, and layouts to get the look you want.\nGood visualization tells a story — not just numbers, but patterns, relationships, and insights.\nUse plots not just to check results, but to communicate them clearly.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide24.JPG",
+      "script": "MATLAB plots are incredibly versatile, allowing you to create a wide range of visualizations, from simple 2D lines to complex 3D surfaces, using basic commands. You can experiment with different styles, colors, and layouts to make your plots clear, concise, and effective. Good visualization doesn't just present numbers, but tells a story, revealing patterns, relationships, and insights that might be hidden in the data.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Basic Commands"
+        },
+        {
+          "timeMs": 1200,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Experiment with Styles"
+        },
+        {
+          "timeMs": 1800,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Effective Communication"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "Now let’s talk about reading and writing data files.",
+      "bullets": [
+        "To open a file, use f open, and pass the file name and read mode.",
+        "For example: f open in dot dat, r t.",
+        "This gives you a file ID — or fid.",
+        "Use f scanf to read numbers from the file.",
+        "When you're done, always close the file using f close.",
+        "If you need formatting help, use help textread or help f printf.",
+        "Below is an example of a data file — it has names, types, numbers, and yes or no labels.",
+        "You’ll often need to work with mixed data — so learning how to read from and write to files is essential in MATLAB workflows."
+      ],
+      "fullText": "Now let’s talk about reading and writing data files.\nTo open a file, use f open, and pass the file name and read mode.\u000bFor example: f open in dot dat, r t.\nThis gives you a file ID — or fid.\nUse f scanf to read numbers from the file.\u000bWhen you're done, always close the file using f close.\nIf you need formatting help, use help textread or help f printf.\nBelow is an example of a data file — it has names, types, numbers, and yes or no labels.\nYou’ll often need to work with mixed data — so learning how to read from and write to files is essential in MATLAB workflows.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide25.JPG",
+      "script": "Now let's talk about reading and writing data files. To open a file, you use the fopen function, passing the file name and read mode, which gives you a file ID, or fid. You can then use fscanf to read numbers from the file, and finally, close the file using fclose. If you need help with formatting, you can use the help textread or help fprintf commands.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Opening a file"
+        },
+        {
+          "timeMs": 6300,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Reading numbers from a file"
+        },
+        {
+          "timeMs": 8300,
+          "type": "laser",
+          "x": 0.8,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Closing a file"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "Let’s now learn how to read data files in MATLAB — both fully and partially.",
+      "bullets": [
+        "To read an entire structured dataset, you first open the file using fopen, then use the textread function to extract data from all columns.",
+        "Each data type in the file corresponds to a format symbol — like %s for strings, %f for floating-point numbers, and %d for integers. MATLAB assigns each column to a variable automatically.",
+        "This works well when you need to load the whole dataset into memory — like names, types, values, and so on.",
+        "Now, if you only want to read part of the data — say just the first column — you can still use textread, but with asterisks added to the format string to skip over the columns you don’t need. MATLAB will still move through the file correctly, but it’ll only save the data you asked for.",
+        "This selective reading is great for reducing memory usage or focusing on relevant features."
+      ],
+      "fullText": "Let’s now learn how to read data files in MATLAB — both fully and partially.\nTo read an entire structured dataset, you first open the file using fopen, then use the textread function to extract data from all columns.\nEach data type in the file corresponds to a format symbol — like %s for strings, %f for floating-point numbers, and %d for integers. MATLAB assigns each column to a variable automatically.\nThis works well when you need to load the whole dataset into memory — like names, types, values, and so on.\nNow, if you only want to read part of the data — say just the first column — you can still use textread, but with asterisks added to the format string to skip over the columns you don’t need. MATLAB will still move through the file correctly, but it’ll only save the data you asked for.\nThis selective reading is great for reducing memory usage or focusing on relevant features.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide26.JPG",
+      "script": "Let's now learn how to read data files in MATLAB, both fully and partially. To read an entire structured dataset, you first open the file using fopen, then use the textread function to extract data from all columns. Each data type in the file corresponds to a format symbol, such as %s for strings, %f for floating-point numbers, and %d for integers. MATLAB assigns each column to a variable automatically, making it easy to load the whole dataset into memory.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Reading entire dataset"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Format symbols"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Reading part of the data"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "Sometimes you don’t need the full file — you just want a specific line. Maybe li",
+      "bullets": [
+        "In this case, you can tell MATLAB to skip one line, and then read just one. You still use textread, but now with two extra options: the number of lines to read, and the number of header lines to skip.",
+        "This lets you directly target a record without loading everything — useful for indexed data, or when you’re debugging or sampling from a large file."
+      ],
+      "fullText": "Sometimes you don’t need the full file — you just want a specific line. Maybe line two contains Joe’s entry, and that’s all you care about.\nIn this case, you can tell MATLAB to skip one line, and then read just one. You still use textread, but now with two extra options: the number of lines to read, and the number of header lines to skip.\nThis lets you directly target a record without loading everything — useful for indexed data, or when you’re debugging or sampling from a large file.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide27.JPG",
+      "script": "When you only need a specific line from a file, you can use textread to skip unnecessary lines and directly target the record you're interested in. This is especially useful for indexed data, debugging, or sampling from large files. By specifying the number of lines to read and header lines to skip, you can efficiently extract the desired information.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Targeting specific lines"
+        },
+        {
+          "timeMs": 5300,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1000,
+          "label": "Indexed data"
+        },
+        {
+          "timeMs": 5300,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Debugging or sampling"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "So far we’ve looked at reading files — now let’s switch to writing.",
+      "bullets": [
+        "To write data out, open a file in write mode using fopen. Then use fprintf to format the output line, inserting variables in the order you want them saved.",
+        "For example, you can save name, type, and numerical values all in one line. And as always, once writing is done, make sure to close the file with fclose.",
+        "This gives you full control over the format, spacing, and layout of your data. Very useful when preparing results for review, or generating output for other software to read."
+      ],
+      "fullText": "So far we’ve looked at reading files — now let’s switch to writing.\nTo write data out, open a file in write mode using fopen. Then use fprintf to format the output line, inserting variables in the order you want them saved.\nFor example, you can save name, type, and numerical values all in one line. And as always, once writing is done, make sure to close the file with fclose.\nThis gives you full control over the format, spacing, and layout of your data. Very useful when preparing results for review, or generating output for other software to read.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide28.JPG",
+      "script": "Now that we've covered reading files, let's switch to writing data out. To do this, we open a file in write mode using fopen, and then use fprintf to format the output line, inserting variables in the order we want them saved. This gives us full control over the format, spacing, and layout of our data, making it very useful for preparing results for review or generating output for other software to read.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Opening a file in write mode"
+        },
+        {
+          "timeMs": 6300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Using fprintf to format the output line"
+        },
+        {
+          "timeMs": 8300,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Closing the file with fclose"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "Next, let’s see how to keep a record of your work using the diary command.",
+      "bullets": [
+        "Start with diary followed by a filename. From that point on, everything you type and everything MATLAB prints will be saved in a log file. Once you’re done, stop the recording by typing diary off.",
+        "This is great for tracking your workflow, recording sessions, or saving what you’ve done for future reference or reporting.",
+        "Now, another useful tool is timing. If you want to measure how long your code takes to run, just put tic before the commands, and toc after them. MATLAB will show you the elapsed time in seconds.",
+        "This helps you compare different methods and optimize performance."
+      ],
+      "fullText": "Next, let’s see how to keep a record of your work using the diary command.\nStart with diary followed by a filename. From that point on, everything you type and everything MATLAB prints will be saved in a log file. Once you’re done, stop the recording by typing diary off.\nThis is great for tracking your workflow, recording sessions, or saving what you’ve done for future reference or reporting.\nNow, another useful tool is timing. If you want to measure how long your code takes to run, just put tic before the commands, and toc after them. MATLAB will show you the elapsed time in seconds.\nThis helps you compare different methods and optimize performance.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide29.JPG",
+      "script": "Let's see how to keep a record of our work using the diary command. We start by typing 'diary' followed by a filename, and everything we type and everything MATLAB prints will be saved in a log file. Once we're done, we stop the recording by typing 'diary off'. This is great for tracking our workflow, recording sessions, or saving what we've done for future reference or reporting.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Start diary recording"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Stop diary recording"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Time your code with tic and toc"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "One of the key ideas in MATLAB is that everything is a matrix.",
+      "bullets": [
+        "A single number? That’s just a one-by-one matrix.",
+        "A row of numbers is a row vector. A column is a column vector.",
+        "And an image? That’s a two-dimensional matrix.",
+        "If it’s in color, it becomes three-dimensional — width, height, and color channels.",
+        "This matrix mindset makes MATLAB powerful and consistent across tasks — whether you're doing math, image processing, or even machine learning.",
+        "Now, let’s talk about indexing. If you have a matrix A:",
+        "A of i comma j gives the element in row i and column j.",
+        "A of i comma colon gives the entire i-th row.",
+        "A of colon comma j gives the whole j-th column.",
+        "You can reshape matrices, slice out parts, or use logical masks to filter data.",
+        "To modify the matrix, use expressions like A plus five — which adds five to every element.",
+        "Or A dot star B — for element-by-element multiplication.",
+        "This is the foundation of MATLAB — matrix thinking in everything you do"
+      ],
+      "fullText": "One of the key ideas in MATLAB is that everything is a matrix.\nA single number? That’s just a one-by-one matrix.\u000bA row of numbers is a row vector. A column is a column vector.\u000bAnd an image? That’s a two-dimensional matrix.\u000bIf it’s in color, it becomes three-dimensional — width, height, and color channels.\nThis matrix mindset makes MATLAB powerful and consistent across tasks — whether you're doing math, image processing, or even machine learning.\nNow, let’s talk about indexing. If you have a matrix A:\u000bA of i comma j gives the element in row i and column j.\u000bA of i comma colon gives the entire i-th row.\u000bA of colon comma j gives the whole j-th column.\nYou can reshape matrices, slice out parts, or use logical masks to filter data.\nTo modify the matrix, use expressions like A plus five — which adds five to every element.\u000bOr A dot star B — for element-by-element multiplication.\nThis is the foundation of MATLAB — matrix thinking in everything you do",
+      "imageURL": "/lectures/Lecture_02/Images/Slide30.JPG",
+      "script": "Everything in MATLAB is treated as a matrix, whether it's a single number, a row of numbers, an image, or even a color image, which becomes a three-dimensional matrix. This matrix mindset makes MATLAB powerful and consistent across tasks. It's what makes MATLAB so versatile and useful for a wide range of applications.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Matrix Mindset"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Row Vector"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Color Image"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "In MATLAB, you can do both matrix and element-wise operations — and the differen",
+      "bullets": [
+        "“A times B” — with a single star — means matrix multiplication.",
+        "“A dot star B” — with a dot — means multiply element by element.",
+        "Same goes for powers and division.",
+        "“A caret 2” raises the matrix to a power.",
+        "“A dot caret 2” squares each element.",
+        "And for division, “A divided by B” solves equations, while “A dot slash B” divides element-wise.",
+        "These small differences are key when working with data, equations, or signals in MATLAB."
+      ],
+      "fullText": "In MATLAB, you can do both matrix and element-wise operations — and the difference is all in the dot.\n“A times B” — with a single star — means matrix multiplication.\u000b“A dot star B” — with a dot — means multiply element by element.\nSame goes for powers and division.\u000b“A caret 2” raises the matrix to a power.\u000b“A dot caret 2” squares each element.\u000bAnd for division, “A divided by B” solves equations, while “A dot slash B” divides element-wise.\nThese small differences are key when working with data, equations, or signals in MATLAB.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide31.JPG",
+      "script": "In MATLAB, the choice of operator makes a big difference in how the computation is performed. A single star is used for matrix multiplication, while a dot is used for element-wise multiplication. This distinction carries over to powers and division, where the choice of operator determines whether the operation is applied element-wise or to the entire matrix. These small differences are crucial when working with data, equations, or signals in MATLAB.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Matrix multiplication"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Element-wise multiplication"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Power and division"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Whenever you can, avoid loops — and write in matrix form.",
+      "bullets": [
+        "Instead of looping to square elements, just write “A dot caret 2”.",
+        "Want row-wise sums? Use “sum of A, comma 2”.",
+        "Need probabilities per row? Divide each row by its total using matrix broadcasting — it’s cleaner and faster than nested loops."
+      ],
+      "fullText": "Whenever you can, avoid loops — and write in matrix form.\nInstead of looping to square elements, just write “A dot caret 2”.\nWant row-wise sums? Use “sum of A, comma 2”.\nNeed probabilities per row? Divide each row by its total using matrix broadcasting — it’s cleaner and faster than nested loops.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide32.JPG",
+      "script": "When writing code, it's often more efficient and cleaner to express operations in matrix form rather than using loops. This can make the code easier to read and more scalable. By using matrix operations, you can avoid nested loops and make the most of vectorized computations.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Avoid loops for efficiency"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Matrix form is cleaner"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Vectorized computations are faster"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "The peaks function creates a sample surface. Use mesh to visualize it.",
+      "bullets": [
+        "To smooth it out, create a finer grid with meshgrid, and use interp2 to estimate new Z-values.",
+        "This technique is useful in graphics, simulations, and image processing — anytime you want smoother, higher-resolution data."
+      ],
+      "fullText": "The peaks function creates a sample surface. Use mesh to visualize it.\nTo smooth it out, create a finer grid with meshgrid, and use interp2 to estimate new Z-values.\nThis technique is useful in graphics, simulations, and image processing — anytime you want smoother, higher-resolution data.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide33.JPG",
+      "script": "The peaks function generates a sample surface, and using mesh allows us to visualize it. To smooth it out, we can create a finer grid with meshgrid and use interp2 to estimate new Z-values, producing higher-resolution data. This technique is useful in various fields, including graphics, simulations, and image processing.",
+      "spotlightEvents": [
+        {
+          "timeMs": 22000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Peaks function"
+        },
+        {
+          "timeMs": 24000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Mesh visualization"
+        },
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.85,
+          "durationMs": 2500,
+          "label": "Smoothing technique"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "Here’s how we morph faces using matrix tools.",
+      "bullets": [
+        "We warp two face images using interpolation on each color channel. Then blend them using a weighted average — with alpha controlling the mix.",
+        "To detect unusual pixels, we reshape the image and compute the Mahalanobis distance from a reference color.",
+        "Next, we create a binary mask by thresholding the distance, and apply a median filter to clean it up.",
+        "It’s a compact example of how MATLAB combines image warping, statistics, and filtering — all with matrices."
+      ],
+      "fullText": "Here’s how we morph faces using matrix tools.\nWe warp two face images using interpolation on each color channel. Then blend them using a weighted average — with alpha controlling the mix.\nTo detect unusual pixels, we reshape the image and compute the Mahalanobis distance from a reference color.\nNext, we create a binary mask by thresholding the distance, and apply a median filter to clean it up.\nIt’s a compact example of how MATLAB combines image warping, statistics, and filtering — all with matrices.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide34.JPG",
+      "script": "We morph faces by warping two images using interpolation on each color channel, blending them with a weighted average, and controlling the mix with alpha. To detect unusual pixels, we reshape the image, compute the Mahalanobis distance from a reference color, create a binary mask, and apply a median filter to clean it up. This process showcases how MATLAB combines image warping, statistics, and filtering using matrix operations.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Morphing faces"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Unusual pixels"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.8,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "MATLAB example"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "This example shows how plot resolution affects curve smoothness.",
+      "bullets": [
+        "In a loop, we increase the number of x-values using linspace, then compute y equals x over one plus x squared.",
+        "We plot each result in a subplot grid, with labels and titles showing the resolution.",
+        "With each pause, you can see the graph getting smoother — a great way to visualize the impact of sampling density."
+      ],
+      "fullText": "This example shows how plot resolution affects curve smoothness.\nIn a loop, we increase the number of x-values using linspace, then compute y equals x over one plus x squared.\nWe plot each result in a subplot grid, with labels and titles showing the resolution.\nWith each pause, you can see the graph getting smoother — a great way to visualize the impact of sampling density.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide35.JPG",
+      "script": "As we increase the number of x-values, the curve becomes smoother and more refined, illustrating the effect of plot resolution on the visual representation of a function. This is a great way to see the impact of sampling density on the smoothness of a curve. By increasing the resolution, we can make the graph look more refined and realistic.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Increasing x-values"
+        },
+        {
+          "timeMs": 1800,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 500,
+          "label": "Computing y-values"
+        },
+        {
+          "timeMs": 2300,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 500,
+          "label": "Plotting subplots"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "Let’s talk about the two main types of files you’ll create in MATLAB — scripts a",
+      "bullets": [
+        "Scripts are simple. They run a series of commands and use variables already in your workspace. You don’t pass anything in, and they don’t return anything out. They’re great for quick experiments or automation.",
+        "Functions, on the other hand, are more structured. You give them inputs, and they return outputs. Inside a function, all variables are local — meaning they don’t interfere with anything else in your workspace.",
+        "Knowing when to use a script or a function is key to writing clean, reliable code."
+      ],
+      "fullText": "Let’s talk about the two main types of files you’ll create in MATLAB — scripts and functions.\nScripts are simple. They run a series of commands and use variables already in your workspace. You don’t pass anything in, and they don’t return anything out. They’re great for quick experiments or automation.\nFunctions, on the other hand, are more structured. You give them inputs, and they return outputs. Inside a function, all variables are local — meaning they don’t interfere with anything else in your workspace.\nKnowing when to use a script or a function is key to writing clean, reliable code.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide36.JPG",
+      "script": "Scripts are simple files that run a series of commands using variables already in the workspace, great for quick experiments or automation. Functions, however, are more structured, taking inputs and returning outputs, with local variables that don't interfere with the workspace. The choice between scripts and functions depends on the purpose of the code, impacting the cleanliness and reliability of the code.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Scripts vs Functions"
+        },
+        {
+          "timeMs": 1800,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Script Benefits"
+        },
+        {
+          "timeMs": 2300,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Function Benefits"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Here’s a basic function example — one that calculates the area and circumference",
+      "bullets": [
+        "We define a function called circle that takes one input: the radius. Inside, we calculate the area as pi times radius squared, and the circumference as two times pi times the radius.",
+        "Save this in a file named circle dot m.",
+        "Now, to use this function, we write a script. For example, if the radius is 7, we call the function with that value and display the result using disp.",
+        "You’d save this script as myscript dot m.",
+        "This is how functions and scripts work together. You build reusable tools with functions and run them from scripts."
+      ],
+      "fullText": "Here’s a basic function example — one that calculates the area and circumference of a circle.\nWe define a function called circle that takes one input: the radius. Inside, we calculate the area as pi times radius squared, and the circumference as two times pi times the radius.\nSave this in a file named circle dot m.\nNow, to use this function, we write a script. For example, if the radius is 7, we call the function with that value and display the result using disp.\nYou’d save this script as myscript dot m.\nThis is how functions and scripts work together. You build reusable tools with functions and run them from scripts.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide37.JPG",
+      "script": "Let's go through an example of how functions and scripts work together. We define a function to calculate the area and circumference of a circle, save it as a file, and then write a script to use that function and display the result. This is a simple but important concept in medical imaging, and it's good to see it in action.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "How functions and scripts work together"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Defining a function"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Using a function in a script"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Let’s try a simple numerical task: summing one over i squared, from i equals 1 t",
+      "bullets": [
+        "We can do this two ways — forward, starting from i equals 1, or backward, starting from i equals 10.",
+        "The code is nearly identical, just with the loop going in reverse.",
+        "Now, in theory, both results should be the same. But because of floating-point rounding, the order can make a small difference. This is a great example of how numerical stability matters — especially in scientific computing."
+      ],
+      "fullText": "Let’s try a simple numerical task: summing one over i squared, from i equals 1 to 10.\nWe can do this two ways — forward, starting from i equals 1, or backward, starting from i equals 10.\nThe code is nearly identical, just with the loop going in reverse.\nNow, in theory, both results should be the same. But because of floating-point rounding, the order can make a small difference. This is a great example of how numerical stability matters — especially in scientific computing.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide38.JPG",
+      "script": "Let's try a simple numerical task: summing one over i squared, from i equals 1 to 10. We can do this two ways — forward, starting from i equals 1, or backward, starting from i equals 10. The code is nearly identical, just with the loop going in reverse. Now, in theory, both results should be the same. But because of floating-point rounding, the order can make a small difference. This is a great example of how numerical stability matters — especially in scientific computing.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Forward and backward summation"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.35,
+          "y": 0.25,
+          "durationMs": 500,
+          "label": "Floating-point rounding"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.45,
+          "y": 0.35,
+          "durationMs": 500,
+          "label": "Numerical stability matters"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "Now let’s write our own matrix multiplication function — no built-in functions a",
+      "bullets": [
+        "We create a function called matrix_multiply that takes two square matrices and a size n.",
+        "Using three nested loops, we compute the product row by row and column by column. For each entry in the result, we take a dot product between a row of A and a column of B.",
+        "This hands-on approach shows exactly how matrix multiplication works under the hood — which is important to understand before we talk about optimization."
+      ],
+      "fullText": "Now let’s write our own matrix multiplication function — no built-in functions allowed.\nWe create a function called matrix_multiply that takes two square matrices and a size n.\nUsing three nested loops, we compute the product row by row and column by column. For each entry in the result, we take a dot product between a row of A and a column of B.\nThis hands-on approach shows exactly how matrix multiplication works under the hood — which is important to understand before we talk about optimization.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide39.JPG",
+      "script": "Now let's write our own matrix multiplication function, where we're not allowed to use built-in functions to really understand the underlying computation. We create a function called matrix_multiply that takes two square matrices and a size n, and using three nested loops, we compute the product row by row and column by column. For each entry in the result, we take a dot product between a row of A and a column of B. This hands-on approach shows exactly how matrix multiplication works under the hood, which is important to understand before we talk about optimization.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Understanding Matrix Multiplication"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "No Built-in Functions"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Three Nested Loops"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "To test our new function, we write a quick script.",
+      "bullets": [
+        "We choose a matrix size n, generate two random n-by-n matrices A and B, and call our matrix_multiply function to compute the result.",
+        "You can also compare it to MATLAB’s built-in multiplication to check for accuracy.",
+        "And here’s something to think about — this triple-loop method works, but it’s not fast. Later on, we’ll talk about how to rewrite this using vectorized operations to make it much more efficient."
+      ],
+      "fullText": "To test our new function, we write a quick script.\nWe choose a matrix size n, generate two random n-by-n matrices A and B, and call our matrix_multiply function to compute the result.\nYou can also compare it to MATLAB’s built-in multiplication to check for accuracy.\nAnd here’s something to think about — this triple-loop method works, but it’s not fast. Later on, we’ll talk about how to rewrite this using vectorized operations to make it much more efficient.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide40.JPG",
+      "script": "Let's write a quick script to test our new function by generating two random matrices A and B, calling our matrix_multiply function, and comparing the result to MATLAB's built-in multiplication. This will help us ensure our function is accurate. Our triple-loop method works, but it's not efficient, and we'll discuss how to improve it later using vectorized operations.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Testing matrix_multiply function"
+        },
+        {
+          "timeMs": 1600,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Efficiency of the triple-loop method"
+        },
+        {
+          "timeMs": 1900,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Rewriting for vectorized operations"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "Now let’s look at a real-world scientific task — measuring how stars move.",
+      "bullets": [
+        "We start with spectral data from a star. It includes many wavelengths, evenly spaced. The key is to find a feature called the Hydrogen-alpha line. If that line shifts, the star is moving — either away or toward us.",
+        "With MATLAB, we’ll identify that line, calculate how much it’s shifted, and then use the Doppler formula to estimate the star’s speed."
+      ],
+      "fullText": "Now let’s look at a real-world scientific task — measuring how stars move.\nWe start with spectral data from a star. It includes many wavelengths, evenly spaced. The key is to find a feature called the Hydrogen-alpha line. If that line shifts, the star is moving — either away or toward us.\nWith MATLAB, we’ll identify that line, calculate how much it’s shifted, and then use the Doppler formula to estimate the star’s speed.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide41.JPG",
+      "script": "Let's take a look at a real-world scientific task where we apply the concepts we've learned to measure how stars move. We start with spectral data from a star, which includes many wavelengths, evenly spaced, and our goal is to find a feature called the Hydrogen-alpha line. If that line shifts, the star is moving, either away or toward us, and we can use MATLAB to identify that line, calculate how much it's shifted, and then use the Doppler formula to estimate the star's speed.",
+      "spotlightEvents": [
+        {
+          "timeMs": 60000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Real-world task"
+        },
+        {
+          "timeMs": 65000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Spectral data"
+        },
+        {
+          "timeMs": 70000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Hydrogen-alpha line"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "Here’s how we do that in MATLAB.",
+      "bullets": [
+        "First, we compute the wavelength range using the start point, number of data points, and spacing. Then, we build a vector of wavelengths.",
+        "Next, we plot the spectrum and locate the lowest point — which marks the Hydrogen-alpha line. Its position gives us the shifted wavelength.",
+        "Using the Doppler shift formula, we compute the redshift, then multiply by 300,000 — the speed of light in kilometers per second — to get the star’s velocity.",
+        "Just a few lines of code, and we’re measuring motion across space."
+      ],
+      "fullText": "Here’s how we do that in MATLAB.\nFirst, we compute the wavelength range using the start point, number of data points, and spacing. Then, we build a vector of wavelengths.\nNext, we plot the spectrum and locate the lowest point — which marks the Hydrogen-alpha line. Its position gives us the shifted wavelength.\nUsing the Doppler shift formula, we compute the redshift, then multiply by 300,000 — the speed of light in kilometers per second — to get the star’s velocity.\nJust a few lines of code, and we’re measuring motion across space.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide42.JPG",
+      "script": "Here's how we do that in MATLAB. We first compute the wavelength range using the start point, number of data points, and spacing, then build a vector of wavelengths. We plot the spectrum, locate the lowest point, and use the Doppler shift formula to calculate the star's velocity. This simple code allows us to measure motion across space.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Wavelength range"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Build wavelength vector"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Doppler shift formula"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "Let’s switch gears to 3D graphics.",
+      "bullets": [
+        "Here, we’re creating a cone using MATLAB’s cylinder function.",
+        "We define a shape with the vector: t equals zero, one, zero. This gives us a cone shape.",
+        "Then we call the cylinder function to get the X, Y, and Z coordinates, and use surf to draw the 3D surface.",
+        "This shows how easily you can build and visualize 3D shapes in MATLAB — helpful for both learning and engineering."
+      ],
+      "fullText": "Let’s switch gears to 3D graphics.\nHere, we’re creating a cone using MATLAB’s cylinder function.\nWe define a shape with the vector: t equals zero, one, zero. This gives us a cone shape.\nThen we call the cylinder function to get the X, Y, and Z coordinates, and use surf to draw the 3D surface.\nThis shows how easily you can build and visualize 3D shapes in MATLAB — helpful for both learning and engineering.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide43.JPG",
+      "script": "Let's switch gears to 3D graphics, where we're creating a cone using MATLAB's cylinder function. We define a shape with the vector: t equals zero, one, zero. This gives us a cone shape. Then we call the cylinder function to get the X, Y, and Z coordinates, and use surf to draw the 3D surface. This shows how easily you can build and visualize 3D shapes in MATLAB, which is helpful for both learning and engineering.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Switching to 3D graphics"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Creating a cone"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Visualizing 3D shapes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 43,
+      "slideNumber": 44,
+      "title": "Here’s the full example, all in one place.",
+      "bullets": [
+        "We define t as a vector with values zero, one, zero. Then we call the cylinder function to generate the geometry, and use surf to plot it.",
+        "That’s it — three lines of code give us a smooth 3D cone you can rotate, zoom, and customize. You can even add lights, shadows, or change the viewing angle.",
+        "It’s a simple example, but it shows the power of MATLAB for 3D visualization."
+      ],
+      "fullText": "Here’s the full example, all in one place.\nWe define t as a vector with values zero, one, zero. Then we call the cylinder function to generate the geometry, and use surf to plot it.\nThat’s it — three lines of code give us a smooth 3D cone you can rotate, zoom, and customize. You can even add lights, shadows, or change the viewing angle.\nIt’s a simple example, but it shows the power of MATLAB for 3D visualization.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide44.JPG",
+      "script": "Here's the full example, all in one place. We define t as a vector with values zero, one, zero, then call the cylinder function to generate the geometry, and use surf to plot it. This simple example shows the power of MATLAB for 3D visualization, allowing us to create a smooth 3D cone that can be customized and manipulated.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Simple 3D Visualization"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Power of MATLAB"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "3D Visualization"
+        }
+      ]
+    },
+    {
+      "slideIndex": 44,
+      "slideNumber": 45,
+      "title": "Now let’s explore the Image Processing Toolbox.",
+      "bullets": [
+        "It includes powerful tools for loading, modifying, analyzing, and segmenting images.",
+        "You can sharpen edges, enhance contrast, or isolate bright regions. It even lets you analyze object shapes and intensities — which is essential in fields like medical imaging.",
+        "You can also use it to register images, align features, and prepare large datasets for analysis. And if needed, you can even accelerate the workflow with C or C++ code.",
+        "This toolbox makes MATLAB a great platform for both learning and real-world applications in imaging."
+      ],
+      "fullText": "Now let’s explore the Image Processing Toolbox.\nIt includes powerful tools for loading, modifying, analyzing, and segmenting images.\nYou can sharpen edges, enhance contrast, or isolate bright regions. It even lets you analyze object shapes and intensities — which is essential in fields like medical imaging.\nYou can also use it to register images, align features, and prepare large datasets for analysis. And if needed, you can even accelerate the workflow with C or C++ code.\nThis toolbox makes MATLAB a great platform for both learning and real-world applications in imaging.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide45.JPG",
+      "script": "The Image Processing Toolbox is a powerful tool that allows you to load, modify, analyze, and segment images, making it essential in medical imaging and other fields. You can sharpen edges, enhance contrast, and isolate bright regions, as well as analyze object shapes and intensities. This toolbox also enables you to register images, align features, and prepare large datasets for analysis, making it a valuable resource for both learning and real-world applications.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Image Processing Toolbox"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Sharpen Edges"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Register Images"
+        }
+      ]
+    },
+    {
+      "slideIndex": 45,
+      "slideNumber": 46,
+      "title": "Now let’s take a look at the Instrument Control Toolbox.",
+      "bullets": [
+        "This toolbox allows MATLAB to talk directly to hardware — like oscilloscopes, sensors, or signal generators. That means you can send commands, receive data, and even control external devices — all from your MATLAB environment.",
+        "You can also create your own instrument drivers, manage device sessions, and work with supported protocols like VISA or TCP/IP.",
+        "So, if you're working in a lab with physical instruments, this toolbox helps you connect MATLAB to the real world."
+      ],
+      "fullText": "Now let’s take a look at the Instrument Control Toolbox.\nThis toolbox allows MATLAB to talk directly to hardware — like oscilloscopes, sensors, or signal generators. That means you can send commands, receive data, and even control external devices — all from your MATLAB environment.\nYou can also create your own instrument drivers, manage device sessions, and work with supported protocols like VISA or TCP/IP.\nSo, if you're working in a lab with physical instruments, this toolbox helps you connect MATLAB to the real world.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide46.JPG",
+      "script": "The Instrument Control Toolbox enables direct communication between MATLAB and real-world hardware, such as oscilloscopes, sensors, or signal generators. This allows for sending commands, receiving data, and controlling external devices from within MATLAB. It also supports creating custom instrument drivers, managing device sessions, and working with protocols like VISA or TCP/IP. This toolbox helps bridge the gap between MATLAB and the physical world.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Instrument Control Toolbox"
+        },
+        {
+          "timeMs": 1200,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Direct Communication"
+        },
+        {
+          "timeMs": 1800,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Custom Instrument Drivers"
+        }
+      ]
+    },
+    {
+      "slideIndex": 46,
+      "slideNumber": 47,
+      "title": "Next up — the Optimization Toolbox.",
+      "bullets": [
+        "This one’s all about solving problems where you want to find the best outcome — like minimizing cost, or maximizing performance.",
+        "You can solve linear programs, quadratic programs, and nonlinear problems. It also supports multi-objective optimization.",
+        "It’s useful in many fields — from data fitting and machine learning to operations research. If your work involves tuning models or decision-making, this toolbox is essential."
+      ],
+      "fullText": "Next up — the Optimization Toolbox.\nThis one’s all about solving problems where you want to find the best outcome — like minimizing cost, or maximizing performance.\nYou can solve linear programs, quadratic programs, and nonlinear problems. It also supports multi-objective optimization.\nIt’s useful in many fields — from data fitting and machine learning to operations research. If your work involves tuning models or decision-making, this toolbox is essential.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide47.JPG",
+      "script": "The Optimization Toolbox is all about finding the best outcome by solving problems, whether it's minimizing cost, maximizing performance, or balancing multiple objectives. It can handle linear, quadratic, and nonlinear problems, making it a powerful tool for data fitting, machine learning, and operations research. This toolbox is a must-have for anyone working with models that need to be tuned or optimized.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5200,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Optimization Toolbox"
+        },
+        {
+          "timeMs": 6300,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Linear Programs"
+        },
+        {
+          "timeMs": 7500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Multi-Objective Optimization"
+        }
+      ]
+    },
+    {
+      "slideIndex": 47,
+      "slideNumber": 48,
+      "title": "Now we move into data science with the Statistics and Machine Learning Toolbox.",
+      "bullets": [
+        "This toolbox helps you analyze data, test hypotheses, and build predictive models.",
+        "You can use it for clustering, regression, dimensionality reduction, or training classifiers. It also supports parallel computing, which is great for handling large datasets.",
+        "And the best part? Many of these features work with just a few lines of code — so you can try powerful techniques without writing complex algorithms from scratch."
+      ],
+      "fullText": "Now we move into data science with the Statistics and Machine Learning Toolbox.\nThis toolbox helps you analyze data, test hypotheses, and build predictive models.\nYou can use it for clustering, regression, dimensionality reduction, or training classifiers. It also supports parallel computing, which is great for handling large datasets.\nAnd the best part? Many of these features work with just a few lines of code — so you can try powerful techniques without writing complex algorithms from scratch.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide48.JPG",
+      "script": "Now we're entering the data science realm, where we'll use the Statistics and Machine Learning Toolbox to analyze, test, and build models. This toolbox is perfect for clustering, regression, reducing dimensions, or training classifiers, and it even supports parallel computing for handling massive datasets. The beauty of it is that many features can be implemented with just a few lines of code, making it easy to try out powerful techniques without writing complex algorithms from scratch.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Data Science Toolbox"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Clustering and Regression"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Parallel Computing"
+        }
+      ]
+    },
+    {
+      "slideIndex": 48,
+      "slideNumber": 49,
+      "title": "The Symbolic Math Toolbox brings exact math into MATLAB.",
+      "bullets": [
+        "Instead of working with numbers alone, you can define symbolic variables and compute exact derivatives, integrals, or solutions to equations.",
+        "For example, you can write a function like f of x equals x squared times sine x and ask MATLAB to find its derivative. You’ll get the answer in symbolic form — not an approximation.",
+        "You can also plot these expressions or export them into Simulink for simulation.",
+        "It’s a great toolbox for exploring math symbolically, especially in calculus and algebra-heavy problems."
+      ],
+      "fullText": "The Symbolic Math Toolbox brings exact math into MATLAB.\nInstead of working with numbers alone, you can define symbolic variables and compute exact derivatives, integrals, or solutions to equations.\nFor example, you can write a function like f of x equals x squared times sine x and ask MATLAB to find its derivative. You’ll get the answer in symbolic form — not an approximation.\nYou can also plot these expressions or export them into Simulink for simulation.\nIt’s a great toolbox for exploring math symbolically, especially in calculus and algebra-heavy problems.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide49.JPG",
+      "script": "The Symbolic Math Toolbox is a powerful tool that allows us to work with exact math in MATLAB, defining symbolic variables and computing exact derivatives, integrals, or solutions to equations. This means we can define a function like f of x equals x squared times sine x and ask MATLAB to find its derivative, receiving the exact answer in symbolic form. This toolbox is particularly useful for exploring math symbolically, especially in calculus and algebra-heavy problems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Symbolic Math Toolbox"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Exact Derivatives"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Calculus and Algebra"
+        }
+      ]
+    },
+    {
+      "slideIndex": 49,
+      "slideNumber": 50,
+      "title": "Finally, let’s talk about how to keep learning on your own.",
+      "bullets": [
+        "There’s a helpful online tutorial by Dr. Azernikov that introduces MATLAB basics step by step. It’s clear and beginner-friendly — a great way to reinforce what we’ve learned here.",
+        "Also, don’t forget about MATLAB’s built-in help tools. If your cursor is on a command, just press F1. Or type help followed by the function name in the Command Window.",
+        "For more support, you can check the MathWorks website, Stack Overflow, or MATLAB Central. These are great places to ask questions and find real code examples.",
+        "In short — keep exploring, keep experimenting, and you'll keep getting better."
+      ],
+      "fullText": "Finally, let’s talk about how to keep learning on your own.\nThere’s a helpful online tutorial by Dr. Azernikov that introduces MATLAB basics step by step. It’s clear and beginner-friendly — a great way to reinforce what we’ve learned here.\nAlso, don’t forget about MATLAB’s built-in help tools. If your cursor is on a command, just press F1. Or type help followed by the function name in the Command Window.\nFor more support, you can check the MathWorks website, Stack Overflow, or MATLAB Central. These are great places to ask questions and find real code examples.\nIn short — keep exploring, keep experimenting, and you'll keep getting better.",
+      "imageURL": "/lectures/Lecture_02/Images/Slide50.JPG",
+      "script": "As we wrap up this lecture, I want to encourage you to keep learning on your own. There's a helpful online tutorial by Dr. Azernikov that introduces MATLAB basics in a clear and step-by-step way. It's a great resource to reinforce what we've covered here. Additionally, don't forget to utilize MATLAB's built-in help tools, such as pressing F1 on a command or typing 'help' followed by the function name in the Command Window. For more support, you can check the MathWorks website, Stack Overflow, or MATLAB Central, where you can ask questions and find real code examples.",
+      "spotlightEvents": [
+        {
+          "timeMs": 360000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Dr. Azernikov's tutorial"
+        },
+        {
+          "timeMs": 370000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "MATLAB help tools"
+        },
+        {
+          "timeMs": 380000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "MathWorks resources"
+        }
+      ]
+    }
+  ]
+}

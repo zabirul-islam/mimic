@@ -1,0 +1,1596 @@
+{
+  "lectureId": "Lecture_03",
+  "lectureTitle": "Medical Imaging — Lecture 03",
+  "totalSlides": 40,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Welcome to Lecture 3, on systems.",
+      "bullets": [
+        "In the earlier lectures, we talked about the big picture of medical imaging,",
+        "and we also made sure you have the basic tools in place, including an initial exposure to MATLAB.",
+        "Starting now, we enter the foundation section of the course.",
+        "These are the core ideas that will keep showing up in every imaging modality we study later.",
+        "Today, the focus is the system viewpoint.",
+        "What do we mean by a system?",
+        "In the simplest sense, a system takes an input, does something to it, and produces an output.",
+        "In medical imaging, that “something” might be physics, hardware, noise, and computation,",
+        "all working together to transform what is inside the body into the data we measure.",
+        "So we are going to learn how to describe input–output relationships clearly,",
+        "how signals and images are transformed,",
+        "and why this viewpoint becomes the common language behind convolution,",
+        "Fourier analysis, and eventually reconstruction.",
+        "One quick note about how these slides are organized.",
+        "You will see labels like “Key to Master” and “Nice to Know.”",
+        "The “Key to Master” items are the ideas I really want you to internalize,",
+        "because they will come back in homework, exams, and later topics.",
+        "The “Nice to Know” items add extra intuition and context,",
+        "but they are not the core requirements.",
+        "Alright, with that in mind, let’s start building the system viewpoint",
+        "that will support everything else we do in medical imaging."
+      ],
+      "fullText": "Welcome to Lecture 3, on systems.\n\nIn the earlier lectures, we talked about the big picture of medical imaging,\nand we also made sure you have the basic tools in place, including an initial exposure to MATLAB.\n\nStarting now, we enter the foundation section of the course.\nThese are the core ideas that will keep showing up in every imaging modality we study later.\n\nToday, the focus is the system viewpoint.\nWhat do we mean by a system?\nIn the simplest sense, a system takes an input, does something to it, and produces an output.\nIn medical imaging, that “something” might be physics, hardware, noise, and computation,\nall working together to transform what is inside the body into the data we measure.\n\nSo we are going to learn how to describe input–output relationships clearly,\nhow signals and images are transformed,\nand why this viewpoint becomes the common language behind convolution,\nFourier analysis, and eventually reconstruction.\n\nOne quick note about how these slides are organized.\nYou will see labels like “Key to Master” and “Nice to Know.”\nThe “Key to Master” items are the ideas I really want you to internalize,\nbecause they will come back in homework, exams, and later topics.\nThe “Nice to Know” items add extra intuition and context,\nbut they are not the core requirements.\n\nAlright, with that in mind, let’s start building the system viewpoint\nthat will support everything else we do in medical imaging.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide1.JPG",
+      "script": "Welcome to Lecture 3, where we're shifting gears to focus on the system viewpoint. A system takes an input, applies some transformation, and produces an output, which is a fundamental concept that will appear in every imaging modality we cover later. This system viewpoint is essential for understanding medical imaging, and it's a great time to explore it.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Lecture 3"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "System Viewpoint"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Core Ideas"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "We are right on schedule in our journey through this material.",
+      "bullets": [
+        "If you’ve had a chance to look over the reading materials for today’s lecture, that’s great — it will make it easier to connect the ideas we cover. If not, that’s fine too. I encourage you to follow along closely and take time afterward to review the main points. Consistently reinforcing concepts as you go will help you develop a stronger and more intuitive grasp, especially as the material becomes more mathematically detailed"
+      ],
+      "fullText": "We are right on schedule in our journey through this material.\n\nIf you’ve had a chance to look over the reading materials for today’s lecture, that’s great — it will make it easier to connect the ideas we cover. If not, that’s fine too. I encourage you to follow along closely and take time afterward to review the main points. Consistently reinforcing concepts as you go will help you develop a stronger and more intuitive grasp, especially as the material becomes more mathematically detailed",
+      "imageURL": "/lectures/Lecture_03/Images/Slide2.JPG",
+      "script": "We're right on schedule in our journey through this material. If you've had a chance to look over the reading materials for today's lecture, that's great, it will make it easier to connect the ideas we cover. If not, that's fine too, just follow along closely and take time afterward to review the main points, reinforcing concepts as you go will help you develop a stronger and more intuitive grasp.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "On schedule"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Reading materials"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Reinforcing concepts"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "Today’s lecture is our first real step into the mathematical foundation of the c",
+      "bullets": [
+        "We’ll follow the same structure as the outline on the slide.",
+        "We’ll start with Section 1: Linear System, where we define what we mean by a “system” in an input–output sense, and then narrow to the special class of systems that are linear.",
+        "Then we move to Section 2: Additivity and Homogeneity. These are the two properties that define linearity. When both hold, we get the superposition principle, and that principle is the reason linear systems are so powerful in signal processing and imaging.",
+        "After that, we’ll briefly discuss Section 3: Non-linear System, meaning systems that violate one or both of those linearity conditions. Nonlinear systems are common in the real world, and it’s important to recognize when linear models are valid approximations and when they are not.",
+        "And finally, we’ll close with Section 4: Remarks, where I’ll summarize the key takeaways and connect them to where we’re going next in the course.",
+        "So the goal today is simple: build a clear, working understanding of “system,” especially linear systems, because this viewpoint will show up repeatedly later, in convolution, Fourier analysis, and ultimately in image formation and reconstruction."
+      ],
+      "fullText": "Today’s lecture is our first real step into the mathematical foundation of the course. The topic is Systems, and if you look at this outline, you’ll see it’s set up exactly like the first chapter in the notes: Chapter 1: System.\n\nWe’ll follow the same structure as the outline on the slide.\n\nWe’ll start with Section 1: Linear System, where we define what we mean by a “system” in an input–output sense, and then narrow to the special class of systems that are linear.\n\nThen we move to Section 2: Additivity and Homogeneity. These are the two properties that define linearity. When both hold, we get the superposition principle, and that principle is the reason linear systems are so powerful in signal processing and imaging.\n\nAfter that, we’ll briefly discuss Section 3: Non-linear System, meaning systems that violate one or both of those linearity conditions. Nonlinear systems are common in the real world, and it’s important to recognize when linear models are valid approximations and when they are not.\n\nAnd finally, we’ll close with Section 4: Remarks, where I’ll summarize the key takeaways and connect them to where we’re going next in the course.\n\nSo the goal today is simple: build a clear, working understanding of “system,” especially linear systems, because this viewpoint will show up repeatedly later, in convolution, Fourier analysis, and ultimately in image formation and reconstruction.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide3.JPG",
+      "script": "Today's lecture marks our first real step into the mathematical foundation of the course, where we'll build a solid understanding of systems. We'll follow the outline, which is set up exactly like the first chapter in the notes, starting with Section 1: Linear System. Here, we'll define what a system is in an input–output sense and then focus on the special class of linear systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Lecture Start"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "Linear System"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1000,
+          "label": "Additivity and Homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "Let’s build intuition by comparing a system to something you already know well: ",
+      "bullets": [
+        "A function is a mathematical relationship that maps each input from a set, the domain, to an output in another set, the range. So in the simplest view, it’s an input–output rule.",
+        "A system is broader. As the definition on the slide says, a system is a group of interacting or interdependent elements that form a complex whole. That “whole” could be an organism, a set of physiologically related parts, a group of interacting physical components, or even a network of structures and channels.",
+        "Now here’s the key connection: even though a system may be made of many interacting parts, we can often still describe it in an input–output way, just like a function. We feed something in, the system processes it through its internal structure, and we observe an output.",
+        "And that viewpoint is exactly what we need for medical imaging. We want to model the imaging process as a system: what goes in, what happens inside the imaging chain, and what comes out. Once we can describe that relationship clearly, we can analyze it, predict behavior, and eventually solve inverse problems like reconstruction."
+      ],
+      "fullText": "Let’s build intuition by comparing a system to something you already know well: a function.\n\nA function is a mathematical relationship that maps each input from a set, the domain, to an output in another set, the range. So in the simplest view, it’s an input–output rule.\n\nA system is broader. As the definition on the slide says, a system is a group of interacting or interdependent elements that form a complex whole. That “whole” could be an organism, a set of physiologically related parts, a group of interacting physical components, or even a network of structures and channels.\n\nNow here’s the key connection: even though a system may be made of many interacting parts, we can often still describe it in an input–output way, just like a function. We feed something in, the system processes it through its internal structure, and we observe an output.\n\nAnd that viewpoint is exactly what we need for medical imaging. We want to model the imaging process as a system: what goes in, what happens inside the imaging chain, and what comes out. Once we can describe that relationship clearly, we can analyze it, predict behavior, and eventually solve inverse problems like reconstruction.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide4.JPG",
+      "script": "Let's build intuition by comparing a system to something you already know well: a function. A function is a mathematical relationship that maps each input from a set, the domain, to an output in another set, the range. It's essentially an input–output rule. In contrast, a system is a group of interacting or interdependent elements that form a complex whole.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "System vs. Function"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "System as Interacting Parts"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Input–Output Viewpoint"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Here’s a simple illustration of what a function does. Imagine selecting a value ",
+      "bullets": [
+        "In my slides, I use symbols to highlight key points: a red diamond marks something essential—concepts you should remember clearly. A green circle points out interesting but optional material, things that go beyond what you strictly need for engineering purposes. While we don’t aim to become mathematicians in this course, understanding these key ideas deeply will strengthen your grasp of medical imaging systems."
+      ],
+      "fullText": "Here’s a simple illustration of what a function does. Imagine selecting a value from the domain—say, a number—and applying the function to find its corresponding value in the range. This basic idea of mapping inputs to outputs might seem simple, but it’s fundamental to everything we’re discussing.\nIn my slides, I use symbols to highlight key points: a red diamond marks something essential—concepts you should remember clearly. A green circle points out interesting but optional material, things that go beyond what you strictly need for engineering purposes. While we don’t aim to become mathematicians in this course, understanding these key ideas deeply will strengthen your grasp of medical imaging systems.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide5.JPG",
+      "script": "Imagine selecting a value from the domain, applying the function, and finding its corresponding value in the range. This basic idea of mapping inputs to outputs is fundamental to everything we're discussing. It's a simple but essential concept that will help us understand complex systems and relationships.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Key idea"
+        },
+        {
+          "timeMs": 1600,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Optional material"
+        },
+        {
+          "timeMs": 1900,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Key concept"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Functions come in many different forms, and this slide is just giving you a few ",
+      "bullets": [
+        "On the top left, you see trigonometric functions like sine and cosine. On the bottom left, you see a curve with a tangent line, which reminds you that we often study a function locally by looking at its slope and linear approximation at a point.",
+        "On the top right is a surface plot, which is a function of two variables, not just one. That becomes very relevant later, because images are naturally 2D or 3D functions.",
+        "And on the bottom right is a classic fractal example, which comes from a recursive or iterative rule. You don’t need fractals for this course, but it’s a nice reminder that functions can be generated in many ways, not only by simple formulas.",
+        "For our purposes, the key point is simply this: a “function” is a very general concept. Whether it’s 1D, 2D, or 3D, simple or complex, we’ll treat it as an input–output mapping, because that viewpoint is what we need to build the system framework for medical imaging."
+      ],
+      "fullText": "Functions come in many different forms, and this slide is just giving you a few representative examples.\n\nOn the top left, you see trigonometric functions like sine and cosine. On the bottom left, you see a curve with a tangent line, which reminds you that we often study a function locally by looking at its slope and linear approximation at a point.\n\nOn the top right is a surface plot, which is a function of two variables, not just one. That becomes very relevant later, because images are naturally 2D or 3D functions.\n\nAnd on the bottom right is a classic fractal example, which comes from a recursive or iterative rule. You don’t need fractals for this course, but it’s a nice reminder that functions can be generated in many ways, not only by simple formulas.\n\nFor our purposes, the key point is simply this: a “function” is a very general concept. Whether it’s 1D, 2D, or 3D, simple or complex, we’ll treat it as an input–output mapping, because that viewpoint is what we need to build the system framework for medical imaging.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide6.JPG",
+      "script": "Functions come in many different forms, and this slide is just giving you a few representative examples. We have trigonometric functions like sine and cosine, which are periodic and smooth. We have a curve with a tangent line, which reminds us that we often study a function locally by looking at its slope and linear approximation at a point. We also have a surface plot, which is a function of two variables, and a fractal example, which illustrates the diversity of functions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Trigonometric functions"
+        },
+        {
+          "timeMs": 1200,
+          "type": "spotlight",
+          "x": 0.35,
+          "y": 0.55,
+          "durationMs": 1500,
+          "label": "Local study with slope and linear approximation"
+        },
+        {
+          "timeMs": 1400,
+          "type": "spotlight",
+          "x": 0.65,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Surface plot and fractal example"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "Another powerful tool in mathematics is the Taylor expansion. This allows us to ",
+      "bullets": [
+        "Each added term improves the approximation, as long as certain conditions are met to ensure the series converges. In engineering practice, though, we often stop at the simpler terms—constant or linear—because they offer a good balance of accuracy and simplicity. This idea of building approximations is central to how we model systems efficiently."
+      ],
+      "fullText": "Another powerful tool in mathematics is the Taylor expansion. This allows us to approximate any smooth, well-behaved function using a sum of terms: starting with a constant (the function’s value at a point), then adding linear terms based on the first derivative, and quadratic terms based on the second derivative, and so on.\nEach added term improves the approximation, as long as certain conditions are met to ensure the series converges. In engineering practice, though, we often stop at the simpler terms—constant or linear—because they offer a good balance of accuracy and simplicity. This idea of building approximations is central to how we model systems efficiently.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide7.JPG",
+      "script": "The Taylor expansion is a powerful tool that enables us to approximate smooth functions by breaking them down into a sum of terms, starting with a constant, then adding linear and quadratic terms, and so on. Each added term improves the approximation, but in engineering practice, we often stop at the simpler terms to strike a balance between accuracy and simplicity. This idea of approximating complex functions is crucial in medical imaging, where we need to simplify models while preserving essential features.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Taylor expansion"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "approximation"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "engineering practice"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "In fact, for most practical purposes, we’re satisfied with linear functions. In ",
+      "bullets": [],
+      "fullText": "In fact, for most practical purposes, we’re satisfied with linear functions. In one dimension, this means a straight line; in two dimensions, it’s a plane; and in higher dimensions, we extend the idea further. These simple, linear relationships are easy to work with and provide the foundation for much of engineering analysis—including in medical imaging.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide8.JPG",
+      "script": "We're often happy with linear functions because they're straightforward to work with, and they form the basis for many engineering analyses, including those in medical imaging. In one dimension, a linear function is a straight line, in two dimensions it's a plane, and in higher dimensions, we generalize this idea to higher-dimensional spaces. These simple, linear relationships are incredibly useful in medical imaging and beyond.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Linear Functions"
+        },
+        {
+          "timeMs": 1800,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Engineering Analyses"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 400,
+          "label": "Medical Imaging"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "As engineers, we often think of the world in terms of systems. We use mathematic",
+      "bullets": [
+        "These inputs and outputs can take many forms: time-dependent signals, images, tensors, or even discrete data sets like color values in an image. The concept is general: a system processes an input and produces an output, just as a function maps domain to range.",
+        "In medical imaging, we apply this thinking to devices like CT scanners, where the entire system transforms physical signals into diagnostic images. And as we analyze these systems, we rely on mathematical relationships to describe their behavior in precise terms. This distinction between thinking as engineers about systems and as mathematicians about abstract functions is subtle but important as we move forward."
+      ],
+      "fullText": "As engineers, we often think of the world in terms of systems. We use mathematical operators—like L or O—to describe how a system transforms an input into an output. If you feed an input signal, V, into a system, the output, W, represents how that signal is modified.\nThese inputs and outputs can take many forms: time-dependent signals, images, tensors, or even discrete data sets like color values in an image. The concept is general: a system processes an input and produces an output, just as a function maps domain to range.\nIn medical imaging, we apply this thinking to devices like CT scanners, where the entire system transforms physical signals into diagnostic images. And as we analyze these systems, we rely on mathematical relationships to describe their behavior in precise terms. This distinction between thinking as engineers about systems and as mathematicians about abstract functions is subtle but important as we move forward.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide9.JPG",
+      "script": "As engineers, we naturally think of the world in terms of systems, where mathematical operators describe how a system transforms an input into an output. This transformation takes an input signal, V, and produces an output, W, representing how that signal is modified. This concept applies to various forms of inputs and outputs, including time-dependent signals, images, and discrete data sets. In medical imaging, we apply this system-thinking to devices like CT scanners.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "System Transformation"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Input-Output Relationship"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Mathematical Operators"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "As engineers, much of our work revolves around systems, and one of the first thi",
+      "bullets": [
+        "When we perform measurements, we typically have input variables and sometimes a reference. Consider weighing an object: we place a known weight on one side of a balance and the object on the other. If the balance is level, we know the object’s weight equals the standard. Similarly, in electrical measurements, we might compare an unknown resistance or voltage against a reference using an ohmmeter or a multimeter. These devices let us measure things like current, resistance, and capacitance with precision.",
+        "More broadly, think of an instructor as a system: when the calendar says it’s time for class, that’s the input. The output is the lecture. But if something changes—say, the instructor is unwell or called away—the output changes too. This is a reminder that systems can have modifiers that influence their behavior."
+      ],
+      "fullText": "As engineers, much of our work revolves around systems, and one of the first things we need to do is measurement. Without measurement, we can’t really understand or control anything. In fact, measurement is at the heart of both engineering and physics. For example, in quantum mechanics, measurement plays a critical role—until we measure, we don’t truly know a system’s state. It’s like the famous thought experiment with Schrödinger’s cat: is the cat alive or dead? Only measurement collapses the uncertainty into reality.\nWhen we perform measurements, we typically have input variables and sometimes a reference. Consider weighing an object: we place a known weight on one side of a balance and the object on the other. If the balance is level, we know the object’s weight equals the standard. Similarly, in electrical measurements, we might compare an unknown resistance or voltage against a reference using an ohmmeter or a multimeter. These devices let us measure things like current, resistance, and capacitance with precision.\nMore broadly, think of an instructor as a system: when the calendar says it’s time for class, that’s the input. The output is the lecture. But if something changes—say, the instructor is unwell or called away—the output changes too. This is a reminder that systems can have modifiers that influence their behavior.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide10.JPG",
+      "script": "As engineers, we need to measure systems to understand and control them, and measurement is fundamental to both engineering and physics. It's what collapses uncertainty into reality, as seen in quantum mechanics and thought experiments like Schrödinger's cat. When we measure, we typically have input variables and sometimes output variables, and our goal is to understand the system's behavior and response. This is where measurement and modeling come together to help us predict and control complex systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Input and Output"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Weighing an Object"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Instructor as a System"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "An imaging system is a specialized type of measurement system. Consider an MRI s",
+      "bullets": [
+        "But not all systems are created equal. A high-quality system will produce sharp, high-contrast images, while a less precise system might blur details, much like how a low-resolution camera produces softer, less defined pictures. This blurring is a key characteristic of the system and tells us a lot about its performance. In essence, imaging systems, sensing systems, and measurement systems all belong to the same family—they process inputs to produce meaningful outputs through measurement."
+      ],
+      "fullText": "An imaging system is a specialized type of measurement system. Consider an MRI scanner: its purpose is to measure and produce an image of a cross-section of the body’s anatomy. Ideally, this image is a faithful representation—a sharp, clear point corresponds exactly to a sharp point in the body.\nBut not all systems are created equal. A high-quality system will produce sharp, high-contrast images, while a less precise system might blur details, much like how a low-resolution camera produces softer, less defined pictures. This blurring is a key characteristic of the system and tells us a lot about its performance. In essence, imaging systems, sensing systems, and measurement systems all belong to the same family—they process inputs to produce meaningful outputs through measurement.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide11.JPG",
+      "script": "An imaging system is a specialized type of measurement system, designed to produce images of the body's internal structures. An MRI scanner, for example, measures and produces an image of a cross-section of the body's anatomy, ideally with sharp, clear points corresponding to sharp points in the body. However, not all systems are created equal, and a high-quality system produces sharp, high-contrast images, while a less precise system blurs details, similar to a low-resolution camera. This blurring is a key characteristic of the system and tells us a lot about its performance.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Imaging system"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Measurement system"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Imaging system"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Another type of system is the control system. Unlike simple measurement systems,",
+      "bullets": [
+        "For instance, think of a radar tracking an airplane. The radar detects the plane’s position and adjusts itself to keep the target within view. This feedback loop helps the system achieve its goal, even as conditions change. Control systems are essential in engineering whenever we want systems to adapt or correct themselves in real time."
+      ],
+      "fullText": "Another type of system is the control system. Unlike simple measurement systems, control systems don’t just generate an output—they use that output as feedback to adjust the input or the system’s behavior.\nFor instance, think of a radar tracking an airplane. The radar detects the plane’s position and adjusts itself to keep the target within view. This feedback loop helps the system achieve its goal, even as conditions change. Control systems are essential in engineering whenever we want systems to adapt or correct themselves in real time.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide12.JPG",
+      "script": "Control systems are unique in that they use feedback from their output to adjust the input or the system's behavior, allowing them to adapt or correct themselves in real-time. This is in contrast to simple measurement systems, which just generate an output. Control systems are crucial in engineering whenever we need systems to respond to changing conditions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Control systems use feedback"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Radar tracking an airplane"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Control systems are essential in engineering"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "Today, robotic systems represent a hot area of control system development. From ",
+      "bullets": [],
+      "fullText": "Today, robotic systems represent a hot area of control system development. From robots that provide assistance in hotels or nursing homes to those that help care for infants, these systems combine control with a degree of machine intelligence. Their adaptability and responsiveness open up incredible possibilities in both industry and healthcare.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide13.JPG",
+      "script": "Robotic systems are a rapidly growing area of control system development, combining control with machine intelligence to adapt and respond to changing situations. They have the potential to assist in various settings, from hotels and nursing homes to healthcare, making them a promising area of research and application.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Robotic systems"
+        },
+        {
+          "timeMs": 1200,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Adapt and respond"
+        },
+        {
+          "timeMs": 1400,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Assist in various settings"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Let’s not forget neurological systems, like the human brain. The brain is a comp",
+      "bullets": [],
+      "fullText": "Let’s not forget neurological systems, like the human brain. The brain is a complex system of billions of neurons that process inputs from the environment and generate intelligent actions. Neurons decide whether to fire based on inputs, passing signals that enable everything from basic reflexes to complex reasoning. Together, these neural networks form the foundation of our physiological systems.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide14.JPG",
+      "script": "The brain is a complex system of billions of neurons that process inputs from the environment and generate intelligent actions, allowing us to react to the world around us. Neurons decide whether to fire based on inputs, passing signals that enable everything from basic reflexes to complex reasoning. This intricate network of neurons forms the foundation of our physiological systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Complex System"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Neural Processing"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Neuron Decision"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "The human system as a whole is incredibly intricate. It spans multiple levels—fr",
+      "bullets": [],
+      "fullText": "The human system as a whole is incredibly intricate. It spans multiple levels—from genes and cells up to organs and entire physiological systems like the circulatory or digestive systems. When disease strikes, understanding these interconnections is crucial. This is the realm of systems biology or systems medicine—a field dedicated to studying the body as a network of interacting parts, so we can better understand, diagnose, and treat disease.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide15.JPG",
+      "script": "The human system is incredibly intricate, with multiple levels of organization, from genes and cells to organs and entire physiological systems. When disease occurs, understanding these interconnections is vital, which is why systems biology or systems medicine is a crucial field of study. It aims to study the body as a network of interacting parts to better understand, diagnose, and treat disease. This approach requires a multidisciplinary perspective, combining biology, engineering, and mathematics.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Systems biology"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Understanding disease"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Interconnections"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Looking ahead, one major trend is the growing interaction between robotic system",
+      "bullets": [
+        "This slide shows a few different relationships. On the left, you see robots in a supportive role, assisting people in healthcare or daily living. On the right, you see a more competitive framing, the classic question of whether machines will match or outperform humans in certain tasks. And at the bottom, the sequence of robot forms is a reminder that robotics is evolving quickly, from simple mechanisms to increasingly human-like platforms.",
+        "Now, why does this matter in a medical imaging course? Because imaging is one of the main ways robots and intelligent systems can perceive the body. Image-guided robots depend on imaging to locate anatomy, track motion, and guide interventions safely. In that sense, medical imaging is not just about making pictures, it becomes part of a larger human–machine system.",
+        "So the key takeaway here is not science fiction. It’s a practical direction: as robotics becomes more capable, imaging, computation, and control become more tightly integrated with healthcare workflows, and understanding “systems” is exactly what helps us reason about that integration."
+      ],
+      "fullText": "Looking ahead, one major trend is the growing interaction between robotic systems and human systems.\n\nThis slide shows a few different relationships. On the left, you see robots in a supportive role, assisting people in healthcare or daily living. On the right, you see a more competitive framing, the classic question of whether machines will match or outperform humans in certain tasks. And at the bottom, the sequence of robot forms is a reminder that robotics is evolving quickly, from simple mechanisms to increasingly human-like platforms.\n\nNow, why does this matter in a medical imaging course? Because imaging is one of the main ways robots and intelligent systems can perceive the body. Image-guided robots depend on imaging to locate anatomy, track motion, and guide interventions safely. In that sense, medical imaging is not just about making pictures, it becomes part of a larger human–machine system.\n\nSo the key takeaway here is not science fiction. It’s a practical direction: as robotics becomes more capable, imaging, computation, and control become more tightly integrated with healthcare workflows, and understanding “systems” is exactly what helps us reason about that integration.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide16.JPG",
+      "script": "As we explore the future of medical imaging, it's essential to consider the intersection of robotics and human systems, as it will impact the development of more intelligent, adaptive, and compassionate imaging technologies. This trend will influence the way we design imaging systems, making them more collaborative and responsive to human needs.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Robotic Systems"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Imaging in Robotics"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Human–Machine Systems"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Given the vast complexity of all these systems, we need to narrow our focus. Tha",
+      "bullets": [
+        "In a linear system, two key properties must hold: additivity and homogeneity. Together, these form the superposition principle. We’ll explore these in detail, starting with simple cases and building up to more rigorous requirements."
+      ],
+      "fullText": "Given the vast complexity of all these systems, we need to narrow our focus. That’s why in this course, we concentrate on linear systems—the simplest and most important class of systems, especially in medical imaging. Linear systems are manageable to study, yet powerful in their applications. Once we master them, we’ll be ready to tackle the greater complexity of nonlinear systems.\nIn a linear system, two key properties must hold: additivity and homogeneity. Together, these form the superposition principle. We’ll explore these in detail, starting with simple cases and building up to more rigorous requirements.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide17.JPG",
+      "script": "We're dealing with incredibly complex systems in medical imaging, but to make progress, we need to focus on the most important and manageable parts. That's why we're concentrating on linear systems, which are the simplest and most useful class of systems in medical imaging. Linear systems are not only easier to study, but also incredibly powerful in their applications. By mastering linear systems, we'll build a solid foundation to tackle more complex systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Linear Systems"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Additivity"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Okay, let’s start with the first requirement for linearity: additivity.",
+      "bullets": [
+        "Think of the system as a black box. You put something in, and you get something out.",
+        "So first, I feed in one input, call it f-one. The system produces an output, call it k-one.",
+        "Then I feed in a second input, f-two, and the system produces k-two.",
+        "Now here’s the key idea.",
+        "If I add those two inputs together first, so I give the system f-one plus f-two, then additivity says the output should simply be k-one plus k-two.",
+        "So the system “respects addition.”",
+        "Adding inputs before the system is the same as adding outputs after the system.",
+        "And this matters a lot, because it means we can take a complicated input, split it into simpler parts, process the parts one by one, and then just add the results back together."
+      ],
+      "fullText": "Okay, let’s start with the first requirement for linearity: additivity.\n\nThink of the system as a black box. You put something in, and you get something out.\n\nSo first, I feed in one input, call it f-one. The system produces an output, call it k-one.\nThen I feed in a second input, f-two, and the system produces k-two.\n\nNow here’s the key idea.\n\nIf I add those two inputs together first, so I give the system f-one plus f-two, then additivity says the output should simply be k-one plus k-two.\n\nSo the system “respects addition.”\nAdding inputs before the system is the same as adding outputs after the system.\n\nAnd this matters a lot, because it means we can take a complicated input, split it into simpler parts, process the parts one by one, and then just add the results back together.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide18.JPG",
+      "script": "Think of the system as a black box. You put something in, and you get something out. So first, I feed in one input, call it f-one. The system produces an output, call it k-one. Then I feed in a second input, f-two, and the system produces k-two. Now here’s the key idea. If I add those two inputs together first, so I give the system f-one plus f-two, then additivity says the output should simply be k-one plus k-two. So the system “respects addition.” Adding inputs before the system is the same as adding outputs after the system responds.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "System as a black box"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "First input and output"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Second input and output"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "Now let’s look at the second requirement for a linear system: homogeneity, also ",
+      "bullets": [
+        "Start with one input, call it f-one. You feed it into the operator",
+        "H, and you get an output, k-one.",
+        "Now here’s the test.",
+        "Before you send the input in, you scale it. In other words, you multiply the whole input by some constant number, say a-one. So the new input is a-one times f-one.",
+        "Homogeneity says the system should respond in a very predictable way: the output should simply scale by that same factor. So the result becomes a-one times k-one.",
+        "In plain language, the system “respects scaling.”",
+        "If you make the input twice as large, the output should become twice as large.",
+        "If you cut the input in half, the output should also be cut in half.",
+        "A simple imaging example is brightness. If you double the intensity of an image going into a linear imaging system, the output intensity should also double.",
+        "And now you can see the bigger picture. Additivity says the system respects addition, and homogeneity says it respects scaling. When a system satisfies both, we call it linear, and that gives us the superposition principle, which is the main reason linear systems are so powerful in medical imaging."
+      ],
+      "fullText": "Now let’s look at the second requirement for a linear system: homogeneity, also called the scaling property.\n\nStart with one input, call it f-one. You feed it into the operator \nH, and you get an output, k-one.\n\nNow here’s the test.\n\nBefore you send the input in, you scale it. In other words, you multiply the whole input by some constant number, say a-one. So the new input is a-one times f-one.\n\nHomogeneity says the system should respond in a very predictable way: the output should simply scale by that same factor. So the result becomes a-one times k-one.\n\nIn plain language, the system “respects scaling.”\nIf you make the input twice as large, the output should become twice as large.\nIf you cut the input in half, the output should also be cut in half.\n\nA simple imaging example is brightness. If you double the intensity of an image going into a linear imaging system, the output intensity should also double.\n\nAnd now you can see the bigger picture. Additivity says the system respects addition, and homogeneity says it respects scaling. When a system satisfies both, we call it linear, and that gives us the superposition principle, which is the main reason linear systems are so powerful in medical imaging.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide19.JPG",
+      "script": "If you scale the input by a certain factor, the output should also be scaled by the same factor, without changing the shape of the response. This means that if you make the input twice as big, the output should also become twice as big.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Scaling property"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Homogeneity test"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Scaling factor"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Let’s test these ideas with a few examples. Suppose we have a system that maps p",
+      "bullets": [
+        "On the other hand, consider a linear transformation in three-dimensional space, like multiplying a vector by a 3×3 matrix. This kind of operation satisfies both additivity and homogeneity, making it a linear system. Similarly, mathematical operations like integration and differentiation also qualify as linear operators. They obey the superposition principle, which combines both key properties of linearity in a compact form."
+      ],
+      "fullText": "Let’s test these ideas with a few examples. Suppose we have a system that maps positive numbers, x, to the square root of x. Is this system linear? Well, while the output is zero when the input is zero, that alone doesn’t make a system linear. Remember, true linearity requires both additivity and homogeneity. The square root function doesn’t satisfy either—if you take two inputs and sum their square roots, that doesn’t equal the square root of the sum, and scaling the input doesn’t scale the output proportionally.\nOn the other hand, consider a linear transformation in three-dimensional space, like multiplying a vector by a 3×3 matrix. This kind of operation satisfies both additivity and homogeneity, making it a linear system. Similarly, mathematical operations like integration and differentiation also qualify as linear operators. They obey the superposition principle, which combines both key properties of linearity in a compact form.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide20.JPG",
+      "script": "Let's test these ideas with a few examples. Suppose we have a system that maps positive numbers, x, to the square root of x. This system is not linear because it doesn't satisfy either additivity or homogeneity. For instance, taking two inputs and summing their square roots doesn't equal the square root of the sum. In contrast, a linear transformation in three-dimensional space, like rotating a vector by an angle theta, is indeed linear because it preserves the key properties of additivity and homogeneity.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Linear System"
+        },
+        {
+          "timeMs": 500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.6,
+          "durationMs": 500,
+          "label": "Additivity"
+        },
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.4,
+          "durationMs": 500,
+          "label": "Homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Alright, now that we’ve defined additivity and homogeneity, there’s a natural qu",
+      "bullets": [
+        "Do we really need both?",
+        "In other words, is the definition of a linear system redundant?",
+        "Could it be that if a system satisfies additivity, then homogeneity automatically follows? Or the other way around?",
+        "That’s exactly what this slide is hinting at.",
+        "The arrows suggest “maybe one leads to the other,” but the slash in the middle is a warning sign: not always.",
+        "And I like this question because it shows you something important about engineering and mathematics: good definitions matter. In math, people have argued for centuries about whether certain assumptions are truly independent. Geometry is a classic example, where a small set of postulates built an entire theory, and later mathematicians asked: are all of those postulates really necessary, or can some be derived from others?",
+        "We can ask the same kind of question here.",
+        "So in the next few slides, we’re going to test this carefully:",
+        "When are additivity and homogeneity connected, and when are they genuinely independent properties?",
+        "And the reason we care is practical: the more clearly we understand the foundations, the more confidently we can model real imaging systems and know when a “linear” assumption is actually justified."
+      ],
+      "fullText": "Alright, now that we’ve defined additivity and homogeneity, there’s a natural question people often ask.\n\nDo we really need both?\n\nIn other words, is the definition of a linear system redundant?\nCould it be that if a system satisfies additivity, then homogeneity automatically follows? Or the other way around?\n\nThat’s exactly what this slide is hinting at.\nThe arrows suggest “maybe one leads to the other,” but the slash in the middle is a warning sign: not always.\n\nAnd I like this question because it shows you something important about engineering and mathematics: good definitions matter. In math, people have argued for centuries about whether certain assumptions are truly independent. Geometry is a classic example, where a small set of postulates built an entire theory, and later mathematicians asked: are all of those postulates really necessary, or can some be derived from others?\n\nWe can ask the same kind of question here.\n\nSo in the next few slides, we’re going to test this carefully:\nWhen are additivity and homogeneity connected, and when are they genuinely independent properties?\n\nAnd the reason we care is practical: the more clearly we understand the foundations, the more confidently we can model real imaging systems and know when a “linear” assumption is actually justified.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide21.JPG",
+      "script": "Good definitions matter, and they're not always intuitive. The question of whether additivity and homogeneity are redundant highlights the importance of carefully considering the properties of a system. It also shows that mathematics and engineering require precise definitions to ensure consistency and accuracy.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Do we really need both?"
+        },
+        {
+          "timeMs": 12000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "In other words, is the definition of a linear system redundant?"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Could it be that if a system satisfies additivity, then homogeneity automatically follows?"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "For continuous functions, additivity and homogeneity can indeed be shown to be e",
+      "bullets": [
+        "But this also points to a larger truth: when building formal systems—whether in mathematics or engineering—we must ensure they are logically consistent. This is no trivial task, and it’s part of what makes formal reasoning so challenging and rewarding."
+      ],
+      "fullText": "For continuous functions, additivity and homogeneity can indeed be shown to be equivalent. For example, if a system satisfies additivity, you can use that property repeatedly to demonstrate homogeneity for integer scalars, rational scalars, and ultimately for all real scalars, thanks to continuity. Conversely, if a system satisfies homogeneity, you can reason your way back to additivity.\nBut this also points to a larger truth: when building formal systems—whether in mathematics or engineering—we must ensure they are logically consistent. This is no trivial task, and it’s part of what makes formal reasoning so challenging and rewarding.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide22.JPG",
+      "script": "For continuous functions, additivity and homogeneity are equivalent because if a system satisfies one property, we can use that to demonstrate the other, thanks to the power of mathematical reasoning and the properties of continuous functions. This equivalence is a result of the interplay between these properties and the continuity of the function. It's a beautiful example of how mathematical ideas are connected and how they can be used to build strong and consistent theories.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Logical Consistency"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Properties of Continuous Functions"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Interplay between Additivity and Homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "Alright, now let’s test the question: does additivity automatically give us homo",
+      "bullets": [
+        "This slide shows a very clean counterexample using complex numbers.",
+        "Take the operation “complex conjugate.”",
+        "So if z equals x plus i y, then the conjugate is x minus i y. That’s what the little diagram on the left is illustrating.",
+        "Now first, check additivity.",
+        "If I take two complex numbers, z one and z two, and I conjugate their sum, I get:",
+        "the conjugate of z one plus z two equals the conjugate of z one plus the conjugate of z two.",
+        "So additivity works perfectly. This operation respects addition.",
+        "But now check homogeneity, meaning scaling.",
+        "If the scalar alpha is a complex number, then watch what happens.",
+        "If I conjugate alpha times z, I get the conjugate of alpha times z equals alpha conjugate times z conjugate.",
+        "But homogeneity would require that to equal alpha times z conjugate.",
+        "And in general, alpha conjugate is not the same as alpha, unless alpha happens to be real.",
+        "So the conjugate operation is additive, but it is not homogeneous for complex scalars.",
+        "And that’s the lesson of this slide: additivity does not automatically imply homogeneity in general.",
+        "If you want to call something linear, you really do have to check both properties, and you also have to be clear about what kind of scalars you allow."
+      ],
+      "fullText": "Alright, now let’s test the question: does additivity automatically give us homogeneity?\n\nThis slide shows a very clean counterexample using complex numbers.\n\nTake the operation “complex conjugate.”\nSo if z equals x plus i y, then the conjugate is x minus i y. That’s what the little diagram on the left is illustrating.\n\nNow first, check additivity.\nIf I take two complex numbers, z one and z two, and I conjugate their sum, I get:\nthe conjugate of z one plus z two equals the conjugate of z one plus the conjugate of z two.\nSo additivity works perfectly. This operation respects addition.\n\nBut now check homogeneity, meaning scaling.\nIf the scalar alpha is a complex number, then watch what happens.\n\nIf I conjugate alpha times z, I get the conjugate of alpha times z equals alpha conjugate times z conjugate.\n\nBut homogeneity would require that to equal alpha times z conjugate.\n\nAnd in general, alpha conjugate is not the same as alpha, unless alpha happens to be real.\n\nSo the conjugate operation is additive, but it is not homogeneous for complex scalars.\n\nAnd that’s the lesson of this slide: additivity does not automatically imply homogeneity in general.\nIf you want to call something linear, you really do have to check both properties, and you also have to be clear about what kind of scalars you allow.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide23.JPG",
+      "script": "Additivity does not automatically give us homogeneity. The conjugate operation is additive, but it does not satisfy homogeneity, as multiplying by a negative number flips the conjugate operation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Counterexample"
+        },
+        {
+          "timeMs": 2400,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Additivity"
+        },
+        {
+          "timeMs": 2700,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 400,
+          "label": "Conjugate Operation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "Similarly, it’s possible to have homogeneity without additivity. Imagine a funct",
+      "bullets": [
+        "These examples remind us why linear systems require both properties. We can’t shortcut the definition by assuming one implies the other in all cases."
+      ],
+      "fullText": "Similarly, it’s possible to have homogeneity without additivity. Imagine a function that applies one slope if the input is rational and another slope if it’s irrational. Scaling works consistently because multiplying by a rational scalar preserves the input’s type (rational or irrational), so homogeneity holds. But if you add two irrational inputs that sum to a rational number, the slopes change—and additivity breaks down.\nThese examples remind us why linear systems require both properties. We can’t shortcut the definition by assuming one implies the other in all cases.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide24.JPG",
+      "script": "It's essential to remember that homogeneity and additivity are independent properties, and a system may satisfy one but not the other. This is why linear systems require both properties to ensure predictability and scalability.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": ""
+        },
+        {
+          "timeMs": 0,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": ""
+        },
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 3000,
+          "label": ""
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "Alright, let’s recap the main idea before we move on.",
+      "bullets": [
+        "A system is called linear only when it satisfies the superposition principle.",
+        "And superposition is really just the combination of two rules we already discussed:",
+        "additivity and homogeneity.",
+        "So what does that mean in plain language?",
+        "It means if I take two inputs, scale them by any constants, add them together,",
+        "and then send that combined signal through the operator,",
+        "I should get the same result as sending each input through the operator separately,",
+        "scaling the outputs the same way, and then adding those outputs.",
+        "That single statement is the clean “one-line” definition of linearity.",
+        "And once we have linearity, life becomes much easier.",
+        "Linear systems are the ones where we can use powerful tools like convolution and Fourier analysis,",
+        "and those tools will show up again and again in medical imaging.",
+        "One more practical point: real systems are not always perfectly linear.",
+        "But even when a system is nonlinear, we often approximate it as linear over a limited range,",
+        "or around a working point, or piece by piece.",
+        "That’s why learning linear systems is not just a math exercise.",
+        "It’s the foundation that lets us analyze, model, and design imaging systems in the real world."
+      ],
+      "fullText": "Alright, let’s recap the main idea before we move on.\n\nA system is called linear only when it satisfies the superposition principle.\nAnd superposition is really just the combination of two rules we already discussed:\nadditivity and homogeneity.\n\nSo what does that mean in plain language?\n\nIt means if I take two inputs, scale them by any constants, add them together,\nand then send that combined signal through the operator,\nI should get the same result as sending each input through the operator separately,\nscaling the outputs the same way, and then adding those outputs.\n\nThat single statement is the clean “one-line” definition of linearity.\n\nAnd once we have linearity, life becomes much easier.\nLinear systems are the ones where we can use powerful tools like convolution and Fourier analysis,\nand those tools will show up again and again in medical imaging.\n\nOne more practical point: real systems are not always perfectly linear.\nBut even when a system is nonlinear, we often approximate it as linear over a limited range,\nor around a working point, or piece by piece.\nThat’s why learning linear systems is not just a math exercise.\nIt’s the foundation that lets us analyze, model, and design imaging systems in the real world.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide25.JPG",
+      "script": "A system is linear if the output of two signals added together is the same as the sum of their individual outputs, which is a direct result of additivity and homogeneity. This means the system respects the order of operations, allowing us to scale, add, and apply the operator in any order.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Recap main idea"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 1000,
+          "label": "Superposition principle"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Additivity and homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "One subtle idea is relative linearity. A system’s behavior might depend on the c",
+      "bullets": [
+        "Similarly, for systems, we often focus on relative changes in input and output rather than absolute values. This helps us apply linear system theory even when the system’s baseline isn’t perfectly aligned with the origin."
+      ],
+      "fullText": "One subtle idea is relative linearity. A system’s behavior might depend on the chosen coordinate system or reference point. For example, a linear function with an intercept (like y = mx + b) is still linear in its relative changes. If you redefine the origin to subtract out b, it behaves like a linear function passing through zero.\nSimilarly, for systems, we often focus on relative changes in input and output rather than absolute values. This helps us apply linear system theory even when the system’s baseline isn’t perfectly aligned with the origin.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide26.JPG",
+      "script": "Relative linearity is a subtle but important idea in medical imaging, where a system's behavior might depend on the chosen coordinate system or reference point. Even if a system isn't perfectly linear, it may still exhibit relative linearity, meaning its behavior is linear when considering relative changes in input and output. This is why we often focus on relative changes, rather than absolute values. By doing so, we can apply linear system theory even when the system's baseline isn't perfectly aligned with the origin.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Relative linearity"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Relative changes"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Linear system theory"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "Let’s consider classic electrical components. A resistor follows Ohm’s law: V = ",
+      "bullets": [],
+      "fullText": "Let’s consider classic electrical components. A resistor follows Ohm’s law: V = IR. This is a linear relationship—double the current, and the voltage doubles. Whether we write V = IR or I = V/R, the linearity remains clear. This is a simple, familiar example of a linear system.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide27.JPG",
+      "script": "A resistor follows Ohm's law, which is a linear relationship between voltage and current. If you double the current, the voltage doubles, and this relationship remains clear whether you solve for voltage or current. This is a simple example of a linear system, where the output changes directly with the input.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Linear Relationship"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Ohm's Law"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Direct Proportionality"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "Now let’s use a capacitor as a simple but important example.",
+      "bullets": [
+        "A capacitor is interesting because its voltage is not determined by the current at just one instant.",
+        "Instead, the voltage depends on the history of the current.",
+        "That’s exactly what the equation on the right is saying:",
+        "the voltage at time t equals one over C times the integral of the current from t0 to t,",
+        "and then you add the initial voltage at time t0.",
+        "So there’s an integral term, and there’s also an initial condition.",
+        "Now here’s the key point for our discussion of linearity.",
+        "If we look at the full expression for v(t), that constant initial voltage term is sitting there.",
+        "But if we focus on the change in voltage relative to the initial time,",
+        "meaning we look at v(t) minus v(t0),",
+        "then the relationship becomes purely the integral of the input current scaled by one over C.",
+        "And that input–output mapping is linear.",
+        "So this is a great example of why we have to be careful about what we call the “input” and the “output,”",
+        "and also why initial conditions matter.",
+        "Often, systems are nicely linear in terms of changes around a reference state,",
+        "even if the full expression includes an offset coming from the initial condition."
+      ],
+      "fullText": "Now let’s use a capacitor as a simple but important example.\n\nA capacitor is interesting because its voltage is not determined by the current at just one instant.\nInstead, the voltage depends on the history of the current.\n\nThat’s exactly what the equation on the right is saying:\nthe voltage at time t equals one over C times the integral of the current from t0 to t,\nand then you add the initial voltage at time t0.\n\nSo there’s an integral term, and there’s also an initial condition.\n\nNow here’s the key point for our discussion of linearity.\n\nIf we look at the full expression for v(t), that constant initial voltage term is sitting there.\nBut if we focus on the change in voltage relative to the initial time,\nmeaning we look at v(t) minus v(t0),\nthen the relationship becomes purely the integral of the input current scaled by one over C.\n\nAnd that input–output mapping is linear.\n\nSo this is a great example of why we have to be careful about what we call the “input” and the “output,”\nand also why initial conditions matter.\nOften, systems are nicely linear in terms of changes around a reference state,\neven if the full expression includes an offset coming from the initial condition.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide28.JPG",
+      "script": "A capacitor is interesting because its voltage is not determined by the current at just one instant, but rather by the total charge accumulated over time. The equation for the voltage includes an integral term to account for this history, as well as an initial condition. This is exactly the kind of non-intuitive behavior that makes a system nonlinear.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Capacitor's voltage depends on current history"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Equation includes integral term for history"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Initial condition is also important"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "An inductor works similarly, but with current depending on the integral of volta",
+      "bullets": [],
+      "fullText": "An inductor works similarly, but with current depending on the integral of voltage over time, or voltage depending on the derivative of current. Again, if we account for initial conditions, we can apply linear system theory to analyze these components effectively.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide29.JPG",
+      "script": "An inductor works similarly, but with current depending on the integral of voltage over time, or voltage depending on the derivative of current. This means that the relationship between voltage and current is not immediate, but rather depends on the history of the signal. However, if we account for initial conditions, we can apply linear system theory to analyze these components effectively.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Inductor's Current-Voltage Relationship"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Accounting for History"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2500,
+          "label": "Impedance in Circuit Analysis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "In medical imaging and other engineering applications, we often focus not just o",
+      "bullets": [
+        "For example, if I take your picture in this room, then take it again in my office, the image of you should look the same. The system’s response stays consistent despite the shift in location. This stability, or shift invariance, is a key property of many imaging systems."
+      ],
+      "fullText": "In medical imaging and other engineering applications, we often focus not just on linear systems, but on shift-invariant linear systems. This means that if the input shifts—say, you move an object from one location to another—the output shifts in the same way.\nFor example, if I take your picture in this room, then take it again in my office, the image of you should look the same. The system’s response stays consistent despite the shift in location. This stability, or shift invariance, is a key property of many imaging systems.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide30.JPG",
+      "script": "In medical imaging and other engineering applications, we often focus on shift-invariant linear systems, where the output shifts in the same way as the input. This means that if you move an object or change the location of the input, the system's response stays consistent. For instance, taking your picture in this room or in my office should produce the same image of you. This stability is a key property of many imaging systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Shift Invariance"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Consistent Response"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Key Property"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "Think about ripples on the surface of a pond.",
+      "bullets": [
+        "If you drop a stone at one spot, you get a circular ripple pattern that spreads outward.",
+        "Now drop a similar stone somewhere else.",
+        "You still get the same kind of ripple pattern, it just starts from a different location.",
+        "That is the basic intuition for spatial invariance.",
+        "A spatially invariant system behaves the same way no matter where the input happens.",
+        "If you shift the input in space, the output shifts by the same amount,",
+        "but the overall shape of the response does not change.",
+        "And this idea is going to matter a lot later in imaging,",
+        "because many imaging systems are approximately spatially invariant over a region,",
+        "and that is exactly the condition that makes convolution such a useful model."
+      ],
+      "fullText": "Think about ripples on the surface of a pond.\n\nIf you drop a stone at one spot, you get a circular ripple pattern that spreads outward.\nNow drop a similar stone somewhere else.\nYou still get the same kind of ripple pattern, it just starts from a different location.\n\nThat is the basic intuition for spatial invariance.\n\nA spatially invariant system behaves the same way no matter where the input happens.\nIf you shift the input in space, the output shifts by the same amount,\nbut the overall shape of the response does not change.\n\nAnd this idea is going to matter a lot later in imaging,\nbecause many imaging systems are approximately spatially invariant over a region,\nand that is exactly the condition that makes convolution such a useful model.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide31.JPG",
+      "script": "The concept of spatial invariance is like observing ripples on a pond, where dropping a stone at different locations creates the same type of ripple pattern, just starting from a different point. This basic intuition helps us understand that a spatially invariant system behaves the same way no matter where the input occurs, with the output shifting by the same amount but maintaining its overall shape. This idea will be crucial later in imaging, particularly when dealing with real-world systems and applications.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Ripples on a pond"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Dropping a stone"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Same ripple pattern"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Now here’s the same idea, but in the time domain.",
+      "bullets": [
+        "Think about a music player.",
+        "If you play the same song today, it has a certain sound waveform.",
+        "If you play that exact same recording tomorrow, or next week, the song still sounds the same.",
+        "In other words, the system does not “care” when you start the input.",
+        "Starting the song later just shifts the output later by the same amount,",
+        "but it does not change the shape of the output.",
+        "That is temporal invariance, or time-shift invariance.",
+        "And this idea is important because many signal-processing and imaging models assume",
+        "the system behaves the same way over time, at least within the time window we care about.",
+        "When a system is time-invariant, shifting the input in time simply shifts the output in time."
+      ],
+      "fullText": "Now here’s the same idea, but in the time domain.\n\nThink about a music player.\nIf you play the same song today, it has a certain sound waveform.\nIf you play that exact same recording tomorrow, or next week, the song still sounds the same.\n\nIn other words, the system does not “care” when you start the input.\nStarting the song later just shifts the output later by the same amount,\nbut it does not change the shape of the output.\n\nThat is temporal invariance, or time-shift invariance.\n\nAnd this idea is important because many signal-processing and imaging models assume\nthe system behaves the same way over time, at least within the time window we care about.\nWhen a system is time-invariant, shifting the input in time simply shifts the output in time.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide32.JPG",
+      "script": "The concept of temporal invariance is crucial in medical imaging, as it allows us to analyze and predict system behavior with confidence. If a system is time-shift invariant, we can apply the same principles to different scenarios, such as image reconstruction or signal processing. This idea is fundamental to understanding how systems behave in medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Temporal Invariance"
+        },
+        {
+          "timeMs": 6500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Music Player Example"
+        },
+        {
+          "timeMs": 8500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "System Behavior"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "Mathematically, shift invariance means that if the input shifts by some amount—s",
+      "bullets": [
+        "Shift invariance, combined with linearity, gives us powerful tools for analyzing systems. Together, they allow us to model and predict system behavior with confidence, whether in medical imaging, signal processing, or other fields of engineering."
+      ],
+      "fullText": "Mathematically, shift invariance means that if the input shifts by some amount—say a—the output shifts by the same amount. The system’s operation stays consistent, no matter where or when the input occurs.\nShift invariance, combined with linearity, gives us powerful tools for analyzing systems. Together, they allow us to model and predict system behavior with confidence, whether in medical imaging, signal processing, or other fields of engineering.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide33.JPG",
+      "script": "If the input shifts by some amount, say a, the output shifts by the same amount, and the system's operation stays consistent, no matter where or when the input occurs. This means that the system's behavior is predictable and reliable, making it easier to analyze and understand. The combination of shift invariance and linearity gives us a solid foundation for modeling and predicting system behavior.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": ""
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": ""
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": ""
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "Let’s finish this part of our discussion by touching briefly on nonlinear system",
+      "bullets": [
+        "Beyond practical applications, nonlinear systems are fascinating because they produce surprising, often counterintuitive phenomena. And anything that defies our intuition naturally grabs our interest."
+      ],
+      "fullText": "Let’s finish this part of our discussion by touching briefly on nonlinear systems. This is a topic marked with a green button—so it’s something nice to know, not required at the core level of this course. Nonlinear science is a relatively new and complex area. Unlike linear systems, nonlinear equations are often difficult, or even impossible, to solve exactly. But thanks to modern computing, we can discretize these equations and compute solutions numerically—even if we have to do so through brute force.\nBeyond practical applications, nonlinear systems are fascinating because they produce surprising, often counterintuitive phenomena. And anything that defies our intuition naturally grabs our interest.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide34.JPG",
+      "script": "Nonlinear systems are a relatively new and complex area of study, marked as 'nice to know' in this course. They're difficult to solve exactly, but modern computing allows us to discretize the equations and find numerical solutions. This is a fascinating area of study that produces surprising and counterintuitive results.",
+      "spotlightEvents": [
+        {
+          "timeMs": 216000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Nonlinear Systems"
+        },
+        {
+          "timeMs": 219000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Counterintuitive Phenomena"
+        },
+        {
+          "timeMs": 221000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Fascinating Area of Study"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "One famous example of a nonlinear system is the logistic map, a simple but power",
+      "bullets": [
+        "When the population is small, growth is nearly linear. But as the population approaches the environment’s limits, growth slows—resources become scarce, and the population stabilizes or even declines. This simple model reflects how nature regulates itself."
+      ],
+      "fullText": "One famous example of a nonlinear system is the logistic map, a simple but powerful mathematical model. It describes how a population—say, of rabbits—evolves over time. The equation looks straightforward: next year’s population depends on this year’s population and a growth rate factor, r. But because of the nonlinear term involving the population itself, the system’s behavior changes dramatically depending on the value of r.\nWhen the population is small, growth is nearly linear. But as the population approaches the environment’s limits, growth slows—resources become scarce, and the population stabilizes or even declines. This simple model reflects how nature regulates itself.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide35.JPG",
+      "script": "The logistic map is a simple yet powerful mathematical model that describes how a population, such as rabbits, evolves over time. The equation appears straightforward, but the nonlinear term involving the population itself leads to dramatic changes in behavior depending on the growth rate factor, r. For small populations, growth is nearly linear, but as the population approaches its limit, growth slows due to resource scarcity. This model demonstrates the complexity that can arise from nonlinear interactions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Logistic Map"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Nonlinear Behavior"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Population Growth"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "What’s remarkable about the logistic map is how its behavior changes as the grow",
+      "bullets": [
+        "This is chaos in a mathematical sense: a deterministic system, governed by precise rules, but with outputs that seem random because they’re so sensitive to initial conditions. This is why long-term predictions, like weather forecasts, become unreliable—small differences in starting conditions can lead to dramatically different outcomes. This idea ties back to quantum mechanics, where we see that at a fundamental level, nature behaves probabilistically."
+      ],
+      "fullText": "What’s remarkable about the logistic map is how its behavior changes as the growth rate increases. At low rates, the population settles to a single stable value. As the rate rises, the population starts oscillating between two values, then four, then many—and eventually behaves unpredictably, in what’s called chaotic behavior.\nThis is chaos in a mathematical sense: a deterministic system, governed by precise rules, but with outputs that seem random because they’re so sensitive to initial conditions. This is why long-term predictions, like weather forecasts, become unreliable—small differences in starting conditions can lead to dramatically different outcomes. This idea ties back to quantum mechanics, where we see that at a fundamental level, nature behaves probabilistically.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide36.JPG",
+      "script": "The logistic map is a simple yet powerful mathematical model that demonstrates the complexity of nonlinear systems. As the growth rate increases, the population's behavior changes dramatically, from a stable value to chaotic oscillations. This transition to chaos is a fundamental aspect of nonlinear science, highlighting the sensitivity of the system to initial conditions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Chaos in a deterministic system"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Sensitivity to initial conditions"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Unreliable long-term predictions"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Another example of a nonlinear system is the biological neuron. A neuron accumul",
+      "bullets": [
+        "We can model this mathematically as an artificial neuron, where inputs are combined through a weighted sum (the linear part), and this sum is passed through a nonlinear function that decides whether or not to fire. This is the basic building block of artificial neural networks."
+      ],
+      "fullText": "Another example of a nonlinear system is the biological neuron. A neuron accumulates inputs over time—small signals have no effect, but once inputs surpass a certain threshold, the neuron fires, sending an electrical impulse. This threshold mechanism helps the nervous system filter out noise and only respond to meaningful stimuli.\nWe can model this mathematically as an artificial neuron, where inputs are combined through a weighted sum (the linear part), and this sum is passed through a nonlinear function that decides whether or not to fire. This is the basic building block of artificial neural networks.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide37.JPG",
+      "script": "The biological neuron is a great example of a nonlinear system that combines linear and nonlinear elements. It accumulates inputs over time, and once the threshold is reached, the neuron fires, sending an electrical impulse. This threshold mechanism helps the nervous system filter out noise and only respond to meaningful stimuli. We can model this mathematically using an artificial neuron, which combines linear and nonlinear elements to make decisions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Threshold mechanism"
+        },
+        {
+          "timeMs": 6000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Noise filtering"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Basic building block"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "When we connect these artificial neurons in layers, we create a neural network. ",
+      "bullets": [
+        "In these networks, the lower layers detect simple features, like edges or corners, while higher layers learn more abstract patterns, like faces or traffic signs. Deep neural networks now drive advances in fields from facial recognition to self-driving cars. This is a powerful example of combining linear and nonlinear elements to solve complex problems."
+      ],
+      "fullText": "When we connect these artificial neurons in layers, we create a neural network. With many layers, we have what’s called a deep neural network—the foundation of modern deep learning.\nIn these networks, the lower layers detect simple features, like edges or corners, while higher layers learn more abstract patterns, like faces or traffic signs. Deep neural networks now drive advances in fields from facial recognition to self-driving cars. This is a powerful example of combining linear and nonlinear elements to solve complex problems.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide38.JPG",
+      "script": "By connecting artificial neurons in layers, we create a neural network that can learn and represent complex patterns and features, such as faces or traffic signs. This is made possible by the combination of linear and nonlinear elements, allowing the network to detect simple features in lower layers and abstract patterns in higher layers. The power of deep neural networks has led to significant advances in various fields, including facial recognition and self-driving cars.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Neural Network"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Lower Layers"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Higher Layers"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "As we wrap up, let me remind you that alongside the exams and homework, those of",
+      "bullets": [],
+      "fullText": "As we wrap up, let me remind you that alongside the exams and homework, those of you who are particularly motivated are welcome to pursue a class project. I recommend looking into machine learning—it’s an exciting and fast-growing area. If you’re interested, you can read my perspective article on this topic, and we can discuss potential directions for your project.",
+      "imageURL": "/lectures/Lecture_03/Images/Slide39.JPG",
+      "script": "As we wrap up, let me remind you that alongside the exams and homework, those of you who are particularly motivated are welcome to pursue a class project. I recommend looking into machine learning—it's an exciting and fast-growing area. If you're interested, you can read my perspective article on this topic, and we can discuss potential directions for your project.",
+      "spotlightEvents": [
+        {
+          "timeMs": 360000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": ""
+        },
+        {
+          "timeMs": 370000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": ""
+        },
+        {
+          "timeMs": 380000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": ""
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "If a project doesn’t interest you, that’s perfectly fine—you can focus on the re",
+      "bullets": [
+        "Thank you for your attention today!"
+      ],
+      "fullText": "If a project doesn’t interest you, that’s perfectly fine—you can focus on the regular course structure of lectures, exams, and homework. Speaking of which, I’ll upload today’s homework assignment for you to download. Please submit your solutions by midnight next Tuesday. After the deadline, we’ll post the answers for your review.\nThank you for your attention today!",
+      "imageURL": "/lectures/Lecture_03/Images/Slide40.JPG",
+      "script": "If a project doesn’t interest you, that’s perfectly fine, you can focus on the regular course structure of lectures, exams, and homework. I'll upload today's homework assignment for you to download, and please submit your solutions by midnight next Tuesday. After the deadline, we'll post the answers for your review. Thank you for your attention today!",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": ""
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": ""
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": ""
+        }
+      ]
+    }
+  ]
+}

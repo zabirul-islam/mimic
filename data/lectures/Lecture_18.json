@@ -1,0 +1,2238 @@
+{
+  "lectureId": "Lecture_18",
+  "lectureTitle": "Medical Imaging — Lecture 18",
+  "totalSlides": 55,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Today, we’re going to begin a new chapter on the physical principles of Magnetic",
+      "bullets": [
+        "MRI is one of the most powerful tools in modern biomedical imaging, and in this session, we’ll look at the physics closely that makes MRI work. We’ll build up from the physical foundations including Maxwell’s equations, through the concepts of magnetization and precession, all the way to how signals are generated and detected. Along the way, we’ll also discuss key parameters, such as proton density, T1 and T2, and how they enable image contrasts.",
+        "Okay, let’s get started with MRI physics."
+      ],
+      "fullText": "Today, we’re going to begin a new chapter on the physical principles of Magnetic Resonance Imaging, or MRI. This is Lecture 18 in our series.\n\nMRI is one of the most powerful tools in modern biomedical imaging, and in this session, we’ll look at the physics closely that makes MRI work. We’ll build up from the physical foundations including Maxwell’s equations, through the concepts of magnetization and precession, all the way to how signals are generated and detected. Along the way, we’ll also discuss key parameters, such as proton density, T1 and T2, and how they enable image contrasts.\nOkay, let’s get started with MRI physics.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide1.JPG",
+      "script": "Let's dive into the physical principles of MRI, which will give us a deeper understanding of this powerful imaging technique. We'll start with the fundamental physical foundations and build up to the key concepts that make MRI work. This will help us appreciate the underlying physics and its connection to image contrasts and tissue differentiation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "New Chapter"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "MRI Physics"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Physical Foundations"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "So, we are still on schedule. If you look at the course outline, we have already",
+      "bullets": [
+        "Now, we are moving into MRI materials. Today’s focus is on MRI physics, which is the foundation for understanding how MRI systems generate and detect signals. This will prepare us for the next lectures, where we will go deeper into MRI techniques, systems, and applications."
+      ],
+      "fullText": "So, we are still on schedule. If you look at the course outline, we have already covered topics such as Fourier series, signal processing, CT reconstruction, and nuclear imaging. \n\nNow, we are moving into MRI materials. Today’s focus is on MRI physics, which is the foundation for understanding how MRI systems generate and detect signals. This will prepare us for the next lectures, where we will go deeper into MRI techniques, systems, and applications.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide2.JPG",
+      "script": "We're right on track, and if you glance at the course outline, you'll see that we've already covered some fundamental topics like Fourier series, signal processing, CT reconstruction, and nuclear imaging. Now, we're shifting our focus to MRI, starting with the physical principles that enable MRI systems to produce and detect signals. This foundation will serve us well as we dive deeper into MRI techniques, systems, and real-world applications in the next lectures.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": ""
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": ""
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": ""
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "Let me start by giving you both a preview and a review. The preview is like a bi",
+      "bullets": [
+        "So first, let’s take a look at this overall framework. We will begin with the physical foundation, then move on to signal generation, and finally discuss signal decay. This roadmap will guide us through today’s lecture."
+      ],
+      "fullText": "Let me start by giving you both a preview and a review. The preview is like a big picture of what MRI physics is about. I will provide you with some basic knowledge and introductory ideas that will help you understand the more detailed content later. \n\nSo first, let’s take a look at this overall framework. We will begin with the physical foundation, then move on to signal generation, and finally discuss signal decay. This roadmap will guide us through today’s lecture.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide3.JPG",
+      "script": "Let me give you both a preview and a review of what to expect in this lecture. The preview is like a big picture of what MRI physics is about, providing a basic understanding of the subject. I'll share some introductory ideas that will help you grasp the more detailed content later. Our roadmap for today's lecture starts with the physical foundation, then moves on to signal generation, and finally discusses signal decay.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Roadmap Overview"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Physical Foundation"
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Signal Generation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "First, let’s step back and look at the big picture. Up to this point, we have st",
+      "bullets": [
+        "Because these two types of information are highly complementary, combining them makes the results much more powerful. That is why PET/CT scanners have become standard in many hospitals, especially in radiation oncology. More recently, companies like Siemens and GE have developed PET/MRI systems. However, CT and MRI have not yet been commercially combined, although research is moving in that direction.",
+        "The long-term vision is to bring CT, MRI, and nuclear imaging together into one unified system, giving us structural, functional, and biochemical information at the same time. This is the major trend in imaging—moving from individual modalities to hybrid and, eventually, fully integrated scanners.",
+        "Now, with that context, let us move to our next imaging modality, MRI, which is unique in that it can provide both anatomical and functional information in a single technique."
+      ],
+      "fullText": "First, let’s step back and look at the big picture. Up to this point, we have studied CT and nuclear imaging. These are already used together in hybrid imaging. CT provides us with detailed structural and anatomical information, while nuclear imaging methods, such as PET and SPECT, provide functional information by tracking radioactive tracers that participate in biochemical reactions within the body.\n\nBecause these two types of information are highly complementary, combining them makes the results much more powerful. That is why PET/CT scanners have become standard in many hospitals, especially in radiation oncology. More recently, companies like Siemens and GE have developed PET/MRI systems. However, CT and MRI have not yet been commercially combined, although research is moving in that direction.\n\nThe long-term vision is to bring CT, MRI, and nuclear imaging together into one unified system, giving us structural, functional, and biochemical information at the same time. This is the major trend in imaging—moving from individual modalities to hybrid and, eventually, fully integrated scanners.\nNow, with that context, let us move to our next imaging modality, MRI, which is unique in that it can provide both anatomical and functional information in a single technique.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide4.JPG",
+      "script": "Let's take a step back and look at the big picture. We've been studying CT and nuclear imaging, which are already used together in hybrid imaging. CT gives us detailed structural and anatomical information, while nuclear imaging methods like PET and SPECT provide functional information by tracking radioactive tracers involved in biochemical reactions. These two types of information are highly complementary, making the results much more powerful when combined.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Hybrid Imaging"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "PET/CT Scanners"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Future of Imaging"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Now, let’s go through some important milestones. MRI is unique because it can pr",
+      "bullets": [
+        "The story begins in 1946, when Bloch at Stanford and Purcell at Harvard discovered nuclear magnetic resonance. For this work, they received the Nobel Prize in Physics in 1952. At that time, NMR was mainly used to measure signals from a whole sample.",
+        "Then in 1973, Lauterbur at Stony Brook University introduced the idea of magnetic resonance imaging. The key innovation was to use gradient magnetic fields, which made it possible to turn NMR from a bulk measurement into a tomographic imaging technique. Now we could form images with pixels and voxels instead of just an overall signal. This breakthrough eventually earned Lauterbur and colleagues the Nobel Prize in Medicine in 2003.",
+        "By the late 1970s, the first human MRI images were produced. In the early 1980s, commercial MRI systems became available. Then, in 1993, functional MRI was developed, allowing us to look at brain activity through blood oxygenation changes.",
+        "And now, we are in the era of large-scale brain initiatives, where MRI continues to be at the center of neuroscience and clinical imaging."
+      ],
+      "fullText": "Now, let’s go through some important milestones. MRI is unique because it can provide two types of information. On one hand, it gives us anatomical information, very much like CT, by showing the structure of soft tissues. On the other hand, it can measure blood oxygenation levels, which adds functional information. That combination is what makes MRI so powerful.\nThe story begins in 1946, when Bloch at Stanford and Purcell at Harvard discovered nuclear magnetic resonance. For this work, they received the Nobel Prize in Physics in 1952. At that time, NMR was mainly used to measure signals from a whole sample.\nThen in 1973, Lauterbur at Stony Brook University introduced the idea of magnetic resonance imaging. The key innovation was to use gradient magnetic fields, which made it possible to turn NMR from a bulk measurement into a tomographic imaging technique. Now we could form images with pixels and voxels instead of just an overall signal. This breakthrough eventually earned Lauterbur and colleagues the Nobel Prize in Medicine in 2003.\nBy the late 1970s, the first human MRI images were produced. In the early 1980s, commercial MRI systems became available. Then, in 1993, functional MRI was developed, allowing us to look at brain activity through blood oxygenation changes.\nAnd now, we are in the era of large-scale brain initiatives, where MRI continues to be at the center of neuroscience and clinical imaging.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide5.JPG",
+      "script": "The story of MRI begins with the discovery of nuclear magnetic resonance by Bloch and Purcell in 1946. They received the Nobel Prize in Physics in 1952 for this groundbreaking work. Initially, NMR was used to measure signals from a small region, but it laid the foundation for future developments.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Bloch and Purcell's Nobel Prize"
+        },
+        {
+          "timeMs": 6000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "NMR was used to measure signals from a whole sample"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Lauterbur introduced gradient magnetic fields"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Here is the very general idea behind how MRI works. At the center of the system,",
+      "bullets": [
+        "In addition, we use radiofrequency coils, or RF coils. These coils send radio waves to disturb the alignment of the protons in the body. When the protons are tipped away from alignment, they begin to precess, and in doing so, they emit their own radiofrequency signals. The RF coils then detect these signals.",
+        "With the help of signal processing and mathematical reconstruction, we turn these detected signals into detailed images. Right now, it may sound abstract, but as we go deeper into the lecture, we will carefully unfold each of these components. For now, just keep in mind the big picture: a strong magnet, gradient coils for spatial encoding, RF coils for excitation and detection, and signal reconstruction to form the final images."
+      ],
+      "fullText": "Here is the very general idea behind how MRI works. At the center of the system, we have a large superconducting magnet. This magnet creates a very strong, stable magnetic field. Around it, we place gradient coils, which allow us to vary the magnetic field in different directions and make tomographic, or slice-by-slice, imaging possible.\n\nIn addition, we use radiofrequency coils, or RF coils. These coils send radio waves to disturb the alignment of the protons in the body. When the protons are tipped away from alignment, they begin to precess, and in doing so, they emit their own radiofrequency signals. The RF coils then detect these signals.\n\nWith the help of signal processing and mathematical reconstruction, we turn these detected signals into detailed images. Right now, it may sound abstract, but as we go deeper into the lecture, we will carefully unfold each of these components. For now, just keep in mind the big picture: a strong magnet, gradient coils for spatial encoding, RF coils for excitation and detection, and signal reconstruction to form the final images.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide6.JPG",
+      "script": "The MRI system consists of a superconducting magnet, gradient coils, and radiofrequency coils. The magnet creates a strong and stable magnetic field, while the gradient coils vary the field in different directions for tomographic imaging. The RF coils send radio waves to disturb the protons, causing them to precess and emit radiofrequency signals. These signals are then detected and processed to form an image.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "RF coils"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 300,
+          "label": "signal reconstruction"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 200,
+          "label": "magnet"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "To get a rough idea of how MRI works, let’s look at it step by step.",
+      "bullets": [
+        "Magnetic resonance imaging—MRI for short—can be modeled in the following way. First, consider this conducting loop of wire. The magnetic dipole moment is defined as the current going through the wire, times the cross-sectional area enclosed by the wire, times a unit vector perpendicular to that surface area. So the magnetic dipole moment points in the perpendicular direction, like this.",
+        "Now, a proton is believed to spin on its axis at the subatomic level. Because it’s spinning, the magnetic dipole moment can be thought of as the sum of many tiny circulating currents. Whenever you take a dipole moment and place it in an external magnetic field, the dipole experiences a torque. That torque is given by the equation: tau equals mu cross B. In words: the torque equals the magnetic dipole moment crossed with the magnetic field.",
+        "What this means is that the dipole moment will tend to align with the magnetic field. Imagine here is the B-field, and here is the dipole moment. When you take the cross product, you get a torque out of the board. That torque causes the dipole to rotate in this direction. The dipole will try to line up with the external B-field, but it won’t line up completely. The angular momentum of the spinning top—so to speak—prevents complete alignment. Instead, it undergoes precession, just like a spinning top wobbling around a vertical axis.",
+        "So, think of the proton as a spinning top. It rotates on its axis, but also precesses about an axis that is parallel to the external magnetic field.",
+        "Now, let’s introduce radiation. We emit an electromagnetic wave laterally, toward the precession axis. For simplicity, I’ve drawn only the magnetic component, oscillating in and out of the board as it travels laterally. If the angular frequency of this radiation equals the angular frequency of precession, resonance occurs.",
+        "We define the Larmor angular frequency:",
+        "omega L equals gamma times B-naught.",
+        "Here gamma is the gyromagnetic ratio. For a proton, gamma is about two-point-sixty-seven times ten to the eighth radians per second per tesla. To convert from radians per second to hertz, we divide by two-pi. So,",
+        "two-pi f L equals gamma times B-naught.",
+        "Or equivalently:",
+        "f L equals gamma over two-pi, times B-naught.",
+        "Numerically, this works out to about forty-two megahertz per tesla.",
+        "So, the frequency of the applied radiation matches the precession frequency of the proton. Whenever the proton comes around to a certain point, the applied B-field is right there to interact with it. The torque tends to flatten the precession, step by step, as the proton keeps rotating.",
+        "When the radiation is turned off, the proton flips back to its original motion, precessing around the external magnetic field axis. This is the fundamental mechanism of magnetic resonance. Historically, it was called nuclear magnetic resonance, but later changed to simply magnetic resonance—mostly for public perception, since “nuclear” tends to worry people.",
+        "Now let’s take a group of hydrogen atoms. The body contains a large amount of hydrogen, because we are mostly water—H2O. Initially, the dipole moments of hydrogen protons are randomly oriented. When we apply an external magnetic field, the protons tend to align with the field, precessing around its axis.",
+        "When we emit radiation laterally, as we discussed before, the protons flatten out. Then, when the radiation is turned off, the protons flip back. Think of this like a spring being released. As they flip back, they emit radiation. That emitted radiation can be detected and processed to form an image.",
+        "In 1973, a breakthrough came from Paul Lauterbur—he showed that you could actually use this principle to create images. The idea was: take a subject, place them inside a tube with a strong superconducting magnet, on the order of five tesla. The magnetic field is aligned along the axis of the tube, so all the protons line up and precess.",
+        "Then, apply a secondary magnetic field that produces a gradient along the axis of the tube. That means the magnetic field is slightly stronger at one end, weaker at the other. Because the Larmor frequency depends on the field strength, different positions along the tube correspond to different precession frequencies.",
+        "For example, at a position one-point-three meters down the tube, the magnetic field might be B1, slightly larger than B0. Substituting B1 into the equation, you find a different resonance frequency. By tuning the applied radiation frequency, only protons at that slice will resonate and emit radiation. This gives spatial localization.",
+        "Engineers extended this idea. By using different gradient coils—like the saddle coil shown here—they can create gradients not only along the Z-axis, but also in the X and Y directions. That way, we can localize signals to small cubes of tissue, called voxels, inside the body.",
+        "Finally, only tissues containing hydrogen—meaning water and fat—produce signal. That’s why MRI works so well for imaging soft tissues in the human body."
+      ],
+      "fullText": "To get a rough idea of how MRI works, let’s look at it step by step. \n\nMagnetic resonance imaging—MRI for short—can be modeled in the following way. First, consider this conducting loop of wire. The magnetic dipole moment is defined as the current going through the wire, times the cross-sectional area enclosed by the wire, times a unit vector perpendicular to that surface area. So the magnetic dipole moment points in the perpendicular direction, like this.\n\nNow, a proton is believed to spin on its axis at the subatomic level. Because it’s spinning, the magnetic dipole moment can be thought of as the sum of many tiny circulating currents. Whenever you take a dipole moment and place it in an external magnetic field, the dipole experiences a torque. That torque is given by the equation: tau equals mu cross B. In words: the torque equals the magnetic dipole moment crossed with the magnetic field.\nWhat this means is that the dipole moment will tend to align with the magnetic field. Imagine here is the B-field, and here is the dipole moment. When you take the cross product, you get a torque out of the board. That torque causes the dipole to rotate in this direction. The dipole will try to line up with the external B-field, but it won’t line up completely. The angular momentum of the spinning top—so to speak—prevents complete alignment. Instead, it undergoes precession, just like a spinning top wobbling around a vertical axis.\nSo, think of the proton as a spinning top. It rotates on its axis, but also precesses about an axis that is parallel to the external magnetic field.\nNow, let’s introduce radiation. We emit an electromagnetic wave laterally, toward the precession axis. For simplicity, I’ve drawn only the magnetic component, oscillating in and out of the board as it travels laterally. If the angular frequency of this radiation equals the angular frequency of precession, resonance occurs.\n\nWe define the Larmor angular frequency:\u000bomega L equals gamma times B-naught.\nHere gamma is the gyromagnetic ratio. For a proton, gamma is about two-point-sixty-seven times ten to the eighth radians per second per tesla. To convert from radians per second to hertz, we divide by two-pi. So,\ntwo-pi f L equals gamma times B-naught.\nOr equivalently:\u000bf L equals gamma over two-pi, times B-naught.\nNumerically, this works out to about forty-two megahertz per tesla.\nSo, the frequency of the applied radiation matches the precession frequency of the proton. Whenever the proton comes around to a certain point, the applied B-field is right there to interact with it. The torque tends to flatten the precession, step by step, as the proton keeps rotating.\nWhen the radiation is turned off, the proton flips back to its original motion, precessing around the external magnetic field axis. This is the fundamental mechanism of magnetic resonance. Historically, it was called nuclear magnetic resonance, but later changed to simply magnetic resonance—mostly for public perception, since “nuclear” tends to worry people.\n\nNow let’s take a group of hydrogen atoms. The body contains a large amount of hydrogen, because we are mostly water—H2O. Initially, the dipole moments of hydrogen protons are randomly oriented. When we apply an external magnetic field, the protons tend to align with the field, precessing around its axis.\nWhen we emit radiation laterally, as we discussed before, the protons flatten out. Then, when the radiation is turned off, the protons flip back. Think of this like a spring being released. As they flip back, they emit radiation. That emitted radiation can be detected and processed to form an image.\nIn 1973, a breakthrough came from Paul Lauterbur—he showed that you could actually use this principle to create images. The idea was: take a subject, place them inside a tube with a strong superconducting magnet, on the order of five tesla. The magnetic field is aligned along the axis of the tube, so all the protons line up and precess.\n\nThen, apply a secondary magnetic field that produces a gradient along the axis of the tube. That means the magnetic field is slightly stronger at one end, weaker at the other. Because the Larmor frequency depends on the field strength, different positions along the tube correspond to different precession frequencies.\nFor example, at a position one-point-three meters down the tube, the magnetic field might be B1, slightly larger than B0. Substituting B1 into the equation, you find a different resonance frequency. By tuning the applied radiation frequency, only protons at that slice will resonate and emit radiation. This gives spatial localization.\nEngineers extended this idea. By using different gradient coils—like the saddle coil shown here—they can create gradients not only along the Z-axis, but also in the X and Y directions. That way, we can localize signals to small cubes of tissue, called voxels, inside the body.\n\nFinally, only tissues containing hydrogen—meaning water and fat—produce signal. That’s why MRI works so well for imaging soft tissues in the human body.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide7.JPG",
+      "script": "Let's break down the MRI process into simple steps to understand how it works. We can start with a conducting loop of wire, where the magnetic dipole moment is defined by the current, cross-sectional area, and a unit vector perpendicular to that surface area. This dipole moment points in the direction perpendicular to the surface area. Now, a proton is thought to spin on its axis, creating a magnetic dipole moment.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Magnetic dipole moment"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 300,
+          "label": "Conducting loop of wire"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 400,
+          "label": "Proton's angular momentum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "So that gives us a general idea of how MRI works. Areas in the body that contain",
+      "bullets": [
+        "The short lecture we just saw is an excellent example of how to present these key principles clearly. I encourage you to revisit it after you study the details, because once you learn the full physics of MRI, you will be able to understand nearly all of it.",
+        "Now, let’s review some of the mathematical foundations. One important concept is the dot product. If we have two vectors, v and w, their dot product is equal to the magnitude of v times the magnitude of w times the cosine of the angle between them. Geometrically, the dot product measures how much one vector projects onto another. You can think of it as relating to the area formed by the parallelogram between the two vectors.",
+        "This is a very elegant mathematical operation, and it also has a counterpart called the cross product, which we will look at next."
+      ],
+      "fullText": "So that gives us a general idea of how MRI works. Areas in the body that contain a lot of water, like soft tissues, produce strong signals, which show up bright in the image. Areas with little water, like bone, produce weak signals, so they appear dark. That is the basic contrast mechanism in MRI.\nThe short lecture we just saw is an excellent example of how to present these key principles clearly. I encourage you to revisit it after you study the details, because once you learn the full physics of MRI, you will be able to understand nearly all of it.\n\nNow, let’s review some of the mathematical foundations. One important concept is the dot product. If we have two vectors, v and w, their dot product is equal to the magnitude of v times the magnitude of w times the cosine of the angle between them. Geometrically, the dot product measures how much one vector projects onto another. You can think of it as relating to the area formed by the parallelogram between the two vectors.\n\nThis is a very elegant mathematical operation, and it also has a counterpart called the cross product, which we will look at next.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide8.JPG",
+      "script": "So, in summary, areas in the body with a lot of water, like soft tissues, produce strong signals and appear bright in the image, while areas with little water, like bone, produce weak signals and appear dark. This is the basic contrast mechanism in MRI, which allows us to see the difference between various tissues. The lecture provides a clear explanation of these key principles, and revisiting it after studying the details will help solidify your understanding of MRI.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Mathematical foundations"
+        },
+        {
+          "timeMs": 18000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Dot product"
+        },
+        {
+          "timeMs": 21000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Cross product"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Now let’s look at the cross product. When you take two vectors, say vector a and",
+      "bullets": [
+        "So while the dot product gives us a projection, the cross product gives us an orthogonal vector that carries both magnitude and direction. This operation is not just a mathematical trick—it has deep physical meaning. In MRI physics, cross products appear naturally when we describe torques, angular momentum, and precession, making them essential to understanding the behavior of magnetic moments in an external field."
+      ],
+      "fullText": "Now let’s look at the cross product. When you take two vectors, say vector a and vector b, their cross product is not a scalar like the dot product, but instead a new vector. The magnitude of this vector is equal to the length of a times the length of b times the sine of the angle between them. The direction of the result is perpendicular to the plane formed by a and b, determined by the right-hand rule.\n\nSo while the dot product gives us a projection, the cross product gives us an orthogonal vector that carries both magnitude and direction. This operation is not just a mathematical trick—it has deep physical meaning. In MRI physics, cross products appear naturally when we describe torques, angular momentum, and precession, making them essential to understanding the behavior of magnetic moments in an external field.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide9.JPG",
+      "script": "Now let's look at the cross product, which takes two vectors and produces a new vector that's perpendicular to the original two. The magnitude of this new vector is calculated using the lengths of the original vectors and the angle between them. The direction of the result is determined by the right-hand rule, making the cross product a useful operation in 3D space. It's not just a mathematical concept, but has practical applications in fields like physics and engineering.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Cross Product"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Magnitude Calculation"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Direction Determination"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "Here we define torque and see how it relates to angular momentum. Linear momentu",
+      "bullets": [
+        "Now, when we move from linear motion to rotational motion, we deal with angular momentum. Angular momentum is defined as the cross product of the position vector r and the linear momentum p. So, L equals r cross p.",
+        "To change angular momentum, we need torque. Torque is also defined through a cross product: r cross F, the position vector crossed with the applied force. Just as force is the reason linear momentum changes, torque is the reason angular momentum changes.",
+        "This is really just an extension of Newton’s second law into rotational dynamics. The derivative of angular momentum with respect to time equals torque. In other words, torque is the rotational analog of force.",
+        "This connection shows why the cross product is essential. It is not only a mathematical operation but also the key to describing how forces lead to changes in rotation. This principle is central in understanding precession and magnetization, which we will soon connect back to MRI physics."
+      ],
+      "fullText": "Here we define torque and see how it relates to angular momentum. Linear momentum is straightforward: it is mass times velocity. According to Newton’s second law, the time derivative of linear momentum is force. That means if you want to change momentum, you need to apply a force, which changes velocity.\nNow, when we move from linear motion to rotational motion, we deal with angular momentum. Angular momentum is defined as the cross product of the position vector r and the linear momentum p. So, L equals r cross p.\n\nTo change angular momentum, we need torque. Torque is also defined through a cross product: r cross F, the position vector crossed with the applied force. Just as force is the reason linear momentum changes, torque is the reason angular momentum changes.\nThis is really just an extension of Newton’s second law into rotational dynamics. The derivative of angular momentum with respect to time equals torque. In other words, torque is the rotational analog of force.\n\nThis connection shows why the cross product is essential. It is not only a mathematical operation but also the key to describing how forces lead to changes in rotation. This principle is central in understanding precession and magnetization, which we will soon connect back to MRI physics.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide10.JPG",
+      "script": "Torque is a bit more subtle than force, because it's not just about applying a force, but also about where that force is applied. When you apply a force perpendicular to the position vector, you get a non-zero torque, which changes the angular momentum. This is why torque is essential for rotational dynamics.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Torque and Angular Momentum"
+        },
+        {
+          "timeMs": 25000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Cross Product"
+        },
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Rotational Analog of Force"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Let’s quickly review some high school physics to set the stage. Electric charges",
+      "bullets": [
+        "The strength of this interaction is given by Coulomb’s law. The force is proportional to the product of the two charges, divided by the square of the distance between them. So the closer the charges, the stronger the force.",
+        "This simple idea about electric forces will be important when we connect electricity and magnetism, and eventually link these basic interactions to the physics of MRI."
+      ],
+      "fullText": "Let’s quickly review some high school physics to set the stage. Electric charges interact through forces. If you place two charges in space, the nature of those charges determines how they behave. Like charges, meaning both positive or both negative, repel each other. Opposite charges, one positive and one negative, attract each other.\n\nThe strength of this interaction is given by Coulomb’s law. The force is proportional to the product of the two charges, divided by the square of the distance between them. So the closer the charges, the stronger the force.\nThis simple idea about electric forces will be important when we connect electricity and magnetism, and eventually link these basic interactions to the physics of MRI.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide11.JPG",
+      "script": "Let's quickly review some high school physics to set the stage. Electric charges interact through forces, and the nature of those forces depends on the type of charges. Like charges repel each other, while opposite charges attract each other, following the rules of Coulomb's law. The force between charges is proportional to the product of the charges and inversely proportional to the square of the distance between them. This simple idea about electric force will be crucial in understanding the behavior of charged particles in medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Coulomb's law"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Opposite charges attract"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Like charges repel"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Here we see the behavior of magnetic poles. Just like electric charges, magnets ",
+      "bullets": [
+        "This is a simple but powerful analogy. You can think of it like teamwork: if two people have the same role, they may push against each other, but if they have complementary skills, they come together to form a stronger team. In the same way, the north and south poles naturally attract and stabilize one another.",
+        "These basic principles of magnetism, combined with the behavior of electric charges, are the foundation for understanding the electromagnetic interactions that drive MRI physics."
+      ],
+      "fullText": "Here we see the behavior of magnetic poles. Just like electric charges, magnets also interact depending on their polarity. Every magnet has two poles: a north pole and a south pole. Like poles repel each other, while opposite poles attract.\n\nThis is a simple but powerful analogy. You can think of it like teamwork: if two people have the same role, they may push against each other, but if they have complementary skills, they come together to form a stronger team. In the same way, the north and south poles naturally attract and stabilize one another.\nThese basic principles of magnetism, combined with the behavior of electric charges, are the foundation for understanding the electromagnetic interactions that drive MRI physics.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide12.JPG",
+      "script": "Magnetic poles naturally attract and stabilize each other, similar to how complementary skills come together to form a stronger team, illustrating the basic principles of magnetism.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Magnetic poles attract and stabilize"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 300,
+          "label": "Complementary skills form a stronger team"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 400,
+          "label": "Basic principles of magnetism"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "The Earth itself has a magnetic field, but it is actually quite weak. The Earth’",
+      "bullets": [
+        "MRI scanners rely on magnets that are tens of thousands of times stronger. Clinical MRI systems typically operate at one and a half Tesla, three Tesla, or even higher in research settings. These strong fields are essential for aligning enough protons in the body to generate measurable signals.",
+        "So while the Earth’s magnetic field is important for navigation and protecting us from solar radiation, it is far too weak for imaging. For MRI, we need very powerful superconducting magnets. And now, let’s connect electric and magnetic forces together, because in physics, they are two sides of the same coin."
+      ],
+      "fullText": "The Earth itself has a magnetic field, but it is actually quite weak. The Earth’s field is about half a Gauss. To put this into perspective, one Tesla equals ten thousand Gauss. So the Earth’s field is only about fifty microtesla, which is tiny compared to what we use in MRI.\n\nMRI scanners rely on magnets that are tens of thousands of times stronger. Clinical MRI systems typically operate at one and a half Tesla, three Tesla, or even higher in research settings. These strong fields are essential for aligning enough protons in the body to generate measurable signals.\nSo while the Earth’s magnetic field is important for navigation and protecting us from solar radiation, it is far too weak for imaging. For MRI, we need very powerful superconducting magnets. And now, let’s connect electric and magnetic forces together, because in physics, they are two sides of the same coin.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide13.JPG",
+      "script": "The Earth itself has a magnetic field, but it's surprisingly weak, measuring only about half a Gauss. To put this into perspective, one Tesla equals ten thousand Gauss, so the Earth's field is a mere fifty microtesla, which is incredibly weak compared to what we use in MRI. Our MRI scanners rely on magnets that are tens of thousands of times stronger, operating at one and a half Tesla, three Tesla, or even higher in research settings. These strong fields are necessary to align enough protons in the body to generate measurable signals.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Perspective on Earth's field"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Importance of strong fields"
+        },
+        {
+          "timeMs": 21000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Connection to electric forces"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Electricity and magnetism are deeply connected. Whenever an electric current flo",
+      "bullets": [
+        "This is the principle behind an electromagnet. By sending current through a coil, we can generate powerful magnetic fields, and the more loops of wire we use, the stronger the field becomes.",
+        "This connection between electricity and magnetism is fundamental to MRI. The giant superconducting magnets used in MRI are essentially coils carrying current, producing extremely strong and stable magnetic fields needed for imaging."
+      ],
+      "fullText": "Electricity and magnetism are deeply connected. Whenever an electric current flows through a wire, it generates a magnetic field around that wire. If you coil the wire into loops, the magnetic fields from each loop add together, creating a much stronger overall magnetic field.\nThis is the principle behind an electromagnet. By sending current through a coil, we can generate powerful magnetic fields, and the more loops of wire we use, the stronger the field becomes.\n\nThis connection between electricity and magnetism is fundamental to MRI. The giant superconducting magnets used in MRI are essentially coils carrying current, producing extremely strong and stable magnetic fields needed for imaging.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide14.JPG",
+      "script": "The connection between electricity and magnetism is fundamental to MRI, and it's what allows us to create the strong magnetic fields needed for imaging. By sending current through a coil of wire, we can generate a powerful magnetic field, and the more loops of wire we use, the stronger the field becomes. This principle is essential for MRI, which relies on these strong magnetic fields to produce detailed images of the body.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Electromagnet Principle"
+        },
+        {
+          "timeMs": 11000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Giant Superconducting Magnets"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 1000,
+          "label": "Connection to MRI"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "So far, we have seen that an electric current can generate a magnetic field. But",
+      "bullets": [
+        "Here’s how it works. Imagine you have a conducting loop. If nothing changes in the magnetic field passing through the loop, no current flows. But if you insert a magnet into the loop, or pull it out, the magnetic field inside the loop changes. This change induces a current in the loop.",
+        "This is Faraday’s law of electromagnetic induction. The induced current always acts to oppose the change that caused it, a principle known as Lenz’s law. So if you try to increase the magnetic field, the induced current will create a field that resists that increase. If you decrease the magnetic field, the induced current will create a field that resists the decrease.",
+        "This interplay between electricity and magnetism is fundamental for MRI. The scanner excites protons using magnetic and radiofrequency fields, and then relies on induced currents in coils to detect the returning signals."
+      ],
+      "fullText": "So far, we have seen that an electric current can generate a magnetic field. But the reverse is also true: a changing magnetic field can generate an electric current.\nHere’s how it works. Imagine you have a conducting loop. If nothing changes in the magnetic field passing through the loop, no current flows. But if you insert a magnet into the loop, or pull it out, the magnetic field inside the loop changes. This change induces a current in the loop.\n\nThis is Faraday’s law of electromagnetic induction. The induced current always acts to oppose the change that caused it, a principle known as Lenz’s law. So if you try to increase the magnetic field, the induced current will create a field that resists that increase. If you decrease the magnetic field, the induced current will create a field that resists the decrease.\nThis interplay between electricity and magnetism is fundamental for MRI. The scanner excites protons using magnetic and radiofrequency fields, and then relies on induced currents in coils to detect the returning signals.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide15.JPG",
+      "script": "A changing magnetic field can generate an electric current, and this is the fundamental principle behind electromagnetic induction, discovered by Michael Faraday. When the magnetic field passing through a conducting loop changes, an electric current is induced in the loop, as seen when a magnet is inserted or removed. This induced current always acts to oppose the change that caused it, a principle known as Lenz's law.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Faraday’s law"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Lenz’s law"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Induced currents"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Now, let’s bring everything together with Maxwell. Alongside Newton and Einstein",
+      "bullets": [
+        "I don’t expect you to master these equations right now, but it is important to recognize their role. They unite everything we have talked about: charges producing electric fields, magnetic fields produced by currents, and the deep connection between electricity and magnetism.",
+        "In these equations, the dot product is used to describe divergence—how field lines flow in or out of a point. The cross product is used to describe curl—how field lines twist or circulate. With just these two mathematical operations, Maxwell captured the full behavior of electromagnetic fields.",
+        "So at a basic level, remember this: Maxwell’s equations are the foundation of all electromagnetic interactions. They are the framework that underlies MRI physics and many other technologies in modern science and engineering."
+      ],
+      "fullText": "Now, let’s bring everything together with Maxwell. Alongside Newton and Einstein, James Clerk Maxwell is regarded as one of the greatest physicists. His major contribution was formulating the four Maxwell equations, which elegantly describe how electric and magnetic fields behave and interact.\n\nI don’t expect you to master these equations right now, but it is important to recognize their role. They unite everything we have talked about: charges producing electric fields, magnetic fields produced by currents, and the deep connection between electricity and magnetism.\nIn these equations, the dot product is used to describe divergence—how field lines flow in or out of a point. The cross product is used to describe curl—how field lines twist or circulate. With just these two mathematical operations, Maxwell captured the full behavior of electromagnetic fields.\n\nSo at a basic level, remember this: Maxwell’s equations are the foundation of all electromagnetic interactions. They are the framework that underlies MRI physics and many other technologies in modern science and engineering.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide16.JPG",
+      "script": "James Clerk Maxwell is considered one of the greatest physicists, alongside Newton and Einstein, for his work on the four Maxwell equations. These equations beautifully describe how electric and magnetic fields interact and behave. They tie together the concepts of charges, currents, and the connection between electricity and magnetism. The equations consist of the dot product and cross product, which we'll explore further in the context of MRI physics.",
+      "spotlightEvents": [
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Maxwell's Equations"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 3000,
+          "label": "Importance of Maxwell's Equations"
+        },
+        {
+          "timeMs": 50000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Maxwell's Equations in MRI"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Here we come to the Lorentz force, a very fundamental concept. The equation says",
+      "bullets": [
+        "This means that when an electric charge moves through a magnetic field, it experiences a force. The direction of that force is given by the cross product, which makes it perpendicular to both the velocity and the magnetic field.",
+        "At a deeper level, the Lorentz force can actually be derived from Maxwell’s equations, showing that Maxwell’s framework is completely self-contained. Together, these equations govern all of electromagnetism: electric and magnetic fields, waves, and interactions.",
+        "For us, the important point is to become familiar with these concepts—Maxwell’s equations, electromagnetic interactions, and the Lorentz force—because they are the physical foundation for MRI signal generation and detection."
+      ],
+      "fullText": "Here we come to the Lorentz force, a very fundamental concept. The equation says that the total force on a charged particle is equal to the electric force plus the magnetic force. Mathematically, F equals q times E plus q times v cross B. Here, q is the charge, E is the electric field, v is the velocity of the particle, and B is the magnetic field.\n\nThis means that when an electric charge moves through a magnetic field, it experiences a force. The direction of that force is given by the cross product, which makes it perpendicular to both the velocity and the magnetic field.\nAt a deeper level, the Lorentz force can actually be derived from Maxwell’s equations, showing that Maxwell’s framework is completely self-contained. Together, these equations govern all of electromagnetism: electric and magnetic fields, waves, and interactions.\n\nFor us, the important point is to become familiar with these concepts—Maxwell’s equations, electromagnetic interactions, and the Lorentz force—because they are the physical foundation for MRI signal generation and detection.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide17.JPG",
+      "script": "The Lorentz force is a fundamental concept that explains the interaction between charged particles and magnetic fields, and it's essential for understanding various phenomena in medical imaging. The equation F = qE + qv x B shows that the total force on a charged particle is the sum of the electric force and the magnetic force. The direction of the magnetic force is perpendicular to both the velocity and the magnetic field, given by the cross product. This concept will be crucial in understanding the behavior of charged particles in magnetic fields, which is essential for MRI imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Lorentz force"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Maxwell's equations"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "MRI signal generation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "That wraps up the first part of our discussion. Next, we will move more systemat",
+      "bullets": [
+        "In the first part, we covered some foundational physics: angular momentum, magnetic moments from a quantum mechanical perspective, magnetization in the classical sense, and the fascinating but at first mysterious idea of precession. These are the building blocks.",
+        "The magnetic moment represents the behavior of individual protons at the quantum level. Magnetization describes how many of these tiny moments add up into a collective vector that we can measure in bulk. And precession explains how that vector behaves in an external magnetic field.",
+        "Together, these ideas form the physical foundation that allows us to understand signal generation, relaxation, and ultimately the imaging sequences that make MRI possible."
+      ],
+      "fullText": "That wraps up the first part of our discussion. Next, we will move more systematically, following closely along with the structure in your textbook.\nIn the first part, we covered some foundational physics: angular momentum, magnetic moments from a quantum mechanical perspective, magnetization in the classical sense, and the fascinating but at first mysterious idea of precession. These are the building blocks.\n\nThe magnetic moment represents the behavior of individual protons at the quantum level. Magnetization describes how many of these tiny moments add up into a collective vector that we can measure in bulk. And precession explains how that vector behaves in an external magnetic field.\nTogether, these ideas form the physical foundation that allows us to understand signal generation, relaxation, and ultimately the imaging sequences that make MRI possible.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide18.JPG",
+      "script": "That wraps up the first part of our discussion, which covered the foundational physics of magnetic resonance, including angular momentum, magnetic moments from a quantum mechanical perspective, magnetization, and precession. These ideas form the building blocks of understanding how MRI works.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Building blocks of MRI"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Magnetic moment"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Magnetization"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "Let’s quickly revisit some high school chemistry to ground ourselves. Here is th",
+      "bullets": [
+        "Inside the nucleus, we find two main types of particles: protons and neutrons. Protons carry positive charges, while neutrons are electrically neutral. Since all the protons are positively charged, they would naturally repel each other. But they are held together by the strong nuclear force, which balances out the electromagnetic repulsion and creates a stable nucleus.",
+        "This balance of forces is what allows atoms to exist in a stable form. And it is precisely these nuclear properties—especially the behavior of protons—that are central to MRI, because the hydrogen nucleus, which is just a single proton, is the main source of signal in magnetic resonance imaging."
+      ],
+      "fullText": "Let’s quickly revisit some high school chemistry to ground ourselves. Here is the basic atomic structure. In the outer shell, we have electrons moving around. In reality, their positions are described by probabilities, but we often picture them as orbiting the nucleus.\nInside the nucleus, we find two main types of particles: protons and neutrons. Protons carry positive charges, while neutrons are electrically neutral. Since all the protons are positively charged, they would naturally repel each other. But they are held together by the strong nuclear force, which balances out the electromagnetic repulsion and creates a stable nucleus.\n\nThis balance of forces is what allows atoms to exist in a stable form. And it is precisely these nuclear properties—especially the behavior of protons—that are central to MRI, because the hydrogen nucleus, which is just a single proton, is the main source of signal in magnetic resonance imaging.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide19.JPG",
+      "script": "Let's quickly revisit some high school chemistry to ground ourselves. The basic atomic structure consists of electrons moving around in the outer shell, with their positions described by probabilities, and in the nucleus, we find protons and neutrons. Protons carry positive charges, while neutrons are electrically neutral, and they're held together by the strong nuclear force. This force balances out the electromagnetic repulsion between the positively charged protons.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Electrons, protons, neutrons"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Protons, neutrons, strong nuclear force"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Hydrogen nucleus, single proton, MRI"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Now let’s focus on the proton itself. A proton is a positively charged particle,",
+      "bullets": [
+        "This is why we say a spinning proton has a magnetic moment. You can picture it as a miniature bar magnet, with a north pole and a south pole.",
+        "If we take just one proton—say, from a hydrogen atom in a water molecule—it acts like a tiny magnet. But in the body, we have countless protons, and in the absence of an external magnetic field, their magnetic moments point in random directions. As a result, they cancel out, and there is no overall magnetic effect.",
+        "However, when we apply a strong external magnetic field, something very interesting happens. These magnetic moments begin to align, and that alignment is what",
+        "MRI relies on generating signals. We will come to that point soon."
+      ],
+      "fullText": "Now let’s focus on the proton itself. A proton is a positively charged particle, and one of its most important properties is spin. You can think of spin as being similar to a tiny top rotating on its axis. Because the proton is both spinning and charged, it behaves like a little current loop. And any current loop produces a magnetic field.\n\nThis is why we say a spinning proton has a magnetic moment. You can picture it as a miniature bar magnet, with a north pole and a south pole.\nIf we take just one proton—say, from a hydrogen atom in a water molecule—it acts like a tiny magnet. But in the body, we have countless protons, and in the absence of an external magnetic field, their magnetic moments point in random directions. As a result, they cancel out, and there is no overall magnetic effect.\nHowever, when we apply a strong external magnetic field, something very interesting happens. These magnetic moments begin to align, and that alignment is what \n\nMRI relies on generating signals. We will come to that point soon.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide20.JPG",
+      "script": "A proton is a positively charged particle with a crucial property called spin, which can be thought of as a tiny top rotating on its axis. This spinning motion, combined with the proton's charge, makes it behave like a small current loop, generating a magnetic field. As a result, the proton has a magnetic moment, similar to a miniature bar magnet with a north and south pole.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Proton's magnetic moment"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Random directions"
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Alignment and signal generation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Here we arrive at two key concepts you must know: angular momentum, usually writ",
+      "bullets": [
+        "From mechanics, angular momentum describes the rotation of a particle—in this case, the proton. You can think of it as a spinning top. Just as torque can change the angular momentum of a top, external influences can change the angular momentum of a proton.",
+        "But unlike a simple spinning top, the proton also carries an electric charge. Because of this, it has not only mechanical properties but also electromagnetic ones. Its magnetic behavior is summarized by the magnetic moment miu.",
+        "The beautiful part is that these two quantities—angular momentum and magnetic moment—are directly linked. The relationship is miu equals gamma times P, where gamma is a constant called the gyromagnetic ratio.",
+        "Quantum mechanics adds one more layer: angular momentum cannot take on any arbitrary value but is quantized. It is expressed in terms of the spin quantum number, I. For a proton, I equals one-half, so the angular momentum follows a specific formula.",
+        "The main takeaway is this: the proton’s mechanical rotation and its electromagnetic behavior are tied together in a very simple and elegant way. This link forms the basis of how MRI exploits proton spins to generate signals."
+      ],
+      "fullText": "Here we arrive at two key concepts you must know: angular momentum, usually written as P, and the magnetic moment, written as miu.\n\nFrom mechanics, angular momentum describes the rotation of a particle—in this case, the proton. You can think of it as a spinning top. Just as torque can change the angular momentum of a top, external influences can change the angular momentum of a proton.\nBut unlike a simple spinning top, the proton also carries an electric charge. Because of this, it has not only mechanical properties but also electromagnetic ones. Its magnetic behavior is summarized by the magnetic moment miu.\n\nThe beautiful part is that these two quantities—angular momentum and magnetic moment—are directly linked. The relationship is miu equals gamma times P, where gamma is a constant called the gyromagnetic ratio.\nQuantum mechanics adds one more layer: angular momentum cannot take on any arbitrary value but is quantized. It is expressed in terms of the spin quantum number, I. For a proton, I equals one-half, so the angular momentum follows a specific formula.\n\nThe main takeaway is this: the proton’s mechanical rotation and its electromagnetic behavior are tied together in a very simple and elegant way. This link forms the basis of how MRI exploits proton spins to generate signals.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide21.JPG",
+      "script": "As we dive deeper into the world of MRI, we're introduced to two crucial concepts: angular momentum and magnetic moment. Angular momentum, represented by P, describes how a spinning particle, like a proton, rotates. It's similar to a spinning top, where torque can alter its motion. However, protons also carry an electric charge, which gives them a unique electromagnetic behavior. This behavior is described by the magnetic moment, represented by miu.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Angular Momentum"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Magnetic Moment"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Quantized Angular Momentum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "When a proton with a magnetic moment is placed in a strong external magnetic fie",
+      "bullets": [
+        "Specifically, we focus on the longitudinal component of the magnetic moment, meaning the part aligned with the external field. For the proton, this component can take on only two values: one parallel to the field and one antiparallel. These values are determined by the nuclear magnetic quantum number, m I, which for a proton can be plus one-half or minus one-half.",
+        "So, the z-component of the magnetic moment, miu z, equals plus or minus gamma times Planck’s constant divided by four pi. This means the magnetic moment is never perfectly aligned—it is always tilted slightly. But it is restricted to these two possible states.",
+        "This quantum restriction, the fact that the magnetic moment can only take on discrete orientations, is what gives rise to the fundamental energy levels we use in MRI."
+      ],
+      "fullText": "When a proton with a magnetic moment is placed in a strong external magnetic field, its behavior becomes quantized. Classically, you might imagine that the magnetic moment could point in any direction. But quantum mechanics tells us that only certain orientations are allowed.\n\nSpecifically, we focus on the longitudinal component of the magnetic moment, meaning the part aligned with the external field. For the proton, this component can take on only two values: one parallel to the field and one antiparallel. These values are determined by the nuclear magnetic quantum number, m I, which for a proton can be plus one-half or minus one-half.\n\nSo, the z-component of the magnetic moment, miu z, equals plus or minus gamma times Planck’s constant divided by four pi. This means the magnetic moment is never perfectly aligned—it is always tilted slightly. But it is restricted to these two possible states.\nThis quantum restriction, the fact that the magnetic moment can only take on discrete orientations, is what gives rise to the fundamental energy levels we use in MRI.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide22.JPG",
+      "script": "When a proton with a magnetic moment is placed in a strong external magnetic field, its behavior becomes quantized, meaning only certain orientations are allowed. Classically, the magnetic moment could point in any direction, but quantum mechanics restricts it to two specific orientations: parallel and antiparallel to the field. This quantization is determined by the nuclear magnetic quantum number, m I. For a proton, this number is one-half, resulting in two allowed states.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Quantized Magnetic Moment"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Longitudinal Component"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Nuclear Magnetic Quantum Number"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "When we place spinning protons, each with a magnetic moment, into a strong exter",
+      "bullets": [
+        "The magnetic moment of a proton can only align in one of two possible ways with respect to the external field: parallel or antiparallel. In the parallel case, the magnetic moment lines up with the field, and this state has lower energy. In the antiparallel case, the magnetic moment points against the field, and this state has higher energy.",
+        "So, instead of a continuous range of orientations, quantum mechanics restricts protons to just these two discrete states. The energy difference between them is proportional to the strength of the magnetic field.",
+        "This is similar to a mechanical analogy: imagine trying to rotate a bar magnet in a strong external field. If you align it with the field, that is the stable, low-energy position. If you force it to oppose the field, that requires work and corresponds to a higher-energy state.",
+        "This splitting of energy levels is fundamental in MRI. It is the small difference in populations between protons in the lower-energy parallel state and the higher-energy antiparallel state that generates the net magnetization we rely on to produce signals."
+      ],
+      "fullText": "When we place spinning protons, each with a magnetic moment, into a strong external magnetic field, their energy levels split. This phenomenon is called the Zeeman effect.\n\nThe magnetic moment of a proton can only align in one of two possible ways with respect to the external field: parallel or antiparallel. In the parallel case, the magnetic moment lines up with the field, and this state has lower energy. In the antiparallel case, the magnetic moment points against the field, and this state has higher energy.\n\nSo, instead of a continuous range of orientations, quantum mechanics restricts protons to just these two discrete states. The energy difference between them is proportional to the strength of the magnetic field.\nThis is similar to a mechanical analogy: imagine trying to rotate a bar magnet in a strong external field. If you align it with the field, that is the stable, low-energy position. If you force it to oppose the field, that requires work and corresponds to a higher-energy state.\n\nThis splitting of energy levels is fundamental in MRI. It is the small difference in populations between protons in the lower-energy parallel state and the higher-energy antiparallel state that generates the net magnetization we rely on to produce signals.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide23.JPG",
+      "script": "When we place spinning protons in a strong external magnetic field, their energy levels split due to the Zeeman effect. This splitting occurs because the magnetic moment can only align in two ways: parallel or antiparallel to the field, resulting in two distinct energy states. The parallel alignment has lower energy, while the antiparallel alignment has higher energy. This discrete energy spectrum is a fundamental aspect of quantum mechanics.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Parallel alignment"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Energy difference"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Mechanical analogy"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "When protons are placed in a strong magnetic field, they split into two energy s",
+      "bullets": [
+        "The energy of each state can be expressed as:",
+        "E equals negative mu z times B naught.",
+        "Here, mu z is the longitudinal component of the magnetic moment, and B naught is the strength of the external magnetic field.",
+        "Because mu z can take on two values, plus gamma h over four pi, or minus gamma h over four pi, the energies are:",
+        "E equals plus or minus gamma times h times B naught, divided by four pi.",
+        "The difference between these two levels is what we call delta E, and it is given by:",
+        "Delta E equals gamma times h times B naught, divided by two pi.",
+        "This difference is critical because it sets the resonance condition. Only when the energy of the applied radiofrequency matches this delta E can protons flip between the two states.",
+        "At body temperature, slightly more protons are in the lower energy parallel state compared to the higher energy antiparallel state. This small imbalance is what produces the net magnetization that we detect in MRI."
+      ],
+      "fullText": "When protons are placed in a strong magnetic field, they split into two energy states: the parallel state, which has lower energy, and the antiparallel state, which has higher energy. This is the Zeeman effect.\n\nThe energy of each state can be expressed as:\nE equals negative mu z times B naught.\nHere, mu z is the longitudinal component of the magnetic moment, and B naught is the strength of the external magnetic field.\nBecause mu z can take on two values, plus gamma h over four pi, or minus gamma h over four pi, the energies are:\nE equals plus or minus gamma times h times B naught, divided by four pi.\nThe difference between these two levels is what we call delta E, and it is given by:\nDelta E equals gamma times h times B naught, divided by two pi.\nThis difference is critical because it sets the resonance condition. Only when the energy of the applied radiofrequency matches this delta E can protons flip between the two states.\n\nAt body temperature, slightly more protons are in the lower energy parallel state compared to the higher energy antiparallel state. This small imbalance is what produces the net magnetization that we detect in MRI.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide24.JPG",
+      "script": "When protons are placed in a strong magnetic field, they naturally split into two energy states due to the Zeeman effect. The two states are the parallel state, with lower energy, and the antiparallel state, with higher energy. The energy of each state can be expressed as E equals negative mu z times B naught, where mu z is the longitudinal component of the magnetic moment, and B naught is the strength of the external magnetic field. This leads to two possible energy values, depending on the orientation of the magnetic moment relative to the field.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Energy states"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Zeeman effect"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Energy formula"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "Now, let’s bring in some mathematics through the Boltzmann distribution, which d",
+      "bullets": [
+        "We can write the ratio of the number of protons in the anti-parallel state to the number in the parallel state as:",
+        "“N anti-parallel divided by N parallel equals the exponential of negative delta E over k T.”",
+        "Here, delta E is the energy difference between the two states, k is the Boltzmann constant, and T is the absolute temperature in kelvins.",
+        "Substituting the expression for delta E, we get:",
+        "“N anti-parallel divided by N parallel equals the exponential of negative gamma times h times B-zero, divided by two pi k T.”",
+        "With a first-order approximation, this becomes:",
+        "“N anti-parallel over N parallel is approximately equal to one minus gamma h B-zero over two pi k T.”",
+        "What does this mean in practice? It means the populations of the two states are nearly equal, with only a tiny excess in the parallel, or lower-energy state.",
+        "The net MRI signal comes from this small population difference. If we take the difference in numbers between the parallel and anti-parallel states, we get:",
+        "“Delta N equals N s times gamma h B-zero divided by four pi k T.”",
+        "Here, N s is the total number of protons in the body. The key point is that this difference is extremely small. For example, at a magnetic field strength of one and a half tesla, out of about one million protons, only a handful contribute to the net signal.",
+        "So, although the individual imbalance is tiny, the collective contribution of billions and billions of protons is what makes MRI signals measurable."
+      ],
+      "fullText": "Now, let’s bring in some mathematics through the Boltzmann distribution, which describes how protons split between the two energy states.\n\nWe can write the ratio of the number of protons in the anti-parallel state to the number in the parallel state as:\n“N anti-parallel divided by N parallel equals the exponential of negative delta E over k T.”\nHere, delta E is the energy difference between the two states, k is the Boltzmann constant, and T is the absolute temperature in kelvins.\n\nSubstituting the expression for delta E, we get:\n“N anti-parallel divided by N parallel equals the exponential of negative gamma times h times B-zero, divided by two pi k T.”\nWith a first-order approximation, this becomes:\n“N anti-parallel over N parallel is approximately equal to one minus gamma h B-zero over two pi k T.”\n\nWhat does this mean in practice? It means the populations of the two states are nearly equal, with only a tiny excess in the parallel, or lower-energy state.\nThe net MRI signal comes from this small population difference. If we take the difference in numbers between the parallel and anti-parallel states, we get:\n“Delta N equals N s times gamma h B-zero divided by four pi k T.”\nHere, N s is the total number of protons in the body. The key point is that this difference is extremely small. For example, at a magnetic field strength of one and a half tesla, out of about one million protons, only a handful contribute to the net signal.\n\nSo, although the individual imbalance is tiny, the collective contribution of billions and billions of protons is what makes MRI signals measurable.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide25.JPG",
+      "script": "Now, let's bring in some mathematics through the Boltzmann distribution, which describes how protons split between the two energy states. We can write the ratio of the number of protons in the anti-parallel state to the number in the parallel state as N anti-parallel divided by N parallel equals the exponential of negative delta E over k T. Here, delta E is the energy difference between the two states, k is the Boltzmann constant, and T is the absolute temperature in kelvins. Substituting the expression for delta E, we get N anti-parallel divided by N parallel equals the exponential of negative gamma h B-naught over two pi k T.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Boltzmann distribution"
+        },
+        {
+          "timeMs": 22000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "delta E"
+        },
+        {
+          "timeMs": 24000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Boltzmann constant"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "Now, all of these models we’ve discussed, including the Boltzmann distribution, ",
+      "bullets": [
+        "When a magnetic moment sits inside a strong external magnetic field, it doesn’t simply align once and stay fixed. Instead, it undergoes a motion very much like a spinning top. The top leans and slowly wobbles around the vertical axis. In the same way, the magnetic moment traces out a precession around the magnetic field direction. We’ll go into more detail on this soon.",
+        "To explain why this happens, we need to go back to Newton’s second law—not just in the familiar form, force equals mass times acceleration, but in the rotational context. In rotations, the central quantity is angular momentum.",
+        "The law tells us that the time derivative of angular momentum, written as dL over dt, is equal to torque. So, torque is the rotational analog of force. Just as force changes linear momentum, torque changes angular momentum.",
+        "The derivation on this slide shows the details. If you’re interested in the full proof, you can follow it step by step. If not, you can simply trust the key result: the rate of change of angular momentum equals torque.",
+        "This is the foundation we need to understand precession in MRI physics."
+      ],
+      "fullText": "Now, all of these models we’ve discussed, including the Boltzmann distribution, set the stage for the next key idea: precession.\n\nWhen a magnetic moment sits inside a strong external magnetic field, it doesn’t simply align once and stay fixed. Instead, it undergoes a motion very much like a spinning top. The top leans and slowly wobbles around the vertical axis. In the same way, the magnetic moment traces out a precession around the magnetic field direction. We’ll go into more detail on this soon.\n\nTo explain why this happens, we need to go back to Newton’s second law—not just in the familiar form, force equals mass times acceleration, but in the rotational context. In rotations, the central quantity is angular momentum.\nThe law tells us that the time derivative of angular momentum, written as dL over dt, is equal to torque. So, torque is the rotational analog of force. Just as force changes linear momentum, torque changes angular momentum.\nThe derivation on this slide shows the details. If you’re interested in the full proof, you can follow it step by step. If not, you can simply trust the key result: the rate of change of angular momentum equals torque.\n\nThis is the foundation we need to understand precession in MRI physics.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide26.JPG",
+      "script": "Now, all of these models we’ve discussed, including the Boltzmann distribution, set the stage for the next key idea: precession. When a magnetic moment sits inside a strong external magnetic field, it doesn’t simply align once and stay fixed, but instead undergoes a motion very much like a spinning top. This motion is a result of the magnetic moment experiencing a torque, or rotational force, due to the magnetic field. We’ll explore this precession motion in more detail soon.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Precession"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Torque"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Angular Momentum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "This is a classic example of precession, and it is the same principle that appli",
+      "bullets": [
+        "Think of a spinning top. The top’s axis of rotation points in one direction, representing the angular momentum. If no external force acts on it, the top will keep spinning steadily, just as a moving object keeps moving in a straight line.",
+        "Now, if a force is applied — here, gravity acting at the center of mass — it produces a torque. Torque is given by the cross product of the lever arm vector r and the force vector F. In this case, r cross F points into the page. That means the torque is perpendicular to the angular momentum.",
+        "When the torque is perpendicular, it doesn’t stop the motion or flip the top over directly. Instead, it causes a small change, delta L, that is also perpendicular to the original angular momentum. This sideways change makes the tip of the angular momentum vector trace out a circle.",
+        "So instead of falling over, the spinning top precesses—it wobbles around in a circular path.",
+        "And that is the key insight: whenever a spinning object with angular momentum experiences a torque perpendicular to it, the result is precession. In MRI, the proton’s magnetic moment behaves just like this spinning top, precessing around the direction of the external magnetic field."
+      ],
+      "fullText": "This is a classic example of precession, and it is the same principle that applies in MRI when the magnetic moment of protons precesses in a magnetic field.\nThink of a spinning top. The top’s axis of rotation points in one direction, representing the angular momentum. If no external force acts on it, the top will keep spinning steadily, just as a moving object keeps moving in a straight line.\n\nNow, if a force is applied — here, gravity acting at the center of mass — it produces a torque. Torque is given by the cross product of the lever arm vector r and the force vector F. In this case, r cross F points into the page. That means the torque is perpendicular to the angular momentum.\nWhen the torque is perpendicular, it doesn’t stop the motion or flip the top over directly. Instead, it causes a small change, delta L, that is also perpendicular to the original angular momentum. This sideways change makes the tip of the angular momentum vector trace out a circle.\nSo instead of falling over, the spinning top precesses—it wobbles around in a circular path.\n\nAnd that is the key insight: whenever a spinning object with angular momentum experiences a torque perpendicular to it, the result is precession. In MRI, the proton’s magnetic moment behaves just like this spinning top, precessing around the direction of the external magnetic field.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide27.JPG",
+      "script": "The spinning top illustrates precession, where a torque causes a small change in the angular momentum, resulting in a circular motion around the axis of the torque. This is similar to what happens in MRI, where the magnetic moment of protons precesses in a magnetic field due to the torque exerted on it. The precession is a result of the conservation of angular momentum, which is only slightly changed by the torque.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Torque and Angular Momentum"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Precession and the Spinning Top"
+        },
+        {
+          "timeMs": 19000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 1000,
+          "label": "Small Change in Angular Momentum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "This idea is not too hard to grasp if we think about orbital motion.",
+      "bullets": [
+        "Take the example of the Moon orbiting around the Earth, or a satellite orbiting a planet. You might wonder: why doesn’t it just fall straight down? The answer is that there is always a centripetal force pointing inward, toward the center of the orbit.",
+        "That centripetal force doesn’t change the magnitude of the velocity, but it does change its direction. Because the force is always perpendicular to the velocity vector, it continuously “bends” the path, keeping the satellite in circular motion rather than letting it fly off in a straight line.",
+        "Mathematically, the centripetal force is equal to mass times velocity squared, divided by the radius: F equals m v squared over r.",
+        "Now connect this to angular momentum. When the change in a vector is always perpendicular to the vector itself, the result is circular motion. In the orbital case, the velocity vector keeps changing direction, while in angular momentum, the same principle applies: torque causes a perpendicular change in angular momentum, and so the angular momentum vector itself traces out a circle.",
+        "This is the key point to understand precession: a perpendicular change leads to circular motion."
+      ],
+      "fullText": "This idea is not too hard to grasp if we think about orbital motion.\nTake the example of the Moon orbiting around the Earth, or a satellite orbiting a planet. You might wonder: why doesn’t it just fall straight down? The answer is that there is always a centripetal force pointing inward, toward the center of the orbit.\n\nThat centripetal force doesn’t change the magnitude of the velocity, but it does change its direction. Because the force is always perpendicular to the velocity vector, it continuously “bends” the path, keeping the satellite in circular motion rather than letting it fly off in a straight line.\nMathematically, the centripetal force is equal to mass times velocity squared, divided by the radius: F equals m v squared over r.\n\nNow connect this to angular momentum. When the change in a vector is always perpendicular to the vector itself, the result is circular motion. In the orbital case, the velocity vector keeps changing direction, while in angular momentum, the same principle applies: torque causes a perpendicular change in angular momentum, and so the angular momentum vector itself traces out a circle.\n\nThis is the key point to understand precession: a perpendicular change leads to circular motion.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide28.JPG",
+      "script": "This idea is not too hard to grasp if we think about orbital motion, like the Moon orbiting the Earth or a satellite orbiting a planet. It might seem like it should fall straight down, but there's always a centripetal force pointing inward, toward the center of the orbit. This force doesn't change the speed of the motion, but it changes the direction of the velocity vector, keeping the satellite in a circular path.",
+      "spotlightEvents": [
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Orbital Motion"
+        },
+        {
+          "timeMs": 60000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1000,
+          "label": "Centripetal Force"
+        },
+        {
+          "timeMs": 80000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 1500,
+          "label": "Angular Momentum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "When a magnetic moment is placed in an external magnetic field, it experiences a",
+      "bullets": [
+        "The rate of this precession is called the Larmor frequency. The Larmor frequency depends on two things: the strength of the magnetic field and a constant called the gyromagnetic ratio, which is unique for each type of nucleus.",
+        "Mathematically, we write the Larmor frequency as omega zero equals gamma times B zero. Here, omega zero represents the precession frequency, gamma is the gyromagnetic ratio, and B zero is the strength of the magnetic field.",
+        "This relationship tells us that the stronger the field, the faster the precession. And this precession frequency is the key to MRI, because it sets the frequency at which protons respond to radiofrequency pulses and generate the measurable MRI signal."
+      ],
+      "fullText": "When a magnetic moment is placed in an external magnetic field, it experiences a torque. This torque does not flip the magnetic moment directly into alignment with the field. Instead, it causes the moment to precess, meaning it rotates around the axis of the magnetic field, very much like a spinning top under the influence of gravity.\n\nThe rate of this precession is called the Larmor frequency. The Larmor frequency depends on two things: the strength of the magnetic field and a constant called the gyromagnetic ratio, which is unique for each type of nucleus.\nMathematically, we write the Larmor frequency as omega zero equals gamma times B zero. Here, omega zero represents the precession frequency, gamma is the gyromagnetic ratio, and B zero is the strength of the magnetic field.\n\nThis relationship tells us that the stronger the field, the faster the precession. And this precession frequency is the key to MRI, because it sets the frequency at which protons respond to radiofrequency pulses and generate the measurable MRI signal.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide29.JPG",
+      "script": "When a magnetic moment is placed in an external magnetic field, it experiences a torque that causes it to precess, or rotate, around the axis of the field, rather than flipping directly into alignment. This precession is the result of the torque's action on the magnetic moment. The rate of precession, or Larmor frequency, depends on the strength of the magnetic field and a constant specific to the nucleus.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Larmor frequency"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 300,
+          "label": "gyromagnetic ratio"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "precession frequency"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "Now let’s carefully look at how we can compute the precessional frequency.",
+      "bullets": [
+        "When a magnetic moment, which we call mu, is placed at an angle to the external magnetic field B, it experiences a torque. This torque can be written as mu cross B zero. That torque is what drives the angular momentum to change over time.",
+        "Mathematically, we can say: torque equals the derivative of angular momentum with respect to time. In other words, dP by dt equals mu cross B zero.",
+        "Here, P is the angular momentum. Because protons both have mass and positive charge, their spinning motion not only produces angular momentum but also generates a tiny current loop. That current loop is associated with a magnetic moment. And so, whenever the magnetic moment is not aligned with the magnetic field, it feels a torque.",
+        "Now, to connect the pieces: magnetic moment and angular momentum are directly proportional. That means the change in angular momentum is tied to the change in magnetic moment.",
+        "To see how this becomes precision, consider a very small angular change, which we call d phi. For such small changes, the sine of d phi can be approximated as just d phi. With this, we can relate torque to the rate of change of the angular position.",
+        "So the angular frequency of precession, written as omega, is equal to the torque divided by the magnitude of angular momentum times sine theta. If you expand the cross product, you eventually find that omega equals gamma times B zero.",
+        "Here, gamma is the gyromagnetic ratio, a constant specific to the nucleus.",
+        "This final result is extremely important: the precessional frequency is directly proportional to the strength of the magnetic field. In a stronger field, the spins precess faster. In a weaker field, they precess more slowly. This proportionality is the foundation of magnetic resonance."
+      ],
+      "fullText": "Now let’s carefully look at how we can compute the precessional frequency.\nWhen a magnetic moment, which we call mu, is placed at an angle to the external magnetic field B, it experiences a torque. This torque can be written as mu cross B zero. That torque is what drives the angular momentum to change over time.\nMathematically, we can say: torque equals the derivative of angular momentum with respect to time. In other words, dP by dt equals mu cross B zero.\n\nHere, P is the angular momentum. Because protons both have mass and positive charge, their spinning motion not only produces angular momentum but also generates a tiny current loop. That current loop is associated with a magnetic moment. And so, whenever the magnetic moment is not aligned with the magnetic field, it feels a torque.\nNow, to connect the pieces: magnetic moment and angular momentum are directly proportional. That means the change in angular momentum is tied to the change in magnetic moment.\nTo see how this becomes precision, consider a very small angular change, which we call d phi. For such small changes, the sine of d phi can be approximated as just d phi. With this, we can relate torque to the rate of change of the angular position.\nSo the angular frequency of precession, written as omega, is equal to the torque divided by the magnitude of angular momentum times sine theta. If you expand the cross product, you eventually find that omega equals gamma times B zero.\n\nHere, gamma is the gyromagnetic ratio, a constant specific to the nucleus.\nThis final result is extremely important: the precessional frequency is directly proportional to the strength of the magnetic field. In a stronger field, the spins precess faster. In a weaker field, they precess more slowly. This proportionality is the foundation of magnetic resonance.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide30.JPG",
+      "script": "Let's carefully look at how we can compute the precessional frequency. When a magnetic moment, which we call mu, is placed at an angle to the external magnetic field B, it experiences a torque, given by mu cross B zero. This torque drives the angular momentum to change over time, and mathematically, it's described as the derivative of angular momentum with respect to time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Magnetic Moment"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Torque"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.8,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Angular Momentum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "It’s often much easier to demonstrate precision than to explain it with equation",
+      "bullets": [
+        "Here you see a gyroscope. Its circular motion around the stand is precession. This motion results from the combination of two effects: the downward force of gravity and the angular momentum around the spinning axis.",
+        "Notice how the wheel does not simply fall. Instead, because of torque, it precesses around the point where it is supported. If I increase the downward force—for example, by adding the weight of a wrench to the axle—you can see that the precession frequency increases.",
+        "This is the same principle that applies in MRI. The frequency of precession is directly linked to the strength of the magnetic field. Stronger forces or fields lead to faster precession. We call this frequency encoding, and it is the foundation for how MRI gathers spatial information."
+      ],
+      "fullText": "It’s often much easier to demonstrate precision than to explain it with equations.\nHere you see a gyroscope. Its circular motion around the stand is precession. This motion results from the combination of two effects: the downward force of gravity and the angular momentum around the spinning axis.\n\nNotice how the wheel does not simply fall. Instead, because of torque, it precesses around the point where it is supported. If I increase the downward force—for example, by adding the weight of a wrench to the axle—you can see that the precession frequency increases.\n\nThis is the same principle that applies in MRI. The frequency of precession is directly linked to the strength of the magnetic field. Stronger forces or fields lead to faster precession. We call this frequency encoding, and it is the foundation for how MRI gathers spatial information.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide31.JPG",
+      "script": "The gyroscope demonstrates precision through its circular motion, precession, which is the result of the combination of gravity and angular momentum. The precession frequency increases with a stronger downward force, illustrating the relationship between torque and motion. This principle applies to magnetic moments in the body, where the precession frequency is influenced by external factors.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Gyroscope"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Torque and Motion"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.4,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Frequency Encoding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Now we move from individual protons to the idea of magnetization.",
+      "bullets": [
+        "Each proton carries a magnetic moment, and as we have discussed, these moments precess around the external magnetic field. In the population of protons, slightly more occupy the lower-energy state, aligned parallel to the magnetic field, while slightly fewer are in the higher-energy, anti-parallel state. This imbalance, even though very small, is crucial.",
+        "Because the magnetic moments are vectors, those that are opposite to each other will cancel out in the transverse plane. What remains is a small excess of protons in the parallel state, and when we add up all of their contributions, we obtain a single net vector pointing along the direction of the magnetic field. This is what we call the net magnetization vector, often denoted as M.",
+        "From this point on, instead of worrying about the behavior of individual protons, we can focus on this collective magnetization vector. We can treat it as a classical vector that can tilt, rotate, or precess, just like a spinning top. This makes it much easier to understand the physics and to design MRI pulse sequences.",
+        "So, magnetization is the bridge from the microscopic quantum world of spins to the macroscopic signals we use in MRI."
+      ],
+      "fullText": "Now we move from individual protons to the idea of magnetization.\nEach proton carries a magnetic moment, and as we have discussed, these moments precess around the external magnetic field. In the population of protons, slightly more occupy the lower-energy state, aligned parallel to the magnetic field, while slightly fewer are in the higher-energy, anti-parallel state. This imbalance, even though very small, is crucial.\n\nBecause the magnetic moments are vectors, those that are opposite to each other will cancel out in the transverse plane. What remains is a small excess of protons in the parallel state, and when we add up all of their contributions, we obtain a single net vector pointing along the direction of the magnetic field. This is what we call the net magnetization vector, often denoted as M.\nFrom this point on, instead of worrying about the behavior of individual protons, we can focus on this collective magnetization vector. We can treat it as a classical vector that can tilt, rotate, or precess, just like a spinning top. This makes it much easier to understand the physics and to design MRI pulse sequences.\n\nSo, magnetization is the bridge from the microscopic quantum world of spins to the macroscopic signals we use in MRI.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide32.JPG",
+      "script": "As we transition from individual protons to the collective behavior, we see that the population of protons has a net magnetization due to the imbalance between the parallel and anti-parallel states. This net magnetization is the result of the collective contribution of millions and billions of protons. The small excess of protons aligned parallel to the magnetic field is what gives rise to the overall magnetization.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Collective magnetization"
+        },
+        {
+          "timeMs": 35000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Imbalance of parallel and anti-parallel states"
+        },
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Net magnetization vector M"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "Now we bring everything together and look at the steady state of magnetization.",
+      "bullets": [
+        "Earlier, we talked about the tiny surplus of protons in the lower-energy parallel state compared with those in the higher-energy anti-parallel state. That difference is very small, but when multiplied by the enormous total number of protons in the body, it adds up to a measurable effect.",
+        "For a single proton, the magnetic moment can be expressed as gamma times h-bar over two. But now, instead of just one proton, we have on the order of 10",
+        "to the power of 23 protons, and only a small fraction contributes to the net imbalance. Multiplying that tiny difference by the large population gives us the bulk magnetization.",
+        "We call this net magnetization M naught. It represents the collective contribution of all the protons and points along the direction of the external field B naught.",
+        "In this steady state, the magnetization only has a longitudinal component. That means M z equals M naught, while the transverse components M x and M y are both zero.",
+        "Even though individual protons are still precessing and flipping between parallel and anti-parallel orientations, when you take the average, the only surviving component is along the z-axis. This is what we refer to as the steady-state magnetization."
+      ],
+      "fullText": "Now we bring everything together and look at the steady state of magnetization.\n\nEarlier, we talked about the tiny surplus of protons in the lower-energy parallel state compared with those in the higher-energy anti-parallel state. That difference is very small, but when multiplied by the enormous total number of protons in the body, it adds up to a measurable effect.\nFor a single proton, the magnetic moment can be expressed as gamma times h-bar over two. But now, instead of just one proton, we have on the order of 10\nto the power of 23 protons, and only a small fraction contributes to the net imbalance. Multiplying that tiny difference by the large population gives us the bulk magnetization.\n\nWe call this net magnetization M naught. It represents the collective contribution of all the protons and points along the direction of the external field B naught.\nIn this steady state, the magnetization only has a longitudinal component. That means M z equals M naught, while the transverse components M x and M y are both zero.\n\nEven though individual protons are still precessing and flipping between parallel and anti-parallel orientations, when you take the average, the only surviving component is along the z-axis. This is what we refer to as the steady-state magnetization.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide33.JPG",
+      "script": "Now we bring everything together and look at the steady state of magnetization. The tiny surplus of protons in the lower-energy parallel state adds up to a measurable effect due to the enormous total number of protons in the body. This surplus contributes to the net magnetization, which is the result of the collective behavior of billions and billions of protons. The collective effect of these protons is what allows us to detect and manipulate the magnetization signal.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Surplus protons"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "M naught"
+        },
+        {
+          "timeMs": 19000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Bulk magnetization"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "So far, we’ve spent quite some time on the physical foundation. That’s good, bec",
+      "bullets": [
+        "Now we’re ready to move forward and talk about how the MRI signal is actually generated. This is the transition point — from theory into application. The key question becomes: once the protons are aligned and precessing in the magnetic field, how do we disturb them in a controlled way and measure the response?",
+        "That’s where the radiofrequency pulse comes in. By applying a carefully tuned RF pulse, we can perturb the magnetization vector and create a measurable signal. In the upcoming slides, I’ll explain this process step by step — beginning with RF perturbation, then the Bloch equations that describe the dynamics, and finally, how we detect the free induction decay signal.",
+        "So, let’s pay attention to the next slide — this is where MRI really comes alive."
+      ],
+      "fullText": "So far, we’ve spent quite some time on the physical foundation. That’s good, because now you have a solid grounding in the physics behind MRI — angular momentum, magnetic moment, precession, and magnetization. All of this is essential because without that base, the next steps would be very difficult to follow.\n\nNow we’re ready to move forward and talk about how the MRI signal is actually generated. This is the transition point — from theory into application. The key question becomes: once the protons are aligned and precessing in the magnetic field, how do we disturb them in a controlled way and measure the response?\nThat’s where the radiofrequency pulse comes in. By applying a carefully tuned RF pulse, we can perturb the magnetization vector and create a measurable signal. In the upcoming slides, I’ll explain this process step by step — beginning with RF perturbation, then the Bloch equations that describe the dynamics, and finally, how we detect the free induction decay signal.\n\nSo, let’s pay attention to the next slide — this is where MRI really comes alive.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide34.JPG",
+      "script": "Now that we have a solid understanding of the physical foundation, we can move forward and explore how the MRI signal is generated. This is the transition point from theory to application, where we'll discuss how to disturb the aligned protons in a controlled way.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Transition point"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "RF perturbation"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Bloch equations"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "So here is the key motivation for MR signal generation. We have this net magneti",
+      "bullets": [
+        "If you just leave M-naught alone in its steady state, it aligns with the main magnetic field and stays constant in time. A static field like this will not generate any measurable electrical signal. Remember, electromagnetic induction only works when the magnetic field is changing. A constant magnetization produces nothing in our detection coil.",
+        "The key idea is this: if we can flip M-naught away from its alignment with the main field, then it will gain a transverse component. That transverse part does not just sit there — it precesses, meaning it rotates around the axis of the main magnetic field. This rotating transverse magnetization produces an alternating magnetic field. An alternating field is exactly what we need, because it induces an electrical signal in the detection coil.",
+        "This was the breakthrough that launched nuclear magnetic resonance. It was discovered in nineteen forty-six by Felix Bloch at Stanford and Edward Purcell at Harvard, and their work was recognized with the Nobel Prize in Physics in nineteen fifty-two.",
+        "So the essential trick is: flip the net magnetization, create a transverse component, let it precess, and detect the alternating signal that comes out. This is the foundation of MRI signal generation."
+      ],
+      "fullText": "So here is the key motivation for MR signal generation. We have this net magnetization vector, which is called M-naught. It reflects the water and lipid content in the body, because that’s where most of the hydrogen protons are found. That sounds great, but the important question is: how do we actually measure M-naught?\nIf you just leave M-naught alone in its steady state, it aligns with the main magnetic field and stays constant in time. A static field like this will not generate any measurable electrical signal. Remember, electromagnetic induction only works when the magnetic field is changing. A constant magnetization produces nothing in our detection coil.\n\nThe key idea is this: if we can flip M-naught away from its alignment with the main field, then it will gain a transverse component. That transverse part does not just sit there — it precesses, meaning it rotates around the axis of the main magnetic field. This rotating transverse magnetization produces an alternating magnetic field. An alternating field is exactly what we need, because it induces an electrical signal in the detection coil.\n\nThis was the breakthrough that launched nuclear magnetic resonance. It was discovered in nineteen forty-six by Felix Bloch at Stanford and Edward Purcell at Harvard, and their work was recognized with the Nobel Prize in Physics in nineteen fifty-two.\nSo the essential trick is: flip the net magnetization, create a transverse component, let it precess, and detect the alternating signal that comes out. This is the foundation of MRI signal generation.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide35.JPG",
+      "script": "So, the net magnetization vector, M-naught, reflects the body's water and lipid content, but simply leaving it alone won't generate a measurable signal. This is because a static field doesn't change, and therefore, doesn't induce an electrical signal. To generate a signal, we need to make M-naught change over time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Key Motivation"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Flipping M-naught"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Precession and Detection"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "When the magnetization vector is in steady state, it is balanced. No magnetic fi",
+      "bullets": [
+        "So how do we flip the magnetization to break the balance? To answer that, we look at the energy difference between the parallel state and the anti-parallel state of the protons. Earlier, we derived this difference and called it delta E.",
+        "This energy difference must be supplied by an incoming electromagnetic wave. And the energy carried by a photon is equal to Planck’s constant times the frequency. That means the frequency of the applied radiofrequency wave has to exactly match the energy gap between the two spin states.",
+        "When you rearrange the formulas, you find that the resonant frequency, written as f, is equal to gamma times B-zero divided by two pi. In terms of angular frequency, written as omega, the result is omega equals gamma times B-zero.",
+        "This is a fundamental result. It tells us that the Larmor precession frequency of the proton is identical to the frequency of the radiofrequency field we must apply to drive transitions between the parallel and the anti-parallel states.",
+        "So, from the quantum mechanical point of view, resonance occurs when the radiofrequency wave carries exactly the right energy to match that gap — and that is the basis of nuclear magnetic resonance."
+      ],
+      "fullText": "When the magnetization vector is in steady state, it is balanced. No magnetic field is changing, so no signal can be detected. But once we flip it, we break that balance. Now there is a transverse component of magnetization. This transverse part does not stay still — it undergoes circular motion, what we call precession. And this precessing transverse component produces an alternating magnetic field, which can then be measured through electromagnetic induction, as described by Maxwell’s equations.\n\nSo how do we flip the magnetization to break the balance? To answer that, we look at the energy difference between the parallel state and the anti-parallel state of the protons. Earlier, we derived this difference and called it delta E.\nThis energy difference must be supplied by an incoming electromagnetic wave. And the energy carried by a photon is equal to Planck’s constant times the frequency. That means the frequency of the applied radiofrequency wave has to exactly match the energy gap between the two spin states.\nWhen you rearrange the formulas, you find that the resonant frequency, written as f, is equal to gamma times B-zero divided by two pi. In terms of angular frequency, written as omega, the result is omega equals gamma times B-zero.\n\nThis is a fundamental result. It tells us that the Larmor precession frequency of the proton is identical to the frequency of the radiofrequency field we must apply to drive transitions between the parallel and the anti-parallel states.\nSo, from the quantum mechanical point of view, resonance occurs when the radiofrequency wave carries exactly the right energy to match that gap — and that is the basis of nuclear magnetic resonance.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide36.JPG",
+      "script": "We flip the magnetization by applying a radiofrequency pulse, which changes the energy of the protons, exciting them and breaking the balance. This radiofrequency pulse is applied along the x-axis, perpendicular to the z-axis, where the magnetization is initially aligned. The energy of the protons is increased by the amount of the radiofrequency energy deposited, exciting them and causing the magnetization to tip away from the z-axis. This tipping motion creates a transverse component of magnetization, which then precesses and produces the detected signal.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Energy difference"
+        },
+        {
+          "timeMs": 500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Resonant frequency"
+        },
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 500,
+          "label": "Larmor precession frequency"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "We can now look at RF excitation from the quantum mechanical point of view.",
+      "bullets": [
+        "Imagine we have two energy levels: a lower energy state and a higher energy state. When we send in a radiofrequency wave at the resonance frequency, that wave carries just the right amount of energy to promote a proton from the lower state up to the higher state.",
+        "But once the RF excitation stops, those protons in the higher energy state cannot stay there forever. They naturally relax back down to the lower energy state, which is the more stable configuration. As they do so, the excess energy is released. Importantly, the released energy is in the form of the same radiofrequency signal that was used to excite them.",
+        "This emitted signal is what we detect externally. It is the key step that allows us to convert the microscopic spin transitions of hydrogen protons into a measurable macroscopic MR signal."
+      ],
+      "fullText": "We can now look at RF excitation from the quantum mechanical point of view.\u000bImagine we have two energy levels: a lower energy state and a higher energy state. When we send in a radiofrequency wave at the resonance frequency, that wave carries just the right amount of energy to promote a proton from the lower state up to the higher state.\n\nBut once the RF excitation stops, those protons in the higher energy state cannot stay there forever. They naturally relax back down to the lower energy state, which is the more stable configuration. As they do so, the excess energy is released. Importantly, the released energy is in the form of the same radiofrequency signal that was used to excite them.\n\nThis emitted signal is what we detect externally. It is the key step that allows us to convert the microscopic spin transitions of hydrogen protons into a measurable macroscopic MR signal.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide37.JPG",
+      "script": "As protons relax back down to the lower energy state, they release excess energy in the form of the same radiofrequency signal that was used to excite them, allowing us to detect this signal and extract information about the body's composition. This process is the basis for MRI signal generation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Quantum Mechanical View"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Energy Levels"
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Relaxation to Lower Energy State"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Now, let’s look at the classical view of RF excitation.",
+      "bullets": [
+        "We have our net magnetization vector, which represents the collective magnetic moment of all protons. In the steady state, this vector points along the z-axis, aligned with the static magnetic field B-zero.",
+        "When we apply an additional magnetic field, called B-one, along the x-axis, something interesting happens. The cross product between the magnetization vector and B-one produces a torque. This torque acts in the direction perpendicular to both vectors, and it causes the magnetization to tip away from the z-axis.",
+        "But remember, the system is still precessing around the main magnetic field. So the magnetization doesn’t simply tilt once and stop—it spirals away from the z-axis, tracing out a cone. The longer we apply the B-one field, the further the vector tips, increasing the flip angle.",
+        "This picture is very convenient to describe using the concept of a rotating frame. In that frame, the B-one field looks stationary, and the magnetization vector simply rotates around it. That’s why we often describe RF excitation as “flipping” the magnetization into the transverse plane."
+      ],
+      "fullText": "Now, let’s look at the classical view of RF excitation.\u000bWe have our net magnetization vector, which represents the collective magnetic moment of all protons. In the steady state, this vector points along the z-axis, aligned with the static magnetic field B-zero.\n\nWhen we apply an additional magnetic field, called B-one, along the x-axis, something interesting happens. The cross product between the magnetization vector and B-one produces a torque. This torque acts in the direction perpendicular to both vectors, and it causes the magnetization to tip away from the z-axis.\nBut remember, the system is still precessing around the main magnetic field. So the magnetization doesn’t simply tilt once and stop—it spirals away from the z-axis, tracing out a cone. The longer we apply the B-one field, the further the vector tips, increasing the flip angle.\n\nThis picture is very convenient to describe using the concept of a rotating frame. In that frame, the B-one field looks stationary, and the magnetization vector simply rotates around it. That’s why we often describe RF excitation as “flipping” the magnetization into the transverse plane.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide38.JPG",
+      "script": "The magnetization vector, representing the collective magnetic moment of all protons, initially points along the z-axis, aligned with the static magnetic field B-zero. When an additional magnetic field B-one is applied along the x-axis, it produces a torque through the cross product, causing the magnetization to tip away from the z-axis. This tipping motion is the result of the torque acting perpendicular to both vectors.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "M-vector"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Torque"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Precession"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "In the laboratory frame, the magnetization vector doesn’t just tip smoothly into",
+      "bullets": [
+        "But there is a much simpler way to describe this motion. Instead of staying in the laboratory coordinate system, we can shift into a rotating frame of reference. This is a coordinate system that rotates at exactly the Larmor frequency.",
+        "In this rotating frame, the spiral disappears. The magnetization no longer seems to precess—it simply tilts, or “flips,” into the transverse plane. This makes the description of RF excitation much more intuitive.",
+        "That’s why, throughout MRI physics, we often switch between the laboratory frame and the rotating frame. The physics is the same, but in the rotating frame, the mathematics and the visualization become much simpler."
+      ],
+      "fullText": "In the laboratory frame, the magnetization vector doesn’t just tip smoothly into the transverse plane. Instead, it traces out a spiral path, because while it is flipping down, it is also precessing around the z-axis at the Larmor frequency. So what we observe looks like a helical trajectory.\n\nBut there is a much simpler way to describe this motion. Instead of staying in the laboratory coordinate system, we can shift into a rotating frame of reference. This is a coordinate system that rotates at exactly the Larmor frequency.\n\nIn this rotating frame, the spiral disappears. The magnetization no longer seems to precess—it simply tilts, or “flips,” into the transverse plane. This makes the description of RF excitation much more intuitive.\n\nThat’s why, throughout MRI physics, we often switch between the laboratory frame and the rotating frame. The physics is the same, but in the rotating frame, the mathematics and the visualization become much simpler.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide39.JPG",
+      "script": "The magnetization vector doesn't just tip smoothly into the transverse plane, but instead traces out a spiral path due to the combination of flipping and precessing motions. However, this spiral motion can be described more simply by shifting into a rotating frame of reference that rotates at exactly the Larmor frequency. In this frame, the spiral motion disappears, revealing a more elegant description of the magnetization's behavior.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Magnetization Vector"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Rotating Frame"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 3000,
+          "label": "Simpler Description"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "Think about this in terms of a revolving door. If you just walk up and push the ",
+      "bullets": [
+        "But if you keep pushing at exactly the right rhythm, always perpendicular to the door, you will steadily drive it around in a smooth motion. That is resonance: applying a force at the right frequency so that every push adds up.",
+        "In MRI, the same idea holds. The RF signal has to be applied at the exact precessional frequency—the Larmor frequency. If it matches, then every cycle of the RF field keeps nudging the spins in the same direction. In the rotating frame, this no longer looks like an oscillating wave. Instead, it looks like a steady force, a constant torque, applied to the magnetization vector.",
+        "That constant torque is what tips the magnetization away from the z-axis. It is what allows us to rotate the vector from its equilibrium position into the transverse plane, or even further.",
+        "So the revolving door is a nice analogy: push in rhythm with the rotation, and the system responds strongly. Push out of rhythm, and the effect cancels out."
+      ],
+      "fullText": "Think about this in terms of a revolving door. If you just walk up and push the door randomly, sometimes your push helps it move, and sometimes it cancels out—because your force is not always aligned in the right way.\nBut if you keep pushing at exactly the right rhythm, always perpendicular to the door, you will steadily drive it around in a smooth motion. That is resonance: applying a force at the right frequency so that every push adds up.\n\nIn MRI, the same idea holds. The RF signal has to be applied at the exact precessional frequency—the Larmor frequency. If it matches, then every cycle of the RF field keeps nudging the spins in the same direction. In the rotating frame, this no longer looks like an oscillating wave. Instead, it looks like a steady force, a constant torque, applied to the magnetization vector.\nThat constant torque is what tips the magnetization away from the z-axis. It is what allows us to rotate the vector from its equilibrium position into the transverse plane, or even further.\n\nSo the revolving door is a nice analogy: push in rhythm with the rotation, and the system responds strongly. Push out of rhythm, and the effect cancels out.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide40.JPG",
+      "script": "Think about this in terms of a revolving door. If you just walk up and push the door randomly, sometimes your push helps it move, and sometimes it cancels out—because your force is not always aligned in the right way. But if you keep pushing at exactly the right rhythm, always perpendicular to the door, you will steadily drive it around in a smooth motion. That is resonance: applying a force at the right frequency so that every push adds up. In MRI, the same idea holds, where the RF signal must be applied at the exact precessional frequency, the Larmor frequency, to match the natural frequency of the protons and drive the signal steadily.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Revolving Door Analogy"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "RF Signal Frequency"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Constant Torque"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "We describe the change of the magnetization vector M of t with time.",
+      "bullets": [
+        "The Bloch equation is:",
+        "dM of t over d t equals M of t cross gamma times B of t, minus R times the difference of M of t and M zero.",
+        "Here:",
+        "gamma is the gyromagnetic ratio,",
+        "B of t is the magnetic field,",
+        "M zero is the equilibrium magnetization,",
+        "and R is the relaxation operator that encodes T1 and T2 processes.",
+        "Now, if we expand this into components, we get three equations:",
+        "For the z component:",
+        "dM z over d t equals gamma times the quantity M x times B y, minus M y times B x, minus the difference M z minus M zero divided by T1.",
+        "For the x component:",
+        "dM x over d t equals gamma times the quantity M y times B z, minus M z times B y, minus M x divided by T2.",
+        "For the y component:",
+        "dM y over d t equals gamma times the quantity M z times B x, minus M x times B z, minus M y divided by T2."
+      ],
+      "fullText": "We describe the change of the magnetization vector M of t with time.\u000bThe Bloch equation is:\ndM of t over d t equals M of t cross gamma times B of t, minus R times the difference of M of t and M zero.\nHere:\ngamma is the gyromagnetic ratio,\nB of t is the magnetic field,\nM zero is the equilibrium magnetization,\nand R is the relaxation operator that encodes T1 and T2 processes.\nNow, if we expand this into components, we get three equations:\nFor the z component:\u000bdM z over d t equals gamma times the quantity M x times B y, minus M y times B x, minus the difference M z minus M zero divided by T1.\nFor the x component:\u000bdM x over d t equals gamma times the quantity M y times B z, minus M z times B y, minus M x divided by T2.\nFor the y component:\u000bdM y over d t equals gamma times the quantity M z times B x, minus M x times B z, minus M y divided by T2.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide41.JPG",
+      "script": "The Bloch equation describes how the magnetization vector changes over time, influenced by the magnetic field and relaxation processes. It's a fundamental concept in understanding MRI signal generation and image formation. The equation is composed of three parts, each describing the change of the magnetization vector in the x, y, and z directions. These equations will be used to derive the MRI signal and understand image contrast.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Bloch Equation"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Gyromagnetic Ratio"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Relaxation Processes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "Now let’s see how the Bloch equation works in practice.",
+      "bullets": [
+        "First, consider precession. If the magnetization vector, capital M, is not parallel to the magnetic field B, then M will precess around B. On the other hand, if M is perfectly parallel to B, then the precession radius is zero. In that case, you do not see any visible precession, even though the vector is still technically circling like a single dot.",
+        "Next, think about what happens when we flip M. Suppose M is rotated away from the z-axis into the transverse plane. Now the magnetization has a horizontal component, which we call M x y. This component will oscillate and produce an alternating magnetic field. That is the field that induces a measurable signal in the nearby coil.",
+        "Physically, you can imagine the magnetization vector as a magnetic bar. If you keep flipping or rotating this bar, the field it produces also keeps changing. That changing field drives current in the coil, which is exactly what we detect as the MR signal. The amplitude of this signal depends on proton density: the more protons available, the stronger the signal.",
+        "Now, after the excitation pulse ends, the system will gradually return to equilibrium. The z-component of magnetization, M z, will recover to its steady-state value M zero. This recovery is governed by the T1 relaxation process, sometimes called spin-lattice relaxation. At the same time, the transverse component M x y will decay toward zero. This loss of coherence is governed by T2 relaxation, also called spin-spin relaxation.",
+        "So, to summarize:",
+        "T1 describes how the longitudinal magnetization M z returns to equilibrium.",
+        "T2 describes how the transverse magnetization M x y decays to zero.",
+        "Both of these effects are essential in shaping the MR signal we actually record."
+      ],
+      "fullText": "Now let’s see how the Bloch equation works in practice.\nFirst, consider precession. If the magnetization vector, capital M, is not parallel to the magnetic field B, then M will precess around B. On the other hand, if M is perfectly parallel to B, then the precession radius is zero. In that case, you do not see any visible precession, even though the vector is still technically circling like a single dot.\n\nNext, think about what happens when we flip M. Suppose M is rotated away from the z-axis into the transverse plane. Now the magnetization has a horizontal component, which we call M x y. This component will oscillate and produce an alternating magnetic field. That is the field that induces a measurable signal in the nearby coil.\nPhysically, you can imagine the magnetization vector as a magnetic bar. If you keep flipping or rotating this bar, the field it produces also keeps changing. That changing field drives current in the coil, which is exactly what we detect as the MR signal. The amplitude of this signal depends on proton density: the more protons available, the stronger the signal.\n\nNow, after the excitation pulse ends, the system will gradually return to equilibrium. The z-component of magnetization, M z, will recover to its steady-state value M zero. This recovery is governed by the T1 relaxation process, sometimes called spin-lattice relaxation. At the same time, the transverse component M x y will decay toward zero. This loss of coherence is governed by T2 relaxation, also called spin-spin relaxation.\nSo, to summarize:\nT1 describes how the longitudinal magnetization M z returns to equilibrium.\nT2 describes how the transverse magnetization M x y decays to zero.\n\nBoth of these effects are essential in shaping the MR signal we actually record.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide42.JPG",
+      "script": "As the magnetization vector precesses, it traces out a cone-shaped path, with the angle of the cone determined by the initial angle between M and the magnetic field B. The faster the precession, the more tightly the cone is wrapped. This precession motion is the basis for MR signal generation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Precession Motion"
+        },
+        {
+          "timeMs": 2300,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Flipping M"
+        },
+        {
+          "timeMs": 3300,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Signal Generation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "Now let’s talk about how the MR signal is actually detected.",
+      "bullets": [
+        "‘",
+        "When the magnetization vector, capital M, is flipped away from the z-axis, it develops a transverse component, which we call M x y. This transverse magnetization does not remain static — it oscillates at the resonance frequency. That oscillation induces a sinusoidal current in the radiofrequency coil, exactly as predicted by Faraday’s law of electromagnetic induction.",
+        "The strength of this induced signal depends directly on the size of M x y. The larger the transverse component, the stronger the oscillating magnetic field, and therefore the stronger the detected voltage in the coil.",
+        "The maximum possible signal is reached when the flip angle is ninety degrees. At this angle, the entire magnetization vector lies in the x-y plane, meaning that M x y is equal to M naught, the full equilibrium magnetization. This is why a ninety-degree pulse is often used in MRI — it gives the largest possible signal for detection."
+      ],
+      "fullText": "Now let’s talk about how the MR signal is actually detected.\n‘\nWhen the magnetization vector, capital M, is flipped away from the z-axis, it develops a transverse component, which we call M x y. This transverse magnetization does not remain static — it oscillates at the resonance frequency. That oscillation induces a sinusoidal current in the radiofrequency coil, exactly as predicted by Faraday’s law of electromagnetic induction.\n\nThe strength of this induced signal depends directly on the size of M x y. The larger the transverse component, the stronger the oscillating magnetic field, and therefore the stronger the detected voltage in the coil.\nThe maximum possible signal is reached when the flip angle is ninety degrees. At this angle, the entire magnetization vector lies in the x-y plane, meaning that M x y is equal to M naught, the full equilibrium magnetization. This is why a ninety-degree pulse is often used in MRI — it gives the largest possible signal for detection.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide43.JPG",
+      "script": "As the magnetization vector, capital M, is flipped away from the z-axis, it develops a transverse component, which we call M x y. This transverse magnetization oscillates at the resonance frequency, inducing a sinusoidal current in the radiofrequency coil. The strength of this induced signal depends directly on the size of M x y. The larger the transverse component, the stronger the oscillating magnetic field.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "M x y oscillates"
+        },
+        {
+          "timeMs": 1600,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Signal strength depends on M x y"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 1000,
+          "label": "Maximum signal at ninety-degree flip"
+        }
+      ]
+    },
+    {
+      "slideIndex": 43,
+      "slideNumber": 44,
+      "title": "Once the radiofrequency pulse is turned off, the magnetization vector begins to ",
+      "bullets": [
+        "As the system relaxes, the transverse magnetization — that is, M x y — begins to decay. This decay produces a signal that gradually decreases to zero. We call this the free induction decay, or FID.",
+        "The FID is the fundamental nuclear magnetic resonance signal. It oscillates at the resonance frequency, and its strength is proportional to the local proton density. In other words, the more protons you have in a region, the stronger the signal you record.",
+        "This decay curve, shaped by relaxation mechanisms T1 and T2, contains the raw information that MRI uses. By capturing and analyzing this signal, we can reconstruct images that reveal tissue structure and composition."
+      ],
+      "fullText": "Once the radiofrequency pulse is turned off, the magnetization vector begins to relax back toward the main magnetic field, capital B naught. In this process, the excess energy that was absorbed is released.\nAs the system relaxes, the transverse magnetization — that is, M x y — begins to decay. This decay produces a signal that gradually decreases to zero. We call this the free induction decay, or FID.\n\nThe FID is the fundamental nuclear magnetic resonance signal. It oscillates at the resonance frequency, and its strength is proportional to the local proton density. In other words, the more protons you have in a region, the stronger the signal you record.\n\nThis decay curve, shaped by relaxation mechanisms T1 and T2, contains the raw information that MRI uses. By capturing and analyzing this signal, we can reconstruct images that reveal tissue structure and composition.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide44.JPG",
+      "script": "As the radiofrequency pulse is turned off, the magnetization vector relaxes back toward the main magnetic field, releasing the excess energy that was absorbed. This relaxation process produces a signal called the free induction decay, or FID, which oscillates at the resonance frequency and is proportional to the local proton density. The FID is the fundamental nuclear magnetic resonance signal that contains the spatial information of the body.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "FID signal"
+        },
+        {
+          "timeMs": 21000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "proton density"
+        },
+        {
+          "timeMs": 22000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "relaxation mechanisms"
+        }
+      ]
+    },
+    {
+      "slideIndex": 44,
+      "slideNumber": 45,
+      "title": "Now that we have covered how MRI signals are generated and detected, the next st",
+      "bullets": [
+        "So, in the final section of this lecture, we will look more closely at the physics behind T1 and T2. We will also see how these relaxation times can be measured, and how pulse sequences such as inversion recovery and spin echo are designed to take advantage of them.",
+        "Up to this point, our discussion has focused on the overall process of signal generation and detection. But to move from signals to images, we need to understand relaxation. T1 and T2 are the keys that translate raw MRI physics into meaningful image contrast."
+      ],
+      "fullText": "Now that we have covered how MRI signals are generated and detected, the next step is to understand how those signals decay. This part is crucial, because the decay mechanisms — specifically T1 and T2 relaxation — are what ultimately give us image contrast.\n\nSo, in the final section of this lecture, we will look more closely at the physics behind T1 and T2. We will also see how these relaxation times can be measured, and how pulse sequences such as inversion recovery and spin echo are designed to take advantage of them.\n\nUp to this point, our discussion has focused on the overall process of signal generation and detection. But to move from signals to images, we need to understand relaxation. T1 and T2 are the keys that translate raw MRI physics into meaningful image contrast.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide45.JPG",
+      "script": "Now that we've covered how MRI signals are generated and detected, the next step is to understand how those signals decay. This part is crucial because the decay mechanisms, specifically T1 and T2 relaxation, are what ultimately give us image contrast. We'll dive deeper into the physics behind T1 and T2, see how they're measured, and explore how pulse sequences like inversion recovery and spin echo are designed to utilize them.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "T1 and T2 relaxation"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Relaxation times for image contrast"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Inversion recovery and spin echo"
+        }
+      ]
+    },
+    {
+      "slideIndex": 45,
+      "slideNumber": 46,
+      "title": "So now let’s ask: why does the MR signal decay?",
+      "bullets": [
+        "The answer is very much like the rolling ball analogy. A ball on the ground slows down because of resistance and friction. In MRI, once we flip the magnetization into precession, it cannot stay there forever. Over time, it will naturally return to its steady state, aligned with the main magnetic field, B naught.",
+        "This return happens through different relaxation mechanisms:",
+        "T1 relaxation, also called longitudinal or spin-lattice relaxation, is when flipped nuclei realign with the main magnetic field. The energy they lose is given back to the surrounding tissue as thermal energy.",
+        "T2 relaxation, also called transverse or spin-spin relaxation, is when the nuclei gradually lose phase coherence with one another. Even though they were flipped together, local differences in their environment cause them to fall out of step.",
+        "T2-star relaxation is an additional effect that comes from imperfections in the magnetic field itself. The field is never perfectly uniform, and small local variations cause the spins to dephase even faster. This effect is especially important in functional MRI, where susceptibility differences are actually used to generate contrast.",
+        "The key point is that the MR signal we detect — the NMR signal — is proportional to proton density, but reduced by these T1, T2, and T2-star factors.",
+        "And this is what gives MRI its powerful contrasts. For example:",
+        "T1 weighting helps us distinguish gray matter from white matter.",
+        "T2 weighting highlights tissues and fluid, such as cerebrospinal fluid.",
+        "T2-star weighting is especially useful for functional MRI, because it is sensitive to magnetic susceptibility changes, such as those caused by blood oxygenation.",
+        "So, signal decay is not a nuisance. In fact, it’s what makes MRI such a versatile imaging tool."
+      ],
+      "fullText": "So now let’s ask: why does the MR signal decay?\nThe answer is very much like the rolling ball analogy. A ball on the ground slows down because of resistance and friction. In MRI, once we flip the magnetization into precession, it cannot stay there forever. Over time, it will naturally return to its steady state, aligned with the main magnetic field, B naught.\n\nThis return happens through different relaxation mechanisms:\nT1 relaxation, also called longitudinal or spin-lattice relaxation, is when flipped nuclei realign with the main magnetic field. The energy they lose is given back to the surrounding tissue as thermal energy.\nT2 relaxation, also called transverse or spin-spin relaxation, is when the nuclei gradually lose phase coherence with one another. Even though they were flipped together, local differences in their environment cause them to fall out of step.\nT2-star relaxation is an additional effect that comes from imperfections in the magnetic field itself. The field is never perfectly uniform, and small local variations cause the spins to dephase even faster. This effect is especially important in functional MRI, where susceptibility differences are actually used to generate contrast.\nThe key point is that the MR signal we detect — the NMR signal — is proportional to proton density, but reduced by these T1, T2, and T2-star factors.\n\nAnd this is what gives MRI its powerful contrasts. For example:\nT1 weighting helps us distinguish gray matter from white matter.\nT2 weighting highlights tissues and fluid, such as cerebrospinal fluid.\nT2-star weighting is especially useful for functional MRI, because it is sensitive to magnetic susceptibility changes, such as those caused by blood oxygenation.\nSo, signal decay is not a nuisance. In fact, it’s what makes MRI such a versatile imaging tool.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide46.JPG",
+      "script": "The MR signal decays because of relaxation mechanisms that bring the magnetization back to its steady state. This is similar to the rolling ball analogy, where the ball slows down due to resistance and friction. In MRI, the magnetization naturally returns to its steady state, aligned with the main magnetic field, through T1 relaxation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Why does the signal decay?"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Similar to the rolling ball"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "T1 relaxation: spin-lattice interaction"
+        }
+      ]
+    },
+    {
+      "slideIndex": 46,
+      "slideNumber": 47,
+      "title": "Now let’s take a closer look at the T1 effect.",
+      "bullets": [
+        "T1 describes how the longitudinal magnetization, that is, the component along the z-axis, gradually returns to its equilibrium value after being disturbed by a radiofrequency pulse.",
+        "On the left side of the figure, we see what happens after a ninety-degree pulse. In this case, the longitudinal magnetization, which we call M z, has been tipped entirely into the transverse plane, so it starts at zero. Over time, it recovers back toward its equilibrium value, which we call M naught, and it does so in an exponential fashion.",
+        "On the right side, we see the case of a one-hundred-eighty-degree pulse. Here, the longitudinal magnetization is flipped completely upside down, starting at negative M naught. From there, it also recovers exponentially back to M naught.",
+        "This exponential recovery is the hallmark of T1 relaxation. The recovery speed depends on the tissue type, because different tissues exchange energy with their environment—the so-called spin-lattice interaction—at different rates.",
+        "So, to summarize: T1 tells us how quickly a tissue’s magnetization realigns with the main magnetic field, B zero. And these differences in T1 times are one of the key sources of image contrast in MRI."
+      ],
+      "fullText": "Now let’s take a closer look at the T1 effect.\nT1 describes how the longitudinal magnetization, that is, the component along the z-axis, gradually returns to its equilibrium value after being disturbed by a radiofrequency pulse.\n\nOn the left side of the figure, we see what happens after a ninety-degree pulse. In this case, the longitudinal magnetization, which we call M z, has been tipped entirely into the transverse plane, so it starts at zero. Over time, it recovers back toward its equilibrium value, which we call M naught, and it does so in an exponential fashion.\n\nOn the right side, we see the case of a one-hundred-eighty-degree pulse. Here, the longitudinal magnetization is flipped completely upside down, starting at negative M naught. From there, it also recovers exponentially back to M naught.\nThis exponential recovery is the hallmark of T1 relaxation. The recovery speed depends on the tissue type, because different tissues exchange energy with their environment—the so-called spin-lattice interaction—at different rates.\n\nSo, to summarize: T1 tells us how quickly a tissue’s magnetization realigns with the main magnetic field, B zero. And these differences in T1 times are one of the key sources of image contrast in MRI.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide47.JPG",
+      "script": "T1 describes how the longitudinal magnetization, or the magnetization along the z-axis, returns to its equilibrium value after being disturbed. This recovery is exponential and follows a curve shaped by the T1 relaxation time. The T1 time is a measure of how long it takes for the longitudinal magnetization to recover to about 63% of its equilibrium value. This recovery process is governed by the T1 relaxation time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "T1 relaxation"
+        },
+        {
+          "timeMs": 1600,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "M z recovery"
+        },
+        {
+          "timeMs": 1900,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "T1 time"
+        }
+      ]
+    },
+    {
+      "slideIndex": 47,
+      "slideNumber": 48,
+      "title": "Now let’s talk about the T2 effect, which is also called transverse relaxation o",
+      "bullets": [
+        "After we apply a ninety-degree pulse, the net magnetization lies entirely in the transverse plane, along the x-y plane. At that initial moment, all of the tiny magnetic moments of individual protons are lined up together, pointing in the same direction.",
+        "But over time, each of those protons experiences slightly different local magnetic fields. Some of them precess a little faster, and others precess a little slower. As a result, they gradually drift out of phase with one another.",
+        "When that happens, their contributions begin to cancel out. The net transverse magnetization shrinks, even though each proton is still spinning.",
+        "On the graph at the bottom, you can see this process clearly. The transverse magnetization starts at its maximum value and then decays exponentially toward zero as the moments become more and more dephased.",
+        "This is the essence of the T2 relaxation process: it measures how quickly the spins lose phase coherence in the transverse plane, leading to signal decay."
+      ],
+      "fullText": "Now let’s talk about the T2 effect, which is also called transverse relaxation or dephasing.\nAfter we apply a ninety-degree pulse, the net magnetization lies entirely in the transverse plane, along the x-y plane. At that initial moment, all of the tiny magnetic moments of individual protons are lined up together, pointing in the same direction.\n\nBut over time, each of those protons experiences slightly different local magnetic fields. Some of them precess a little faster, and others precess a little slower. As a result, they gradually drift out of phase with one another.\nWhen that happens, their contributions begin to cancel out. The net transverse magnetization shrinks, even though each proton is still spinning.\nOn the graph at the bottom, you can see this process clearly. The transverse magnetization starts at its maximum value and then decays exponentially toward zero as the moments become more and more dephased.\n\nThis is the essence of the T2 relaxation process: it measures how quickly the spins lose phase coherence in the transverse plane, leading to signal decay.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide48.JPG",
+      "script": "As the tiny magnetic moments of individual protons precess at slightly different rates, they naturally drift out of phase with one another, resulting in a loss of coherence and a reduction in signal strength. This effect is caused by the slightly different local magnetic fields experienced by each proton.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "T2 effect"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "local magnetic fields"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 200,
+          "label": "dephasing"
+        }
+      ]
+    },
+    {
+      "slideIndex": 48,
+      "slideNumber": 49,
+      "title": "At this stage, we can summarize how T1 and T2 relaxation describe the time evolu",
+      "bullets": [
+        "First, consider the longitudinal component, which we usually call M z. After a radiofrequency pulse, it does not instantly return to equilibrium. Instead, it recovers gradually, following an exponential curve. Mathematically, we say that M z of time equals M naught multiplied by one minus e to the power of negative t over T1. In plain words, this means the recovery depends on a time constant, T1, which tells us how quickly the spins realign with the main magnetic field.",
+        "Next, for the transverse components, which are M x and M y, these decay over time. Their rate of decay is described by the time constant T2. The equations are written as d M x over d t equals minus M x divided by T2, and d M y over d t equals minus M y divided by T2. In other words, both x and y components shrink exponentially toward zero, at a rate determined by T2.",
+        "So, together, T1 and T2 give us a semi-quantitative model for MRI. T1 governs how fast the longitudinal magnetization recovers, and T2 governs how fast the transverse magnetization disappears. Both processes follow exponential curves, but with different time constants."
+      ],
+      "fullText": "At this stage, we can summarize how T1 and T2 relaxation describe the time evolution of magnetization in MRI.\n\nFirst, consider the longitudinal component, which we usually call M z. After a radiofrequency pulse, it does not instantly return to equilibrium. Instead, it recovers gradually, following an exponential curve. Mathematically, we say that M z of time equals M naught multiplied by one minus e to the power of negative t over T1. In plain words, this means the recovery depends on a time constant, T1, which tells us how quickly the spins realign with the main magnetic field.\n\nNext, for the transverse components, which are M x and M y, these decay over time. Their rate of decay is described by the time constant T2. The equations are written as d M x over d t equals minus M x divided by T2, and d M y over d t equals minus M y divided by T2. In other words, both x and y components shrink exponentially toward zero, at a rate determined by T2.\n\nSo, together, T1 and T2 give us a semi-quantitative model for MRI. T1 governs how fast the longitudinal magnetization recovers, and T2 governs how fast the transverse magnetization disappears. Both processes follow exponential curves, but with different time constants.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide49.JPG",
+      "script": "At this stage, we can summarize how T1 and T2 relaxation describe the time evolution of magnetization in MRI. The longitudinal component, M z, recovers gradually following an exponential curve, described by the equation M z of time equals M naught multiplied by one minus e to the power of negative t over T1. This recovery depends on the time constant T1, which determines how quickly the spins realign with the main magnetic field.",
+      "spotlightEvents": [
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "T1 relaxation"
+        },
+        {
+          "timeMs": 42000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "T2 relaxation"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Exponential recovery"
+        }
+      ]
+    },
+    {
+      "slideIndex": 49,
+      "slideNumber": 50,
+      "title": "Here we have a summary table of T1 and T2 relaxation times for different tissues",
+      "bullets": [
+        "For fat, the T1 relaxation time is about two hundred sixty milliseconds, and the T2 is about eighty milliseconds.",
+        "For muscle, T1 is around eight hundred seventy milliseconds, while T2 is much shorter, about forty-five milliseconds.",
+        "In the brain, gray matter has a T1 of about nine hundred milliseconds and a T2 of about one hundred milliseconds. White matter is slightly shorter, with a T1 of about seven hundred eighty milliseconds and a T2 of about ninety milliseconds.",
+        "The liver shows a T1 of about five hundred milliseconds and a T2 of about forty milliseconds.",
+        "Finally, cerebrospinal fluid has the longest times by far: a T1 of about two thousand four hundred milliseconds and a T2 of about one hundred sixty milliseconds.",
+        "These values illustrate a key point: different tissues have different relaxation times, and that difference is what gives MRI its powerful ability to generate contrast between tissues."
+      ],
+      "fullText": "Here we have a summary table of T1 and T2 relaxation times for different tissues, measured at a field strength of one point five Tesla.\n\nFor fat, the T1 relaxation time is about two hundred sixty milliseconds, and the T2 is about eighty milliseconds.\nFor muscle, T1 is around eight hundred seventy milliseconds, while T2 is much shorter, about forty-five milliseconds.\nIn the brain, gray matter has a T1 of about nine hundred milliseconds and a T2 of about one hundred milliseconds. White matter is slightly shorter, with a T1 of about seven hundred eighty milliseconds and a T2 of about ninety milliseconds.\nThe liver shows a T1 of about five hundred milliseconds and a T2 of about forty milliseconds.\nFinally, cerebrospinal fluid has the longest times by far: a T1 of about two thousand four hundred milliseconds and a T2 of about one hundred sixty milliseconds.\n\nThese values illustrate a key point: different tissues have different relaxation times, and that difference is what gives MRI its powerful ability to generate contrast between tissues.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide50.JPG",
+      "script": "Let's review the relaxation times for different tissues. For fat, T1 is around two hundred sixty milliseconds, and T2 is about eighty milliseconds. For muscle, T1 is eight hundred seventy milliseconds, and T2 is much shorter, about forty-five milliseconds. In the brain, gray matter has a T1 of about nine hundred milliseconds and a T2 of about one hundred milliseconds, while white matter has a slightly shorter T1 of about seven hundred eighty milliseconds and a T2 of about ninety milliseconds.",
+      "spotlightEvents": [
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "T1 and T2 times"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Relaxation times for fat"
+        },
+        {
+          "timeMs": 8000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 2000,
+          "label": "T1 and T2 for muscle"
+        }
+      ]
+    },
+    {
+      "slideIndex": 50,
+      "slideNumber": 51,
+      "title": "Now let’s distinguish between T2, T2 prime, and T2 star.",
+      "bullets": [
+        "The loss of phase coherence in the transverse magnetization can arise from two different mechanisms. The first is the so-called pure T2 decay, which comes from intrinsic spin–spin interactions inside the tissue. This is a physiological and biological effect, and it represents the fundamental limit of how long spins can stay in phase with one another.",
+        "The second contribution comes from spatial variations in the magnetic field strength inside the body. In practice, no magnet is perfectly uniform. There are always small imperfections in the main field, B zero. In addition, different tissues have slightly different magnetic susceptibilities, especially at boundaries between air and tissue, or bone and tissue. These local variations cause spins to accumulate extra phase shifts, further accelerating the loss of coherence. This additional contribution is represented by T2 prime.",
+        "When we put these together, the overall transverse relaxation time we observe is called T2 star. Mathematically, the rate of decay of T2 star is the sum of the rates of T2 and T2 prime. That is, one over T2 star equals one over T2 plus one over T2 prime.",
+        "So in summary:",
+        "T2 reflects fundamental spin–spin interactions.",
+        "T2 prime reflects field inhomogeneity and susceptibility effects.",
+        "T2 star combines both, and it is the effective decay time we actually measure in many MRI sequences."
+      ],
+      "fullText": "Now let’s distinguish between T2, T2 prime, and T2 star.\nThe loss of phase coherence in the transverse magnetization can arise from two different mechanisms. The first is the so-called pure T2 decay, which comes from intrinsic spin–spin interactions inside the tissue. This is a physiological and biological effect, and it represents the fundamental limit of how long spins can stay in phase with one another.\n\nThe second contribution comes from spatial variations in the magnetic field strength inside the body. In practice, no magnet is perfectly uniform. There are always small imperfections in the main field, B zero. In addition, different tissues have slightly different magnetic susceptibilities, especially at boundaries between air and tissue, or bone and tissue. These local variations cause spins to accumulate extra phase shifts, further accelerating the loss of coherence. This additional contribution is represented by T2 prime.\nWhen we put these together, the overall transverse relaxation time we observe is called T2 star. Mathematically, the rate of decay of T2 star is the sum of the rates of T2 and T2 prime. That is, one over T2 star equals one over T2 plus one over T2 prime.\n\nSo in summary:\nT2 reflects fundamental spin–spin interactions.\nT2 prime reflects field inhomogeneity and susceptibility effects.\nT2 star combines both, and it is the effective decay time we actually measure in many MRI sequences.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide51.JPG",
+      "script": "Let's break down the difference between T2, T2 prime, and T2 star. T2 is the pure biological spin–spin relaxation time, describing how quickly spins lose phase coherence due to intrinsic interactions. T2 prime is the combined effect of both biological spin–spin interaction and external field inhomogeneity. T2 star is the total dephasing rate, including both pure T2 decay and external field inhomogeneity.",
+      "spotlightEvents": [
+        {
+          "timeMs": 6600,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "T2 pure biological effect"
+        },
+        {
+          "timeMs": 8000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "T2 prime external field inhomogeneity"
+        },
+        {
+          "timeMs": 10000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "T2 star combined effect"
+        }
+      ]
+    },
+    {
+      "slideIndex": 51,
+      "slideNumber": 52,
+      "title": "Now, let’s look at how T1 can be measured using the inversion recovery method.",
+      "bullets": [
+        "The idea is to start with a one-hundred-eighty-degree pulse, which flips the net magnetization completely upside down along the negative Z-axis. Once it is inverted, we allow it to recover toward equilibrium during a delay time, which we call tau. During this period, the longitudinal magnetization gradually regrows toward its steady state, following the exponential recovery curve we discussed earlier.",
+        "At the end of the delay, we apply a ninety-degree pulse. This flips whatever longitudinal magnetization has recovered into the transverse plane, where it produces a measurable signal. By repeating this process with different values of tau, we can track how the magnetization regrows over time.",
+        "Mathematically, the detected signal follows the expression:",
+        "S of tau equals M zero times the quantity one minus two times e to the power of minus tau over T1.",
+        "By fitting this recovery curve, we obtain the T1 relaxation time. In practice, this method gives a very robust way to measure T1 across different tissues, and it is the basis for many T1-weighted imaging protocols in MRI."
+      ],
+      "fullText": "Now, let’s look at how T1 can be measured using the inversion recovery method.\nThe idea is to start with a one-hundred-eighty-degree pulse, which flips the net magnetization completely upside down along the negative Z-axis. Once it is inverted, we allow it to recover toward equilibrium during a delay time, which we call tau. During this period, the longitudinal magnetization gradually regrows toward its steady state, following the exponential recovery curve we discussed earlier.\n\nAt the end of the delay, we apply a ninety-degree pulse. This flips whatever longitudinal magnetization has recovered into the transverse plane, where it produces a measurable signal. By repeating this process with different values of tau, we can track how the magnetization regrows over time.\nMathematically, the detected signal follows the expression:\u000bS of tau equals M zero times the quantity one minus two times e to the power of minus tau over T1.\n\nBy fitting this recovery curve, we obtain the T1 relaxation time. In practice, this method gives a very robust way to measure T1 across different tissues, and it is the basis for many T1-weighted imaging protocols in MRI.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide52.JPG",
+      "script": "The inversion recovery method involves a one-hundred-eighty-degree pulse to invert the magnetization, a delay time tau for recovery, and a ninety-degree pulse to rotate the magnetization into the transverse plane. During the delay time, the longitudinal magnetization follows an exponential recovery curve. This method allows us to measure T1 by observing the recovery of the magnetization.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Inversion recovery method"
+        },
+        {
+          "timeMs": 6300,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "One-hundred-eighty-degree pulse"
+        },
+        {
+          "timeMs": 8300,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2500,
+          "label": "Exponential recovery curve"
+        }
+      ]
+    },
+    {
+      "slideIndex": 52,
+      "slideNumber": 53,
+      "title": "Now let’s visualize what’s happening in an inversion recovery sequence.",
+      "bullets": [
+        "We start with the net magnetization pointing up along the Z-axis at its equilibrium value, M₀. Then, we apply a one-hundred-eighty-degree pulse, which flips it completely upside down, to minus M₀. From this inverted state, the magnetization begins to relax back toward equilibrium. Over time, the longitudinal component regrows along the Z-axis following the T1 recovery curve.",
+        "At some chosen inversion time, which we call TI, we apply a ninety-degree pulse. This rotates whatever longitudinal magnetization has recovered into the transverse plane. Once in the transverse plane, it generates a measurable free induction decay, or FID signal, that is subject to T2 star decay.",
+        "By repeating this process with different inversion times and recording the signals, we can map out the full recovery curve. Then, using a logarithmic fit, we extract the T1 relaxation time.",
+        "So, in short, this diagram shows how the one-hundred-eighty-degree inversion, the recovery period, and the ninety-degree readout pulse together make it possible to measure T1 directly."
+      ],
+      "fullText": "Now let’s visualize what’s happening in an inversion recovery sequence.\nWe start with the net magnetization pointing up along the Z-axis at its equilibrium value, M₀. Then, we apply a one-hundred-eighty-degree pulse, which flips it completely upside down, to minus M₀. From this inverted state, the magnetization begins to relax back toward equilibrium. Over time, the longitudinal component regrows along the Z-axis following the T1 recovery curve.\nAt some chosen inversion time, which we call TI, we apply a ninety-degree pulse. This rotates whatever longitudinal magnetization has recovered into the transverse plane. Once in the transverse plane, it generates a measurable free induction decay, or FID signal, that is subject to T2 star decay.\nBy repeating this process with different inversion times and recording the signals, we can map out the full recovery curve. Then, using a logarithmic fit, we extract the T1 relaxation time.\nSo, in short, this diagram shows how the one-hundred-eighty-degree inversion, the recovery period, and the ninety-degree readout pulse together make it possible to measure T1 directly.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide53.JPG",
+      "script": "Let's visualize the inversion recovery sequence step by step. We start with the net magnetization pointing up along the Z-axis at its equilibrium value, M₀. Then, we apply a one-hundred-eighty-degree pulse, which flips it completely upside down, to minus M₀. From this inverted state, the magnetization begins to relax back toward equilibrium, following the T1 recovery curve.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Inversion recovery sequence"
+        },
+        {
+          "timeMs": 500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "T1 recovery curve"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 1500,
+          "label": "90-degree pulse"
+        }
+      ]
+    },
+    {
+      "slideIndex": 53,
+      "slideNumber": 54,
+      "title": "Now let’s look at how we measure T2 relaxation using the spin-echo method.",
+      "bullets": [
+        "We begin with a ninety-degree pulse that tips the net magnetization into the transverse plane. Right away, the spins begin to dephase because of small differences in their local magnetic environments. Faster spins move ahead, slower spins lag, and the overall signal decays quickly with a time constant that looks like T2 star.",
+        "But here is the clever trick: at a certain time, we apply a one-hundred-eighty-degree pulse. This flips all the spins over, so that the ones that were leading are now behind, and the ones that were lagging are now in front. As time continues, these spins re-converge, and at a later time, they come back into phase. When that happens, we see the spins add constructively and produce a strong signal, known as the spin echo.",
+        "The height of this echo decays with the true T2 relaxation time, not with T2 star. By repeating the sequence with different time delays, we can track how quickly the echo signal diminishes, and from that, extract the T2 constant.",
+        "This technique is both simple and powerful: it cancels out static inhomogeneities in the magnetic field and isolates the true spin-spin relaxation, which is exactly what T2 represents."
+      ],
+      "fullText": "Now let’s look at how we measure T2 relaxation using the spin-echo method.\nWe begin with a ninety-degree pulse that tips the net magnetization into the transverse plane. Right away, the spins begin to dephase because of small differences in their local magnetic environments. Faster spins move ahead, slower spins lag, and the overall signal decays quickly with a time constant that looks like T2 star.\n\nBut here is the clever trick: at a certain time, we apply a one-hundred-eighty-degree pulse. This flips all the spins over, so that the ones that were leading are now behind, and the ones that were lagging are now in front. As time continues, these spins re-converge, and at a later time, they come back into phase. When that happens, we see the spins add constructively and produce a strong signal, known as the spin echo.\nThe height of this echo decays with the true T2 relaxation time, not with T2 star. By repeating the sequence with different time delays, we can track how quickly the echo signal diminishes, and from that, extract the T2 constant.\n\nThis technique is both simple and powerful: it cancels out static inhomogeneities in the magnetic field and isolates the true spin-spin relaxation, which is exactly what T2 represents.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide54.JPG",
+      "script": "We use a ninety-degree pulse to initially tip the magnetization, causing the spins to dephase and the signal to decay with a time constant resembling T2 star. Then, a one-hundred-eighty-degree pulse is applied, refocusing the spins and allowing us to measure the pure T2 relaxation. This refocusing step is essential for isolating T2 relaxation, as it eliminates the effect of external field inhomogeneities. The resulting signal decay curve reflects the true T2 relaxation, which can be described by the equation one over T2 equals one over T two plus one over T two star.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "T2 star"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "True T2 relaxation"
+        },
+        {
+          "timeMs": 19000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Spin echo"
+        }
+      ]
+    },
+    {
+      "slideIndex": 54,
+      "slideNumber": 55,
+      "title": "To wrap up today’s lecture, here is your homework assignment.",
+      "bullets": [
+        "For problem 4.3, you will calculate the effects of different pulse sequences on thermal equilibrium magnetization. Your final answers should include the x, y, and z components of magnetization. The cases include a ninety-degree pulse about the x-axis, an eighty-degree pulse about the x-axis, two consecutive ninety-degree pulses about x and y, and finally, two consecutive eighty-degree pulses about x and y.",
+        "For problem 4.4, you will decide whether each statement is true or false and provide a brief explanation. These questions cover recovery of magnetization, the behavior of the static field B0, relaxation from the transverse to the longitudinal axis, and the interpretation of a short T1 relaxation time.",
+        "The due date is one working week from today.",
+        "Thank you for following along — we’ve covered a lot of ground, from the Bloch equations to T1 and T2 relaxation and even spin echo sequences. This sets the stage for more advanced imaging concepts in our next lecture."
+      ],
+      "fullText": "To wrap up today’s lecture, here is your homework assignment.\n\nFor problem 4.3, you will calculate the effects of different pulse sequences on thermal equilibrium magnetization. Your final answers should include the x, y, and z components of magnetization. The cases include a ninety-degree pulse about the x-axis, an eighty-degree pulse about the x-axis, two consecutive ninety-degree pulses about x and y, and finally, two consecutive eighty-degree pulses about x and y.\n\nFor problem 4.4, you will decide whether each statement is true or false and provide a brief explanation. These questions cover recovery of magnetization, the behavior of the static field B0, relaxation from the transverse to the longitudinal axis, and the interpretation of a short T1 relaxation time.\nThe due date is one working week from today.\n\nThank you for following along — we’ve covered a lot of ground, from the Bloch equations to T1 and T2 relaxation and even spin echo sequences. This sets the stage for more advanced imaging concepts in our next lecture.",
+      "imageURL": "/lectures/Lecture_18/Images/Slide55.JPG",
+      "script": "Let's review the homework assignment to make sure everyone is clear on what's expected. For problem 4.3, you'll be calculating the magnetization components for different pulse sequences, and for problem 4.4, you'll be evaluating the truth of various statements related to MRI physics.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Problem 4.3"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Problem 4.4"
+        },
+        {
+          "timeMs": 47000,
+          "type": "laser",
+          "x": 0.8,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Due Date"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2623 @@
+{
+  "lectureId": "Lecture_04",
+  "lectureTitle": "Medical Imaging — Lecture 04",
+  "totalSlides": 49,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Alright, welcome to Lecture 4, where our focus is convolution.",
+      "bullets": [
+        "This lecture is a direct continuation of what we started in the previous lecture on systems,",
+        "especially linear systems and shift-invariant systems.",
+        "And the reason convolution is so central is very simple:",
+        "for a linear, shift-invariant system, convolution is the operation that connects",
+        "the input to the output through the system’s impulse response.",
+        "So once you understand convolution,",
+        "you gain a practical way to predict how a system will respond to any input signal.",
+        "You will see convolution everywhere in this course.",
+        "It appears in signal filtering, image blurring and deblurring,",
+        "system modeling, and image reconstruction.",
+        "So today we are going to build the concept carefully,",
+        "both intuitively and mathematically,",
+        "so it becomes a tool you can actually use rather than just a formula you memorize."
+      ],
+      "fullText": "Alright, welcome to Lecture 4, where our focus is convolution.\n\nThis lecture is a direct continuation of what we started in the previous lecture on systems,\nespecially linear systems and shift-invariant systems.\n\nAnd the reason convolution is so central is very simple:\nfor a linear, shift-invariant system, convolution is the operation that connects\nthe input to the output through the system’s impulse response.\n\nSo once you understand convolution,\nyou gain a practical way to predict how a system will respond to any input signal.\n\nYou will see convolution everywhere in this course.\nIt appears in signal filtering, image blurring and deblurring,\nsystem modeling, and image reconstruction.\nSo today we are going to build the concept carefully,\nboth intuitively and mathematically,\nso it becomes a tool you can actually use rather than just a formula you memorize.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide1.JPG",
+      "script": "Welcome to Lecture 4, where we're going to dive into the world of convolution. This lecture builds directly on what we started in the previous lecture, focusing on linear systems and their behavior. Convolution is central to this topic because it's the operation that links the input signal to the output through the system's impulse response. Once you grasp convolution, you'll have a powerful tool to predict how a system will respond to any input signal.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Lecture 4"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "Direct Continuation"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 2500,
+          "label": "Linear Systems"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "We are right on schedule in our journey through this material.",
+      "bullets": [
+        "If you’ve already gone through the reading materials for today, that’s excellent — it will help you link the concepts more quickly. If you haven’t, that’s okay. Just stay engaged during the lecture and review the key points afterward. Building this habit of revisiting ideas will strengthen your understanding, especially as we move into more math-heavy topics"
+      ],
+      "fullText": "We are right on schedule in our journey through this material.\n\nIf you’ve already gone through the reading materials for today, that’s excellent — it will help you link the concepts more quickly. If you haven’t, that’s okay. Just stay engaged during the lecture and review the key points afterward. Building this habit of revisiting ideas will strengthen your understanding, especially as we move into more math-heavy topics",
+      "imageURL": "/lectures/Lecture_04/Images/Slide2.JPG",
+      "script": "We're right on schedule in our journey through this material, and I'm glad to see everyone's progress. If you've already read the materials, great – it'll help you connect the dots faster. If not, don't worry, just stay focused during the lecture and review the key points afterwards, and remember to revisit ideas regularly to build a stronger understanding.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Stay focused during the lecture"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Review key points afterwards"
+        },
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Revisit ideas to strengthen understanding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "As we step into the topic of convolution, let’s outline what we’ll be exploring ",
+      "bullets": [
+        "We’ll begin by revisiting shift-invariant linear systems, grounding ourselves in a concept we touched on earlier. Then, we’ll move into two important formulations of convolution: continuous convolution and discrete convolution.",
+        "Each of them plays a crucial role depending on the context — continuous for signals that evolve smoothly over time or space, and discrete for digital signals and images. Through this lecture, we’ll examine both perspectives and their practical implications.",
+        "By the end of the course, you’ll not only understand how convolution works — you'll also appreciate why it matters in system analysis, image reconstruction, and the broader field of medical imaging."
+      ],
+      "fullText": "As we step into the topic of convolution, let’s outline what we’ll be exploring today.\nWe’ll begin by revisiting shift-invariant linear systems, grounding ourselves in a concept we touched on earlier. Then, we’ll move into two important formulations of convolution: continuous convolution and discrete convolution.\n\nEach of them plays a crucial role depending on the context — continuous for signals that evolve smoothly over time or space, and discrete for digital signals and images. Through this lecture, we’ll examine both perspectives and their practical implications.\nBy the end of the course, you’ll not only understand how convolution works — you'll also appreciate why it matters in system analysis, image reconstruction, and the broader field of medical imaging.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide3.JPG",
+      "script": "As we dive into convolution, let's review what we'll be covering. We'll start by revisiting shift-invariant linear systems, building on our earlier understanding. Then, we'll explore two key formulations of convolution: continuous convolution for smooth signals and discrete convolution for digital signals and images. This lecture will balance both perspectives, highlighting their importance in different contexts.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Convolution Overview"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Revisiting Linear Systems"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Continuous vs Discrete Convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "Let’s refresh our picture of a linear, shift-invariant system using this ripple ",
+      "bullets": [
+        "Imagine dropping a pebble into a calm pond.",
+        "You get a circular ripple pattern that spreads outward.",
+        "Now drop the pebble somewhere else.",
+        "You still get the same kind of ripple pattern,",
+        "it just starts from a different location.",
+        "That idea, “same response, just shifted,” is what we call shift invariance.",
+        "The system behaves the same way no matter where the input happens.",
+        "If you shift the input in space, the output shifts in the same way,",
+        "but the shape of the response stays the same.",
+        "Now connect that to medical imaging.",
+        "In an ideal setting, if the patient has not changed,",
+        "and the scan conditions are comparable,",
+        "the imaging system should produce consistent results.",
+        "So repeating a scan should not create a completely different picture just because of position or timing.",
+        "That consistency is the intuition behind invariance assumptions.",
+        "Next is linearity, and linearity has two parts.",
+        "First is additivity.",
+        "If two separate effects are present,",
+        "the system’s response to both together should be the sum of the responses to each one separately.",
+        "Second is homogeneity, or scaling.",
+        "If the strength of the input doubles,",
+        "the strength of the output should also double,",
+        "at least within the range where the system is behaving linearly.",
+        "When both additivity and homogeneity hold,",
+        "we get the superposition principle.",
+        "And that is why linear, shift-invariant models are so useful:",
+        "they are predictable and analyzable,",
+        "and they lead directly to tools like convolution and Fourier methods.",
+        "So keep the ripple picture in mind.",
+        "It’s a simple visual that captures what we mean by shift invariance,",
+        "and why linear, shift-invariant systems are such a central model in imaging."
+      ],
+      "fullText": "Let’s refresh our picture of a linear, shift-invariant system using this ripple image.\n\nImagine dropping a pebble into a calm pond.\nYou get a circular ripple pattern that spreads outward.\n\nNow drop the pebble somewhere else.\nYou still get the same kind of ripple pattern,\nit just starts from a different location.\n\nThat idea, “same response, just shifted,” is what we call shift invariance.\nThe system behaves the same way no matter where the input happens.\nIf you shift the input in space, the output shifts in the same way,\nbut the shape of the response stays the same.\n\nNow connect that to medical imaging.\nIn an ideal setting, if the patient has not changed,\nand the scan conditions are comparable,\nthe imaging system should produce consistent results.\nSo repeating a scan should not create a completely different picture just because of position or timing.\nThat consistency is the intuition behind invariance assumptions.\n\nNext is linearity, and linearity has two parts.\n\nFirst is additivity.\nIf two separate effects are present,\nthe system’s response to both together should be the sum of the responses to each one separately.\n\nSecond is homogeneity, or scaling.\nIf the strength of the input doubles,\nthe strength of the output should also double,\nat least within the range where the system is behaving linearly.\n\nWhen both additivity and homogeneity hold,\nwe get the superposition principle.\n\nAnd that is why linear, shift-invariant models are so useful:\nthey are predictable and analyzable,\nand they lead directly to tools like convolution and Fourier methods.\n\nSo keep the ripple picture in mind.\nIt’s a simple visual that captures what we mean by shift invariance,\nand why linear, shift-invariant systems are such a central model in imaging.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide4.JPG",
+      "script": "Let's refresh our picture of a linear, shift-invariant system using this ripple image. Imagine dropping a pebble into a calm pond, you get a circular ripple pattern that spreads outward. Now drop the pebble somewhere else, you still get the same kind of ripple pattern, it just starts from a different location. That idea, 'same response, just shifted,' is what we call shift invariance, the system behaves the same way no matter where the input happens.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Ripple Image"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 300,
+          "label": "Pebble in Pond"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 400,
+          "label": "Ripple Pattern"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "To understand convolution deeply, let’s frame it through a familiar story from p",
+      "bullets": [
+        "You might recall the idea — sometimes attributed to Newton — that the universe began with a single impulse, a sort of divine kick that set everything into motion. Whether metaphor or mechanics, this idea captures something fundamental.",
+        "In physics, we often model this idea of an initial force as an impulse — a very short burst of energy that sets a system into motion. For instance, think of hitting a golf ball with a club. That brief push is an impulse, and the ball's subsequent motion is the system’s response."
+      ],
+      "fullText": "To understand convolution deeply, let’s frame it through a familiar story from physics.\nYou might recall the idea — sometimes attributed to Newton — that the universe began with a single impulse, a sort of divine kick that set everything into motion. Whether metaphor or mechanics, this idea captures something fundamental.\nIn physics, we often model this idea of an initial force as an impulse — a very short burst of energy that sets a system into motion. For instance, think of hitting a golf ball with a club. That brief push is an impulse, and the ball's subsequent motion is the system’s response.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide5.JPG",
+      "script": "Let's explore the connection between convolution and this physical concept of an impulse. The idea of an initial force setting a system into motion is a powerful metaphor for understanding convolution. It helps us see convolution as a way to describe how a system responds to an impulse, whether that impulse is a brief push or a more complex input. This physical perspective can deepen our understanding of convolution and its applications.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Impulse and Convolution"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Newton’s Idea"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Golf Ball Analogy"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Let’s take a closer look at the idea of an impulse, using this golf-ball picture",
+      "bullets": [
+        "When you hit a stationary golf ball, the force from the club acts only for a very short time.",
+        "It is a quick, concentrated push.",
+        "But even though it lasts only a moment, the effect is lasting.",
+        "That short burst of force changes the ball’s momentum, and the ball starts moving.",
+        "That is the basic intuition behind an impulse:",
+        "a brief input that produces a measurable change in the system.",
+        "Now bring this back to system analysis.",
+        "We often ask a very specific question:",
+        "if I hit a system with an idealized impulse, what does the system do afterward?",
+        "The output we observe after that impulse is called the impulse response.",
+        "And it is incredibly important, because for a linear, shift-invariant system,",
+        "the impulse response completely characterizes the system.",
+        "Once you know the impulse response, you can predict the output for any input signal,",
+        "not by guessing, but by using convolution.",
+        "So you can think of convolution as the tool that builds a complicated response",
+        "out of many shifted and scaled impulse responses.",
+        "So this simple golf example is a doorway to a big idea:",
+        "impulse response tells you how a system behaves,",
+        "and convolution tells you how the system responds to everything else."
+      ],
+      "fullText": "Let’s take a closer look at the idea of an impulse, using this golf-ball picture.\n\nWhen you hit a stationary golf ball, the force from the club acts only for a very short time.\nIt is a quick, concentrated push.\n\nBut even though it lasts only a moment, the effect is lasting.\nThat short burst of force changes the ball’s momentum, and the ball starts moving.\n\nThat is the basic intuition behind an impulse:\na brief input that produces a measurable change in the system.\n\nNow bring this back to system analysis.\nWe often ask a very specific question:\nif I hit a system with an idealized impulse, what does the system do afterward?\n\nThe output we observe after that impulse is called the impulse response.\nAnd it is incredibly important, because for a linear, shift-invariant system,\nthe impulse response completely characterizes the system.\n\nOnce you know the impulse response, you can predict the output for any input signal,\nnot by guessing, but by using convolution.\nSo you can think of convolution as the tool that builds a complicated response\nout of many shifted and scaled impulse responses.\n\nSo this simple golf example is a doorway to a big idea:\nimpulse response tells you how a system behaves,\nand convolution tells you how the system responds to everything else.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide6.JPG",
+      "script": "When you hit a stationary golf ball, the force from the club acts only for a very short time, a quick, concentrated push. But even though it lasts only a moment, the effect is lasting, changing the ball's momentum and setting it in motion. This brief input produces a measurable change in the system, illustrating the basic intuition behind an impulse. This idea will be crucial in understanding how systems respond to inputs.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Golf Ball Example"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Impulse"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 4000,
+          "label": "System Response"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "Let’s look at how impulse relates to momentum — a key concept in both physics an",
+      "bullets": [
+        "Momentum, as you may recall, is simply mass multiplied by velocity.",
+        "So if an object is at rest, it has zero momentum. When you apply a force over a period of time — say, when you hit a tennis ball with a racket — the object gains velocity. That change in velocity reflects a change in momentum.",
+        "Now here’s the essential link:",
+        "Impulse is defined as force multiplied by the time over which it acts.",
+        "We start with Newton’s second law, which tells us:",
+        "Force equals mass times acceleration — or simply,",
+        "F equals m a.",
+        "Now, acceleration is defined as the change in velocity divided by the change in time — so we write:",
+        "a equals delta v over delta t.",
+        "If we substitute that into Newton’s law, we get:",
+        "F times delta t equals m times delta v.",
+        "This equation shows us something powerful:",
+        "Impulse — that’s force times time — equals the change in momentum.",
+        "tells us that impulse causes the change in momentum.",
+        "It’s the way to model how mechanical systems respond to external inputs, and the idea applies to other input-output relationships as well."
+      ],
+      "fullText": "Let’s look at how impulse relates to momentum — a key concept in both physics and system analysis.\nMomentum, as you may recall, is simply mass multiplied by velocity. \n\nSo if an object is at rest, it has zero momentum. When you apply a force over a period of time — say, when you hit a tennis ball with a racket — the object gains velocity. That change in velocity reflects a change in momentum.\n\nNow here’s the essential link:\u000bImpulse is defined as force multiplied by the time over which it acts.\n\u000bWe start with Newton’s second law, which tells us:\u000bForce equals mass times acceleration — or simply,\u000bF equals m a.\n\nNow, acceleration is defined as the change in velocity divided by the change in time — so we write:\u000ba equals delta v over delta t.\n\nIf we substitute that into Newton’s law, we get:\u000bF times delta t equals m times delta v.\n\nThis equation shows us something powerful:\u000bImpulse — that’s force times time — equals the change in momentum.\ntells us that impulse causes the change in momentum.\n\n\n It’s the way to model how mechanical systems respond to external inputs, and the idea applies to other input-output relationships as well.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide7.JPG",
+      "script": "Let's look at how impulse relates to momentum, a key concept in both physics and system analysis. Momentum is simply mass multiplied by velocity, so if an object is at rest, it has zero momentum. When you apply a force over a period of time, the object gains velocity, and that change in velocity reflects a change in momentum. Impulse is defined as force multiplied by the time over which it acts, which is essential for understanding how momentum changes.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Impulse"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Momentum"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Change in Velocity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "Building on what we just discussed, this slide is showing something very elegant",
+      "bullets": [
+        "Look at the different shapes on the plot.",
+        "Some are tall and very narrow.",
+        "Some are shorter but much wider.",
+        "Even though the shapes look different, the key message is this:",
+        "for impulse, the exact shape is not the main thing.",
+        "What really matters is the area under the curve.",
+        "That area is the total “overall effect” of the force applied over time.",
+        "So a small force applied for a longer time can produce the same impulse",
+        "as a large force applied for a very short time,",
+        "as long as the areas match.",
+        "Now translate that idea into system thinking.",
+        "Often, what drives the system’s response is not a single instantaneous value,",
+        "but the accumulated influence of the input over time.",
+        "That is exactly the mindset behind convolution.",
+        "Convolution is basically a structured way of adding up contributions across time:",
+        "you take a response shape, you slide it, scale it, and sum up the overlap.",
+        "So this impulse picture is a nice bridge from physical intuition",
+        "to the mathematical tool we are about to use."
+      ],
+      "fullText": "Building on what we just discussed, this slide is showing something very elegant about impulse.\n\nLook at the different shapes on the plot.\nSome are tall and very narrow.\nSome are shorter but much wider.\n\nEven though the shapes look different, the key message is this:\nfor impulse, the exact shape is not the main thing.\nWhat really matters is the area under the curve.\n\nThat area is the total “overall effect” of the force applied over time.\nSo a small force applied for a longer time can produce the same impulse\nas a large force applied for a very short time,\nas long as the areas match.\n\nNow translate that idea into system thinking.\n\nOften, what drives the system’s response is not a single instantaneous value,\nbut the accumulated influence of the input over time.\nThat is exactly the mindset behind convolution.\n\nConvolution is basically a structured way of adding up contributions across time:\nyou take a response shape, you slide it, scale it, and sum up the overlap.\nSo this impulse picture is a nice bridge from physical intuition\nto the mathematical tool we are about to use.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide8.JPG",
+      "script": "The shapes on the plot represent different impulse profiles, but what matters is the total area under each curve, which represents the overall effect of the force applied over time. The exact shape of the impulse is not as important as the total impulse itself. This is a fundamental concept in medical imaging, where understanding impulse is crucial for analyzing and interpreting data.",
+      "spotlightEvents": [
+        {
+          "timeMs": 52000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Total impulse matters"
+        },
+        {
+          "timeMs": 53000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Shape is not as important"
+        },
+        {
+          "timeMs": 54000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Area under the curve"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Now let’s extend that idea.",
+      "bullets": [
+        "Impulse isn’t limited to rectangular shapes. We can see in this graph that different Gaussian curves — whether wide or narrow, flat or sharp — can all serve as impulse-like inputs.",
+        "What matters is the area under each curve. This area represents the total impulse delivered by the force, regardless of how the function looks. As long as that area remains the same, the impact on the system is the same.",
+        "This insight is critical in both physics and engineering: we often abstract away the exact shape of a signal and focus instead on its integrated effect — the impulse."
+      ],
+      "fullText": "Now let’s extend that idea.\nImpulse isn’t limited to rectangular shapes. We can see in this graph that different Gaussian curves — whether wide or narrow, flat or sharp — can all serve as impulse-like inputs.\n\nWhat matters is the area under each curve. This area represents the total impulse delivered by the force, regardless of how the function looks. As long as that area remains the same, the impact on the system is the same.\nThis insight is critical in both physics and engineering: we often abstract away the exact shape of a signal and focus instead on its integrated effect — the impulse.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide9.JPG",
+      "script": "Let's extend the idea of impulse to non-rectangular shapes. We can see in this graph that different Gaussian curves, whether wide or narrow, flat or sharp, can all serve as impulse-like inputs. What matters is the area under each curve, which represents the total impulse delivered by the force. This insight is critical in both physics and engineering, where we often abstract away the exact shape of a signal and focus instead on its integrated effect.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Gaussian curves"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Area under the curve"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Integrated effect"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "Now we come to an important mathematical idea: the limiting process.",
+      "bullets": [
+        "This is how we build an ideal impulse in math.",
+        "We start with a simple pulse-shaped function, which the slide calls d sub tau of t.",
+        "Here is the definition.",
+        "d sub tau of t equals one over two tau when t is between minus tau and plus tau,",
+        "and it equals zero everywhere else.",
+        "So it is just a flat rectangle centered at zero.",
+        "The width is two tau,",
+        "and the height is one over two tau.",
+        "Now notice what that choice does.",
+        "If you multiply the height by the width,",
+        "you get one over two tau times two tau, which is exactly one.",
+        "So no matter what tau is,",
+        "the area under the curve stays equal to one.",
+        "Now imagine making tau smaller and smaller.",
+        "The rectangle gets narrower,",
+        "and at the same time it gets taller,",
+        "but the total area stays fixed at one.",
+        "That is the key idea behind the Dirac delta.",
+        "In the limit as tau goes to zero,",
+        "the pulse collapses into something infinitely narrow and infinitely tall,",
+        "but with a finite total area of one.",
+        "The slide summarizes this in two statements.",
+        "First, the pointwise value d sub tau of t goes to zero as tau goes to zero,",
+        "because the pulse becomes narrower and narrower.",
+        "Second, the total area, which we can call I of tau,",
+        "stays equal to one in the limit.",
+        "So the delta function is not a normal function in the usual sense.",
+        "It is an idealized impulse:",
+        "zero everywhere except concentrated at a single instant,",
+        "yet still carrying a total “weight” of one.",
+        "And this is exactly what we need for system analysis.",
+        "Once we define an impulse cleanly,",
+        "we can define the impulse response,",
+        "and then convolution will tell us how the system responds to any input."
+      ],
+      "fullText": "Now we come to an important mathematical idea: the limiting process.\nThis is how we build an ideal impulse in math.\n\nWe start with a simple pulse-shaped function, which the slide calls d sub tau of t.\n\nHere is the definition.\nd sub tau of t equals one over two tau when t is between minus tau and plus tau,\nand it equals zero everywhere else.\n\nSo it is just a flat rectangle centered at zero.\nThe width is two tau,\nand the height is one over two tau.\n\nNow notice what that choice does.\nIf you multiply the height by the width,\nyou get one over two tau times two tau, which is exactly one.\n\nSo no matter what tau is,\nthe area under the curve stays equal to one.\n\nNow imagine making tau smaller and smaller.\nThe rectangle gets narrower,\nand at the same time it gets taller,\nbut the total area stays fixed at one.\n\nThat is the key idea behind the Dirac delta.\nIn the limit as tau goes to zero,\nthe pulse collapses into something infinitely narrow and infinitely tall,\nbut with a finite total area of one.\n\nThe slide summarizes this in two statements.\nFirst, the pointwise value d sub tau of t goes to zero as tau goes to zero,\nbecause the pulse becomes narrower and narrower.\nSecond, the total area, which we can call I of tau,\nstays equal to one in the limit.\n\nSo the delta function is not a normal function in the usual sense.\nIt is an idealized impulse:\nzero everywhere except concentrated at a single instant,\nyet still carrying a total “weight” of one.\n\nAnd this is exactly what we need for system analysis.\nOnce we define an impulse cleanly,\nwe can define the impulse response,\nand then convolution will tell us how the system responds to any input.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide10.JPG",
+      "script": "Now we come to an important mathematical idea: the limiting process. This is how we build an ideal impulse in math. We start with a simple pulse-shaped function, which the slide calls d sub tau of t. It's defined as one over two tau when t is between minus tau and plus tau, and it equals zero everywhere else. This gives us a flat rectangle centered at zero, with a width of two tau and a height of one over two tau.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Limiting Process"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Pulse-Shaped Function"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 400,
+          "label": "Definition of d sub tau of t"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Let’s pause for a second and ask the question this slide is asking:",
+      "bullets": [
+        "if we already understand the effect of an impulse,",
+        "why do we need a limiting process at all?",
+        "The reason is that the limiting process gives us an ideal impulse that is thorough and “perfect,”",
+        "in the same way that the limit definition gives us a perfect definition of a derivative.",
+        "In real life, every impulse has some finite width and some shape.",
+        "But in system theory, we want a universal model that captures only what matters,",
+        "without being tied to a particular physical waveform.",
+        "Now that leads to the next question on the slide:",
+        "what is the shape of the delta function?",
+        "And the honest answer is:",
+        "we don’t really know, and in most cases, we don’t need to care.",
+        "Why?",
+        "Because for the delta function, the important feature is not the detailed shape,",
+        "it is the overall effect, which is captured by its total area, or total weight.",
+        "Different narrow pulses can look different,",
+        "but if they are all “impulse-like” and have the same total area,",
+        "they represent the same idealized input in the limit.",
+        "So you can think of it this way:",
+        "as long as the impulse delivers the same total amount in an instant,",
+        "the system theory treats it as the same delta input.",
+        "And that’s why the slide says “all shapes are possible.”",
+        "If you refuse to specify the shape, then many shapes could fit,",
+        "and you only know the exact shape if you measure a real waveform.",
+        "The “quantum mechanics” line is just a playful analogy:",
+        "without measurement, you can imagine many possibilities,",
+        "but in our math model, we intentionally avoid the details,",
+        "because the delta function is meant to represent only the ideal overall effect."
+      ],
+      "fullText": "Let’s pause for a second and ask the question this slide is asking:\nif we already understand the effect of an impulse,\nwhy do we need a limiting process at all?\n\nThe reason is that the limiting process gives us an ideal impulse that is thorough and “perfect,”\nin the same way that the limit definition gives us a perfect definition of a derivative.\n\nIn real life, every impulse has some finite width and some shape.\nBut in system theory, we want a universal model that captures only what matters,\nwithout being tied to a particular physical waveform.\n\nNow that leads to the next question on the slide:\nwhat is the shape of the delta function?\n\nAnd the honest answer is:\nwe don’t really know, and in most cases, we don’t need to care.\n\nWhy?\nBecause for the delta function, the important feature is not the detailed shape,\nit is the overall effect, which is captured by its total area, or total weight.\n\nDifferent narrow pulses can look different,\nbut if they are all “impulse-like” and have the same total area,\nthey represent the same idealized input in the limit.\n\nSo you can think of it this way:\nas long as the impulse delivers the same total amount in an instant,\nthe system theory treats it as the same delta input.\n\nAnd that’s why the slide says “all shapes are possible.”\nIf you refuse to specify the shape, then many shapes could fit,\nand you only know the exact shape if you measure a real waveform.\n\nThe “quantum mechanics” line is just a playful analogy:\nwithout measurement, you can imagine many possibilities,\nbut in our math model, we intentionally avoid the details,\nbecause the delta function is meant to represent only the ideal overall effect.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide11.JPG",
+      "script": "As we understand the effect of an impulse, we might wonder why we need a limiting process at all. However, the limiting process provides an ideal impulse that is thorough and perfect, similar to how the limit definition gives us a perfect definition of a derivative. This ideal impulse allows us to capture the system's response without being tied to a particular physical waveform.",
+      "spotlightEvents": [
+        {
+          "timeMs": 6600,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Why ideal impulse?"
+        },
+        {
+          "timeMs": 8800,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Limiting process"
+        },
+        {
+          "timeMs": 11000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Perfect definition"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Let’s take a deeper look at the Dirac delta function — one of the most powerful ",
+      "bullets": [
+        "The delta function is what we call a generalized function, or in mathematical terms, a distribution. It helps us model a perfect impulse — something that delivers a concentrated effect at a single moment in time.",
+        "Now, here’s how we describe it mathematically:",
+        "We say that delta of t minus t naught equals zero for all values of t not equal to t naught.",
+        "And, when we integrate this delta function from minus infinity to infinity, the result is one.",
+        "What does that mean?",
+        "It means the function is zero everywhere — except at one specific point in time, which we call t naught. At that single point, it has an infinitely sharp spike, but the area under the spike is exactly one. That area is what we call the impulse.",
+        "So even though we can’t see or draw the spike perfectly, we know that its total effect — the impulse — is one. That’s what matters. The effect is important, but the exact shape doesn’t matter.",
+        "Now, let’s shift to the discrete version of the delta function — something we use in digital systems.",
+        "We define delta of n like this:",
+        "It equals one when n is zero,",
+        "and it equals zero for all other values of n.",
+        "In other words, this function is zero everywhere — except at n equals zero, where it has a value of one.",
+        "It’s a single pulse — like a quick tap — at a specific point in time.",
+        "We can also shift this pulse. For example, delta of n minus two just moves the pulse to position n equals two.",
+        "This simple pulse is incredibly useful. It forms the building block for discrete-time convolution, which we’ll talk about next.",
+        "So both the continuous and discrete versions of the delta function help us analyze how systems respond to input — whether we’re dealing with real-world signals or digital data."
+      ],
+      "fullText": "Let’s take a deeper look at the Dirac delta function — one of the most powerful concepts in system analysis.\nThe delta function is what we call a generalized function, or in mathematical terms, a distribution. It helps us model a perfect impulse — something that delivers a concentrated effect at a single moment in time.\n\nNow, here’s how we describe it mathematically:\nWe say that delta of t minus t naught equals zero for all values of t not equal to t naught.\u000bAnd, when we integrate this delta function from minus infinity to infinity, the result is one.\nWhat does that mean?\nIt means the function is zero everywhere — except at one specific point in time, which we call t naught. At that single point, it has an infinitely sharp spike, but the area under the spike is exactly one. That area is what we call the impulse.\nSo even though we can’t see or draw the spike perfectly, we know that its total effect — the impulse — is one. That’s what matters. The effect is important, but the exact shape doesn’t matter.\n\nNow, let’s shift to the discrete version of the delta function — something we use in digital systems.\nWe define delta of n like this:\nIt equals one when n is zero,\u000band it equals zero for all other values of n.\n\nIn other words, this function is zero everywhere — except at n equals zero, where it has a value of one.\u000bIt’s a single pulse — like a quick tap — at a specific point in time.\n\nWe can also shift this pulse. For example, delta of n minus two just moves the pulse to position n equals two.\n\nThis simple pulse is incredibly useful. It forms the building block for discrete-time convolution, which we’ll talk about next.\nSo both the continuous and discrete versions of the delta function help us analyze how systems respond to input — whether we’re dealing with real-world signals or digital data.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide12.JPG",
+      "script": "The Dirac delta function is a generalized function, or distribution, that models a perfect impulse, delivering a concentrated effect at a single moment in time. It's described mathematically as being zero for all values of t not equal to t naught, and when integrated from minus infinity to infinity, the result is one. This means the function is zero everywhere except at a single instant, and even then, it's not really a function in the classical sense, but rather a mathematical idealization.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Dirac delta function"
+        },
+        {
+          "timeMs": 1200,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Generalized function"
+        },
+        {
+          "timeMs": 1400,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Mathematical description"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "Before we use the delta function to talk about sampling, let’s recall one key id",
+      "bullets": [
+        "the mean value theorem for integrals.",
+        "Look at the picture.",
+        "We have a continuous function y equals f of x, drawn over the interval from a to b.",
+        "The shaded region represents the area under the curve, which is the integral of f from a to b.",
+        "Now here is the statement of the theorem in plain language.",
+        "It says that somewhere between a and b,",
+        "there exists at least one point c,",
+        "so that the function value at that point, f of c,",
+        "is equal to the average height of the function over the whole interval.",
+        "And visually, that means this:",
+        "if you draw a horizontal line at y equals f of c,",
+        "you get a rectangle with base length b minus a,",
+        "and that rectangle has exactly the same area as the area under the curve.",
+        "So the idea is:",
+        "the total area can be represented as “average height times width,”",
+        "and the theorem guarantees that this average height actually occurs at some point c inside the interval.",
+        "We are going to use this intuition in the next step.",
+        "When the interval becomes very small,",
+        "the average value over that tiny interval starts to look like the value at a specific point.",
+        "And that is exactly the kind of thinking that leads into how the delta function acts like an ideal sampler."
+      ],
+      "fullText": "Before we use the delta function to talk about sampling, let’s recall one key idea from calculus:\nthe mean value theorem for integrals.\n\nLook at the picture.\nWe have a continuous function y equals f of x, drawn over the interval from a to b.\nThe shaded region represents the area under the curve, which is the integral of f from a to b.\n\nNow here is the statement of the theorem in plain language.\n\nIt says that somewhere between a and b,\nthere exists at least one point c,\nso that the function value at that point, f of c,\nis equal to the average height of the function over the whole interval.\n\nAnd visually, that means this:\nif you draw a horizontal line at y equals f of c,\nyou get a rectangle with base length b minus a,\nand that rectangle has exactly the same area as the area under the curve.\n\nSo the idea is:\nthe total area can be represented as “average height times width,”\nand the theorem guarantees that this average height actually occurs at some point c inside the interval.\n\nWe are going to use this intuition in the next step.\nWhen the interval becomes very small,\nthe average value over that tiny interval starts to look like the value at a specific point.\nAnd that is exactly the kind of thinking that leads into how the delta function acts like an ideal sampler.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide13.JPG",
+      "script": "The mean value theorem tells us that there's a point where the function's value matches the average value over the entire interval. This means that if we zoom in enough, we'll find a point where the function's value equals the average height of the curve over that interval. This is a fundamental idea in calculus that will be useful later in understanding sampling and reconstruction in medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Mean Value Theorem"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Zooming In"
+        },
+        {
+          "timeMs": 46000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Average Height"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Let’s now connect this idea directly to the delta function and its role in sampl",
+      "bullets": [
+        "Imagine you have a continuous function — let’s call it f of t. Now, if you multiply this function by a shifted delta function, specifically delta of t minus t naught, and then integrate, something powerful happens:",
+        "You end up extracting the value of f at t naught. In other words, the delta function acts like a perfect sampling tool.",
+        "Mathematically, this is shown through a limiting process. As the width of the delta function shrinks toward zero, its height increases — but the total area remains one. That’s key.",
+        "Inside this narrow window around t naught, the function f is essentially flat — and using the mean value theorem, we know there must be some point where the function's value equals the average over that interval. As the window becomes infinitesimally small, that point converges exactly to t naught.",
+        "So what do we get?",
+        "The integral from minus infinity to infinity of delta of t minus t naught, times f of t, d t — equals f of t naught.",
+        "This is called the sampling property of the delta function. It’s as if the delta function \"reaches into\" the function and pulls out the value at a single point.",
+        "Even more fascinating — we can actually rebuild any continuous function using this idea. By stacking many delta functions across time, each weighted by the function’s value at that point, we can reconstruct the entire function. Think of it like slicing the function into tiny pieces — each slice tells us something, and when you add them all together, you get the full picture again."
+      ],
+      "fullText": "Let’s now connect this idea directly to the delta function and its role in sampling.\nImagine you have a continuous function — let’s call it f of t. Now, if you multiply this function by a shifted delta function, specifically delta of t minus t naught, and then integrate, something powerful happens:\n\u000bYou end up extracting the value of f at t naught. In other words, the delta function acts like a perfect sampling tool.\nMathematically, this is shown through a limiting process. As the width of the delta function shrinks toward zero, its height increases — but the total area remains one. That’s key.\nInside this narrow window around t naught, the function f is essentially flat — and using the mean value theorem, we know there must be some point where the function's value equals the average over that interval. As the window becomes infinitesimally small, that point converges exactly to t naught.\nSo what do we get?\n\nThe integral from minus infinity to infinity of delta of t minus t naught, times f of t, d t — equals f of t naught.\nThis is called the sampling property of the delta function. It’s as if the delta function \"reaches into\" the function and pulls out the value at a single point.\nEven more fascinating — we can actually rebuild any continuous function using this idea. By stacking many delta functions across time, each weighted by the function’s value at that point, we can reconstruct the entire function. Think of it like slicing the function into tiny pieces — each slice tells us something, and when you add them all together, you get the full picture again.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide14.JPG",
+      "script": "Let's connect the idea of a train of delta functions to the sampling theorem, which states that if the spacing between delta functions is greater than twice the highest frequency component of the signal, the original information can be perfectly recovered. This is a fundamental concept in digital signal processing and is crucial for understanding how to represent and manipulate signals in the digital domain.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10800,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Sampling Theorem"
+        },
+        {
+          "timeMs": 11000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Delta Function"
+        },
+        {
+          "timeMs": 11200,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Mean Value Theorem"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "Now let’s translate this delta idea into the discrete world.",
+      "bullets": [
+        "In the discrete case, instead of a continuous curve, we deal with samples on a grid.",
+        "One helpful way to visualize a discrete signal is as a collection of little rectangular bars,",
+        "one bar at each integer location.",
+        "That is exactly the picture you see on this slide.",
+        "At the top, the slide is reminding you that we can build a function out of shifted building blocks.",
+        "One common building block is the rectangular “gate” function, written as rect of t, or Pi of t.",
+        "And its definition is simple:",
+        "it is one inside a small interval around zero,",
+        "it is zero outside,",
+        "and it takes the value one-half right at the endpoints.",
+        "So it is basically a unit-width pulse centered at zero.",
+        "Now move to the bottom, where the main point is.",
+        "The discrete delta function, delta of n, is defined like this:",
+        "it equals one when n equals zero,",
+        "and it equals zero everywhere else.",
+        "So it is a single spike at n equals zero.",
+        "And if we shift it, for example delta of n minus two,",
+        "the spike moves to n equals two.",
+        "Everything else stays zero.",
+        "Why is this so useful?",
+        "Because these shifted impulses are like the “basis elements” for discrete signals.",
+        "Any discrete sequence can be written as a sum of scaled and shifted delta functions:",
+        "each delta picks out one sample location,",
+        "and the scaling coefficient sets the value at that location.",
+        "So you can think of it like building a picture out of pixels.",
+        "Each pixel is one location,",
+        "and delta functions let us represent the whole discrete signal as a clean sum of those locations."
+      ],
+      "fullText": "Now let’s translate this delta idea into the discrete world.\n\nIn the discrete case, instead of a continuous curve, we deal with samples on a grid.\nOne helpful way to visualize a discrete signal is as a collection of little rectangular bars,\none bar at each integer location.\nThat is exactly the picture you see on this slide.\n\nAt the top, the slide is reminding you that we can build a function out of shifted building blocks.\nOne common building block is the rectangular “gate” function, written as rect of t, or Pi of t.\n\nAnd its definition is simple:\nit is one inside a small interval around zero,\nit is zero outside,\nand it takes the value one-half right at the endpoints.\nSo it is basically a unit-width pulse centered at zero.\n\nNow move to the bottom, where the main point is.\nThe discrete delta function, delta of n, is defined like this:\nit equals one when n equals zero,\nand it equals zero everywhere else.\n\nSo it is a single spike at n equals zero.\n\nAnd if we shift it, for example delta of n minus two,\nthe spike moves to n equals two.\nEverything else stays zero.\n\nWhy is this so useful?\nBecause these shifted impulses are like the “basis elements” for discrete signals.\nAny discrete sequence can be written as a sum of scaled and shifted delta functions:\neach delta picks out one sample location,\nand the scaling coefficient sets the value at that location.\n\nSo you can think of it like building a picture out of pixels.\nEach pixel is one location,\nand delta functions let us represent the whole discrete signal as a clean sum of those locations.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide15.JPG",
+      "script": "Now let's translate the delta idea into the discrete world. In the discrete case, instead of a continuous curve, we deal with samples on a grid. One helpful way to visualize a discrete signal is as a collection of little rectangular bars, one bar at each integer location. That is exactly the picture you see on this slide.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Discrete Signal"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Rectangular Bars"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Picture on Slide"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Here’s the idea visually.",
+      "bullets": [
+        "The gray curve is the original continuous-time function, f of t.",
+        "And the red staircase is a piecewise-constant approximation of that curve.",
+        "So what we are doing is this:",
+        "we divide the time axis into small intervals,",
+        "and on each interval we replace the smooth curve by a constant value.",
+        "That constant is chosen to match the function value on that interval,",
+        "so each step is like a little rectangular “gate.”",
+        "Now, the key point of the slide title is that this staircase signal can be written",
+        "as a sum of shifted rect, or gate, functions.",
+        "Each step is one gate function located over a particular time bin,",
+        "and multiplied by the appropriate height.",
+        "When you add all those scaled gates together, you get the full red staircase.",
+        "So this is one way to think about sampling and approximation:",
+        "a continuous signal can be represented, approximately, by a sum of simple building blocks,",
+        "and here the building block is a rectangular pulse.",
+        "And later, when we shrink the width of those rectangles,",
+        "this picture also connects naturally to the impulse viewpoint,",
+        "where signals are represented as sums of shifted, scaled impulses."
+      ],
+      "fullText": "Here’s the idea visually.\n\nThe gray curve is the original continuous-time function, f of t.\nAnd the red staircase is a piecewise-constant approximation of that curve.\n\nSo what we are doing is this:\nwe divide the time axis into small intervals,\nand on each interval we replace the smooth curve by a constant value.\nThat constant is chosen to match the function value on that interval,\nso each step is like a little rectangular “gate.”\n\nNow, the key point of the slide title is that this staircase signal can be written\nas a sum of shifted rect, or gate, functions.\n\nEach step is one gate function located over a particular time bin,\nand multiplied by the appropriate height.\nWhen you add all those scaled gates together, you get the full red staircase.\n\nSo this is one way to think about sampling and approximation:\na continuous signal can be represented, approximately, by a sum of simple building blocks,\nand here the building block is a rectangular pulse.\n\nAnd later, when we shrink the width of those rectangles,\nthis picture also connects naturally to the impulse viewpoint,\nwhere signals are represented as sums of shifted, scaled impulses.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide16.JPG",
+      "script": "Here’s the idea visually. The gray curve is the original continuous-time function, f of t, and the red staircase is a piecewise-constant approximation of that curve. We divide the time axis into small intervals and replace the smooth curve with a constant value on each interval, chosen to match the function value. This staircase signal can be written as a sum of shifted rect, or gate, functions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Continuous-time function"
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.4,
+          "durationMs": 2000,
+          "label": "Piecewise-constant approximation"
+        },
+        {
+          "timeMs": 6000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Divide time axis into small intervals"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Now let’s take the next step.",
+      "bullets": [
+        "This slide is showing that we can represent a sampled signal as a sum of delta functions.",
+        "Look at the gray curve as the underlying continuous function.",
+        "Then at each sampling time, we take one sample value.",
+        "The red arrows show those sampled values.",
+        "Mathematically, we can think of each sample as a scaled delta located at that time.",
+        "So at time t0 we place a delta scaled by f of t0,",
+        "at time t1 we place a delta scaled by f of t1,",
+        "and so on.",
+        "When you add up all of those shifted, scaled deltas,",
+        "you get a compact representation of the sampled signal.",
+        "So the key idea is:",
+        "delta functions act like “selectors.”",
+        "Each delta isolates one location in time,",
+        "and its scaling coefficient carries the sample value at that location.",
+        "That’s why we say any discrete-time signal can be written as a sum of shifted deltas.",
+        "And this representation becomes extremely useful once we start talking about convolution,",
+        "because convolution with deltas is very easy to analyze."
+      ],
+      "fullText": "Now let’s take the next step.\n\nThis slide is showing that we can represent a sampled signal as a sum of delta functions.\n\nLook at the gray curve as the underlying continuous function.\nThen at each sampling time, we take one sample value.\nThe red arrows show those sampled values.\n\nMathematically, we can think of each sample as a scaled delta located at that time.\nSo at time t0 we place a delta scaled by f of t0,\nat time t1 we place a delta scaled by f of t1,\nand so on.\n\nWhen you add up all of those shifted, scaled deltas,\nyou get a compact representation of the sampled signal.\n\nSo the key idea is:\ndelta functions act like “selectors.”\nEach delta isolates one location in time,\nand its scaling coefficient carries the sample value at that location.\n\nThat’s why we say any discrete-time signal can be written as a sum of shifted deltas.\nAnd this representation becomes extremely useful once we start talking about convolution,\nbecause convolution with deltas is very easy to analyze.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide17.JPG",
+      "script": "Now let's take the next step in understanding how we can represent a sampled signal in a mathematically precise way. We can think of each sample as a scaled delta function located at that time, capturing both the time and value of each sample. This allows us to represent the entire sampled signal as a sum of these scaled delta functions, providing a compact and efficient representation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Delta functions"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Gray curve"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2500,
+          "label": "Sampled values"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Now that we’ve developed an understanding of the delta function and its role in ",
+      "bullets": [
+        "Here we observe a powerful mathematical concept: any discrete function — let’s call it g of n — can be expressed as a weighted sum of shifted delta functions. That is, we take the delta function, shift it to the appropriate position, and scale it by the function’s value at that point. When we add all these together, we recover the original function.",
+        "Here you can see the mathematical expression in this slide.",
+        "This formula tells us that each sample of g contributes one impulse, located at n equals k, and scaled by g at that k. When we add up all these scaled and shifted impulses, we rebuild the function g.",
+        "Let’s look at a specific example to make this concrete.",
+        "Suppose your discrete function consists of just a few nonzero points. The first point is at n equals 0 with value 1 — that’s just delta of n.",
+        "The second point is at n equals 1 with a value of negative 1 — so we write that as minus delta of n minus 1.",
+        "And the third point is at n equals 2 with a value of 1.5 — which becomes 1.5 times delta of n minus 2.",
+        "By adding these three impulses together, we effectively reconstruct the original signal, point by point.",
+        "This approach is not only elegant, it’s also foundational in signal processing and linear systems. It allows us to treat any discrete-time signal as a sum of building blocks — scaled and shifted impulses — making analysis and filtering much easier later on.",
+        "We’ll continue building on this idea when we introduce convolution, which is just the response of a system to this kind of delta-based representation."
+      ],
+      "fullText": "Now that we’ve developed an understanding of the delta function and its role in modeling discrete events, let’s take this idea a step further and see how we can use it to represent an entire discrete function.\n\nHere we observe a powerful mathematical concept: any discrete function — let’s call it g of n — can be expressed as a weighted sum of shifted delta functions. That is, we take the delta function, shift it to the appropriate position, and scale it by the function’s value at that point. When we add all these together, we recover the original function.\nHere you can see the mathematical expression in this slide.\n\nThis formula tells us that each sample of g contributes one impulse, located at n equals k, and scaled by g at that k. When we add up all these scaled and shifted impulses, we rebuild the function g.\n\nLet’s look at a specific example to make this concrete.\n\nSuppose your discrete function consists of just a few nonzero points. The first point is at n equals 0 with value 1 — that’s just delta of n.\n\u000bThe second point is at n equals 1 with a value of negative 1 — so we write that as minus delta of n minus 1.\n\u000bAnd the third point is at n equals 2 with a value of 1.5 — which becomes 1.5 times delta of n minus 2.\n\nBy adding these three impulses together, we effectively reconstruct the original signal, point by point.\n\nThis approach is not only elegant, it’s also foundational in signal processing and linear systems. It allows us to treat any discrete-time signal as a sum of building blocks — scaled and shifted impulses — making analysis and filtering much easier later on.\nWe’ll continue building on this idea when we introduce convolution, which is just the response of a system to this kind of delta-based representation.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide18.JPG",
+      "script": "Now that we've developed an understanding of the delta function and its role in modeling discrete events, let's take this idea a step further and see how we can use it to represent an entire discrete function. We can express any discrete function, g of n, as a weighted sum of shifted delta functions, where we scale the delta function by the function's value at each point and add them all together to recover the original function. This is a powerful mathematical concept that allows us to represent discrete functions in a new and interesting way. It's a fundamental idea in signal processing and imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Discrete Function Representation"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Weighted Sum of Shifted Delta Functions"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Mathematical Expression"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "So far, we’ve looked at delta functions in two settings:",
+      "bullets": [
+        "the continuous-time version and the discrete-time version.",
+        "And the big idea is that both give us a way to build signals out of simple building blocks.",
+        "In the continuous case, we think in terms of integrals and the Dirac delta.",
+        "In the discrete case, we think in terms of summations and the discrete impulse.",
+        "Now, this slide is reminding us of something important:",
+        "the boundary between “continuous” and “discrete” is not always obvious in the real world.",
+        "Look at the pictures at the top.",
+        "On the left, you see a staircase-style picture, which is discrete:",
+        "it is made of individual steps.",
+        "On the right, you see a smooth curve, which is continuous.",
+        "And the fence photo at the bottom gives the same intuition in a physical way.",
+        "From far away, a fence can look like one continuous boundary.",
+        "But when you get closer, you realize it is made of individual boards,",
+        "so it is actually discrete.",
+        "That’s exactly how many real systems behave.",
+        "At one scale, a continuous model is the most convenient and accurate.",
+        "At another scale, a discrete model makes more sense.",
+        "So in engineering, we choose the viewpoint that helps us solve the problem.",
+        "Summation is the natural language for discrete signals.",
+        "Integration is the natural language for continuous signals.",
+        "And conceptually, they are closely related.",
+        "With that foundation in place, we’re ready for the next step:",
+        "we will connect delta functions directly to shift-invariant systems,",
+        "and that will lead us naturally into convolution, which is a key tool in imaging and signal processing."
+      ],
+      "fullText": "So far, we’ve looked at delta functions in two settings:\nthe continuous-time version and the discrete-time version.\n\nAnd the big idea is that both give us a way to build signals out of simple building blocks.\nIn the continuous case, we think in terms of integrals and the Dirac delta.\nIn the discrete case, we think in terms of summations and the discrete impulse.\n\nNow, this slide is reminding us of something important:\nthe boundary between “continuous” and “discrete” is not always obvious in the real world.\n\nLook at the pictures at the top.\nOn the left, you see a staircase-style picture, which is discrete:\nit is made of individual steps.\nOn the right, you see a smooth curve, which is continuous.\n\nAnd the fence photo at the bottom gives the same intuition in a physical way.\nFrom far away, a fence can look like one continuous boundary.\nBut when you get closer, you realize it is made of individual boards,\nso it is actually discrete.\n\nThat’s exactly how many real systems behave.\nAt one scale, a continuous model is the most convenient and accurate.\nAt another scale, a discrete model makes more sense.\n\nSo in engineering, we choose the viewpoint that helps us solve the problem.\nSummation is the natural language for discrete signals.\nIntegration is the natural language for continuous signals.\nAnd conceptually, they are closely related.\n\nWith that foundation in place, we’re ready for the next step:\nwe will connect delta functions directly to shift-invariant systems,\nand that will lead us naturally into convolution, which is a key tool in imaging and signal processing.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide19.JPG",
+      "script": "So far, we've looked at delta functions in two settings: the continuous-time version and the discrete-time version. Both give us a way to build signals out of simple building blocks, using integrals and summations respectively. The Dirac delta is a key concept in both cases. The boundary between 'continuous' and 'discrete' is not always obvious in the real world, as seen in the pictures at the top, which illustrate this idea.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 5000,
+          "label": "Boundary between continuous and discrete"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Dirac delta in continuous case"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.7,
+          "durationMs": 4000,
+          "label": "Discrete impulse in discrete case"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Let’s take a look at this graph.",
+      "bullets": [
+        "This impulse response, shown here as h of n, is our key piece of knowledge.",
+        "I’m not asking you to start from nothing.",
+        "I’m giving you the system’s reaction to a standardized input — the delta function applied at time zero.",
+        "Once you have that, you’re ready.",
+        "Because if I give the system a more general input — not just a single impulse, but any arbitrary shape —",
+        "you can still figure out the output.",
+        "So the question becomes:",
+        "How do you compute the output from this known impulse response and a general input?",
+        "That’s exactly where convolution comes in.",
+        "Convolution is the operation that combines the input signal with the impulse response,",
+        "to produce the final output.",
+        "It’s absolutely essential in imaging and signal processing."
+      ],
+      "fullText": "Let’s take a look at this graph.\nThis impulse response, shown here as h of n, is our key piece of knowledge.\nI’m not asking you to start from nothing.\u000bI’m giving you the system’s reaction to a standardized input — the delta function applied at time zero.\nOnce you have that, you’re ready.\nBecause if I give the system a more general input — not just a single impulse, but any arbitrary shape —\u000byou can still figure out the output.\nSo the question becomes:\u000bHow do you compute the output from this known impulse response and a general input?\nThat’s exactly where convolution comes in.\nConvolution is the operation that combines the input signal with the impulse response,\u000bto produce the final output.\nIt’s absolutely essential in imaging and signal processing.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide20.JPG",
+      "script": "Let's take a look at this graph. This impulse response, shown here as h of n, is our key piece of knowledge. I'm giving you the system's reaction to a standardized input — the delta function applied at time zero. Once you have that, you're ready. Because if I give the system a more general input — not just a single impulse, but any arbitrary shape — you can still figure out the output.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Impulse Response"
+        },
+        {
+          "timeMs": 6500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Standardized Input"
+        },
+        {
+          "timeMs": 8500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Delta Function"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "In a shift-invariant system, if you know the system’s response to an impulse at ",
+      "bullets": [
+        "That’s because shift-invariance means the system behaves the same way, no matter where or when you apply the impulse.",
+        "If you apply an impulse at a different time or position, you can infer the output by simply shifting the known response accordingly.",
+        "And because the system is linear, you have additivity and homogeneity.",
+        "If you scale an input, the output will be scaled in the same way.",
+        "If you add multiple inputs, the output will be the sum of individual outputs due to each input.",
+        "This is exactly why knowing the impulse response of a system tells you everything about how that system behaves — no matter what input you give it.",
+        "To summarize, for a shift-invariant linear system, given any input, we want to compute the output.",
+        "The critical information we rely on is the system’s impulse response.",
+        "If we know how the system reacts to a delta function at time zero,",
+        "we can use that as a building block to find the output for any input."
+      ],
+      "fullText": "In a shift-invariant system, if you know the system’s response to an impulse at one location, you can predict its response at any other location or time.\nThat’s because shift-invariance means the system behaves the same way, no matter where or when you apply the impulse.\nIf you apply an impulse at a different time or position, you can infer the output by simply shifting the known response accordingly.\nAnd because the system is linear, you have additivity and homogeneity.\nIf you scale an input, the output will be scaled in the same way.\nIf you add multiple inputs, the output will be the sum of individual outputs due to each input.\nThis is exactly why knowing the impulse response of a system tells you everything about how that system behaves — no matter what input you give it.\n\nTo summarize, for a shift-invariant linear system, given any input, we want to compute the output.\u000bThe critical information we rely on is the system’s impulse response.\u000bIf we know how the system reacts to a delta function at time zero,\u000bwe can use that as a building block to find the output for any input.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide21.JPG",
+      "script": "In a shift-invariant system, if you know the system’s response to an impulse at one location, you can predict its response at any other location or time. This is because the system behaves the same way no matter where or when you apply the impulse. You can infer the output by simply shifting the known response accordingly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Shift invariance"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Linear system"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Additivity and homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "To be specific, now let’s see how we actually compute the output y of n of a shi",
+      "bullets": [
+        "Suppose I give you a system characterized by its impulse response, written as h of n, which is shown on the 2nd line.",
+        "That means: if you feed the system a discrete delta function as input, the output will be h of n.",
+        "This response — h of n — is the system’s character.",
+        "But what if you give the system a more general input, say x of n?",
+        "What will the output y of n be, which is what I just formulated on the 1st line, and a very important question.",
+        "Let’s break it down step by step.",
+        "Since the system is shift-invariant, if you shift the input by k, the output also shifts by k, shown on the 3rd line.",
+        "So if the input is delta of n minus k, the output becomes h of n minus k.",
+        "Then, because the system is linear, if we scale the input by x of k,",
+        "Consequently, the output is also scaled by x of k.",
+        "That gives us x of k times h of n minus k on the 4th line.",
+        "Now, to get the total output, we add up all of these scaled and shifted responses.",
+        "Mathematically, this gives us the convolution sum, on the right-hand side of the last two lines:",
+        "y of n equals the sum over k from minus infinity to infinity of x of k times h of n minus k.",
+        "This is how the convolution is defined, and also why we need this concept.",
+        "It shows why the impulse response is so powerful — it’s all you need to compute the system’s output for any input.",
+        "Now, convolution might seem a bit tricky at first, especially because of the flipping and shifting involved —",
+        "that negative k inside h of n minus k could appear confusing.",
+        "But if you follow the logic step-by-step, the structure becomes clear.",
+        "This convolution concept is fundamental in linear systems and engineering —",
+        "and that’s why we dedicate so much attention to understanding convolution."
+      ],
+      "fullText": "To be specific, now let’s see how we actually compute the output y of n of a shift-invariant linear system to an arbitrary input x of n, formulated on the 1st line.\nSuppose I give you a system characterized by its impulse response, written as h of n, which is shown on the 2nd line.\u000bThat means: if you feed the system a discrete delta function as input, the output will be h of n.\u000bThis response — h of n — is the system’s character.\nBut what if you give the system a more general input, say x of n?\u000bWhat will the output y of n be, which is what I just formulated on the 1st line, and a very important question.\nLet’s break it down step by step.\nSince the system is shift-invariant, if you shift the input by k, the output also shifts by k, shown on the 3rd line.\u000bSo if the input is delta of n minus k, the output becomes h of n minus k.\nThen, because the system is linear, if we scale the input by x of k,\u000bConsequently, the output is also scaled by x of k.\u000bThat gives us x of k times h of n minus k on the 4th line.\nNow, to get the total output, we add up all of these scaled and shifted responses.\nMathematically, this gives us the convolution sum, on the right-hand side of the last two lines:\ny of n equals the sum over k from minus infinity to infinity of x of k times h of n minus k.\nThis is how the convolution is defined, and also why we need this concept.\n\u000bIt shows why the impulse response is so powerful — it’s all you need to compute the system’s output for any input.\nNow, convolution might seem a bit tricky at first, especially because of the flipping and shifting involved —\u000bthat negative k inside h of n minus k could appear confusing.\n\u000bBut if you follow the logic step-by-step, the structure becomes clear.\nThis convolution concept is fundamental in linear systems and engineering —\u000band that’s why we dedicate so much attention to understanding convolution.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide22.JPG",
+      "script": "To compute the output y of n, we need to understand how the system responds to an arbitrary input x of n. This involves convolving the input signal with the system's impulse response, h of n. The impulse response is the system's character, and convolving it with the input signal allows us to predict the system's behavior to any input.",
+      "spotlightEvents": [
+        {
+          "timeMs": 22000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Impulse Response"
+        },
+        {
+          "timeMs": 23000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Convolution"
+        },
+        {
+          "timeMs": 24000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Predicting System Behavior"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "Now let’s apply the same idea in the continuous case.",
+      "bullets": [
+        "Again, you’re given the system’s response to a delta function, which we call h of t.",
+        "If we shift the delta to t minus tau, the output becomes h of t minus tau.",
+        "In other words, shifting the input shifts the output in the same way — that’s shift-invariance.",
+        "Next, we scale the input by x of tau.",
+        "Because the system is linear, the output also gets scaled — giving us x of tau times h of t minus tau.",
+        "Finally, to build the full output for a general input signal,",
+        "we integrate over all time — summing these scaled and shifted responses.",
+        "This gives us the continuous-time convolution integral:",
+        "You can think of this as collecting all the weighted impulse responses across time,",
+        "and combining them to form the system’s output, where we have utilized the sampling property of the delta function.",
+        "This is how linear, shift-invariant systems behave in continuous time —",
+        "and this operation, convolution, lies at the heart of modeling and understanding them.",
+        "Finally, we have assumed that all involved integrals or summations on the previous slide converge, so mathematically well defined."
+      ],
+      "fullText": "Now let’s apply the same idea in the continuous case.\nAgain, you’re given the system’s response to a delta function, which we call h of t.\nIf we shift the delta to t minus tau, the output becomes h of t minus tau.\u000bIn other words, shifting the input shifts the output in the same way — that’s shift-invariance.\nNext, we scale the input by x of tau.\u000bBecause the system is linear, the output also gets scaled — giving us x of tau times h of t minus tau.\nFinally, to build the full output for a general input signal,\u000bwe integrate over all time — summing these scaled and shifted responses.\nThis gives us the continuous-time convolution integral:\n\nYou can think of this as collecting all the weighted impulse responses across time,\u000band combining them to form the system’s output, where we have utilized the sampling property of the delta function.\nThis is how linear, shift-invariant systems behave in continuous time —\u000band this operation, convolution, lies at the heart of modeling and understanding them.\nFinally, we have assumed that all involved integrals or summations on the previous slide converge, so mathematically well defined.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide23.JPG",
+      "script": "Now let's apply the same idea in the continuous case. We're given the system's response to a delta function, which we call h of t. If we shift the delta to t minus tau, the output becomes h of t minus tau. This shows that shifting the input shifts the output in the same way, demonstrating shift-invariance. Next, we scale the input by x of tau, and because the system is linear, the output also gets scaled, giving us x of tau times h of t minus tau.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Continuous Case"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Shifting Input Shifts Output"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 400,
+          "label": "Scaling Input"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "So whether we’re dealing with discrete or continuous systems,",
+      "bullets": [
+        "Convolution is the tool we use to compute the output.",
+        "In both cases, the idea is the same:",
+        "First, express the input as a collection of impulses.",
+        "Then, for each impulse, you already know the output — that's the impulse response.",
+        "Finally, sum or integrate all of those individual responses to get the final output.",
+        "This process is captured using these two key equations:",
+        "We can see here discrete and continuous mathematical formulations.",
+        "But I know from experience that convolution can feel confusing at first.",
+        "That’s why it really helps to look at a concrete example.",
+        "Let’s move on to one now."
+      ],
+      "fullText": "So whether we’re dealing with discrete or continuous systems,\u000bConvolution is the tool we use to compute the output.\nIn both cases, the idea is the same:\n\nFirst, express the input as a collection of impulses.\u000bThen, for each impulse, you already know the output — that's the impulse response.\u000bFinally, sum or integrate all of those individual responses to get the final output.\nThis process is captured using these two key equations:\nWe can see here discrete and continuous mathematical formulations.\u000b\nBut I know from experience that convolution can feel confusing at first.\u000bThat’s why it really helps to look at a concrete example.\nLet’s move on to one now.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide24.JPG",
+      "script": "So whether we're dealing with discrete or continuous systems, Convolution is the tool we use to compute the output. In both cases, the idea is the same: express the input as a collection of impulses, use the impulse response to compute the output for each impulse, and then sum or integrate all those individual responses to get the final output. This process is captured using these two key equations, which show the discrete and continuous mathematical formulations of convolution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 22000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Convolution in discrete and continuous systems"
+        },
+        {
+          "timeMs": 24000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Same idea for both discrete and continuous systems"
+        },
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Express input as a collection of impulses"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "Let’s do a hands-on example of discrete convolution, using the “two hands” pictu",
+      "bullets": [
+        "We have two discrete sequences.",
+        "Think of the red one as x of n, the input.",
+        "Think of the green one as h of n, the impulse response.",
+        "Now here is the key step that always confuses people at first:",
+        "in convolution we do not use h of k.",
+        "We use h of n minus k.",
+        "That “minus k” means we have to flip h before we slide it.",
+        "So use your hands to remember it.",
+        "Your left hand is x of n.",
+        "Your right hand is h of n.",
+        "To get h of n minus k, you first flip your right hand,",
+        "like turning it around so you see the back side.",
+        "That flip is the time-reversal step.",
+        "After flipping, we shift it.",
+        "And we shift it across x step by step.",
+        "Now we compute the output one index at a time.",
+        "At n equals zero,",
+        "we place the flipped h so its zero point lines up at n equals zero.",
+        "Then we multiply whatever samples overlap,",
+        "and we add up those products.",
+        "That sum is y of zero.",
+        "At n equals one,",
+        "we shift the flipped h one step to the right.",
+        "Again, multiply the overlapping samples and add them up.",
+        "That gives y of one.",
+        "And we keep doing the same routine:",
+        "shift, multiply, sum.",
+        "As we slide through,",
+        "the overlap between the two sequences first grows,",
+        "then reaches a maximum when the two shapes overlap the most,",
+        "and then shrinks again as they slide past each other.",
+        "That is why the convolution output rises to a peak and then falls back down.",
+        "So this is the core algorithm of discrete convolution:",
+        "flip one sequence,",
+        "shift it,",
+        "multiply point-by-point,",
+        "and sum the overlap.",
+        "If you can visualize that process, the formula stops feeling mysterious."
+      ],
+      "fullText": "Let’s do a hands-on example of discrete convolution, using the “two hands” picture on this slide.\n\nWe have two discrete sequences.\nThink of the red one as x of n, the input.\nThink of the green one as h of n, the impulse response.\n\nNow here is the key step that always confuses people at first:\nin convolution we do not use h of k.\nWe use h of n minus k.\nThat “minus k” means we have to flip h before we slide it.\n\nSo use your hands to remember it.\nYour left hand is x of n.\nYour right hand is h of n.\nTo get h of n minus k, you first flip your right hand,\nlike turning it around so you see the back side.\nThat flip is the time-reversal step.\n\nAfter flipping, we shift it.\nAnd we shift it across x step by step.\n\nNow we compute the output one index at a time.\n\nAt n equals zero,\nwe place the flipped h so its zero point lines up at n equals zero.\nThen we multiply whatever samples overlap,\nand we add up those products.\nThat sum is y of zero.\n\nAt n equals one,\nwe shift the flipped h one step to the right.\nAgain, multiply the overlapping samples and add them up.\nThat gives y of one.\n\nAnd we keep doing the same routine:\nshift, multiply, sum.\n\nAs we slide through,\nthe overlap between the two sequences first grows,\nthen reaches a maximum when the two shapes overlap the most,\nand then shrinks again as they slide past each other.\nThat is why the convolution output rises to a peak and then falls back down.\n\nSo this is the core algorithm of discrete convolution:\nflip one sequence,\nshift it,\nmultiply point-by-point,\nand sum the overlap.\nIf you can visualize that process, the formula stops feeling mysterious.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide25.JPG",
+      "script": "Let's do a hands-on example of discrete convolution, using the “two hands” picture on this slide. We have two discrete sequences, the red one as x of n, the input, and the green one as h of n, the impulse response. To perform convolution, we use h of n minus k, which means we have to flip h before we slide it. This is the key step that often confuses people at first, but using your hands to remember it can help, where your left hand is x of n and your right hand is h of n, and to get h of n minus k, you first flip your right hand.",
+      "spotlightEvents": [
+        {
+          "timeMs": 20000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Two discrete sequences"
+        },
+        {
+          "timeMs": 22000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Input sequence"
+        },
+        {
+          "timeMs": 24000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Impulse response"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "Now let’s put actual numbers into our hand example and see the result.",
+      "bullets": [
+        "On the left hand, think of the five samples as",
+        "five, four, three, two, one.",
+        "That’s our input sequence x.",
+        "On the right hand, the samples go the other way:",
+        "one, two, three, four, five.",
+        "That’s our impulse response h.",
+        "Now we do exactly what convolution tells us to do:",
+        "we flip the right-hand sequence,",
+        "we slide it across the left-hand sequence,",
+        "and at each shift we multiply the overlapping entries and add them up.",
+        "Each one of those sums becomes one output sample.",
+        "And that is exactly what the MATLAB code on the slide is doing.",
+        "We define:",
+        "x equals [5 4 3 2 1]",
+        "h equals [1 2 3 4 5]",
+        "Then we compute:",
+        "y equals conv(x, h)",
+        "And finally we plot y.",
+        "If you look at the plot, you see a clear peak in the middle.",
+        "That makes sense, because the middle position is where the overlap between the two sequences is the strongest,",
+        "so the sum of products is the largest.",
+        "Then as we slide past that point, the overlap decreases,",
+        "so the output falls back down.",
+        "One quick bookkeeping rule to remember:",
+        "if x has length N1 and h has length N2,",
+        "then the convolution result has length N1 plus N2 minus one.",
+        "In this example, both are length five, so the output length is nine,",
+        "which matches the plot.",
+        "So this is the big takeaway:",
+        "convolution is not mysterious.",
+        "It is flip, shift, multiply, and sum.",
+        "And for linear, shift-invariant systems, that operation is the core tool that tells you how the system responds to any input."
+      ],
+      "fullText": "Now let’s put actual numbers into our hand example and see the result.\n\nOn the left hand, think of the five samples as\nfive, four, three, two, one.\nThat’s our input sequence x.\n\nOn the right hand, the samples go the other way:\none, two, three, four, five.\nThat’s our impulse response h.\n\nNow we do exactly what convolution tells us to do:\nwe flip the right-hand sequence,\nwe slide it across the left-hand sequence,\nand at each shift we multiply the overlapping entries and add them up.\nEach one of those sums becomes one output sample.\n\nAnd that is exactly what the MATLAB code on the slide is doing.\n\nWe define:\nx equals [5 4 3 2 1]\nh equals [1 2 3 4 5]\n\nThen we compute:\ny equals conv(x, h)\n\nAnd finally we plot y.\n\nIf you look at the plot, you see a clear peak in the middle.\nThat makes sense, because the middle position is where the overlap between the two sequences is the strongest,\nso the sum of products is the largest.\nThen as we slide past that point, the overlap decreases,\nso the output falls back down.\n\nOne quick bookkeeping rule to remember:\nif x has length N1 and h has length N2,\nthen the convolution result has length N1 plus N2 minus one.\nIn this example, both are length five, so the output length is nine,\nwhich matches the plot.\n\nSo this is the big takeaway:\nconvolution is not mysterious.\nIt is flip, shift, multiply, and sum.\nAnd for linear, shift-invariant systems, that operation is the core tool that tells you how the system responds to any input.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide26.JPG",
+      "script": "Now let's put actual numbers into our hand example and see the result. On the left hand, we have the input sequence x, which is five, four, three, two, one. On the right hand, we have the impulse response h, which is one, two, three, four, five. We'll flip the right-hand sequence, slide it across the left-hand sequence, multiply the overlapping entries, and add them up to get each output sample. This is exactly what the MATLAB code is doing.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Input sequence x"
+        },
+        {
+          "timeMs": 5300,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Impulse response h"
+        },
+        {
+          "timeMs": 6300,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1000,
+          "label": "Convolution process"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "Let’s look at another example, this time directly from medical imaging.",
+      "bullets": [
+        "This picture is about a gamma camera imaging a hypothetical kidney.",
+        "So instead of talking about iodine in X-ray, let’s stay with what the slide is showing:",
+        "a tracer signal being detected by a gamma camera over time.",
+        "On the left, you see an “impulse input.”",
+        "You can think of that as an idealized, very short injection of a radioactive tracer,",
+        "almost like a delta function in time.",
+        "Now look at the diagram in the middle.",
+        "The tracer does not travel through a single clean path.",
+        "It moves through multiple routes, and each route has a different transit time.",
+        "That’s why the branches are labeled with different delays, like 3 minutes, 4 minutes, 5 minutes, 6 minutes.",
+        "So what does the gamma camera measure?",
+        "On the right, you see the impulse response:",
+        "a sequence of values, H1, H2, H3, and so on, appearing at different times.",
+        "Each piece of that response corresponds to tracer activity arriving through a different pathway,",
+        "with a different delay and a different weight.",
+        "Now here is the key systems idea.",
+        "If the input were a perfect impulse, then the measured output would be the impulse response itself.",
+        "But in reality, injections are not perfect impulses.",
+        "The input is spread out in time.",
+        "And when a spread-out input passes through a linear, time-invariant system,",
+        "the output is the convolution of the input with the impulse response.",
+        "So this is a very concrete example of why convolution matters in medical imaging.",
+        "It gives us a clean way to describe how a time-varying tracer input is transformed",
+        "by the body’s transport dynamics and then observed by an imaging device like a gamma camera."
+      ],
+      "fullText": "Let’s look at another example, this time directly from medical imaging.\n\nThis picture is about a gamma camera imaging a hypothetical kidney.\nSo instead of talking about iodine in X-ray, let’s stay with what the slide is showing:\na tracer signal being detected by a gamma camera over time.\n\nOn the left, you see an “impulse input.”\nYou can think of that as an idealized, very short injection of a radioactive tracer,\nalmost like a delta function in time.\n\nNow look at the diagram in the middle.\nThe tracer does not travel through a single clean path.\nIt moves through multiple routes, and each route has a different transit time.\nThat’s why the branches are labeled with different delays, like 3 minutes, 4 minutes, 5 minutes, 6 minutes.\n\nSo what does the gamma camera measure?\nOn the right, you see the impulse response:\na sequence of values, H1, H2, H3, and so on, appearing at different times.\n\nEach piece of that response corresponds to tracer activity arriving through a different pathway,\nwith a different delay and a different weight.\n\nNow here is the key systems idea.\nIf the input were a perfect impulse, then the measured output would be the impulse response itself.\n\nBut in reality, injections are not perfect impulses.\nThe input is spread out in time.\nAnd when a spread-out input passes through a linear, time-invariant system,\nthe output is the convolution of the input with the impulse response.\n\nSo this is a very concrete example of why convolution matters in medical imaging.\nIt gives us a clean way to describe how a time-varying tracer input is transformed\nby the body’s transport dynamics and then observed by an imaging device like a gamma camera.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide27.JPG",
+      "script": "Let's dive into this example from medical imaging. The picture shows a gamma camera imaging a hypothetical kidney, where a tracer signal is detected over time. We have an impulse input on the left, representing an idealized, very short injection of a radioactive tracer. The diagram in the middle illustrates the tracer's movement through multiple routes, not a single clean path.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Impulse Input"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Tracer Signal"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 400,
+          "label": "Gamma Camera"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "In reality, the contrast isn’t delivered as a perfect impulse —",
+      "bullets": [
+        "it’s injected over a period of time, with more at the start and less later, forming a time curve.",
+        "We can think of this non-ideal input as a sum of small impulses occurring at different times —",
+        "each one representing a fraction of the total injected dose.",
+        "For each of these small impulses, we already know the system’s response —",
+        "that’s the impulse response we’ve discussed.",
+        "So what do we do?",
+        "We scale each impulse response based on how much contrast was injected at that moment,",
+        "shift it in time according to when it was injected,",
+        "and then add all the individual responses together.",
+        "What we get is the system’s total response — the final signal that’s measured by the detector.",
+        "This is a perfect visualization of discrete convolution in a real-world setting.",
+        "It shows how imaging systems handle non-ideal, time-varying inputs using the exact same principles we’ve learned.",
+        "It may take some time for these ideas to fully sink in,",
+        "but they form the foundation for understanding how imaging systems process signals and generate useful images."
+      ],
+      "fullText": "In reality, the contrast isn’t delivered as a perfect impulse —\u000bit’s injected over a period of time, with more at the start and less later, forming a time curve.\nWe can think of this non-ideal input as a sum of small impulses occurring at different times —\u000beach one representing a fraction of the total injected dose.\nFor each of these small impulses, we already know the system’s response —\u000bthat’s the impulse response we’ve discussed.\nSo what do we do?\nWe scale each impulse response based on how much contrast was injected at that moment,\u000bshift it in time according to when it was injected,\u000band then add all the individual responses together.\nWhat we get is the system’s total response — the final signal that’s measured by the detector.\nThis is a perfect visualization of discrete convolution in a real-world setting.\u000bIt shows how imaging systems handle non-ideal, time-varying inputs using the exact same principles we’ve learned.\nIt may take some time for these ideas to fully sink in,\u000bbut they form the foundation for understanding how imaging systems process signals and generate useful images.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide28.JPG",
+      "script": "When the contrast isn't delivered perfectly, we model it as a time curve with more at the start and less later. We can break this down into small impulses, each representing a fraction of the total dose, and use the impulse response to scale and shift them in time. We then add up all these scaled and shifted responses to get the final output.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Impulse Response"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Time Curve"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Small Impulses"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "Now, let’s work through a more abstract — and slightly more mathematical — examp",
+      "bullets": [
+        "I like to call this a minds-on example.",
+        "This example is based on continuous convolution, and while it’s not difficult, it does require you to think like in calculus.",
+        "So let’s take our time with it.",
+        "With convolution, the basic process is this:",
+        "We flip one function, shift it, multiply them point by point, and then integrate over the region where they overlap.",
+        "At first, that might sound a little mechanical. So let’s break it down clearly, step by step.",
+        "We’re working with two functions here:",
+        "f of t, shown in red. This is a triangular function — it starts at zero, rises to a peak at t equals 2, and then drops back to zero.",
+        "g of t, shown in purple. This is a rectangular pulse that spans from t equals minus 2 to plus 2, with a constant value of 3.",
+        "Now, because g of t is symmetric, flipping it across the vertical axis doesn’t change its shape —",
+        "which actually makes our job easier.",
+        "So we’ll flip g to get g of t minus tau, and then slide it across f of tau,",
+        "evaluating the convolution at each position t.",
+        "Here’s the key part:",
+        "Both functions are compactly supported, meaning they’re only non-zero over a specific range.",
+        "That means the overlap only happens during certain intervals.",
+        "So to compute the convolution, we’ll handle it case by case — based on the value of t."
+      ],
+      "fullText": "Now, let’s work through a more abstract — and slightly more mathematical — example.\u000bI like to call this a minds-on example.\nThis example is based on continuous convolution, and while it’s not difficult, it does require you to think like in calculus.\nSo let’s take our time with it.\nWith convolution, the basic process is this:\u000bWe flip one function, shift it, multiply them point by point, and then integrate over the region where they overlap.\nAt first, that might sound a little mechanical. So let’s break it down clearly, step by step.\nWe’re working with two functions here:\nf of t, shown in red. This is a triangular function — it starts at zero, rises to a peak at t equals 2, and then drops back to zero.\ng of t, shown in purple. This is a rectangular pulse that spans from t equals minus 2 to plus 2, with a constant value of 3.\nNow, because g of t is symmetric, flipping it across the vertical axis doesn’t change its shape —\u000bwhich actually makes our job easier.\nSo we’ll flip g to get g of t minus tau, and then slide it across f of tau,\u000bevaluating the convolution at each position t.\nHere’s the key part:\u000bBoth functions are compactly supported, meaning they’re only non-zero over a specific range.\u000bThat means the overlap only happens during certain intervals.\nSo to compute the convolution, we’ll handle it case by case — based on the value of t.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide29.JPG",
+      "script": "Let's dive into this example step by step, breaking down the process of continuous convolution. We'll start with two functions, f of t, shown in red, and g of t, shown in blue, and apply the basic rules of convolution to understand the output.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 5000,
+          "label": "Continuous Convolution Example"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 1000,
+          "label": "Two Functions f of t and g of t"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Basic Rules of Convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "👉 Case 1: When t is less than –2",
+      "bullets": [
+        "At this stage, the flipped and shifted version of g, written as g of t minus tau,",
+        "is positioned so far to the left that it does not overlap with f of tau at all.",
+        "That means the product of the two functions is zero everywhere,",
+        "so the convolution result y of t is also zero.",
+        "This is our first insight:",
+        "No overlap means no contribution to the integral, and the output is zero.",
+        "Case 2: When t is between –2 and 0",
+        "Now we begin to see partial overlap.",
+        "As g of t minus tau slides to the right, part of it starts to enter the region where f of tau is non-zero.",
+        "Let’s break this down mathematically:",
+        "Over the region where they overlap, f of tau is defined as",
+        "f of tau equals negative tau plus 2, valid from tau equals 0 to tau equals 2.",
+        "And the flipped rectangle, g of t minus tau, still has a constant height of 3 wherever it overlaps.",
+        "So we’re integrating the product of these two functions across the overlapping interval.",
+        "The simplifies convolution becomes:",
+        "3 times the integral of (–tau + 2), from 0 to 2 plus t.",
+        "If you evaluate this integral, you get:",
+        "y of t equals negative three-halves t squared plus 6.",
+        "So the convolution result in this case is a parabolic curve, rising as t approaches zero.",
+        "This illustrates an important idea:",
+        "Convolution is constructed from slices of overlapping areas —",
+        "and in each case, we’re summing the product over those intervals of overlap."
+      ],
+      "fullText": "👉 Case 1: When t is less than –2\nAt this stage, the flipped and shifted version of g, written as g of t minus tau,\u000bis positioned so far to the left that it does not overlap with f of tau at all.\nThat means the product of the two functions is zero everywhere,\u000bso the convolution result y of t is also zero.\nThis is our first insight:\u000bNo overlap means no contribution to the integral, and the output is zero.\n\n\n Case 2: When t is between –2 and 0\nNow we begin to see partial overlap.\nAs g of t minus tau slides to the right, part of it starts to enter the region where f of tau is non-zero.\nLet’s break this down mathematically:\nOver the region where they overlap, f of tau is defined as\u000bf of tau equals negative tau plus 2, valid from tau equals 0 to tau equals 2.\nAnd the flipped rectangle, g of t minus tau, still has a constant height of 3 wherever it overlaps.\nSo we’re integrating the product of these two functions across the overlapping interval.\n\nThe simplifies convolution becomes:\u000b3 times the integral of (–tau + 2), from 0 to 2 plus t.\nIf you evaluate this integral, you get:\u000by of t equals negative three-halves t squared plus 6.\nSo the convolution result in this case is a parabolic curve, rising as t approaches zero.\n\nThis illustrates an important idea:\u000bConvolution is constructed from slices of overlapping areas —\u000band in each case, we’re summing the product over those intervals of overlap.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide30.JPG",
+      "script": "As t becomes more positive, the overlap between f of tau and g of t minus tau increases, and we start to see a contribution to the integral.\nThis is where the convolution result y of t begins to rise as t approaches zero.\nThe output starts to increase as the two functions start to overlap.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Convolution Result Rises"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Overlap Increases"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Output Increases"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "Case 3: When t is between 0 and 2",
+      "bullets": [
+        "In this case, the flipped and shifted version of g, that is, g of t minus tau,",
+        "completely overlaps the triangular function f of tau.",
+        "This means we integrate across the entire support of f of tau,",
+        "from tau equals 0 to 2.",
+        "Within this interval:",
+        "f of tau equals negative tau plus 2",
+        "g of t minus tau is constant at 3",
+        "So the convolution becomes:",
+        "y of t equals the integral from 0 to 2 of 3 times (–tau + 2), d tau",
+        "When we evaluate this, we get:",
+        "y of t equals 6",
+        "So, for t between 0 and 2, the convolution gives a flat region with a constant value of 6.",
+        "This happens because the area under the product is the same across the entire interval.",
+        "Case 4: When t is between 2 and 4",
+        "Now, f of tau begins to slide out of the rectangular window of g of t minus tau.",
+        "We’re back to a partial overlap, but this time on the opposite side —",
+        "the right edge of g is moving past f.",
+        "The new overlapping interval runs from",
+        "tau equals t minus 2 to tau equals 2",
+        "Again, we use:",
+        "f of tau equals negative tau plus 2",
+        "g of t minus tau equals 3",
+        "So the convolution becomes:",
+        "y of t equals the integral from t minus 2 to 2 of 3 times (–tau + 2), d tau",
+        "Evaluating this gives:",
+        "y of t equals three-halves t squared minus twelve t plus 24",
+        "This result traces out the descending part of the convolution curve,",
+        "as the overlap shrinks toward zero.",
+        "Case 5: When t is greater than or equal to 4",
+        "At this point, g of t minus tau has completely moved past f of tau.",
+        "There is no overlap between the two functions,",
+        "so the convolution result once again becomes:",
+        "y of t equals 0"
+      ],
+      "fullText": "Case 3: When t is between 0 and 2\nIn this case, the flipped and shifted version of g, that is, g of t minus tau,\u000bcompletely overlaps the triangular function f of tau.\nThis means we integrate across the entire support of f of tau,\u000bfrom tau equals 0 to 2.\nWithin this interval:\nf of tau equals negative tau plus 2\ng of t minus tau is constant at 3\nSo the convolution becomes:\u000by of t equals the integral from 0 to 2 of 3 times (–tau + 2), d tau\nWhen we evaluate this, we get:\u000by of t equals 6\nSo, for t between 0 and 2, the convolution gives a flat region with a constant value of 6.\u000bThis happens because the area under the product is the same across the entire interval.\n\n Case 4: When t is between 2 and 4\nNow, f of tau begins to slide out of the rectangular window of g of t minus tau.\nWe’re back to a partial overlap, but this time on the opposite side —\u000bthe right edge of g is moving past f.\nThe new overlapping interval runs from\u000btau equals t minus 2 to tau equals 2\nAgain, we use:\nf of tau equals negative tau plus 2\ng of t minus tau equals 3\nSo the convolution becomes:\u000by of t equals the integral from t minus 2 to 2 of 3 times (–tau + 2), d tau\nEvaluating this gives:\u000by of t equals three-halves t squared minus twelve t plus 24\nThis result traces out the descending part of the convolution curve,\u000bas the overlap shrinks toward zero.\n\n Case 5: When t is greater than or equal to 4\nAt this point, g of t minus tau has completely moved past f of tau.\nThere is no overlap between the two functions,\u000bso the convolution result once again becomes:\u000by of t equals 0",
+      "imageURL": "/lectures/Lecture_04/Images/Slide31.JPG",
+      "script": "When t is between 0 and 2, the flipped and shifted version of g completely overlaps the triangular function f of tau, and we integrate across the entire support of f of tau, from tau equals 0 to 2. Within this interval, f of tau equals negative tau plus 2, and g of t minus tau is constant at 3, so the convolution becomes the integral from 0 to 2 of 3 times (–tau + 2), d tau. Evaluating this, we get y of t equals 6, a flat region with a constant value of 6. This happens because the overlap between f and g is a rectangle, and the area under this rectangle is 6.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Case 3: t between 0 and 2"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Flipped and shifted version of g overlaps f of tau"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 2000,
+          "label": "Integrate across entire support of f of tau"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Alright, now we’re ready to put everything together.",
+      "bullets": [
+        "Up to this point, we handled the convolution one interval at a time,",
+        "because the overlap between f of t and g of t changes as we slide one across the other.",
+        "And that overlap pattern is really the whole story.",
+        "No overlap means the convolution is zero.",
+        "Partial overlap gives us a changing value.",
+        "Full overlap gives us the maximum, and sometimes a flat region.",
+        "So when we combine all those cases, we get the complete piecewise result shown on this slide.",
+        "Here is the final answer.",
+        "For t less than minus two, there is no overlap, so y of t is zero.",
+        "For t between minus two and zero, the overlap is growing,",
+        "and the convolution becomes:",
+        "negative three over two times t squared plus six.",
+        "For t between zero and two, we have full overlap in the middle,",
+        "so the convolution stays constant at six.",
+        "For t between two and four, the overlap is shrinking,",
+        "and the convolution becomes:",
+        "three over two times t squared minus twelve t plus twenty four.",
+        "And for t greater than or equal to four, the overlap is gone again,",
+        "so y of t goes back to zero.",
+        "If you look at the plot at the bottom, you can see exactly what that means visually.",
+        "The curve rises as the overlap builds,",
+        "it levels off in the middle,",
+        "and then it falls as the overlap disappears.",
+        "That “bump” shape is exactly what we expect from convolution in continuous time.",
+        "So this slide is a nice checkpoint.",
+        "It shows that continuous convolution is not mysterious.",
+        "It is always the same workflow:",
+        "flip one function,",
+        "shift it,",
+        "multiply the overlap,",
+        "and integrate.",
+        "Then you repeat that logic over the different overlap intervals,",
+        "and finally you stitch the pieces together into one complete output."
+      ],
+      "fullText": "Alright, now we’re ready to put everything together.\n\nUp to this point, we handled the convolution one interval at a time,\nbecause the overlap between f of t and g of t changes as we slide one across the other.\n\nAnd that overlap pattern is really the whole story.\nNo overlap means the convolution is zero.\nPartial overlap gives us a changing value.\nFull overlap gives us the maximum, and sometimes a flat region.\n\nSo when we combine all those cases, we get the complete piecewise result shown on this slide.\n\nHere is the final answer.\n\nFor t less than minus two, there is no overlap, so y of t is zero.\n\nFor t between minus two and zero, the overlap is growing,\nand the convolution becomes:\nnegative three over two times t squared plus six.\n\nFor t between zero and two, we have full overlap in the middle,\nso the convolution stays constant at six.\n\nFor t between two and four, the overlap is shrinking,\nand the convolution becomes:\nthree over two times t squared minus twelve t plus twenty four.\n\nAnd for t greater than or equal to four, the overlap is gone again,\nso y of t goes back to zero.\n\nIf you look at the plot at the bottom, you can see exactly what that means visually.\nThe curve rises as the overlap builds,\nit levels off in the middle,\nand then it falls as the overlap disappears.\nThat “bump” shape is exactly what we expect from convolution in continuous time.\n\nSo this slide is a nice checkpoint.\nIt shows that continuous convolution is not mysterious.\nIt is always the same workflow:\nflip one function,\nshift it,\nmultiply the overlap,\nand integrate.\nThen you repeat that logic over the different overlap intervals,\nand finally you stitch the pieces together into one complete output.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide32.JPG",
+      "script": "Now that we've broken down the convolution process, we can put everything together to get the complete piecewise result, which is the final answer to the convolution problem. This result is shaped by the overlap pattern between the two functions, which changes as we slide one across the other.",
+      "spotlightEvents": [
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Putting it all together"
+        },
+        {
+          "timeMs": 27000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Overlap pattern"
+        },
+        {
+          "timeMs": 28000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "No overlap means zero convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "Now let’s tie all of this together with a very practical example: an RC circuit.",
+      "bullets": [
+        "Even if you do not love circuits, you can treat this as a black box.",
+        "There is an input signal, x of t, and there is an output signal, y of t.",
+        "The box happens to be made of a resistor R and a capacitor C,",
+        "and we are looking at the voltage across the capacitor as the output.",
+        "Here is the key systems idea.",
+        "If this circuit is linear and time-invariant, then it is completely characterized by its impulse response, h of t.",
+        "So imagine we hit the input with an ideal impulse.",
+        "The output we observe is h of t.",
+        "For an RC circuit, that impulse response has a very simple shape:",
+        "it is a decaying exponential that starts at time zero and then fades away,",
+        "and the time scale is controlled by the product R times C.",
+        "Now look at the plots on the right side of the slide.",
+        "They are showing exactly what convolution means in practice.",
+        "On the left of each row you see an input x of t,",
+        "for example a short rectangular pulse, a longer pulse, or an impulse-like spike.",
+        "On the right of each row you see the output y of t,",
+        "along with the impulse response h of t for reference.",
+        "And the message is this:",
+        "different inputs produce different outputs,",
+        "but they all follow the same rule.",
+        "The output is the convolution of the input with the impulse response.",
+        "So the circuit is acting like a smoothing system.",
+        "A sharp input does not stay sharp.",
+        "It gets “spread out” in time according to that exponential response.",
+        "That is exactly what convolution captures.",
+        "And this is why we care beyond circuits.",
+        "The same mathematics shows up everywhere:",
+        "in signal filtering, in physiological time responses, and later in imaging systems.",
+        "Once you know the impulse response, convolution tells you how the system reacts to any input."
+      ],
+      "fullText": "Now let’s tie all of this together with a very practical example: an RC circuit.\n\nEven if you do not love circuits, you can treat this as a black box.\nThere is an input signal, x of t, and there is an output signal, y of t.\nThe box happens to be made of a resistor R and a capacitor C,\nand we are looking at the voltage across the capacitor as the output.\n\nHere is the key systems idea.\nIf this circuit is linear and time-invariant, then it is completely characterized by its impulse response, h of t.\n\nSo imagine we hit the input with an ideal impulse.\nThe output we observe is h of t.\n\nFor an RC circuit, that impulse response has a very simple shape:\nit is a decaying exponential that starts at time zero and then fades away,\nand the time scale is controlled by the product R times C.\n\nNow look at the plots on the right side of the slide.\nThey are showing exactly what convolution means in practice.\n\nOn the left of each row you see an input x of t,\nfor example a short rectangular pulse, a longer pulse, or an impulse-like spike.\nOn the right of each row you see the output y of t,\nalong with the impulse response h of t for reference.\n\nAnd the message is this:\ndifferent inputs produce different outputs,\nbut they all follow the same rule.\nThe output is the convolution of the input with the impulse response.\n\nSo the circuit is acting like a smoothing system.\nA sharp input does not stay sharp.\nIt gets “spread out” in time according to that exponential response.\nThat is exactly what convolution captures.\n\nAnd this is why we care beyond circuits.\nThe same mathematics shows up everywhere:\nin signal filtering, in physiological time responses, and later in imaging systems.\nOnce you know the impulse response, convolution tells you how the system reacts to any input.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide33.JPG",
+      "script": "Now let's tie all of this together with a very practical example: an RC circuit. Even if you don't love circuits, you can treat this as a black box with an input signal, x of t, and an output signal, y of t. The box consists of a resistor R and a capacitor C, and we're looking at the voltage across the capacitor as the output. If the circuit is linear and time-invariant, it's completely characterized by its impulse response, h of t.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "RC circuit"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "black box"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "resistor R"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "Now that you understand how 1D convolution works,",
+      "bullets": [
+        "it’s actually quite easy to extend the idea to two dimensions, especially when working with images.",
+        "In 2D convolution, you’re essentially applying the same process —",
+        "but now, instead of just one variable like t, you’re working with two:",
+        "x and y in the discrete case, or tau one and tau two in the continuous case.",
+        "Let’s take a look at the discrete form first.",
+        "We can see the formula at the top of the slide:",
+        "f of x, y convolved with g of x, y equals the double sum",
+        "over n 1 and n 2 of f at n 1, n 2 times g at x minus n 1, y minus n 1.",
+        "Just like in 1D, we flip the kernel, shift it, multiply, and sum —",
+        "but now we do this across both rows and columns.",
+        "In the continuous case, we do the same thing using integrals.",
+        "We integrate over both variables — tau one and tau two —",
+        "to compute the total area under the product.",
+        "So the core principle stays the same:",
+        "Flip, shift, multiply, and sum or integrate —",
+        "but now it happens in two directions at once, across a 2D grid or surface.",
+        "This extension is especially important in image processing and medical imaging,",
+        "where we often apply filters, masks, or system responses across 2D signals like slices or projection data.",
+        "Whether you’re summing or integrating,",
+        "convolution gives you a systematic way to model how a signal transforms when passed through a system."
+      ],
+      "fullText": "Now that you understand how 1D convolution works,\u000bit’s actually quite easy to extend the idea to two dimensions, especially when working with images.\n\nIn 2D convolution, you’re essentially applying the same process —\u000bbut now, instead of just one variable like t, you’re working with two:\u000bx and y in the discrete case, or tau one and tau two in the continuous case.\n\nLet’s take a look at the discrete form first.\nWe can see the formula at the top of the slide:\nf of x, y convolved with g of x, y equals the double sum\u000bover n 1 and n 2 of f at n 1, n 2 times g at x minus n 1, y minus n 1.\nJust like in 1D, we flip the kernel, shift it, multiply, and sum —\u000bbut now we do this across both rows and columns.\nIn the continuous case, we do the same thing using integrals.\u000bWe integrate over both variables — tau one and tau two —\u000bto compute the total area under the product.\n\nSo the core principle stays the same:\u000bFlip, shift, multiply, and sum or integrate —\u000bbut now it happens in two directions at once, across a 2D grid or surface.\nThis extension is especially important in image processing and medical imaging,\u000bwhere we often apply filters, masks, or system responses across 2D signals like slices or projection data.\nWhether you’re summing or integrating,\u000bconvolution gives you a systematic way to model how a signal transforms when passed through a system.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide34.JPG",
+      "script": "Now that you understand how 1D convolution works, it's actually quite easy to extend the idea to two dimensions, especially when working with images. In 2D convolution, you're essentially applying the same process, but now, instead of just one variable like t, you're working with two: x and y in the discrete case, or tau one and tau two in the continuous case. Let's take a look at the discrete form first. The formula at the top of the slide shows the double sum over n 1 and n 2 of f at n 1, n 2 times g at x minus n 1, y minus n 1. Just like in the 1D case, this process involves sliding the kernel across the image and performing a point-wise multiplication.",
+      "spotlightEvents": [
+        {
+          "timeMs": 42000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "2D Convolution Basics"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Extension of 1D Concept"
+        },
+        {
+          "timeMs": 46000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2500,
+          "label": "Variables x and y"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "In imaging, 2D convolution is a powerful tool for modeling blurring.",
+      "bullets": [
+        "Let’s take a look at how this works using a simple example.",
+        "On the left, we see an input image represented as a matrix of pixel intensities.",
+        "Each number corresponds to the brightness level of a pixel.",
+        "In the middle, we see a 3 by 3 averaging mask.",
+        "All entries are 1, and we divide the result by 9 —",
+        "which means we’re averaging the values in a 3 by 3 window.",
+        "This operation is a 2D convolution:",
+        "we slide the mask across the image, and at each position,",
+        "we multiply corresponding elements, sum them up, and store the result in the center pixel of the output.",
+        "Let’s focus on the region that’s highlighted.",
+        "For the top-left example, the 3 by 3 neighborhood includes values like 1, 2, 3, and so on.",
+        "When we sum those values and divide by 9, we get the blurred output value, shown in yellow.",
+        "The same thing happens throughout the image.",
+        "Each pixel in the output image becomes the average of itself and its eight neighbors.",
+        "The result?",
+        "Sharp transitions are smoothed out, fine details are softened —",
+        "and the image takes on a blurred appearance.",
+        "This is a fundamental application of 2D convolution —",
+        "and it’s used not only for visual effects, but also as a preprocessing step in many medical imaging tasks,",
+        "like noise reduction and feature extraction."
+      ],
+      "fullText": "In imaging, 2D convolution is a powerful tool for modeling blurring.\nLet’s take a look at how this works using a simple example.\nOn the left, we see an input image represented as a matrix of pixel intensities.\u000bEach number corresponds to the brightness level of a pixel.\nIn the middle, we see a 3 by 3 averaging mask.\u000bAll entries are 1, and we divide the result by 9 —\u000bwhich means we’re averaging the values in a 3 by 3 window.\nThis operation is a 2D convolution:\u000bwe slide the mask across the image, and at each position,\u000bwe multiply corresponding elements, sum them up, and store the result in the center pixel of the output.\nLet’s focus on the region that’s highlighted.\nFor the top-left example, the 3 by 3 neighborhood includes values like 1, 2, 3, and so on.\u000bWhen we sum those values and divide by 9, we get the blurred output value, shown in yellow.\nThe same thing happens throughout the image.\u000bEach pixel in the output image becomes the average of itself and its eight neighbors.\nThe result?\u000bSharp transitions are smoothed out, fine details are softened —\u000band the image takes on a blurred appearance.\nThis is a fundamental application of 2D convolution —\u000band it’s used not only for visual effects, but also as a preprocessing step in many medical imaging tasks,\u000blike noise reduction and feature extraction.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide35.JPG",
+      "script": "In imaging, 2D convolution is a powerful tool for modeling blurring, and it's essential to understand how it works. Let's take a look at a simple example where we have an input image and a 3 by 3 averaging mask. As we slide the mask across the image, we perform a point-wise multiplication and sum the products, effectively blurring the image. This process is a fundamental concept in medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "2D Convolution"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.3,
+          "durationMs": 300,
+          "label": "Averaging Mask"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.5,
+          "durationMs": 400,
+          "label": "Point-wise Multiplication"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "Let’s take a look at how blurring arises naturally in imaging systems — not just",
+      "bullets": [
+        "Here we observe a key concept in optics called the point spread function, or PSF.",
+        "In theory, if you image a perfect point of light, it should appear as a sharp dot on the detector.",
+        "But in reality, that point gets blurred into a small disk — often called an Airy disk —",
+        "because of how light diffracts through the lens system.",
+        "This is the system’s impulse response in two dimensions.",
+        "So even if your input is just a single point — like a star in the night sky —",
+        "the output captured by your imaging system is a small, spread-out shape.",
+        "And when two bright points are placed too close together,",
+        "their point spread functions begin to overlap.",
+        "This overlap makes it difficult — or even impossible — to tell them apart in the final image.",
+        "This phenomenon is at the core of what we call the resolution limit in optical systems.",
+        "In fact, PSFs are not just a curiosity —",
+        "they’re mathematically modeled and measured,",
+        "and they define how sharp or blurry every part of an image will be.",
+        "So in medical imaging, astronomy, microscopy —",
+        "understanding the point spread function is essential to both image formation and image reconstruction."
+      ],
+      "fullText": "Let’s take a look at how blurring arises naturally in imaging systems — not just from digital filters, but from physical limitations.\nHere we observe a key concept in optics called the point spread function, or PSF.\nIn theory, if you image a perfect point of light, it should appear as a sharp dot on the detector.\u000bBut in reality, that point gets blurred into a small disk — often called an Airy disk —\u000bbecause of how light diffracts through the lens system.\nThis is the system’s impulse response in two dimensions.\nSo even if your input is just a single point — like a star in the night sky —\u000bthe output captured by your imaging system is a small, spread-out shape.\nAnd when two bright points are placed too close together,\u000btheir point spread functions begin to overlap.\u000bThis overlap makes it difficult — or even impossible — to tell them apart in the final image.\nThis phenomenon is at the core of what we call the resolution limit in optical systems.\nIn fact, PSFs are not just a curiosity —\u000bthey’re mathematically modeled and measured,\u000band they define how sharp or blurry every part of an image will be.\nSo in medical imaging, astronomy, microscopy —\u000bunderstanding the point spread function is essential to both image formation and image reconstruction.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide36.JPG",
+      "script": "Let's take a look at how blurring arises naturally in imaging systems, not just from digital filters, but from physical limitations. We observe a key concept in optics called the point spread function, or PSF. In theory, if you image a perfect point of light, it should appear as a sharp dot on the detector, but in reality, that point gets blurred into a small disk, often called an Airy disk, because of how light diffracts through the lens system. This is the system's impulse response in two dimensions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Blurring in Imaging Systems"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "Point Spread Function"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Airy Disk"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Now let’s talk about the reverse process of blurring — a technique called deconv",
+      "bullets": [
+        "When an image is blurred, it’s often because the original scene has been convolved with a point spread function — or PSF.",
+        "We saw earlier that even a perfect point source becomes a blurred spot due to system limitations.",
+        "Deconvolution is the process of trying to undo that effect —",
+        "to recover the original image from its blurred version.",
+        "You can think of convolution like a kind of advanced multiplication:",
+        "we blend the signal with the system’s response.",
+        "In that same spirit, deconvolution behaves like an advanced form of division —",
+        "we’re trying to undo the blending, and isolate the original input.",
+        "We can see that clearly in the example on this slide.",
+        "The left image is a blurred photo of a car — the license plate is unreadable.",
+        "After deconvolution, the right image restores the clarity — now we can read the plate.",
+        "This kind of technique is used not just in photography, but in microscopy, astronomy, and especially in medical imaging,",
+        "where resolving fine detail can be critical.",
+        "It’s important to note that deconvolution is not always perfect —",
+        "in real-world systems, noise and distortion make it a challenging problem.",
+        "But with good modeling of the PSF and proper regularization,",
+        "we can often greatly enhance image quality."
+      ],
+      "fullText": "Now let’s talk about the reverse process of blurring — a technique called deconvolution.\nWhen an image is blurred, it’s often because the original scene has been convolved with a point spread function — or PSF.\u000bWe saw earlier that even a perfect point source becomes a blurred spot due to system limitations.\nDeconvolution is the process of trying to undo that effect —\u000bto recover the original image from its blurred version.\nYou can think of convolution like a kind of advanced multiplication:\u000bwe blend the signal with the system’s response.\u000bIn that same spirit, deconvolution behaves like an advanced form of division —\u000bwe’re trying to undo the blending, and isolate the original input.\nWe can see that clearly in the example on this slide.\u000bThe left image is a blurred photo of a car — the license plate is unreadable.\u000bAfter deconvolution, the right image restores the clarity — now we can read the plate.\nThis kind of technique is used not just in photography, but in microscopy, astronomy, and especially in medical imaging,\u000bwhere resolving fine detail can be critical.\nIt’s important to note that deconvolution is not always perfect —\u000bin real-world systems, noise and distortion make it a challenging problem.\u000bBut with good modeling of the PSF and proper regularization,\u000bwe can often greatly enhance image quality.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide37.JPG",
+      "script": "Deconvolution is the process of reversing the blurring effect to recover the original image from its blurred version. It's the opposite of convolution, where we try to undo the spreading out of the image caused by the system's limitations. Deconvolution is a clever technique that can restore sharpness to a blurred image, but it requires smart algorithms and good models.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 5000,
+          "label": "Deconvolution"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Blurred Image"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "PSF"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Here’s the idea in action.",
+      "bullets": [
+        "This slide shows how inverse filtering works in the frequency domain.",
+        "A sharp image, when convolved with a point spread function, results in a blurred image.",
+        "In the Fourier domain, convolution becomes multiplication.",
+        "So, the Fourier transform of the blurred image equals",
+        "the product of the transforms of the original image and the PSF.",
+        "To reverse this, we perform division in the frequency domain —",
+        "this is the essence of inverse filtering.",
+        "In the red box below, the image on the right is the transform of the blurred image,",
+        "the center is the transform of the PSF,",
+        "and the left is the result of dividing them — recovering the original image spectrum.",
+        "Applying the inverse Fourier transform brings us back to the spatial domain.",
+        "This process forms the basis of many image restoration techniques."
+      ],
+      "fullText": "Here’s the idea in action.\nThis slide shows how inverse filtering works in the frequency domain.\nA sharp image, when convolved with a point spread function, results in a blurred image.\nIn the Fourier domain, convolution becomes multiplication.\u000bSo, the Fourier transform of the blurred image equals\u000bthe product of the transforms of the original image and the PSF.\nTo reverse this, we perform division in the frequency domain —\u000bthis is the essence of inverse filtering.\nIn the red box below, the image on the right is the transform of the blurred image,\u000bthe center is the transform of the PSF,\u000band the left is the result of dividing them — recovering the original image spectrum.\nApplying the inverse Fourier transform brings us back to the spatial domain.\nThis process forms the basis of many image restoration techniques.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide38.JPG",
+      "script": "The inverse filtering process is demonstrated by the equation in the red box, where we divide the transform of the blurred image by the transform of the PSF to recover the original image spectrum. This division allows us to undo the blurring effect and restore the sharp image.",
+      "spotlightEvents": [
+        {
+          "timeMs": 53000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Inverse Filtering"
+        },
+        {
+          "timeMs": 55000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Division in Frequency Domain"
+        },
+        {
+          "timeMs": 57000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Undoing the Blurring Effect"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "If this still feels a little abstract right now, that’s completely normal.",
+      "bullets": [
+        "The picture will become much clearer once we introduce Fourier analysis.",
+        "For the moment, I want you to keep one simple analogy in mind.",
+        "In basic arithmetic, multiplication combines things, and division tries to undo that combination.",
+        "In signal and image processing, convolution plays the role of a more advanced kind of multiplication:",
+        "it combines an input with a system response, like blur or smoothing.",
+        "And deconvolution plays the role of the corresponding division:",
+        "given the blurred output and some knowledge of the system response,",
+        "we try to work backward and recover the original signal or image.",
+        "So just like integration can be thought of as “continuous addition,”",
+        "convolution can be thought of as “structured multiplication,”",
+        "and deconvolution is the hard inverse operation that tries to undo it.",
+        "We will return to this later, and Fourier methods will show you exactly why this analogy works so well."
+      ],
+      "fullText": "If this still feels a little abstract right now, that’s completely normal.\nThe picture will become much clearer once we introduce Fourier analysis.\n\nFor the moment, I want you to keep one simple analogy in mind.\n\nIn basic arithmetic, multiplication combines things, and division tries to undo that combination.\nIn signal and image processing, convolution plays the role of a more advanced kind of multiplication:\nit combines an input with a system response, like blur or smoothing.\n\nAnd deconvolution plays the role of the corresponding division:\ngiven the blurred output and some knowledge of the system response,\nwe try to work backward and recover the original signal or image.\n\nSo just like integration can be thought of as “continuous addition,”\nconvolution can be thought of as “structured multiplication,”\nand deconvolution is the hard inverse operation that tries to undo it.\n\nWe will return to this later, and Fourier methods will show you exactly why this analogy works so well.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide39.JPG",
+      "script": "Don't worry if the concept of convolution and deconvolution feels abstract at this point – it's normal to need time to grasp it. The relationship between these operations and Fourier analysis will become clearer as we dive deeper into the subject. For now, remember the analogy of basic arithmetic, where multiplication and division have counterparts in convolution and deconvolution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4200,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Convolution and Deconvolution"
+        },
+        {
+          "timeMs": 4500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 300,
+          "label": "Basic Arithmetic Analogy"
+        },
+        {
+          "timeMs": 4800,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 400,
+          "label": "Multiplication and Division"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "Returning to one-dimensional signals, convolution behaves like multiplication in",
+      "bullets": [
+        "Commutative: h convolved with f equals f convolved with h.",
+        "Associative: h convolved with the result of f convolved with g equals the result of h convolved with f, then convolved with g.",
+        "Distributive: h convolved with the sum of f and g equals h convolved with f plus h convolved with g.",
+        "These properties show that convolution is algebraically structured, and they will connect directly to Fourier analysis.",
+        "You’re invited to try a quick quiz:",
+        "If y of n equals h of n convolved with x of n,",
+        "prove that y of n minus k equals h of n convolved with x of n minus k.",
+        "This follows naturally from the meaning of convolution."
+      ],
+      "fullText": "Returning to one-dimensional signals, convolution behaves like multiplication in several key ways:\nCommutative: h convolved with f equals f convolved with h.\nAssociative: h convolved with the result of f convolved with g equals the result of h convolved with f, then convolved with g.\nDistributive: h convolved with the sum of f and g equals h convolved with f plus h convolved with g.\nThese properties show that convolution is algebraically structured, and they will connect directly to Fourier analysis.\nYou’re invited to try a quick quiz:\u000bIf y of n equals h of n convolved with x of n,\u000bprove that y of n minus k equals h of n convolved with x of n minus k.\nThis follows naturally from the meaning of convolution.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide40.JPG",
+      "script": "Convolution behaves like multiplication in several key ways, including being commutative, associative, and distributive, which shows that convolution is algebraically structured and will connect directly to Fourier analysis. These properties will be important when we move into Fourier analysis.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Commutative"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Associative"
+        },
+        {
+          "timeMs": 9000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Distributive"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "We can even prove these properties. I won’t go through the full proof now, but i",
+      "bullets": [
+        "Here, we start with the standard convolution definition:",
+        "y of n equals the sum over k of x of k times h of n minus k.",
+        "By substituting k equals n minus capital K,",
+        "we change the index of summation and rewrite the expression in reversed order.",
+        "This leads directly to:",
+        "h convolved with x equals x convolved with h.",
+        "So, convolution is commutative — just like multiplication."
+      ],
+      "fullText": "We can even prove these properties. I won’t go through the full proof now, but it follows directly from how convolution is defined.\n\nHere, we start with the standard convolution definition:\u000by of n equals the sum over k of x of k times h of n minus k.\nBy substituting k equals n minus capital K,\u000bwe change the index of summation and rewrite the expression in reversed order.\nThis leads directly to:\u000bh convolved with x equals x convolved with h.\nSo, convolution is commutative — just like multiplication.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide41.JPG",
+      "script": "We can actually prove that convolution is commutative, meaning the order of the input signal and the impulse response doesn't change the result. This follows directly from the definition of convolution, where we can simply swap the variables and rearrange the terms.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Convolution is commutative"
+        },
+        {
+          "timeMs": 13600,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Swapping variables"
+        },
+        {
+          "timeMs": 13900,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Rearranging terms"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "A related concept to convolution is cross-correlation.",
+      "bullets": [
+        "Mathematically, the key difference is in the sign of the shift.",
+        "In convolution, we compute the integral of f of x minus u times g of u.",
+        "In cross-correlation, it’s f of x plus u times g of u.",
+        "So, convolution flips one of the functions before shifting and multiplying,",
+        "while cross-correlation does not.",
+        "Both are useful in signal processing —",
+        "but for different purposes, like system response versus pattern matching."
+      ],
+      "fullText": "A related concept to convolution is cross-correlation.\nMathematically, the key difference is in the sign of the shift.\nIn convolution, we compute the integral of f of x minus u times g of u.\nIn cross-correlation, it’s f of x plus u times g of u.\nSo, convolution flips one of the functions before shifting and multiplying,\u000bwhile cross-correlation does not.\nBoth are useful in signal processing —\u000bbut for different purposes, like system response versus pattern matching.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide42.JPG",
+      "script": "Cross-correlation is a related concept to convolution, and the key difference lies in the sign of the shift. In cross-correlation, we compute the integral of f of x plus u times g of u, whereas in convolution, it's f of x minus u times g of u. This means convolution flips one of the functions before shifting and multiplying, whereas cross-correlation does not. Both are useful in signal processing, but for different purposes, such as system response and pattern matching.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Key difference in sign of shift"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Convolution flips one function"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Cross-correlation computes integral with plus sign"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "Let’s take a closer look at the graphical differences between convolution, cross",
+      "bullets": [
+        "On the left, we see convolution.",
+        "Function f is in blue, and function g is in red.",
+        "In convolution, g is first flipped horizontally, then shifted, multiplied with f, and finally integrated or summed.",
+        "As g slides across f, the overlapping area is computed at each step — producing the black output curve below.",
+        "In the middle, we have cross-correlation.",
+        "It follows the same steps as convolution, except there’s no flipping of g.",
+        "We simply shift g across f, multiply at each point, and accumulate the result.",
+        "So visually, the shapes are the same, but the symmetry is different — this matters in pattern alignment and signal comparison.",
+        "On the right, we see autocorrelation.",
+        "This is a special case of cross-correlation where the same function is compared with itself.",
+        "So g and f are the same, and we measure how well the signal matches its own shifted versions.",
+        "The result usually peaks at zero shift — showing maximum similarity with itself — and falls off on either side."
+      ],
+      "fullText": "Let’s take a closer look at the graphical differences between convolution, cross-correlation, and autocorrelation.\nOn the left, we see convolution.\u000bFunction f is in blue, and function g is in red.\u000bIn convolution, g is first flipped horizontally, then shifted, multiplied with f, and finally integrated or summed.\u000bAs g slides across f, the overlapping area is computed at each step — producing the black output curve below.\nIn the middle, we have cross-correlation.\u000bIt follows the same steps as convolution, except there’s no flipping of g.\u000bWe simply shift g across f, multiply at each point, and accumulate the result.\u000bSo visually, the shapes are the same, but the symmetry is different — this matters in pattern alignment and signal comparison.\nOn the right, we see autocorrelation.\u000bThis is a special case of cross-correlation where the same function is compared with itself.\u000bSo g and f are the same, and we measure how well the signal matches its own shifted versions.\u000bThe result usually peaks at zero shift — showing maximum similarity with itself — and falls off on either side.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide43.JPG",
+      "script": "Let's take a closer look at the graphical differences between convolution, cross-correlation, and autocorrelation. Convolution involves flipping one function, shifting it, multiplying point by point, and integrating or summing. This process produces a symmetric output curve. In contrast, cross-correlation follows the same steps but without the flipping step, resulting in a non-symmetric output curve.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Convolution"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.4,
+          "y": 0.4,
+          "durationMs": 3000,
+          "label": "Flipping and Shifting"
+        },
+        {
+          "timeMs": 8000,
+          "type": "spotlight",
+          "x": 0.6,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "Multiplication and Integration"
+        }
+      ]
+    },
+    {
+      "slideIndex": 43,
+      "slideNumber": 44,
+      "title": "Cross-correlation is deeply connected to the Cauchy–Schwarz inequality.",
+      "bullets": [
+        "This fundamental result tells us that the inner product of two signals",
+        "is always less than or equal to the product of their norms.",
+        "Mathematically, this absolute value of the inner product is less than or equal to",
+        "the square root of the sum of all the a k squared",
+        "times the square root of the sum of all the b k squared.",
+        "Equality holds only when the two signals are proportional.",
+        "This is why cross-correlation works in this way:",
+        "the output is maximized when the signal and the template are aligned in shape —",
+        "a key idea in pattern recognition and signal detection."
+      ],
+      "fullText": "Cross-correlation is deeply connected to the Cauchy–Schwarz inequality.\nThis fundamental result tells us that the inner product of two signals\u000bis always less than or equal to the product of their norms.\nMathematically, this absolute value of the inner product is less than or equal to\u000bthe square root of the sum of all the a k squared\u000btimes the square root of the sum of all the b k squared.\n\nEquality holds only when the two signals are proportional.\nThis is why cross-correlation works in this way:\u000bthe output is maximized when the signal and the template are aligned in shape —\u000ba key idea in pattern recognition and signal detection.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide44.JPG",
+      "script": "The Cauchy–Schwarz inequality is a fundamental concept that explains why cross-correlation works the way it does. It tells us that the inner product of two signals is always less than or equal to the product of their norms, with equality holding only when the two signals are proportional. This means that cross-correlation is maximized when the signal and the template are aligned in shape, which is why it's a powerful tool for detecting patterns and features.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Cauchy–Schwarz inequality"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "inner product"
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "norms of signals"
+        }
+      ]
+    },
+    {
+      "slideIndex": 44,
+      "slideNumber": 45,
+      "title": "Here we observe a practical example of cross-correlation in action —",
+      "bullets": [
+        "a technique known as matched filtering, widely used in signal detection.",
+        "In the top plot, the blue curve shows a received signal that includes both the desired pulse and a lot of background noise.",
+        "The red curve represents the matched filter — a reference copy of the signal we’re trying to detect.",
+        "The bottom plot shows the cross-correlation output.",
+        "Notice the sharp peak centered around one second — this is where the received signal best aligns with the matched filter.",
+        "That spike tells us that the target signal is present at that location in time.",
+        "This is exactly what the Cauchy–Schwarz inequality predicted:",
+        "the inner product, or correlation, reaches its maximum value when the two signals are best aligned.",
+        "Matched filtering like this is essential in many fields:",
+        "from radar and sonar, to wireless communication, and even in medical imaging —",
+        "anywhere we want to pull a weak signal out of noisy data.",
+        "Cross-correlation gives us a way to do that precisely and efficiently."
+      ],
+      "fullText": "Here we observe a practical example of cross-correlation in action —\u000ba technique known as matched filtering, widely used in signal detection.\nIn the top plot, the blue curve shows a received signal that includes both the desired pulse and a lot of background noise.\u000bThe red curve represents the matched filter — a reference copy of the signal we’re trying to detect.\nThe bottom plot shows the cross-correlation output.\u000bNotice the sharp peak centered around one second — this is where the received signal best aligns with the matched filter.\u000bThat spike tells us that the target signal is present at that location in time.\nThis is exactly what the Cauchy–Schwarz inequality predicted:\u000bthe inner product, or correlation, reaches its maximum value when the two signals are best aligned.\nMatched filtering like this is essential in many fields:\u000bfrom radar and sonar, to wireless communication, and even in medical imaging —\u000banywhere we want to pull a weak signal out of noisy data.\nCross-correlation gives us a way to do that precisely and efficiently.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide45.JPG",
+      "script": "Here we see a practical example of cross-correlation in action, a technique called matched filtering used in signal detection. The top plot shows a received signal with a desired pulse and background noise, while the red curve represents the matched filter, a reference copy of the signal to be detected. The bottom plot displays the cross-correlation output, with a sharp peak centered around one second indicating the best alignment between the received signal and the matched filter. This spike tells us that the target signal is present at that location.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Matched Filter"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Received Signal"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Cross-Correlation Output"
+        }
+      ]
+    },
+    {
+      "slideIndex": 45,
+      "slideNumber": 46,
+      "title": "Now let’s see a very practical use of convolution: feature extraction, especiall",
+      "bullets": [
+        "On the left, we have the source image, shown as a grid of pixel intensity values.",
+        "We pick one pixel location, and we look at its local neighborhood, a 3-by-3 patch.",
+        "In the middle, we have a 3-by-3 convolution filter.",
+        "This one is the Sobel operator, often used to measure an intensity change in a specific direction.",
+        "You can see the weights include negative values on one side, positive values on the other,",
+        "with a stronger weight of two in the middle row.",
+        "That pattern is designed to respond strongly when pixel values change across the neighborhood.",
+        "Here is the procedure.",
+        "We align the Sobel kernel on top of a 3-by-3 region of the input image.",
+        "Then we multiply each pixel by the corresponding kernel weight,",
+        "and we add up all those products.",
+        "The slide even shows one full calculation.",
+        "When you do that sum of products for this highlighted patch, the result comes out to minus three.",
+        "And that number becomes the value of the destination pixel at that location on the right.",
+        "Now we slide the same filter to the next location and repeat.",
+        "Slide, multiply, sum.",
+        "Over and over, for every pixel position.",
+        "And the interpretation is simple.",
+        "If the region is mostly uniform, the positive and negative contributions cancel,",
+        "and the output stays small.",
+        "But if there is a sharp intensity transition, the cancellation fails,",
+        "and the output becomes large in magnitude.",
+        "That is edge detection in one sentence:",
+        "convolution turns local intensity changes into a strong numerical response,",
+        "so edges and boundaries become easier to detect and analyze.",
+        "And later in medical imaging, this kind of filtering connects directly to tasks like",
+        "highlighting boundaries, detecting structures, and extracting features for segmentation and diagnosis."
+      ],
+      "fullText": "Now let’s see a very practical use of convolution: feature extraction, especially edge detection.\n\nOn the left, we have the source image, shown as a grid of pixel intensity values.\nWe pick one pixel location, and we look at its local neighborhood, a 3-by-3 patch.\n\nIn the middle, we have a 3-by-3 convolution filter.\nThis one is the Sobel operator, often used to measure an intensity change in a specific direction.\nYou can see the weights include negative values on one side, positive values on the other,\nwith a stronger weight of two in the middle row.\nThat pattern is designed to respond strongly when pixel values change across the neighborhood.\n\nHere is the procedure.\n\nWe align the Sobel kernel on top of a 3-by-3 region of the input image.\nThen we multiply each pixel by the corresponding kernel weight,\nand we add up all those products.\n\nThe slide even shows one full calculation.\nWhen you do that sum of products for this highlighted patch, the result comes out to minus three.\nAnd that number becomes the value of the destination pixel at that location on the right.\n\nNow we slide the same filter to the next location and repeat.\nSlide, multiply, sum.\nOver and over, for every pixel position.\n\nAnd the interpretation is simple.\nIf the region is mostly uniform, the positive and negative contributions cancel,\nand the output stays small.\nBut if there is a sharp intensity transition, the cancellation fails,\nand the output becomes large in magnitude.\n\nThat is edge detection in one sentence:\nconvolution turns local intensity changes into a strong numerical response,\nso edges and boundaries become easier to detect and analyze.\n\nAnd later in medical imaging, this kind of filtering connects directly to tasks like\nhighlighting boundaries, detecting structures, and extracting features for segmentation and diagnosis.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide46.JPG",
+      "script": "Now let's see a very practical use of convolution: feature extraction, especially edge detection. We're looking at a specific example where the convolution operation is used to extract features from an image, like detecting edges. The Sobel operator is a 3-by-3 filter used to measure intensity changes in a specific direction, responding strongly to edges.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Source Image"
+        },
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.35,
+          "y": 0.35,
+          "durationMs": 5000,
+          "label": "3-by-3 Patch"
+        },
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.55,
+          "y": 0.55,
+          "durationMs": 5000,
+          "label": "Sobel Operator"
+        }
+      ]
+    },
+    {
+      "slideIndex": 46,
+      "slideNumber": 47,
+      "title": "Now let’s look at a classic edge-detection result.",
+      "bullets": [
+        "On the left is the original grayscale image.",
+        "On the right is the output of the Canny edge detector,",
+        "which is one of the most widely used edge-detection methods.",
+        "The main goal here is simple:",
+        "we want to convert an image into a clean map of boundaries,",
+        "so object outlines and important structures stand out clearly.",
+        "Canny works in several stages.",
+        "First, it smooths the image a little to reduce noise,",
+        "because noise can create fake edges.",
+        "Next, it computes image gradients, which you can think of as measuring how quickly intensity changes.",
+        "In practice, this gradient step is done using convolution-based derivative filters,",
+        "so convolution is still at the core.",
+        "Then the algorithm looks for places where the gradient is locally strongest,",
+        "and it keeps only those locations.",
+        "That step is called non-maximum suppression, and it makes the edges thin and sharp.",
+        "Finally, Canny uses two thresholds, a high and a low,",
+        "and it links edge pixels together using a rule called hysteresis.",
+        "The idea is to keep strong edges for sure,",
+        "and keep weak edges only if they connect to strong ones.",
+        "That helps remove isolated noise responses while preserving real boundaries.",
+        "So what you get at the end is a crisp edge map, like the one shown on the right.",
+        "And this is exactly why edge detection matters:",
+        "it gives you a compact representation of structure,",
+        "which is often the first step toward higher-level tasks like segmentation, tracking, and measurement."
+      ],
+      "fullText": "Now let’s look at a classic edge-detection result.\n\nOn the left is the original grayscale image.\nOn the right is the output of the Canny edge detector,\nwhich is one of the most widely used edge-detection methods.\n\nThe main goal here is simple:\nwe want to convert an image into a clean map of boundaries,\nso object outlines and important structures stand out clearly.\n\nCanny works in several stages.\n\nFirst, it smooths the image a little to reduce noise,\nbecause noise can create fake edges.\n\nNext, it computes image gradients, which you can think of as measuring how quickly intensity changes.\nIn practice, this gradient step is done using convolution-based derivative filters,\nso convolution is still at the core.\n\nThen the algorithm looks for places where the gradient is locally strongest,\nand it keeps only those locations.\nThat step is called non-maximum suppression, and it makes the edges thin and sharp.\n\nFinally, Canny uses two thresholds, a high and a low,\nand it links edge pixels together using a rule called hysteresis.\nThe idea is to keep strong edges for sure,\nand keep weak edges only if they connect to strong ones.\nThat helps remove isolated noise responses while preserving real boundaries.\n\nSo what you get at the end is a crisp edge map, like the one shown on the right.\nAnd this is exactly why edge detection matters:\nit gives you a compact representation of structure,\nwhich is often the first step toward higher-level tasks like segmentation, tracking, and measurement.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide47.JPG",
+      "script": "Let's take a look at this classic edge-detection result. On the left, we have the original grayscale image, and on the right, we have the output of the Canny edge detector, which is one of the most widely used edge-detection methods. The main goal here is to convert an image into a clean map of boundaries, so object outlines and important structures stand out clearly. The Canny edge detector works in several stages, starting with smoothing the image to reduce noise.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Original Grayscale Image"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Canny Edge Detector Output"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Main Goal of Edge Detection"
+        }
+      ]
+    },
+    {
+      "slideIndex": 47,
+      "slideNumber": 48,
+      "title": "Alright, let’s wrap up what we covered today.",
+      "bullets": [
+        "The big storyline of this lecture is right at the top of the slide:",
+        "linear system, then shift invariance, and that leads directly to convolution.",
+        "First, we reviewed what it means for an operator to be linear.",
+        "It has to satisfy additivity and homogeneity,",
+        "which is just the superposition principle.",
+        "Next, we brought in shift invariance,",
+        "meaning the system behaves the same way even when the input is shifted in time or space.",
+        "And once you have both of those together, linear plus shift-invariant,",
+        "you get a very powerful result:",
+        "the system output can be written as a convolution of the input with the impulse response.",
+        "We also spent time building intuition for where convolution comes from,",
+        "by decomposing signals using impulses, shifting, scaling, and then summing everything up.",
+        "And along the way, we connected these ideas to practical examples,",
+        "like filtering, edge detection, and even imaging-system behavior.",
+        "So if convolution still feels a little unfamiliar, that’s normal.",
+        "The good news is that it becomes much more intuitive with repetition,",
+        "because it always follows the same recipe:",
+        "flip, shift, multiply, and add or integrate.",
+        "That’s the core tool we will keep using as we move forward in signal processing and medical imaging."
+      ],
+      "fullText": "Alright, let’s wrap up what we covered today.\n\nThe big storyline of this lecture is right at the top of the slide:\nlinear system, then shift invariance, and that leads directly to convolution.\n\nFirst, we reviewed what it means for an operator to be linear.\nIt has to satisfy additivity and homogeneity,\nwhich is just the superposition principle.\n\nNext, we brought in shift invariance,\nmeaning the system behaves the same way even when the input is shifted in time or space.\n\nAnd once you have both of those together, linear plus shift-invariant,\nyou get a very powerful result:\nthe system output can be written as a convolution of the input with the impulse response.\n\nWe also spent time building intuition for where convolution comes from,\nby decomposing signals using impulses, shifting, scaling, and then summing everything up.\n\nAnd along the way, we connected these ideas to practical examples,\nlike filtering, edge detection, and even imaging-system behavior.\n\nSo if convolution still feels a little unfamiliar, that’s normal.\nThe good news is that it becomes much more intuitive with repetition,\nbecause it always follows the same recipe:\nflip, shift, multiply, and add or integrate.\n\nThat’s the core tool we will keep using as we move forward in signal processing and medical imaging.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide48.JPG",
+      "script": "Let's wrap up what we covered today. The big storyline of this lecture is right at the top of the slide: linear system, then shift invariance, and that leads directly to convolution. We reviewed what it means for an operator to be linear, which is additivity and homogeneity, or the superposition principle. We brought in shift invariance, meaning the system behaves the same way even when the input is shifted in time or space. And once you have both of those together, linear plus shift-invariant, you get a very powerful result: the system output can be calculated using convolution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Linear System"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.5,
+          "durationMs": 1000,
+          "label": "Additivity"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Homogeneity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 48,
+      "slideNumber": 49,
+      "title": "Alright, now it’s time to apply what we’ve learned in a concrete way.",
+      "bullets": [
+        "This is Homework 04.",
+        "For this assignment, assume the RC time constant is one second.",
+        "Your task is to use MATLAB to reproduce the plots shown in the first row on the right side of this slide.",
+        "Here is the setup.",
+        "The system is the RC circuit, and its impulse response is",
+        "h of t equals RC times e to the minus t over RC, multiplied by the unit step function.",
+        "With RC equal to one, that becomes a simple decaying exponential that starts at time zero.",
+        "You will define the input signal x of t shown in the first row,",
+        "compute the output y of t by convolving x of t with h of t,",
+        "and then plot the input and the output so they match the first-row figures.",
+        "As you do this, pay attention to the main idea:",
+        "the output is shaped by how the input overlaps with the impulse response over time.",
+        "That is exactly what convolution means.",
+        "For submission, please upload one Word document to the course system.",
+        "In that document, include your MATLAB script and the figures you generated.",
+        "And the due date is one week from now, by midnight next Friday."
+      ],
+      "fullText": "Alright, now it’s time to apply what we’ve learned in a concrete way.\n\nThis is Homework 04.\n\nFor this assignment, assume the RC time constant is one second.\nYour task is to use MATLAB to reproduce the plots shown in the first row on the right side of this slide.\n\nHere is the setup.\nThe system is the RC circuit, and its impulse response is\nh of t equals RC times e to the minus t over RC, multiplied by the unit step function.\nWith RC equal to one, that becomes a simple decaying exponential that starts at time zero.\n\nYou will define the input signal x of t shown in the first row,\ncompute the output y of t by convolving x of t with h of t,\nand then plot the input and the output so they match the first-row figures.\n\nAs you do this, pay attention to the main idea:\nthe output is shaped by how the input overlaps with the impulse response over time.\nThat is exactly what convolution means.\n\nFor submission, please upload one Word document to the course system.\nIn that document, include your MATLAB script and the figures you generated.\n\nAnd the due date is one week from now, by midnight next Friday.",
+      "imageURL": "/lectures/Lecture_04/Images/Slide49.JPG",
+      "script": "Now it's time to apply what we've learned in a concrete way. This is Homework 04, where you'll use MATLAB to reproduce the plots shown in the slide. You'll assume the RC time constant is one second and work with the RC circuit's impulse response, which is a decaying exponential starting at time zero. Your task is to define the input signal, compute the output, and generate the plots.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Homework 04"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Assume RC time constant is one second"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 2000,
+          "label": "Use MATLAB to reproduce plots"
+        }
+      ]
+    }
+  ]
+}

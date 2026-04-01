@@ -1,0 +1,2095 @@
+{
+  "lectureId": "Lecture_10",
+  "lectureTitle": "Medical Imaging — Lecture 10",
+  "totalSlides": 50,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Good afternoon, everyone. Today, we begin Lecture 10, which focuses on networks.",
+      "bullets": [
+        "Before we dive into the details, let me remind you that this topic builds directly on what we’ve covered in linear systems and Fourier analysis. If you haven’t reviewed those concepts recently, now would be a great time to revisit them, because they’ll help you see the deeper connections between the theory and the applications we’ll explore today."
+      ],
+      "fullText": "Good afternoon, everyone. Today, we begin Lecture 10, which focuses on networks.\u000b\nBefore we dive into the details, let me remind you that this topic builds directly on what we’ve covered in linear systems and Fourier analysis. If you haven’t reviewed those concepts recently, now would be a great time to revisit them, because they’ll help you see the deeper connections between the theory and the applications we’ll explore today.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide1.JPG",
+      "script": "Good afternoon, everyone. Today, we begin Lecture 10, which focuses on networks. This topic builds directly on what we've covered in linear systems and Fourier analysis, so reviewing those concepts will help you see the deeper connections between the theory and the applications we'll explore today.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Lecture 10"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Review linear systems"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Review Fourier analysis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "“So, this is our schedule. Today, we will cover Network. We are on schedule, so ",
+      "bullets": [],
+      "fullText": "“So, this is our schedule. Today, we will cover Network. We are on schedule, so everything is proceeding as planned.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide2.JPG",
+      "script": "So, this is our schedule, and today we're going to cover the Network portion of the lecture. We're right on track, so everything is proceeding smoothly.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Lecture Schedule"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "Before we dive into networks, let’s recall the two related ideas we’ve already d",
+      "bullets": [
+        "A function is a mathematical concept. It takes an input, processes it according to some rule, and produces an output. You can think of it in terms of a domain and a range.",
+        "A system is essentially the same idea, but we often use this term in engineering. We talk about inputs and outputs, and the system could be simple or complex.",
+        "Now, a network is really just a more complex kind of system — one made up of many interconnected subsystems. The internet is a perfect example: millions of computers linked together, exchanging information. From a mathematical perspective, you can think of a network as a very complicated function, often involving many variables and composite functions linked together.",
+        "In electrical engineering, we often study electrical networks, where components like resistors, capacitors, and inductors are connected to form a circuit. In modern artificial intelligence, we have neural networks, which connect many artificial neurons to process information — in some ways, similar to how biological neurons communicate through electrical signals in our nervous system.",
+        "Today, we’ll start with the more classic engineering example: the electrical network."
+      ],
+      "fullText": "Before we dive into networks, let’s recall the two related ideas we’ve already discussed — functions and systems.\u000b\nA function is a mathematical concept. It takes an input, processes it according to some rule, and produces an output. You can think of it in terms of a domain and a range.\u000bA system is essentially the same idea, but we often use this term in engineering. We talk about inputs and outputs, and the system could be simple or complex.\n\nNow, a network is really just a more complex kind of system — one made up of many interconnected subsystems. The internet is a perfect example: millions of computers linked together, exchanging information. From a mathematical perspective, you can think of a network as a very complicated function, often involving many variables and composite functions linked together.\n\nIn electrical engineering, we often study electrical networks, where components like resistors, capacitors, and inductors are connected to form a circuit. In modern artificial intelligence, we have neural networks, which connect many artificial neurons to process information — in some ways, similar to how biological neurons communicate through electrical signals in our nervous system.\n\nToday, we’ll start with the more classic engineering example: the electrical network.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide3.JPG",
+      "script": "Let's review the ideas we've already covered before moving on to networks. A function is a mathematical concept that takes an input, applies a rule, and produces an output, with a clear domain and range. A system is essentially the same idea, used in engineering to describe inputs, outputs, and processing. A network is a more complex kind of system, made up of many interconnected subsystems, like the internet.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Function"
+        },
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "System"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 300,
+          "label": "Network"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "Let’s start with the most basic electrical component — the resistor.",
+      "bullets": [
+        "You already know Ohm’s Law, which tells us that the voltage across a resistor equals the current flowing through it multiplied by its resistance. In words,",
+        "v equals i times R.",
+        "We can also rearrange this to say that the current i equals the voltage v divided by the resistance R.",
+        "This means the current is directly proportional to the applied voltage and inversely proportional to the resistance.",
+        "The name resistor comes from its function — it resists the flow of electric current. In other words, it limits how many electrons can pass through it for a given voltage.",
+        "Next, we’ll move on to another fundamental component — the capacitor."
+      ],
+      "fullText": "Let’s start with the most basic electrical component — the resistor.\u000b\nYou already know Ohm’s Law, which tells us that the voltage across a resistor equals the current flowing through it multiplied by its resistance. In words,\u000bv equals i times R.\nWe can also rearrange this to say that the current i equals the voltage v divided by the resistance R.\u000bThis means the current is directly proportional to the applied voltage and inversely proportional to the resistance.\nThe name resistor comes from its function — it resists the flow of electric current. In other words, it limits how many electrons can pass through it for a given voltage.\n\nNext, we’ll move on to another fundamental component — the capacitor.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide4.JPG",
+      "script": "Let's start with the most basic electrical component — the resistor. You already know Ohm's Law, which tells us that the voltage across a resistor equals the current flowing through it multiplied by its resistance. This means the current is directly proportional to the applied voltage and inversely proportional to the resistance. The resistor resists the flow of electric current, limiting how many electrons can pass through.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Ohm's Law"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Current-Proportional Relationship"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Resistance's Role"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Here we have the capacitor — another fundamental circuit component.",
+      "bullets": [
+        "When we connect a voltage source, such as a battery, across the capacitor, electrons are pushed toward one plate, creating a buildup of negative charge. On the opposite plate, a positive charge accumulates. Importantly, the capacitor itself doesn’t let electrons pass directly through; instead, the charges stay separated by an insulating material called the dielectric.",
+        "As more charge accumulates, an opposing electric field develops across the plates. Eventually, this field balances the applied voltage, and the current flow stops.",
+        "Mathematically, the relationship between voltage and current for a capacitor is given by:",
+        "I equals C times the derivative of v with respect to time.",
+        "In words, the current is proportional to how quickly the voltage changes over time.",
+        "We can also write it in integral form:",
+        "v equals one over C times the integral of i with respect to time, plus the initial voltage.",
+        "This is different from a resistor, where voltage and current are simply proportional. For a capacitor, the key is the rate of voltage change — no change in voltage means no current flows."
+      ],
+      "fullText": "Here we have the capacitor — another fundamental circuit component.\u000b\nWhen we connect a voltage source, such as a battery, across the capacitor, electrons are pushed toward one plate, creating a buildup of negative charge. On the opposite plate, a positive charge accumulates. Importantly, the capacitor itself doesn’t let electrons pass directly through; instead, the charges stay separated by an insulating material called the dielectric.\nAs more charge accumulates, an opposing electric field develops across the plates. Eventually, this field balances the applied voltage, and the current flow stops.\n\nMathematically, the relationship between voltage and current for a capacitor is given by:\u000bI equals C times the derivative of v with respect to time.\u000bIn words, the current is proportional to how quickly the voltage changes over time.\u000bWe can also write it in integral form:\u000bv equals one over C times the integral of i with respect to time, plus the initial voltage.\n\nThis is different from a resistor, where voltage and current are simply proportional. For a capacitor, the key is the rate of voltage change — no change in voltage means no current flows.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide5.JPG",
+      "script": "Here we have the capacitor, another fundamental circuit component. When a voltage source is connected across the capacitor, electrons are pushed toward one plate, creating a buildup of negative charge, while the opposite plate accumulates a positive charge. The capacitor itself doesn't let electrons pass directly through, instead, the charges stay separated by an insulating material called the dielectric. As more charge accumulates, an opposing electric field develops across the plates, eventually balancing the applied voltage and stopping the current flow.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Capacitor Fundamentals"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 300,
+          "label": "Charge Accumulation"
+        },
+        {
+          "timeMs": 4500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Capacitor's Role in Circuits"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Now, let’s look at the inductor. Its voltage–current relationship is similar in ",
+      "bullets": [
+        "For an inductor, the voltage v is equal to the inductance L multiplied by the rate of change of current — in other words,",
+        "v equals L times the derivative of i with respect to time.",
+        "We can also express this in integral form:",
+        "I equals one over L times the integral of v with respect to time, plus the initial current.",
+        "So, for a capacitor, current depends on how quickly voltage changes. For an inductor, voltage depends on how quickly current changes. Capacitors store energy in an electric field, while inductors store energy in a magnetic field.",
+        "These three components — resistor, capacitor, and inductor — are the building blocks of classic electrical circuits. Understanding their voltage–current relationships is essential before we move on to phasors, which will make analyzing AC circuits much easier."
+      ],
+      "fullText": "Now, let’s look at the inductor. Its voltage–current relationship is similar in form to the capacitor’s, but with the roles of voltage and current reversed.\n\nFor an inductor, the voltage v is equal to the inductance L multiplied by the rate of change of current — in other words,\u000bv equals L times the derivative of i with respect to time.\n\nWe can also express this in integral form:\u000bI equals one over L times the integral of v with respect to time, plus the initial current.\nSo, for a capacitor, current depends on how quickly voltage changes. For an inductor, voltage depends on how quickly current changes. Capacitors store energy in an electric field, while inductors store energy in a magnetic field.\n\nThese three components — resistor, capacitor, and inductor — are the building blocks of classic electrical circuits. Understanding their voltage–current relationships is essential before we move on to phasors, which will make analyzing AC circuits much easier.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide6.JPG",
+      "script": "Now, let’s look at the inductor. Its voltage–current relationship is similar in form to the capacitor’s, but with the roles of voltage and current reversed. For an inductor, the voltage v is equal to the inductance L multiplied by the rate of change of current, or v equals L times the derivative of i with respect to time. This relationship can also be expressed in integral form, where the current I equals one over L times the integral of v with respect to time, plus the initial current.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Inductor's Voltage-Current Relationship"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Inductance L"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Initial Current"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "Let’s take a moment to revisit complex numbers, because they form the foundation",
+      "bullets": [
+        "A complex number has two parts — a real part, x, and an imaginary part, y. We can represent this on a complex plane, with the horizontal axis for the real part and the vertical axis for the imaginary part. This is like a Cartesian coordinate system.",
+        "But there’s another way to represent the same point — using polar coordinates. Instead of x y, we describe it by its distance from the origin, called the magnitude r, and its angle from the real axis, called the phase angle phi.",
+        "Mathematically, we can write this as r times e to the power i phi. Here, e to the power i phi comes from Euler’s formula, which says e to the i phi equals cosine phi plus i times sine phi. Multiplying r by those components gives us back x y.",
+        "When we analyze sinusoidal signals, like in AC circuits, we often know the frequency in advance. In that case, the important quantities are the magnitude r, which tells us the signal’s strength, and the phase angle phi, which tells us where the waveform starts in time.",
+        "Instead of writing out the full exponential, we can use the simpler phasor notation: r angle phi. For example, if we know an AC current has a magnitude of 5 amperes and a phase angle of 30 degrees, we can write it as “5 at angle 30 degrees.”",
+        "This phasor approach is a very convenient way to describe sinusoidal signals, and as we’ll see, it makes circuit analysis much simpler."
+      ],
+      "fullText": "Let’s take a moment to revisit complex numbers, because they form the foundation for understanding phasors.\n\nA complex number has two parts — a real part, x, and an imaginary part, y. We can represent this on a complex plane, with the horizontal axis for the real part and the vertical axis for the imaginary part. This is like a Cartesian coordinate system.\nBut there’s another way to represent the same point — using polar coordinates. Instead of x y, we describe it by its distance from the origin, called the magnitude r, and its angle from the real axis, called the phase angle phi.\n\nMathematically, we can write this as r times e to the power i phi. Here, e to the power i phi comes from Euler’s formula, which says e to the i phi equals cosine phi plus i times sine phi. Multiplying r by those components gives us back x y.\n\nWhen we analyze sinusoidal signals, like in AC circuits, we often know the frequency in advance. In that case, the important quantities are the magnitude r, which tells us the signal’s strength, and the phase angle phi, which tells us where the waveform starts in time.\nInstead of writing out the full exponential, we can use the simpler phasor notation: r angle phi. For example, if we know an AC current has a magnitude of 5 amperes and a phase angle of 30 degrees, we can write it as “5 at angle 30 degrees.”\n\nThis phasor approach is a very convenient way to describe sinusoidal signals, and as we’ll see, it makes circuit analysis much simpler.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide7.JPG",
+      "script": "Let's take a moment to revisit complex numbers, because they form the foundation for understanding phasors. A complex number has two parts — a real part, x, and an imaginary part, y. We can represent this on a complex plane, with the horizontal axis for the real part and the vertical axis for the imaginary part. This is like a Cartesian coordinate system, but there's another way to represent the same point — using polar coordinates. Instead of x y, we describe it by its distance from the origin, called the magnitude r, and its angle from the real axis, called the phase angle phi.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Complex Number"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Polar Coordinates"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Euler’s Formula"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "Let’s take a closer look at the imaginary unit i and understand it from a geomet",
+      "bullets": [
+        "e to the i theta equals cosine theta plus i times sine theta.",
+        "If we set theta to 90 degrees, e to the i 90° gives us i. You can think of multiplying by i as rotating a vector by 90 degrees in the complex plane. For example, if we start with the unit vector at 1 on the real axis and multiply by i, it rotates to point straight up along the imaginary axis.",
+        "If we multiply by i again — another 90-degree rotation — we end up at negative 1 on the real axis. In other words, i times i equals –1. That’s the origin of the idea that i is the square root of negative one.",
+        "More generally, multiplying by e to the i theta rotates a vector by an angle theta, while multiplying by a real number r simply scales its length. This gives a very natural, visual way to think about complex multiplication — scaling changes the magnitude, and the exponential term changes the direction.",
+        "Addition is also straightforward: if you have two complex numbers, u and v, you add their real parts and their imaginary parts separately. Graphically, that’s just adding two vectors tip-to-tail to get u plus v.",
+        "With these rules for addition and multiplication, we have a complete algebraic system for complex numbers. And this system is extremely powerful for representing sinusoidal waves — the building blocks of Fourier analysis — as well as for solving wave equations in fields like ultrasound and electromagnetics.",
+        "This is why the phase representation, using complex numbers, is such a fundamental tool in engineering and physics."
+      ],
+      "fullText": "Let’s take a closer look at the imaginary unit i and understand it from a geometric perspective using Euler’s formula:\u000be to the i theta equals cosine theta plus i times sine theta.\n\nIf we set theta to 90 degrees, e to the i 90° gives us i. You can think of multiplying by i as rotating a vector by 90 degrees in the complex plane. For example, if we start with the unit vector at 1 on the real axis and multiply by i, it rotates to point straight up along the imaginary axis.\n\nIf we multiply by i again — another 90-degree rotation — we end up at negative 1 on the real axis. In other words, i times i equals –1. That’s the origin of the idea that i is the square root of negative one.\n\nMore generally, multiplying by e to the i theta rotates a vector by an angle theta, while multiplying by a real number r simply scales its length. This gives a very natural, visual way to think about complex multiplication — scaling changes the magnitude, and the exponential term changes the direction.\n\nAddition is also straightforward: if you have two complex numbers, u and v, you add their real parts and their imaginary parts separately. Graphically, that’s just adding two vectors tip-to-tail to get u plus v.\nWith these rules for addition and multiplication, we have a complete algebraic system for complex numbers. And this system is extremely powerful for representing sinusoidal waves — the building blocks of Fourier analysis — as well as for solving wave equations in fields like ultrasound and electromagnetics.\n\nThis is why the phase representation, using complex numbers, is such a fundamental tool in engineering and physics.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide8.JPG",
+      "script": "Multiplying by i rotates a vector by 90 degrees in the complex plane, taking a vector along the real axis to the imaginary axis, then to the negative real axis, and so on. This rotation is the geometric intuition behind the powers of i.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Geometric intuition"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Multiplying by i"
+        },
+        {
+          "timeMs": 21000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Rotation in complex plane"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Now let’s see how phase, or phasor, representation applies directly to a capacit",
+      "bullets": [
+        "In basic DC circuits, Ohm’s Law tells us that voltage equals current times resistance. But for a capacitor, we normally describe the relationship in terms of a derivative or an integral — for example, i equals C times dv over dt.",
+        "However, when we work in the phasor domain, something elegant happens. The derivative operation in the time domain becomes a simple multiplication by j omega in the frequency domain. This means that, for sinusoidal signals, the voltage–current relationship for a capacitor can look just like Ohm’s Law — except that instead of a real resistance, we have a complex quantity called impedance.",
+        "Here’s the key point: in any linear circuit made up of resistors, capacitors, and inductors, if we drive it with a pure sinusoidal signal, the output will also be a sinusoid at the exact same frequency. The amplitude may change, and the waveform may shift in phase, but the frequency remains unchanged.",
+        "For example, suppose the voltage across a capacitor is A cosine omega t. Differentiating this to find the current shifts the waveform by 90 degrees and multiplies its amplitude by C omega. In phasor notation, this phase shift is written as “at an angle of + 90 degrees.”",
+        "Finally, in the phasor domain, the capacitor’s impedance is 1 over j omega C. That’s directly analogous to resistance in Ohm’s Law — except here it’s a complex value, reflecting the fact that voltage and current are out of phase."
+      ],
+      "fullText": "Now let’s see how phase, or phasor, representation applies directly to a capacitor’s voltage–current relationship.\nIn basic DC circuits, Ohm’s Law tells us that voltage equals current times resistance. But for a capacitor, we normally describe the relationship in terms of a derivative or an integral — for example, i equals C times dv over dt.\n\nHowever, when we work in the phasor domain, something elegant happens. The derivative operation in the time domain becomes a simple multiplication by j omega in the frequency domain. This means that, for sinusoidal signals, the voltage–current relationship for a capacitor can look just like Ohm’s Law — except that instead of a real resistance, we have a complex quantity called impedance.\nHere’s the key point: in any linear circuit made up of resistors, capacitors, and inductors, if we drive it with a pure sinusoidal signal, the output will also be a sinusoid at the exact same frequency. The amplitude may change, and the waveform may shift in phase, but the frequency remains unchanged.\n\nFor example, suppose the voltage across a capacitor is A cosine omega t. Differentiating this to find the current shifts the waveform by 90 degrees and multiplies its amplitude by C omega. In phasor notation, this phase shift is written as “at an angle of + 90 degrees.”\nFinally, in the phasor domain, the capacitor’s impedance is 1 over j omega C. That’s directly analogous to resistance in Ohm’s Law — except here it’s a complex value, reflecting the fact that voltage and current are out of phase.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide9.JPG",
+      "script": "When we represent the relationship between voltage and current in the phasor domain, the derivative operation becomes a simple multiplication by j omega. This allows us to describe the relationship in a more straightforward way, similar to Ohm's Law. For a capacitor, this means that current equals j omega times C times voltage. This is a direct result of the phasor representation, making it easier to analyze the circuit's behavior.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Phasor Representation"
+        },
+        {
+          "timeMs": 7000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Impedance"
+        },
+        {
+          "timeMs": 9000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Linear Circuit"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "For an inductor, the process is very similar to what we saw with a capacitor, bu",
+      "bullets": [
+        "Suppose the current is sinusoidal: B cosine omega t. The voltage across the inductor is given by v equals L times di/dt. Differentiating the current shifts the waveform by 90 degrees and changes the amplitude by a factor of L omega.",
+        "In phasor notation, if the current is B at angle 0 degrees, then the voltage becomes L omega B at angle 90 degrees. That phase shift means the voltage leads the current by 90 degrees in an inductor — the exact opposite of a capacitor, where the current leads the voltage by 90 degrees.",
+        "In the phasor domain, this relationship is written simply as V equals j omega L times I. Here, j omega L plays the same role for an inductor that resistance R plays for a resistor — it’s the impedance. The only difference is that it’s a complex quantity, reflecting the phase relationship between voltage and current.",
+        "So once again, phasor notation allows us to generalize Ohm’s Law to all three basic components — resistor, capacitor, and inductor — using the single idea of impedance."
+      ],
+      "fullText": "For an inductor, the process is very similar to what we saw with a capacitor, but here it’s the current that we start with.\n\nSuppose the current is sinusoidal: B cosine omega t. The voltage across the inductor is given by v equals L times di/dt. Differentiating the current shifts the waveform by 90 degrees and changes the amplitude by a factor of L omega.\nIn phasor notation, if the current is B at angle 0 degrees, then the voltage becomes L omega B at angle 90 degrees. That phase shift means the voltage leads the current by 90 degrees in an inductor — the exact opposite of a capacitor, where the current leads the voltage by 90 degrees.\n\nIn the phasor domain, this relationship is written simply as V equals j omega L times I. Here, j omega L plays the same role for an inductor that resistance R plays for a resistor — it’s the impedance. The only difference is that it’s a complex quantity, reflecting the phase relationship between voltage and current.\n\nSo once again, phasor notation allows us to generalize Ohm’s Law to all three basic components — resistor, capacitor, and inductor — using the single idea of impedance.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide10.JPG",
+      "script": "For an inductor, the process is very similar to what we saw with a capacitor, but here it's the current that we start with. When we differentiate the current, which is sinusoidal, we get a voltage that's also sinusoidal, but with a 90-degree phase shift and an amplitude change. This phase shift means the voltage leads the current by 90 degrees in an inductor.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Impedance"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 300,
+          "label": "Phase Shift"
+        },
+        {
+          "timeMs": 4500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 400,
+          "label": "Impedance"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Up to now, we’ve talked about resistors, capacitors, and inductors separately. E",
+      "bullets": [
+        "Instead of calling all these effects “resistance,” we use a broader term — impedance. Impedance describes how any circuit element opposes the flow of alternating current, and it applies to all three components.",
+        "For a resistor, impedance is simply R.",
+        "For a capacitor, impedance is 1 over j omega C.",
+        "For an inductor, impedance is j omega L.",
+        "In each case, impedance is defined as voltage divided by current — Z equals V over I. This is the same structure as Ohm’s Law, but with Z taking the place of R.",
+        "When we combine components in a circuit, the total impedance depends on whether they are connected in series or in parallel. Later, we’ll learn how to calculate equivalent impedance for these different configurations. But the important takeaway here is that impedance unifies the behavior of resistors, capacitors, and inductors into one general concept, making AC circuit analysis much simpler."
+      ],
+      "fullText": "Up to now, we’ve talked about resistors, capacitors, and inductors separately. Each has its own voltage–current relationship, and each can be expressed in the phasor domain.\n\nInstead of calling all these effects “resistance,” we use a broader term — impedance. Impedance describes how any circuit element opposes the flow of alternating current, and it applies to all three components.\nFor a resistor, impedance is simply R.\u000bFor a capacitor, impedance is 1 over j omega C.\u000bFor an inductor, impedance is j omega L.\nIn each case, impedance is defined as voltage divided by current — Z equals V over I. This is the same structure as Ohm’s Law, but with Z taking the place of R.\n\nWhen we combine components in a circuit, the total impedance depends on whether they are connected in series or in parallel. Later, we’ll learn how to calculate equivalent impedance for these different configurations. But the important takeaway here is that impedance unifies the behavior of resistors, capacitors, and inductors into one general concept, making AC circuit analysis much simpler.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide11.JPG",
+      "script": "Now we're going to talk about impedance, which is a more general concept that applies to all three components. Impedance describes how each component opposes the flow of alternating current, and it's defined as voltage divided by current. For a resistor, impedance is just R, for a capacitor it's 1 over j omega C, and for an inductor, it's j omega L.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Impedance"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Resistor Impedance"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Capacitor Impedance"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Let’s now step back and look at a general electrical network. I’ll use this simp",
+      "bullets": [
+        "A node is a point where two or more circuit components meet. These components could be resistors, capacitors, inductors, or sources like batteries and current generators. In our diagram, each place where elements connect is a node.",
+        "A branch is a single circuit element between two nodes. You can think of it as one “arm” of the circuit, carrying current from one node to another.",
+        "A loop is a closed path that goes through a sequence of branches and nodes without passing through any branch or node more than once. In other words, it’s a single, non-repeating path that starts and ends at the same point.",
+        "Using these definitions, you might ask: in this diagram, how many nodes are there? And how many loops? This kind of reasoning will become important when we apply Kirchhoff’s laws for circuit analysis."
+      ],
+      "fullText": "Let’s now step back and look at a general electrical network. I’ll use this simple example to introduce three important terms: node, branch, and loop.\n\nA node is a point where two or more circuit components meet. These components could be resistors, capacitors, inductors, or sources like batteries and current generators. In our diagram, each place where elements connect is a node.\nA branch is a single circuit element between two nodes. You can think of it as one “arm” of the circuit, carrying current from one node to another.\nA loop is a closed path that goes through a sequence of branches and nodes without passing through any branch or node more than once. In other words, it’s a single, non-repeating path that starts and ends at the same point.\n\nUsing these definitions, you might ask: in this diagram, how many nodes are there? And how many loops? This kind of reasoning will become important when we apply Kirchhoff’s laws for circuit analysis.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide12.JPG",
+      "script": "Let's now step back and look at a general electrical network. I'll use this simple example to introduce three important terms: node, branch, and loop. A node is a point where two or more circuit components meet, such as resistors, capacitors, inductors, or sources like batteries and current generators. In our diagram, each place where elements connect is a node. A branch is a single circuit element between two nodes, carrying current from one node to another. A loop is a closed path that goes through a sequence of branches and nodes, allowing us to analyze the circuit's behavior.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Node Definition"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Branch Definition"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.3,
+          "durationMs": 2000,
+          "label": "Loop Definition"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "So, how many nodes are in this circuit? Let’s apply the definition.",
+      "bullets": [
+        "A node is any point where two or more branches connect. Here, all the points along this conducting path are electrically the same — the wires are ideal conductors with zero resistance — so we treat them as one single node. This first node connects resistor R 1, resistor R 2, resistor R 3, and the voltage source.",
+        "The other connection point, down here, is the second node. It ties together the lower ends of R 2 and R 3, the negative terminal of the voltage source, and the current source.",
+        "So even though there are multiple connection spots physically drawn, electrically, we have just two distinct nodes in this circuit."
+      ],
+      "fullText": "So, how many nodes are in this circuit? Let’s apply the definition.\n\nA node is any point where two or more branches connect. Here, all the points along this conducting path are electrically the same — the wires are ideal conductors with zero resistance — so we treat them as one single node. This first node connects resistor R 1, resistor R 2, resistor R 3, and the voltage source.\n\nThe other connection point, down here, is the second node. It ties together the lower ends of R 2 and R 3, the negative terminal of the voltage source, and the current source.\nSo even though there are multiple connection spots physically drawn, electrically, we have just two distinct nodes in this circuit.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide13.JPG",
+      "script": "Let's count the nodes carefully. We have two main connection points: one at the top where R 1 meets R 2 meets R 3 meets the voltage source, and the other at the bottom where R 2 meets R 3 meets the negative terminal of the voltage source and the current source. These two points are the only distinct nodes in this circuit.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Two main connection points"
+        },
+        {
+          "timeMs": 500,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.5,
+          "durationMs": 500,
+          "label": "Definition of a node"
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Two distinct nodes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Now let’s talk about loops — and more specifically, independent loops.",
+      "bullets": [
+        "A loop is a closed path in the circuit that passes through a sequence of branches and returns to the starting point without crossing any branch more than once. But not all loops are equally useful in analysis. We focus on independent loops, which each contain at least one branch that is not part of any other loop in the set.",
+        "In this example, we have three independent loops:",
+        "Loop 1 includes the voltage source, resistor R 1, and resistor R 2.",
+        "Loop 2 includes resistor R 2 and resistor R 3.",
+        "Loop 3 includes resistor R 3 and the current source.",
+        "You might notice that other closed paths exist — for example, one that goes all the way around the outside — but these can be derived from combinations of the independent loops. They don’t give us any new information.",
+        "The reason this concept is important is that each independent loop gives us one equation when we apply Kirchhoff’s Voltage Law. These equations are the building blocks for solving circuit problems with multiple unknowns, such as the current through each branch or the voltage across each resistor."
+      ],
+      "fullText": "Now let’s talk about loops — and more specifically, independent loops.\n\nA loop is a closed path in the circuit that passes through a sequence of branches and returns to the starting point without crossing any branch more than once. But not all loops are equally useful in analysis. We focus on independent loops, which each contain at least one branch that is not part of any other loop in the set.\n\nIn this example, we have three independent loops:\nLoop 1 includes the voltage source, resistor R 1, and resistor R 2.\nLoop 2 includes resistor R 2 and resistor R 3.\nLoop 3 includes resistor R 3 and the current source.\nYou might notice that other closed paths exist — for example, one that goes all the way around the outside — but these can be derived from combinations of the independent loops. They don’t give us any new information.\n\nThe reason this concept is important is that each independent loop gives us one equation when we apply Kirchhoff’s Voltage Law. These equations are the building blocks for solving circuit problems with multiple unknowns, such as the current through each branch or the voltage across each resistor.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide14.JPG",
+      "script": "A loop is a closed path in the circuit that passes through a sequence of branches and returns to the starting point without crossing any branch more than once. Independent loops are the ones that each contain at least one branch not part of any other loop in the set. We focus on these independent loops because they are the ones that give us independent equations for circuit analysis. In this example, we have three independent loops that cover all the branches in the circuit.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "What is a loop?"
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "What is the focus of this lecture?"
+        },
+        {
+          "timeMs": 4500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.3,
+          "durationMs": 2000,
+          "label": "Why are independent loops important?"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "The first rule we use in circuit analysis is Kirchhoff’s Current Law, or KCL. It",
+      "bullets": [
+        "Think of the node as a junction — electrons flow in from some branches and out through others. They don’t pile up or vanish at the node. If two amperes flow in from one branch and three amperes flow in from another, then a total of five amperes must flow out through the remaining branch.",
+        "You can picture this like people moving through a doorway: the number of people entering must match the number leaving, assuming no one stays inside the doorway. Or like cars passing through an intersection: cars can’t just appear or disappear; what comes in must go out.",
+        "KCL is essentially a statement of conservation of charge — charge is neither created nor destroyed at a node. This simple but powerful rule will be one of the main tools we use to solve circuit equations."
+      ],
+      "fullText": "The first rule we use in circuit analysis is Kirchhoff’s Current Law, or KCL. It’s very straightforward: for any node in a circuit, the total current flowing into the node must equal the total current flowing out.\n\nThink of the node as a junction — electrons flow in from some branches and out through others. They don’t pile up or vanish at the node. If two amperes flow in from one branch and three amperes flow in from another, then a total of five amperes must flow out through the remaining branch.\nYou can picture this like people moving through a doorway: the number of people entering must match the number leaving, assuming no one stays inside the doorway. Or like cars passing through an intersection: cars can’t just appear or disappear; what comes in must go out.\n\nKCL is essentially a statement of conservation of charge — charge is neither created nor destroyed at a node. This simple but powerful rule will be one of the main tools we use to solve circuit equations.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide15.JPG",
+      "script": "The first rule we use in circuit analysis is Kirchhoff’s Current Law, or KCL. It states that for any node in a circuit, the total current flowing into the node must equal the total current flowing out. This means that electrons don't pile up or vanish at the node, they just keep moving through the circuit.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Kirchhoff's Current Law"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Conservation of Charge"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Circuit Analysis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "The second key rule is Kirchhoff’s Voltage Law, or KVL. It states that if you tr",
+      "bullets": [
+        "You can think of it like taking a hike around a loop trail that starts and ends at the same place. Along the way, you might climb uphill — that’s like a voltage rise from a battery — and you might walk downhill — that’s like a voltage drop across a resistor. By the time you return to where you started, your total elevation change is zero.",
+        "In a circuit, it’s the same idea but with electrical potential instead of gravitational potential. As electrons move through a voltage source, they gain energy; as they pass through resistive elements, they lose energy. Around a complete loop, the total gains and losses cancel out exactly — a direct consequence of energy conservation.",
+        "In this example, the voltage source V 1 is 10 volts. As we move around the loop, we see drops of 2 volts, 3 volts, and 1 volt across different resistors, and zero volts across the ideal conducting wire. That leaves one resistor with an unknown drop. To satisfy KVL, it must drop 4 volts so that the algebraic sum is zero.",
+        "When we combine KVL with Kirchhoff’s Current Law, we can write enough equations to solve for all the unknown currents and voltages in even a complex electrical network."
+      ],
+      "fullText": "The second key rule is Kirchhoff’s Voltage Law, or KVL. It states that if you travel around any closed loop in a circuit, the sum of all the voltage rises and drops must equal zero.\n\nYou can think of it like taking a hike around a loop trail that starts and ends at the same place. Along the way, you might climb uphill — that’s like a voltage rise from a battery — and you might walk downhill — that’s like a voltage drop across a resistor. By the time you return to where you started, your total elevation change is zero.\nIn a circuit, it’s the same idea but with electrical potential instead of gravitational potential. As electrons move through a voltage source, they gain energy; as they pass through resistive elements, they lose energy. Around a complete loop, the total gains and losses cancel out exactly — a direct consequence of energy conservation.\n\nIn this example, the voltage source V 1 is 10 volts. As we move around the loop, we see drops of 2 volts, 3 volts, and 1 volt across different resistors, and zero volts across the ideal conducting wire. That leaves one resistor with an unknown drop. To satisfy KVL, it must drop 4 volts so that the algebraic sum is zero.\nWhen we combine KVL with Kirchhoff’s Current Law, we can write enough equations to solve for all the unknown currents and voltages in even a complex electrical network.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide16.JPG",
+      "script": "Kirchhoff’s Voltage Law states that the sum of all voltage rises and drops must equal zero when traveling around any closed loop in a circuit. This is similar to taking a hike where the total elevation change is zero after completing a loop. In a circuit, this means the net change in electrical potential is zero.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "KVL Example"
+        },
+        {
+          "timeMs": 6300,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "KVL Loop"
+        },
+        {
+          "timeMs": 8300,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "KVL in Circuit"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "If you start with the simplest case — a single loop — the problem is straightfor",
+      "bullets": [
+        "As you make the network more complex, you can add loops, nodes, or both. Each time you add a loop, you introduce a new unknown, but KVL gives you one more independent equation to match it. Each time you add a node, you also introduce a new unknown; however, KCL provides the additional equation needed.",
+        "If you add both a node and a loop at the same time, you introduce two unknowns — for example, splitting a branch into two paths so currents can differ — but you also gain two equations: one from KCL at the new node and one from KVL around the new loop.",
+        "The key point is that no matter how you expand the network, KCL and KVL together give you exactly the number of independent equations you need to solve for all the unknown currents and voltages. This balance is what ensures that a well-defined electrical network always has a unique solution."
+      ],
+      "fullText": "If you start with the simplest case — a single loop — the problem is straightforward. You can solve it directly, just like using Ohm’s Law: voltage equals impedance times current.\n\nAs you make the network more complex, you can add loops, nodes, or both. Each time you add a loop, you introduce a new unknown, but KVL gives you one more independent equation to match it. Each time you add a node, you also introduce a new unknown; however, KCL provides the additional equation needed.\n\nIf you add both a node and a loop at the same time, you introduce two unknowns — for example, splitting a branch into two paths so currents can differ — but you also gain two equations: one from KCL at the new node and one from KVL around the new loop.\nThe key point is that no matter how you expand the network, KCL and KVL together give you exactly the number of independent equations you need to solve for all the unknown currents and voltages. This balance is what ensures that a well-defined electrical network always has a unique solution.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide17.JPG",
+      "script": "When you start with a simple case, like a single loop, Kirchhoff's Voltage Law gives you a direct way to solve the problem, using impedance to relate voltage and current. As the network gets more complex, you add loops or nodes, introducing new unknowns, but also getting new equations from KVL or KCL to match them. Adding both a node and a loop at once introduces two new unknowns, but also two new equations, keeping the system solvable.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Starting with a simple case"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Adding loops introduces new unknowns and equations"
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Adding nodes introduces new unknowns and equations"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Let’s solve this example step by step.",
+      "bullets": [
+        "We have two voltage sources and two loops. Our goal is to find three unknown currents:",
+        "I 1, which flows through the left loop,",
+        "I 2, which flows through the right loop,",
+        "and I₃, which flows along the bottom branch.",
+        "First, we apply Kirchhoff’s Current Law at node c. In words, the current I 1 flowing into the node plus the current I 2 flowing into the node must equal the current I₃ flowing out. That’s our first equation:",
+        "“I one plus I two equals I three.”",
+        "Next, we apply Kirchhoff’s Voltage Law to the green loop, moving clockwise through points b, e, f, c, and back to b. As we go around the loop:",
+        "passing through the fourteen-volt battery in the opposite direction gives a minus fourteen volts,",
+        "passing through the ten-volt battery in the opposite direction gives minus ten volts,",
+        "passing through the six-ohm resistor with current I 1 gives plus six times I 1,",
+        "and passing through the four-ohm resistor with current I 2 gives minus four times I 2.",
+        "Adding them all up and setting the total to zero, we have:",
+        "“negative fourteen, minus ten, plus six times I one, minus four times I two, equals zero.”",
+        "Finally, we apply Kirchhoff’s Voltage Law to the blue loop, moving through points a, b, c, d, and back to a. This gives:",
+        "“ten, minus six times I one, minus two times I three, equals zero.”",
+        "Now we have three equations:",
+        "I one plus I two equals I three.",
+        "Negative fourteen minus ten plus six I one minus four I two equals zero.",
+        "Ten minus six I one minus two I three equals zero.",
+        "Solving these, we find:",
+        "I one equals two amperes,",
+        "I two equals negative three amperes — meaning it actually flows in the opposite direction we assumed —",
+        "and I three equals negative one ampere."
+      ],
+      "fullText": "Let’s solve this example step by step.\n\nWe have two voltage sources and two loops. Our goal is to find three unknown currents:\nI 1, which flows through the left loop,\nI 2, which flows through the right loop,\nand I₃, which flows along the bottom branch.\nFirst, we apply Kirchhoff’s Current Law at node c. In words, the current I 1 flowing into the node plus the current I 2 flowing into the node must equal the current I₃ flowing out. That’s our first equation:\u000b“I one plus I two equals I three.”\n\nNext, we apply Kirchhoff’s Voltage Law to the green loop, moving clockwise through points b, e, f, c, and back to b. As we go around the loop:\npassing through the fourteen-volt battery in the opposite direction gives a minus fourteen volts,\npassing through the ten-volt battery in the opposite direction gives minus ten volts,\npassing through the six-ohm resistor with current I 1 gives plus six times I 1,\nand passing through the four-ohm resistor with current I 2 gives minus four times I 2.\n\nAdding them all up and setting the total to zero, we have:\u000b“negative fourteen, minus ten, plus six times I one, minus four times I two, equals zero.”\nFinally, we apply Kirchhoff’s Voltage Law to the blue loop, moving through points a, b, c, d, and back to a. This gives:\u000b“ten, minus six times I one, minus two times I three, equals zero.”\n\nNow we have three equations:\nI one plus I two equals I three.\nNegative fourteen minus ten plus six I one minus four I two equals zero.\nTen minus six I one minus two I three equals zero.\n\nSolving these, we find:\u000bI one equals two amperes,\u000bI two equals negative three amperes — meaning it actually flows in the opposite direction we assumed —\u000band I three equals negative one ampere.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide18.JPG",
+      "script": "Let's start by applying Kirchhoff's Current Law at node c, where the currents I 1 and I 2 flow in and I 3 flows out, giving us our first equation: I 1 + I 2 = I 3. Now, we'll apply Kirchhoff's Voltage Law to the green loop, starting at point b and moving clockwise through points e, f, c, and back to a.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Kirchhoff's Current Law"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Kirchhoff's Voltage Law"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.3,
+          "durationMs": 2000,
+          "label": "Green Loop"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "This slide is a summary that generalizes Ohm’s Law for alternating current circu",
+      "bullets": [
+        "In direct current circuits, we know the familiar form: “voltage equals resistance times current.” In alternating current circuits, thanks to phasor notation, we can keep the same simple structure — voltage equals impedance times current — but now impedance can be a complex number, depending on the type of component.",
+        "For a resistor, impedance is simply R, and voltage and current are in phase — their peaks occur simultaneously.",
+        "For a capacitor, the impedance is “one divided by j omega C,” which in polar form is “one over omega C at an angle of negative ninety degrees.” This means the voltage lags the current by ninety degrees. In other words, the current reaches its peak before the voltage does.",
+        "For an inductor, the impedance is “j omega L,” or in polar form “omega L at an angle of positive ninety degrees.” This means the voltage leads the current by ninety degrees — the voltage peaks first, and the current builds up afterward.",
+        "If you think about it intuitively:",
+        "An inductor resists sudden changes in current, so when you first apply voltage, the current starts small and gradually increases.",
+        "A capacitor resists changes in voltage, so when you first apply current, the voltage takes time to build.",
+        "Mathematically, we derive these results from the voltage–current relationships we saw earlier, but phasor notation makes them look just like Ohm’s Law — only with complex impedance replacing simple resistance."
+      ],
+      "fullText": "This slide is a summary that generalizes Ohm’s Law for alternating current circuits.\nIn direct current circuits, we know the familiar form: “voltage equals resistance times current.” In alternating current circuits, thanks to phasor notation, we can keep the same simple structure — voltage equals impedance times current — but now impedance can be a complex number, depending on the type of component.\n\nFor a resistor, impedance is simply R, and voltage and current are in phase — their peaks occur simultaneously.\nFor a capacitor, the impedance is “one divided by j omega C,” which in polar form is “one over omega C at an angle of negative ninety degrees.” This means the voltage lags the current by ninety degrees. In other words, the current reaches its peak before the voltage does.\n\nFor an inductor, the impedance is “j omega L,” or in polar form “omega L at an angle of positive ninety degrees.” This means the voltage leads the current by ninety degrees — the voltage peaks first, and the current builds up afterward.\nIf you think about it intuitively:\nAn inductor resists sudden changes in current, so when you first apply voltage, the current starts small and gradually increases.\nA capacitor resists changes in voltage, so when you first apply current, the voltage takes time to build.\n\nMathematically, we derive these results from the voltage–current relationships we saw earlier, but phasor notation makes them look just like Ohm’s Law — only with complex impedance replacing simple resistance.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide19.JPG",
+      "script": "The impedance of a capacitor is one over j omega C, or in polar form, one over the square root of one plus omega squared over omega C. This means voltage leads current by 90 degrees, or one-quarter cycle.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Impedance of a capacitor"
+        },
+        {
+          "timeMs": 6000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Voltage leads current by 90 degrees"
+        },
+        {
+          "timeMs": 8000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Impedance of an inductor"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Let’s learn how to replace two impedances with a single equivalent impedance.",
+      "bullets": [
+        "Series connection — one after the other on the same branch:",
+        "The same current flows through both, and the voltage drops add.",
+        "So the equivalent is:",
+        "“Z sub e equals Z one plus Z two.”",
+        "This works even when the impedances are complex.",
+        "A one-line proof, spoken: assume a current I flows.",
+        "The total voltage is I times Z sub e.",
+        "It is also I times Z one plus I times Z two.",
+        "Set them equal and cancel I: “Z sub e equals Z one plus Z two.”",
+        "Parallel connection — the two elements share the same two nodes:",
+        "The voltage across each is the same, and the currents add.",
+        "So the equivalent is:",
+        "“one over Z sub e equals one over Z one plus one over Z two,”",
+        "or, equivalently,",
+        "“Z sub e equals Z one times Z two, divided by Z one plus Z two.”",
+        "Quick proof, spoken: let the common voltage be V.",
+        "Currents are I 1 = V over Z 1 and I 2 = V over Z 2.",
+        "Total current I = I 1 plus I 2 = V times (1 over Z 1 plus 1 over Z 2).",
+        "But I = V over Z sub e.",
+        "Cancel V to get the reciprocal form above."
+      ],
+      "fullText": "Let’s learn how to replace two impedances with a single equivalent impedance.\n\nSeries connection — one after the other on the same branch:\u000bThe same current flows through both, and the voltage drops add.\u000b\nSo the equivalent is:\u000b“Z sub e equals Z one plus Z two.”\u000bThis works even when the impedances are complex.\nA one-line proof, spoken: assume a current I flows.\u000bThe total voltage is I times Z sub e.\u000bIt is also I times Z one plus I times Z two.\u000bSet them equal and cancel I: “Z sub e equals Z one plus Z two.”\nParallel connection — the two elements share the same two nodes:\u000bThe voltage across each is the same, and the currents add.\u000b\nSo the equivalent is:\u000b“one over Z sub e equals one over Z one plus one over Z two,”\u000bor, equivalently,\u000b“Z sub e equals Z one times Z two, divided by Z one plus Z two.”\nQuick proof, spoken: let the common voltage be V.\u000bCurrents are I 1 = V over Z 1 and I 2 = V over Z 2.\u000bTotal current I = I 1 plus I 2 = V times (1 over Z 1 plus 1 over Z 2).\u000bBut I = V over Z sub e.\u000bCancel V to get the reciprocal form above.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide20.JPG",
+      "script": "When impedances are connected in series, the same current flows through both, and the voltage drops add up. The equivalent impedance is the sum of the individual impedances, Z sub e equals Z one plus Z two. This rule works even when the impedances are complex. To see why, let's assume a current I flows through the circuit, and the total voltage is I times Z sub e. This is also equal to I times Z one plus I times Z two. By canceling out the current I, we get the formula for the equivalent impedance in a series connection.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Equivalent Impedance"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Series Connection"
+        },
+        {
+          "timeMs": 5500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Voltage Drops Add Up"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Once we know how to combine impedances into a single equivalent value, we can si",
+      "bullets": [
+        "After that, solving the network becomes a two-step process:",
+        "Step one: find the overall currents and voltages using the simplified equivalent impedances.",
+        "Step two, if needed, break the equivalent impedance back into its original components and distribute the results to each part.",
+        "Now let’s apply this to the idea of a voltage divider. In the circuit on the left, we have an input voltage split between a resistor and a capacitor. The fraction of the input voltage that appears across the capacitor is given by the transfer function:",
+        "“Capital T of omega equals one divided by j omega C, all over R plus one divided by j omega C.”",
+        "If we simplify, that becomes:",
+        "“T of omega equals one over one plus j times omega over omega sub c,”",
+        "where omega sub c equals one over R times C.",
+        "This formula tells us how the circuit responds to different frequencies. If the input is a pure sinusoidal wave, we just plug its frequency into omega and get the scaling factor for the output.",
+        "And if the input is an arbitrary waveform, Fourier analysis lets us break it into many sinusoidal components, each with its own frequency.",
+        "We apply the transfer function to each frequency separately, then sum them back up to get the total output.",
+        "This particular circuit is called a low-pass filter because it passes low-frequency signals with little attenuation, but strongly reduces high-frequency components. At very low frequencies, omega is close to zero, so the transfer function is close to one — the output nearly matches the input. At very high frequencies, omega is large, the transfer function becomes very small, and the output is greatly reduced.",
+        "The inductor–resistor version on the right works the same way, except its cutoff frequency omega sub c equals R divided by L."
+      ],
+      "fullText": "Once we know how to combine impedances into a single equivalent value, we can simplify any branch of a network. Each branch can then be treated as just two things: an impedance and a source — either a voltage source, a current source, or both. If there are more components in the branch, we simply combine them into one equivalent impedance before solving.\n\nAfter that, solving the network becomes a two-step process:\u000bStep one: find the overall currents and voltages using the simplified equivalent impedances.\u000bStep two, if needed, break the equivalent impedance back into its original components and distribute the results to each part.\n\nNow let’s apply this to the idea of a voltage divider. In the circuit on the left, we have an input voltage split between a resistor and a capacitor. The fraction of the input voltage that appears across the capacitor is given by the transfer function:\n“Capital T of omega equals one divided by j omega C, all over R plus one divided by j omega C.”\nIf we simplify, that becomes:\u000b“T of omega equals one over one plus j times omega over omega sub c,”\u000bwhere omega sub c equals one over R times C.\n\nThis formula tells us how the circuit responds to different frequencies. If the input is a pure sinusoidal wave, we just plug its frequency into omega and get the scaling factor for the output.\nAnd if the input is an arbitrary waveform, Fourier analysis lets us break it into many sinusoidal components, each with its own frequency. \n\nWe apply the transfer function to each frequency separately, then sum them back up to get the total output.\nThis particular circuit is called a low-pass filter because it passes low-frequency signals with little attenuation, but strongly reduces high-frequency components. At very low frequencies, omega is close to zero, so the transfer function is close to one — the output nearly matches the input. At very high frequencies, omega is large, the transfer function becomes very small, and the output is greatly reduced.\n\nThe inductor–resistor version on the right works the same way, except its cutoff frequency omega sub c equals R divided by L.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide21.JPG",
+      "script": "Now that we can combine impedances into a single equivalent value, we can simplify any branch of a network. Each branch can be treated as just two things: an impedance and a source, which could be a voltage source, a current source, or both. By combining multiple components into one equivalent impedance, we can break down complex networks into manageable parts. This simplification makes it easier to solve the network.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Simplifying Network Analysis"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Voltage Divider"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Transfer Function"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "When we move into the Fourier domain, any signal can be represented as a collect",
+      "bullets": [
+        "A low-pass filter allows low-frequency components to pass through while attenuating or reducing high-frequency components. In the idealized diagram here, the passband is shown as a flat rectangle up to the cutoff frequency, omega sub c, and then it drops to zero in the stopband. In real circuits, the transition is not perfectly sharp — it’s more gradual — but the concept is the same. At the cutoff frequency, the signal power has dropped to half its low-frequency value.",
+        "A high-pass filter does the opposite: it blocks low-frequency signals and passes the high-frequency ones.",
+        "A band-pass filter only allows frequencies within a certain range to pass, blocking both lower and higher frequencies.",
+        "A band-stop filter, sometimes called a notch filter, removes frequencies within a specific range but passes those outside that range.",
+        "All of these can be analyzed using the same approach:",
+        "Decompose the input signal into sinusoidal components using Fourier analysis.",
+        "For each frequency, calculate the system’s response using impedance and the phasor form of Ohm’s Law: voltage equals impedance times current.",
+        "Combine the individual frequency responses to reconstruct the total output.",
+        "For DC circuits with constant voltages, we only need algebraic equations — just resistance times current equals voltage. But with AC signals or sinusoidal sources, the relationships involve derivatives and integrals. Phasor notation transforms those into simple algebraic equations, letting us solve AC problems with the same ease as DC problems."
+      ],
+      "fullText": "When we move into the Fourier domain, any signal can be represented as a collection of frequency components. Filters are circuits or systems that selectively pass or block these components based on their frequency.\n\nA low-pass filter allows low-frequency components to pass through while attenuating or reducing high-frequency components. In the idealized diagram here, the passband is shown as a flat rectangle up to the cutoff frequency, omega sub c, and then it drops to zero in the stopband. In real circuits, the transition is not perfectly sharp — it’s more gradual — but the concept is the same. At the cutoff frequency, the signal power has dropped to half its low-frequency value.\nA high-pass filter does the opposite: it blocks low-frequency signals and passes the high-frequency ones.\nA band-pass filter only allows frequencies within a certain range to pass, blocking both lower and higher frequencies.\nA band-stop filter, sometimes called a notch filter, removes frequencies within a specific range but passes those outside that range.\n\nAll of these can be analyzed using the same approach:\nDecompose the input signal into sinusoidal components using Fourier analysis.\nFor each frequency, calculate the system’s response using impedance and the phasor form of Ohm’s Law: voltage equals impedance times current.\n\nCombine the individual frequency responses to reconstruct the total output.\nFor DC circuits with constant voltages, we only need algebraic equations — just resistance times current equals voltage. But with AC signals or sinusoidal sources, the relationships involve derivatives and integrals. Phasor notation transforms those into simple algebraic equations, letting us solve AC problems with the same ease as DC problems.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide22.JPG",
+      "script": "When we move into the Fourier domain, any signal can be represented as a collection of frequency components, and filters are designed to manipulate these components. A low-pass filter is a type of filter that allows low-frequency components to pass through while reducing high-frequency components. It has a clear passband up to the cutoff frequency, omega sub c, and then strongly attenuates frequencies beyond that point. The transition between the passband and stopband is not perfectly sharp in real circuits, but the idealized model helps us understand the concept.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Idealized Low-Pass Filter"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 300,
+          "label": "Real-World Filter Transition"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "High-Pass Filter"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "In this sense, an alternating current circuit can be treated just like a direct ",
+      "bullets": [
+        "By representing AC voltages and currents as phasors, we turn differential equations into simple algebraic ones, just like in DC analysis. This dramatically simplifies the process of solving AC circuit problems.",
+        "This clever idea was first developed decades ago by an engineer at the GE Global Research Center, not far from here. It’s now a standard computational tool in electrical engineering, and it’s one of the reasons AC circuit analysis can be so elegant."
+      ],
+      "fullText": "In this sense, an alternating current circuit can be treated just like a direct current circuit — once we use phasor notation and impedance. That’s why we say AC is DC in disguise.\n\nBy representing AC voltages and currents as phasors, we turn differential equations into simple algebraic ones, just like in DC analysis. This dramatically simplifies the process of solving AC circuit problems.\nThis clever idea was first developed decades ago by an engineer at the GE Global Research Center, not far from here. It’s now a standard computational tool in electrical engineering, and it’s one of the reasons AC circuit analysis can be so elegant.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide23.JPG",
+      "script": "By using phasor notation and impedance, we can treat an alternating current circuit just like a direct current circuit, making AC analysis look like DC analysis. This is because we can represent AC voltages and currents as phasors, turning differential equations into simple algebraic ones. This simplification makes it easier to solve AC circuit problems, and it's a fundamental concept in electrical engineering.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Phasor notation simplifies AC analysis"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Differential equations become algebraic"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Standard tool in electrical engineering"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "Here’s a very typical and practical circuit — the voltage divider.",
+      "bullets": [
+        "We start with an input voltage, which is split between two resistors or impedances, R 1 and R 2. The voltage drop across the second resistor becomes our output signal. This is a common way to pass a signal from one stage of a system to the next.",
+        "A real-world example might be a sensor connected to a measurement device. The human body, for instance, has its own electrical impedance. If we were measuring a cardiac signal, we could model the body’s impedance as R 1. The second resistor, R 2, could represent the input impedance of our measuring instrument.",
+        "From an engineering perspective, we usually have three goals when designing such a circuit:",
+        "Large input resistance — We want R1 to be large so that most of the input voltage appears across it, ensuring we capture as much of the signal as possible.",
+        "Small output resistance — We want R2 to be small so the next stage in the circuit can take the signal without losing much voltage.",
+        "High gain — If possible, we want to amplify the signal to make it easier to detect and process.",
+        "These goals can sometimes conflict — for example, making R 1 large helps with capturing the signal, but we also want R 2 small for driving the next stage. Circuit design is about balancing these trade-offs.",
+        "In the example at the bottom right, R S is our sensor, whose resistance changes slightly by a factor of x in response to something like temperature or pressure. R_L is the load resistor. If x equals zero, the sensor is at its nominal value. When x changes, even by a small amount, the output voltage V out changes.",
+        "Mathematically, V out equals V in multiplied by the ratio R 2 over R 1 plus R 2. This is just the voltage divider rule we’ve seen before. In practice, the change in x might be very small, so the change in V out is tiny — often just a few millivolts. If we want to amplify this tiny change, we ideally remove the constant background voltage so that only the small variation gets amplified. This allows for much higher gain without overloading the system."
+      ],
+      "fullText": "Here’s a very typical and practical circuit — the voltage divider.\nWe start with an input voltage, which is split between two resistors or impedances, R 1 and R 2. The voltage drop across the second resistor becomes our output signal. This is a common way to pass a signal from one stage of a system to the next.\n\nA real-world example might be a sensor connected to a measurement device. The human body, for instance, has its own electrical impedance. If we were measuring a cardiac signal, we could model the body’s impedance as R 1. The second resistor, R 2, could represent the input impedance of our measuring instrument.\n\nFrom an engineering perspective, we usually have three goals when designing such a circuit:\nLarge input resistance — We want R1 to be large so that most of the input voltage appears across it, ensuring we capture as much of the signal as possible.\nSmall output resistance — We want R2 to be small so the next stage in the circuit can take the signal without losing much voltage.\nHigh gain — If possible, we want to amplify the signal to make it easier to detect and process.\n\nThese goals can sometimes conflict — for example, making R 1 large helps with capturing the signal, but we also want R 2 small for driving the next stage. Circuit design is about balancing these trade-offs.\nIn the example at the bottom right, R S is our sensor, whose resistance changes slightly by a factor of x in response to something like temperature or pressure. R_L is the load resistor. If x equals zero, the sensor is at its nominal value. When x changes, even by a small amount, the output voltage V out changes.\n\nMathematically, V out equals V in multiplied by the ratio R 2 over R 1 plus R 2. This is just the voltage divider rule we’ve seen before. In practice, the change in x might be very small, so the change in V out is tiny — often just a few millivolts. If we want to amplify this tiny change, we ideally remove the constant background voltage so that only the small variation gets amplified. This allows for much higher gain without overloading the system.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide24.JPG",
+      "script": "The voltage divider is a fundamental circuit that splits the input voltage between two resistors or impedances, R 1 and R 2, and the voltage drop across the second resistor becomes our output signal. This is a common way to pass a signal from one stage of a system to the next, such as from a sensor to a measurement device. In medical imaging, we might model the body's electrical impedance as R 1, and the input impedance of a device as R 2.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Voltage Divider"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Practical Circuit"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Large Input Resistance"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "One way to remove the background signal and make small changes easier to detect ",
+      "bullets": [
+        "The Wheatstone bridge is essentially two voltage dividers connected side by side. On the left divider, we have resistors R 1 and R 2; on the right divider, we have resistors R 3 and R4. The output voltage, V_out, is measured between the midpoints of these two dividers.",
+        "If the ratios of the resistors are chosen so that R 1 over R 2 equals R 4 over R 3, the two dividers produce exactly the same voltage at their midpoints, and V_out is zero. This is called the null mode — no signal at the output when the bridge is balanced.",
+        "Now, if one of the resistors — typically R 3 — is actually a sensor whose resistance changes slightly, say from R knot to R knot times (1 plus x), the bridge becomes unbalanced. This small change in R 3 produces a nonzero V out, even though the original background voltage was canceled out.",
+        "In deflection mode, we can write V out as the supply voltage V c c multiplied by the difference between the left divider ratio and the right divider ratio. Because the bridge starts balanced, even a very small change in R 3 creates a measurable output.",
+        "The advantage is that we’ve removed the large constant voltage and isolated only the change we care about. This makes it possible to apply high gain to that small signal without saturating the system."
+      ],
+      "fullText": "One way to remove the background signal and make small changes easier to detect is by using a Wheatstone bridge.\n\nThe Wheatstone bridge is essentially two voltage dividers connected side by side. On the left divider, we have resistors R 1 and R 2; on the right divider, we have resistors R 3 and R4. The output voltage, V_out, is measured between the midpoints of these two dividers.\nIf the ratios of the resistors are chosen so that R 1 over R 2 equals R 4 over R 3, the two dividers produce exactly the same voltage at their midpoints, and V_out is zero. This is called the null mode — no signal at the output when the bridge is balanced.\n\nNow, if one of the resistors — typically R 3 — is actually a sensor whose resistance changes slightly, say from R knot to R knot times (1 plus x), the bridge becomes unbalanced. This small change in R 3 produces a nonzero V out, even though the original background voltage was canceled out.\n\nIn deflection mode, we can write V out as the supply voltage V c c multiplied by the difference between the left divider ratio and the right divider ratio. Because the bridge starts balanced, even a very small change in R 3 creates a measurable output.\nThe advantage is that we’ve removed the large constant voltage and isolated only the change we care about. This makes it possible to apply high gain to that small signal without saturating the system.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide25.JPG",
+      "script": "The Wheatstone bridge is a clever circuit that removes the background signal by balancing two voltage dividers, allowing small changes to be detected more easily. It works by having two dividers with resistors R 1 and R 2 on the left, and R 3 and R 4 on the right, with the output voltage measured between their midpoints. When the ratios of the resistors are chosen correctly, the two dividers produce the same voltage at their midpoints, resulting in a zero output voltage, or null mode. This balance is essential for detecting small changes in the signal.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Wheatstone bridge"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 300,
+          "label": "null mode"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 400,
+          "label": "deflection mode"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "Up to now, we’ve looked at components that behave in a linear way — resistors, c",
+      "bullets": [
+        "But many real-world circuit elements are nonlinear components. Their voltage–current relationship does not form a straight line.",
+        "For example, a diode only allows significant current to flow in one direction once the forward voltage reaches a certain threshold — about 0.7 volts for silicon and 0.3 volts for germanium. In reverse bias, very little current flows until breakdown occurs.",
+        "Transistors, such as the NPN bipolar junction transistor shown here, can amplify signals. By carefully biasing the base–emitter junction, a small change in base current controls a much larger change in collector current. This allows weak input signals to be amplified into stronger output signals.",
+        "We also have digital logic gates — OR, AND, XOR, NOR, NAND, and NOT — which are the building blocks of digital electronics. They process binary signals, producing specific outputs based on logical rules. By combining these gates, we can create flip-flops and sequential circuits, which store and manipulate digital information.",
+        "Nonlinear components make it possible to build amplifiers, oscillators, logic circuits, and microprocessors. They open the door to modern electronics — where linear analysis still plays a role, but must be combined with device-specific nonlinear behavior."
+      ],
+      "fullText": "Up to now, we’ve looked at components that behave in a linear way — resistors, capacitors, and inductors — all of which follow the generalized Ohm’s Law, voltage equals impedance times current.\n\nBut many real-world circuit elements are nonlinear components. Their voltage–current relationship does not form a straight line.\nFor example, a diode only allows significant current to flow in one direction once the forward voltage reaches a certain threshold — about 0.7 volts for silicon and 0.3 volts for germanium. In reverse bias, very little current flows until breakdown occurs.\nTransistors, such as the NPN bipolar junction transistor shown here, can amplify signals. By carefully biasing the base–emitter junction, a small change in base current controls a much larger change in collector current. This allows weak input signals to be amplified into stronger output signals.\n\nWe also have digital logic gates — OR, AND, XOR, NOR, NAND, and NOT — which are the building blocks of digital electronics. They process binary signals, producing specific outputs based on logical rules. By combining these gates, we can create flip-flops and sequential circuits, which store and manipulate digital information.\n\nNonlinear components make it possible to build amplifiers, oscillators, logic circuits, and microprocessors. They open the door to modern electronics — where linear analysis still plays a role, but must be combined with device-specific nonlinear behavior.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide26.JPG",
+      "script": "We've been studying components that obey Ohm's Law, but in reality, many circuit elements are nonlinear, meaning their voltage-current relationship isn't a straight line. A diode, for instance, only conducts significant current in one direction after a certain threshold voltage is reached, about 0.7 volts for silicon or 0.3 volts for germanium. In reverse bias, the current is very small until breakdown occurs. Transistors, another crucial component, also have nonlinear behavior.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Diode's nonlinear voltage–current relationship"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 300,
+          "label": "Transistor amplifies signals"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Digital logic gates process binary signals"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "Just as we can have linear systems and nonlinear systems, we also have nonlinear",
+      "bullets": [
+        "One of the most fundamental is the diode. A diode has a strong directional preference for current flow. In its forward direction, the current rises rapidly after a certain threshold voltage — about 0.7 volts for silicon. In the reverse direction, the current is extremely small until breakdown occurs. This is a clearly nonlinear voltage–current relationship.",
+        "If we combine two diodes in a specific configuration, we create a transistor. A transistor takes a small signal at its input and produces a much larger version of the same signal shape at its output — it acts as an amplifier. This ability to magnify weak signals makes the transistor an essential building block for electronics.",
+        "Multiple transistors can be combined to perform logic operations. For example, an AND gate outputs a high voltage only if both inputs are high. An OR gate outputs a high voltage if either input is high. More complex gates, like NAND, NOR, and XOR, can be built from these basic ideas.",
+        "By connecting logic gates, we can create circuits that add, multiply, store data, and make decisions — the very basis of digital computers.",
+        "This is why in electronics we need to understand both linear and nonlinear systems. Linear components handle predictable analog relationships, while nonlinear components give us amplification, switching, and the foundation for all digital processing."
+      ],
+      "fullText": "Just as we can have linear systems and nonlinear systems, we also have nonlinear electronic components.\n\nOne of the most fundamental is the diode. A diode has a strong directional preference for current flow. In its forward direction, the current rises rapidly after a certain threshold voltage — about 0.7 volts for silicon. In the reverse direction, the current is extremely small until breakdown occurs. This is a clearly nonlinear voltage–current relationship.\n\nIf we combine two diodes in a specific configuration, we create a transistor. A transistor takes a small signal at its input and produces a much larger version of the same signal shape at its output — it acts as an amplifier. This ability to magnify weak signals makes the transistor an essential building block for electronics.\n\nMultiple transistors can be combined to perform logic operations. For example, an AND gate outputs a high voltage only if both inputs are high. An OR gate outputs a high voltage if either input is high. More complex gates, like NAND, NOR, and XOR, can be built from these basic ideas.\nBy connecting logic gates, we can create circuits that add, multiply, store data, and make decisions — the very basis of digital computers.\n\nThis is why in electronics we need to understand both linear and nonlinear systems. Linear components handle predictable analog relationships, while nonlinear components give us amplification, switching, and the foundation for all digital processing.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide27.JPG",
+      "script": "A diode has a strong directional preference for current flow, with a rapid increase in current after a threshold voltage of about 0.7 volts for silicon in the forward direction, and a very small current in the reverse direction until breakdown occurs. This nonlinear voltage–current relationship is due to the bandgap in the semiconductor material. By combining two diodes in a specific configuration, we create a transistor, which amplifies a small input signal. The transistor's operation is also based on a nonlinear relationship between voltage and current.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Diode's nonlinear voltage–current relationship"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2000,
+          "label": "Transistor amplifies weak signals"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 2500,
+          "label": "Logic gates and digital circuits"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "As we just discussed, we often want three things in a circuit:",
+      "bullets": [
+        "very high input resistance,",
+        "very low output resistance,",
+        "and a large gain or magnification factor.",
+        "The operational amplifier — or op amp — delivers exactly that.",
+        "Inside an op amp are many transistors and other components, all arranged to meet these requirements. The internal circuitry can look complicated, but for analysis, we can use a simple model:",
+        "We apply a small input voltage, V in, between the non-inverting and inverting inputs. The op amp multiplies this by a large gain factor, G, to produce the output voltage, V out equals G times V in.",
+        "In the ideal model:",
+        "The gain is infinitely large.",
+        "The input impedance is infinite, so the op amp doesn’t draw current from the source — we capture the full signal.",
+        "The output impedance is zero, so the op amp can drive the next stage without loss.",
+        "Real op amps don’t reach these ideal values, but they can come close — for example, input impedance in the megaohm to teraohm range, and output impedance as low as a few hundred ohms.",
+        "An op amp is an active component — it needs its own power supply, typically labeled V S plus and V S minus. This internal power lets it amplify signals, something passive components like resistors, capacitors, and inductors cannot do on their own."
+      ],
+      "fullText": "As we just discussed, we often want three things in a circuit:\nvery high input resistance,\nvery low output resistance,\nand a large gain or magnification factor.\nThe operational amplifier — or op amp — delivers exactly that.\n\nInside an op amp are many transistors and other components, all arranged to meet these requirements. The internal circuitry can look complicated, but for analysis, we can use a simple model:\nWe apply a small input voltage, V in, between the non-inverting and inverting inputs. The op amp multiplies this by a large gain factor, G, to produce the output voltage, V out equals G times V in.\nIn the ideal model:\nThe gain is infinitely large.\n\nThe input impedance is infinite, so the op amp doesn’t draw current from the source — we capture the full signal.\nThe output impedance is zero, so the op amp can drive the next stage without loss.\nReal op amps don’t reach these ideal values, but they can come close — for example, input impedance in the megaohm to teraohm range, and output impedance as low as a few hundred ohms.\n\nAn op amp is an active component — it needs its own power supply, typically labeled V S plus and V S minus. This internal power lets it amplify signals, something passive components like resistors, capacitors, and inductors cannot do on their own.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide28.JPG",
+      "script": "The op amp's internal circuitry is designed to provide very high input resistance, very low output resistance, and a large gain or magnification factor. This is achieved through the arrangement of many transistors and other components. To analyze the op amp's behavior, we can use a simple model where a small input voltage is multiplied by a large gain factor to produce the output voltage.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Key characteristics"
+        },
+        {
+          "timeMs": 1200,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "High input resistance"
+        },
+        {
+          "timeMs": 1800,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Large gain or magnification factor"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "Even though an operational amplifier is an active component, the basic circuit l",
+      "bullets": [
+        "But for op amps, we have two special rules that make analysis much easier:",
+        "Rule one: The two input terminals are at the same voltage.",
+        "This happens because the op amp’s gain is extremely large. Even the tiniest difference between the inputs is amplified so much that the output adjusts to make the two inputs essentially equal in voltage.",
+        "Rule two: No current flows into either input terminal.",
+        "The input impedance of an op amp is extremely high — ideally infinite — so no measurable current enters the inputs.",
+        "These two rules are the foundation for almost all op amp circuit analysis. They let us treat the inputs as if they are at the same voltage and as if they draw no current, which simplifies solving even complex amplifier circuits."
+      ],
+      "fullText": "Even though an operational amplifier is an active component, the basic circuit laws still apply — Kirchhoff’s Current Law and Kirchhoff’s Voltage Law always hold.\n\nBut for op amps, we have two special rules that make analysis much easier:\nRule one: The two input terminals are at the same voltage.\u000bThis happens because the op amp’s gain is extremely large. Even the tiniest difference between the inputs is amplified so much that the output adjusts to make the two inputs essentially equal in voltage.\nRule two: No current flows into either input terminal.\u000bThe input impedance of an op amp is extremely high — ideally infinite — so no measurable current enters the inputs.\n\nThese two rules are the foundation for almost all op amp circuit analysis. They let us treat the inputs as if they are at the same voltage and as if they draw no current, which simplifies solving even complex amplifier circuits.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide29.JPG",
+      "script": "Even though an operational amplifier is an active component, the basic circuit laws still apply, but we have two special rules that make analysis much easier. The first rule is that the two input terminals are at the same voltage, due to the op amp's extremely large gain. The second rule is that no current flows into either input terminal, because of the op amp's extremely high input impedance.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Rule one: Same voltage at input terminals"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 300,
+          "label": "Op amp's gain is extremely large"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 400,
+          "label": "Rule two: No current flows into input terminals"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "Let’s look at this inverting amplifier and walk through the analysis step-by-ste",
+      "bullets": [
+        "First, the non-inverting input is connected to ground.",
+        "By rule one, the inverting input is also at zero volts — that’s our virtual ground.",
+        "By rule two, no current flows into the op amp input.",
+        "That means all the current coming through the input resistor R-i from the input voltage must flow through the feedback resistor R-f to the output.",
+        "Now, the current through R-i equals the input voltage minus zero, divided by R-i.",
+        "The current through R-f equals zero minus the output voltage, divided by R-f.",
+        "Since these currents are the same, we can say:",
+        "Input voltage divided by R-i equals negative output voltage divided by R-f.",
+        "If we multiply both sides by R-f, we get:",
+        "Output voltage equals negative R-f over R-i, times the input voltage.",
+        "The negative sign means the output is inverted compared to the input.",
+        "The size of the gain is the value of R-f divided by the value of R-i.",
+        "So, with just those two op amp rules, we can find the input–output relationship without worrying about the op amp’s internal complexity."
+      ],
+      "fullText": "Let’s look at this inverting amplifier and walk through the analysis step-by-step using our two op amp rules.\n\nFirst, the non-inverting input is connected to ground.\u000bBy rule one, the inverting input is also at zero volts — that’s our virtual ground.\nBy rule two, no current flows into the op amp input.\u000bThat means all the current coming through the input resistor R-i from the input voltage must flow through the feedback resistor R-f to the output.\n\nNow, the current through R-i equals the input voltage minus zero, divided by R-i.\u000bThe current through R-f equals zero minus the output voltage, divided by R-f.\n\nSince these currents are the same, we can say:\u000bInput voltage divided by R-i equals negative output voltage divided by R-f.\nIf we multiply both sides by R-f, we get:\u000bOutput voltage equals negative R-f over R-i, times the input voltage.\nThe negative sign means the output is inverted compared to the input.\u000bThe size of the gain is the value of R-f divided by the value of R-i.\n\nSo, with just those two op amp rules, we can find the input–output relationship without worrying about the op amp’s internal complexity.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide30.JPG",
+      "script": "Let's look at this inverting amplifier and walk through the analysis step-by-step using our two op amp rules. The non-inverting input is connected to ground, which means the inverting input is also at zero volts, our virtual ground. Since no current flows into the op amp input, all the current coming through the input resistor R-i from the input voltage must flow through the feedback resistor R-f to the output. This means the current through R-i equals the input voltage divided by R-i, and the current through R-f equals the output voltage divided by R-f.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Non-inverting input is ground"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 500,
+          "label": "Virtual ground at inverting input"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "No current flows into op amp input"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "Operational amplifiers can be connected in many different configurations, each p",
+      "bullets": [
+        "Here you see several common modules:",
+        "A non-inverting amplifier, where the gain equals one plus the ratio of R2 over R1.",
+        "An inverting amplifier, where the gain equals negative R2 over R1.",
+        "A differentiator, which produces an output proportional to the rate of change of the input signal.",
+        "An integrator, which produces an output proportional to the time integral of the input signal.",
+        "A differential amplifier, which amplifies the difference between two input signals.",
+        "All of these can be analyzed using the same two op amp rules we discussed earlier: the inputs are at the same voltage, and no current flows into the input terminals.",
+        "While the details of each configuration can get more involved, for our purposes, it’s enough to understand the fundamental idea: by choosing how we connect resistors, capacitors, and feedback paths, we can make the op amp perform a wide range of analog signal processing tasks.",
+        "If you’re interested in the full derivations and formulas, the linked reference has complete explanations — but for this class, understanding the basic concepts is sufficient."
+      ],
+      "fullText": "Operational amplifiers can be connected in many different configurations, each producing a specific function.\n\nHere you see several common modules:\nA non-inverting amplifier, where the gain equals one plus the ratio of R2 over R1.\nAn inverting amplifier, where the gain equals negative R2 over R1.\nA differentiator, which produces an output proportional to the rate of change of the input signal.\nAn integrator, which produces an output proportional to the time integral of the input signal.\nA differential amplifier, which amplifies the difference between two input signals.\nAll of these can be analyzed using the same two op amp rules we discussed earlier: the inputs are at the same voltage, and no current flows into the input terminals.\n\nWhile the details of each configuration can get more involved, for our purposes, it’s enough to understand the fundamental idea: by choosing how we connect resistors, capacitors, and feedback paths, we can make the op amp perform a wide range of analog signal processing tasks.\n\nIf you’re interested in the full derivations and formulas, the linked reference has complete explanations — but for this class, understanding the basic concepts is sufficient.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide31.JPG",
+      "script": "Operational amplifiers are incredibly versatile, and by connecting them in different configurations, we can create various functional modules, each with a specific purpose, such as amplifying signals, differentiating or integrating them, or comparing two signals. These modules form the foundation of more complex imaging systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Non-inverting amplifier"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Inverting amplifier"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Differentiator"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "We can also use operational amplifiers in measurement setups, particularly for i",
+      "bullets": [
+        "Looking into the input port of an op amp, the impedance is very high. This means it can capture a signal from a source without significantly loading it. On the other hand, when we take the signal from the output port, the impedance is very low. This allows the signal to drive the next stage efficiently. In this way, the op amp satisfies the two opposing requirements we discussed earlier: high input impedance and low output impedance.",
+        "This principle applies to both DC and AC circuit analysis. Remember the voltage–current relationships for resistors, capacitors, and inductors. When you connect these components into a network, Kirchhoff’s Voltage Law and Kirchhoff’s Current Law give you enough equations to solve for all unknowns.",
+        "The beauty of phasor notation is that for AC steady-state circuits, you don’t need to solve differential equations. You simply work with algebraic equations, just as in DC analysis. This is why, in a sense, we can say “AC is DC in disguise” — at least for steady-state analysis.",
+        "Of course, if you’re dealing with transients — for example, when a signal is suddenly applied — you would still need to solve the time-domain differential equations. But once the system reaches steady state, algebraic methods are enough.",
+        "These circuit concepts are applied in many areas — from sensing signals in medical imaging to filtering unwanted noise. In fact, we’ve already seen examples where Fourier analysis helps us understand how circuits pass or block certain frequencies. This is crucial for designing data acquisition systems that can detect and process signals effectively."
+      ],
+      "fullText": "We can also use operational amplifiers in measurement setups, particularly for impedance matching.\n\nLooking into the input port of an op amp, the impedance is very high. This means it can capture a signal from a source without significantly loading it. On the other hand, when we take the signal from the output port, the impedance is very low. This allows the signal to drive the next stage efficiently. In this way, the op amp satisfies the two opposing requirements we discussed earlier: high input impedance and low output impedance.\n\nThis principle applies to both DC and AC circuit analysis. Remember the voltage–current relationships for resistors, capacitors, and inductors. When you connect these components into a network, Kirchhoff’s Voltage Law and Kirchhoff’s Current Law give you enough equations to solve for all unknowns.\n\nThe beauty of phasor notation is that for AC steady-state circuits, you don’t need to solve differential equations. You simply work with algebraic equations, just as in DC analysis. This is why, in a sense, we can say “AC is DC in disguise” — at least for steady-state analysis.\nOf course, if you’re dealing with transients — for example, when a signal is suddenly applied — you would still need to solve the time-domain differential equations. But once the system reaches steady state, algebraic methods are enough.\n\nThese circuit concepts are applied in many areas — from sensing signals in medical imaging to filtering unwanted noise. In fact, we’ve already seen examples where Fourier analysis helps us understand how circuits pass or block certain frequencies. This is crucial for designing data acquisition systems that can detect and process signals effectively.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide32.JPG",
+      "script": "Operational amplifiers have high input impedance, which allows them to capture a signal from a source without loading it, and low output impedance, which enables the signal to drive the next stage efficiently. This satisfies the two opposing requirements we discussed earlier. The principle applies to both DC and AC circuit analysis.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "High input impedance"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Low output impedance"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Satisfies opposing requirements"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "Let me take you back to an event from several years ago. We organized a symposiu",
+      "bullets": [
+        "This meeting is one of the most important gatherings in the scientific community. It brings together experts from every field — medicine, engineering, mathematics, physics, education — you name it. The aim is not just to share research, but also to promote broad scientific understanding and collaboration.",
+        "Our symposium was titled X-ray Imaging Innovations for Biomedicine. We discussed advances in CT technology, covering both hardware improvements and algorithmic innovations. We also looked at how imaging can play a more predictive and personalized role in medicine.",
+        "The meeting is structured into many symposiums running in parallel. We had our session, shared our work, exchanged ideas, and learned from other fields. It was a valuable experience — not only for presenting our research, but also for gaining perspectives from outside our immediate domain."
+      ],
+      "fullText": "Let me take you back to an event from several years ago. We organized a symposium at the AAAS Annual Meeting — that’s the American Association for the Advancement of Science. If you’re familiar with Science magazine, that’s actually the flagship publication of AAAS.\n\nThis meeting is one of the most important gatherings in the scientific community. It brings together experts from every field — medicine, engineering, mathematics, physics, education — you name it. The aim is not just to share research, but also to promote broad scientific understanding and collaboration.\nOur symposium was titled X-ray Imaging Innovations for Biomedicine. We discussed advances in CT technology, covering both hardware improvements and algorithmic innovations. We also looked at how imaging can play a more predictive and personalized role in medicine.\n\nThe meeting is structured into many symposiums running in parallel. We had our session, shared our work, exchanged ideas, and learned from other fields. It was a valuable experience — not only for presenting our research, but also for gaining perspectives from outside our immediate domain.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide33.JPG",
+      "script": "Let me take you back to an event from several years ago. We organized a symposium at the AAAS Annual Meeting, which is one of the most important gatherings in the scientific community, bringing together experts from every field. The symposium was titled 'From Research to Reality: Transforming Healthcare with Science and Technology'.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "AAAS Annual Meeting"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Transforming Health"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Research to Reality"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "The day after our own symposium, I found myself free for the afternoon, so I dec",
+      "bullets": [
+        "I listened to several fascinating presentations. The speakers shared breakthroughs in AI research, from neuroscience-inspired architectures to game-playing systems that were pushing the limits of machine learning. The atmosphere was electric — you could feel that this was more than just incremental progress.",
+        "That afternoon convinced me of something important: AI had truly entered a revolutionary stage. The technology was no longer just an academic curiosity; it was becoming a powerful tool with transformative potential, ready to impact science, healthcare, and our understanding of the human mind. It was clear that an exciting new era was unfolding."
+      ],
+      "fullText": "The day after our own symposium, I found myself free for the afternoon, so I decided to attend another session titled The Technology of Artificial Intelligence. It was led by Demis Hassabis, the co-founder and CEO of DeepMind — one of the world’s leading AI companies, later acquired by Google.\n\nI listened to several fascinating presentations. The speakers shared breakthroughs in AI research, from neuroscience-inspired architectures to game-playing systems that were pushing the limits of machine learning. The atmosphere was electric — you could feel that this was more than just incremental progress.\n\nThat afternoon convinced me of something important: AI had truly entered a revolutionary stage. The technology was no longer just an academic curiosity; it was becoming a powerful tool with transformative potential, ready to impact science, healthcare, and our understanding of the human mind. It was clear that an exciting new era was unfolding.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide34.JPG",
+      "script": "I attended a session on the technology of artificial intelligence, led by Demis Hassabis, co-founder and CEO of DeepMind. The speakers shared breakthroughs in AI research, inspired by neuroscience and pushing the limits of machine learning. The atmosphere was electric, with a sense of excitement and discovery. It was clear that AI is advancing rapidly and has the potential to transform many fields.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "AI Research Breakthroughs"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Neuroscience-Inspired AI"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Machine Learning Limits"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "That experience sparked an idea in my mind. Over the past few centuries, humanit",
+      "bullets": [
+        "Now, with the rise of machine learning and artificial intelligence, we are entering what I like to call the Intelligence Revolution. This is not just about automating tasks — it’s about creating machines that can learn, adapt, and make decisions, performing tasks that were once thought to be exclusively human.",
+        "This shift will influence every aspect of life — from science and medicine to education, communication, and beyond. It’s a change as profound as the revolutions before it, but one that reaches directly into the realm of thought and reasoning.",
+        "When we look at the history of science, we can see that it has evolved through distinct paradigms over time. Thousands of years ago, science was primarily empirical. People described natural phenomena based on what they could directly observe — carefully recording patterns in nature without necessarily understanding the underlying mechanisms.",
+        "A few hundred years ago, the theoretical branch emerged. This was a major leap forward: scientists began building mathematical models and generalizations, allowing them not just to describe the world, but to predict and explain it.",
+        "In the past few decades, we’ve added a computational branch. With powerful computers, we can now simulate complex phenomena that are impossible to test directly, exploring theories in silico before ever stepping into a laboratory.",
+        "And today, we have entered a new era — the era of data exploration, often called eScience. Here, we unify theory, experiment, and simulation, but our driving force is data itself. Instruments and sensors capture enormous amounts of information, which is then processed by software and stored in vast databases. From there, we can apply data analytics, statistics, and increasingly, machine learning to extract patterns, features, and relationships directly from the data.",
+        "This approach — using big data and AI to uncover new knowledge — is so different that some call it the “fourth paradigm” of science. It represents a shift in thinking: instead of starting with a theory, we can sometimes let the data speak for itself."
+      ],
+      "fullText": "That experience sparked an idea in my mind. Over the past few centuries, humanity has gone through several major transformations. We began with the Industrial Revolution — when machines took over physical labor and reshaped manufacturing, transportation, and the way we lived. Then came the Information Revolution, where computers and the internet allowed us to store, process, and share knowledge at unprecedented speed.\n\nNow, with the rise of machine learning and artificial intelligence, we are entering what I like to call the Intelligence Revolution. This is not just about automating tasks — it’s about creating machines that can learn, adapt, and make decisions, performing tasks that were once thought to be exclusively human.\n\nThis shift will influence every aspect of life — from science and medicine to education, communication, and beyond. It’s a change as profound as the revolutions before it, but one that reaches directly into the realm of thought and reasoning.\n\nWhen we look at the history of science, we can see that it has evolved through distinct paradigms over time. Thousands of years ago, science was primarily empirical. People described natural phenomena based on what they could directly observe — carefully recording patterns in nature without necessarily understanding the underlying mechanisms.\n\nA few hundred years ago, the theoretical branch emerged. This was a major leap forward: scientists began building mathematical models and generalizations, allowing them not just to describe the world, but to predict and explain it.\nIn the past few decades, we’ve added a computational branch. With powerful computers, we can now simulate complex phenomena that are impossible to test directly, exploring theories in silico before ever stepping into a laboratory.\n\nAnd today, we have entered a new era — the era of data exploration, often called eScience. Here, we unify theory, experiment, and simulation, but our driving force is data itself. Instruments and sensors capture enormous amounts of information, which is then processed by software and stored in vast databases. From there, we can apply data analytics, statistics, and increasingly, machine learning to extract patterns, features, and relationships directly from the data.\n\nThis approach — using big data and AI to uncover new knowledge — is so different that some call it the “fourth paradigm” of science. It represents a shift in thinking: instead of starting with a theory, we can sometimes let the data speak for itself.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide35.JPG",
+      "script": "You know, that experience sparked an idea in my mind. Over the past few centuries, humanity has gone through several major transformations. We began with the Industrial Revolution, where machines took over physical labor and reshaped manufacturing, transportation, and the way we lived. Then came the Information Revolution, where computers and the internet allowed us to store, process, and share knowledge at unprecedented speed. Now, with the rise of machine learning and artificial intelligence, we are entering what I like to call the Intelligence Revolution. This is not just about automating tasks, but about creating machines that can learn, adapt, and make decisions on their own.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Intelligence Revolution"
+        },
+        {
+          "timeMs": 32000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Machine Learning"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Empirical Science"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "Here, we see the structure of a biological neuron — the basic building block of ",
+      "bullets": [
+        "A neuron has several main parts. The dendrites act like antennas, receiving incoming signals from other neurons. These signals travel toward the cell body, which contains the nucleus and all the essential cellular machinery to keep the neuron alive and functioning.",
+        "From the cell body, information is sent down a long projection called the axon. This is essentially the neuron’s transmission cable, carrying electrical signals — known as action potentials — toward the axon terminals. Along the way, the signal may be sped up by segments of myelin sheath, which act as insulation.",
+        "At the axon terminals, the neuron communicates with its target cells — which could be other neurons, muscle fibers, or glands — across small gaps called synapses. Communication here happens chemically, through the release of neurotransmitters, or in some cases, electrically.",
+        "The important thing to remember is that neurons are not just passive wires. They integrate inputs, make decisions about whether to fire, and adapt over time. This biological model is what inspired the design of artificial neural networks in machine learning."
+      ],
+      "fullText": "Here, we see the structure of a biological neuron — the basic building block of the nervous system.\n\nA neuron has several main parts. The dendrites act like antennas, receiving incoming signals from other neurons. These signals travel toward the cell body, which contains the nucleus and all the essential cellular machinery to keep the neuron alive and functioning.\nFrom the cell body, information is sent down a long projection called the axon. This is essentially the neuron’s transmission cable, carrying electrical signals — known as action potentials — toward the axon terminals. Along the way, the signal may be sped up by segments of myelin sheath, which act as insulation.\n\nAt the axon terminals, the neuron communicates with its target cells — which could be other neurons, muscle fibers, or glands — across small gaps called synapses. Communication here happens chemically, through the release of neurotransmitters, or in some cases, electrically.\n\nThe important thing to remember is that neurons are not just passive wires. They integrate inputs, make decisions about whether to fire, and adapt over time. This biological model is what inspired the design of artificial neural networks in machine learning.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide36.JPG",
+      "script": "Here, we see the structure of a biological neuron — the basic building block of the nervous system. A neuron has several main parts, including dendrites that act like antennas to receive incoming signals, a cell body that contains the essential cellular machinery, and an axon that carries electrical signals toward the axon terminals. The axon is essentially the neuron's transmission cable, carrying action potentials as it sends information. This complex structure allows neurons to communicate with each other and process information.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Neuron Structure"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Dendrites"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Axon and Myelin Sheath"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Here is a simplified view of how neurons work. Think of this as the basic flow o",
+      "bullets": [
+        "Incoming signals — whether from the outside world or from other neurons — arrive at the dendrites. These dendrites act as the input terminals of the neuron. They collect all incoming information, both excitatory and inhibitory.",
+        "If the combined strength of these signals is strong enough to cross a certain threshold, the neuron generates an electrical pulse called an action potential. This signal travels down the axon — the long fiber you see here — and moves toward the axon terminals.",
+        "At the axon terminals, the neuron communicates with the next cell, often through a synapse. There, chemical messengers or direct electrical connections pass the information forward, continuing the chain of processing in the nervous system.",
+        "This is the fundamental process behind everything from reflexes to complex thought — and it’s also the biological inspiration for how artificial neural networks process information in AI systems."
+      ],
+      "fullText": "Here is a simplified view of how neurons work. Think of this as the basic flow of information in our nervous system.\n\nIncoming signals — whether from the outside world or from other neurons — arrive at the dendrites. These dendrites act as the input terminals of the neuron. They collect all incoming information, both excitatory and inhibitory.\nIf the combined strength of these signals is strong enough to cross a certain threshold, the neuron generates an electrical pulse called an action potential. This signal travels down the axon — the long fiber you see here — and moves toward the axon terminals.\n\nAt the axon terminals, the neuron communicates with the next cell, often through a synapse. There, chemical messengers or direct electrical connections pass the information forward, continuing the chain of processing in the nervous system.\nThis is the fundamental process behind everything from reflexes to complex thought — and it’s also the biological inspiration for how artificial neural networks process information in AI systems.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide37.JPG",
+      "script": "Here's a simplified view of how neurons work, which is the basic flow of information in our nervous system. Incoming signals from the outside world or other neurons arrive at the dendrites, acting as the input terminals of the neuron, collecting both excitatory and inhibitory information. If the combined strength of these signals reaches a certain threshold, the neuron generates an electrical pulse called an action potential, which travels down the axon toward the axon terminal.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Dendrites collect incoming information"
+        },
+        {
+          "timeMs": 32000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Action potential threshold"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 4000,
+          "label": "Axon terminals communicate with next cell"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Now, here is the simplest way to think about it.",
+      "bullets": [
+        "At the top, you see a biological neuron. It receives input through many branches, called dendrites. All of these signals are gathered in the main cell body, the soma. If the combined signal is strong enough, the neuron generates an electrical pulse that travels down the axon. Finally, it reaches the output interface — the synapse — where it passes the signal on to other neurons.",
+        "Below that is the mathematical model we use for an artificial neuron. Each input is represented as a variable, and not all inputs carry the same importance, so we assign a weight to each one. Larger weights mean that input has a bigger influence; smaller weights mean less influence.",
+        "The neuron first performs a linear operation — a weighted sum of all the inputs, which is essentially an inner product. But that’s not enough. Just like in biology, small random fluctuations — small “nudges” — are ignored. Only when the total input crosses a certain threshold does the neuron respond strongly. This is where the nonlinear transformation comes in, producing the actual output.",
+        "So, in short: first we sum the inputs in a weighted way, then we pass the result through a nonlinear function that decides whether to respond — and how strongly."
+      ],
+      "fullText": "Now, here is the simplest way to think about it.\n\nAt the top, you see a biological neuron. It receives input through many branches, called dendrites. All of these signals are gathered in the main cell body, the soma. If the combined signal is strong enough, the neuron generates an electrical pulse that travels down the axon. Finally, it reaches the output interface — the synapse — where it passes the signal on to other neurons.\nBelow that is the mathematical model we use for an artificial neuron. Each input is represented as a variable, and not all inputs carry the same importance, so we assign a weight to each one. Larger weights mean that input has a bigger influence; smaller weights mean less influence.\n\nThe neuron first performs a linear operation — a weighted sum of all the inputs, which is essentially an inner product. But that’s not enough. Just like in biology, small random fluctuations — small “nudges” — are ignored. Only when the total input crosses a certain threshold does the neuron respond strongly. This is where the nonlinear transformation comes in, producing the actual output.\nSo, in short: first we sum the inputs in a weighted way, then we pass the result through a nonlinear function that decides whether to respond — and how strongly.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide38.JPG",
+      "script": "Now, here is the simplest way to think about it. The biological neuron receives inputs through dendrites, gathers them in the soma, and sends the signal out through the axon and synapse. This process is mirrored in the artificial neuron, where inputs are weighted and combined to produce an output. The artificial neuron's output is then passed through an activation function, similar to the biological neuron's threshold for firing. This process allows artificial neurons to learn and represent complex relationships between inputs and outputs.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Biological Neuron"
+        },
+        {
+          "timeMs": 500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.3,
+          "durationMs": 500,
+          "label": "Artificial Neuron"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Weighted Sum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "Now let’s look at how we represent a neuron in a computer — what we call a perce",
+      "bullets": [
+        "A perceptron takes multiple inputs, each labeled here as a 1, a 2, a 3,…, a n. Each input has a weight, shown as w 1,w 2,w 3,…,w n​, which controls how important that input is.",
+        "The first thing we do is multiply each input by its weight. Then we sum them all together — this is an inner product operation. Often, we also add an extra term called a bias, b, which shifts the output. You can think of the bias as an offset — a way to control the baseline response of the neuron, even if all the inputs are zero.",
+        "Once we have this weighted sum, we pass it through a nonlinear function, which we usually call the activation function. Here it’s labeled",
+        "sigma. This step is essential — without it, the perceptron would just be a simple linear device.",
+        "There are many choices for the activation function. A common one is the sigmoid, which produces an S-shaped curve. Another is the hyperbolic tangent, or tanh, which gives outputs between minus one and plus one. There are also piecewise-linear functions such as the ReLU — the rectified linear unit — where the output is zero for negative inputs and increases proportionally for positive inputs.",
+        "So in short: a perceptron takes weighted inputs, adds them up, applies a bias, and then uses a nonlinear transformation to produce its output. This artificial neuron is the basic building block for artificial neural networks — just as resistors, capacitors, and inductors are building blocks in electrical circuits."
+      ],
+      "fullText": "Now let’s look at how we represent a neuron in a computer — what we call a perceptron.\n\nA perceptron takes multiple inputs, each labeled here as a 1, a 2, a 3,…, a n. Each input has a weight, shown as w 1,w 2,w 3,…,w n​, which controls how important that input is.\n\nThe first thing we do is multiply each input by its weight. Then we sum them all together — this is an inner product operation. Often, we also add an extra term called a bias, b, which shifts the output. You can think of the bias as an offset — a way to control the baseline response of the neuron, even if all the inputs are zero.\n\nOnce we have this weighted sum, we pass it through a nonlinear function, which we usually call the activation function. Here it’s labeled \nsigma. This step is essential — without it, the perceptron would just be a simple linear device.\nThere are many choices for the activation function. A common one is the sigmoid, which produces an S-shaped curve. Another is the hyperbolic tangent, or tanh, which gives outputs between minus one and plus one. There are also piecewise-linear functions such as the ReLU — the rectified linear unit — where the output is zero for negative inputs and increases proportionally for positive inputs.\n\nSo in short: a perceptron takes weighted inputs, adds them up, applies a bias, and then uses a nonlinear transformation to produce its output. This artificial neuron is the basic building block for artificial neural networks — just as resistors, capacitors, and inductors are building blocks in electrical circuits.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide39.JPG",
+      "script": "Now let's look at how we represent a neuron in a computer, which we call a perceptron. A perceptron takes multiple inputs, each with a weight that controls its importance, and combines them through an inner product operation, often with an additional bias term to shift the output. This process allows the perceptron to respond to different inputs in a weighted manner.",
+      "spotlightEvents": [
+        {
+          "timeMs": 6500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Perceptron Basics"
+        },
+        {
+          "timeMs": 7500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Inner Product"
+        },
+        {
+          "timeMs": 8500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Activation Function"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "Now that we understand a single perceptron, let’s see what happens when we conne",
+      "bullets": [
+        "At the far left, we have the input layer — each circle here receives one piece of information from our data. These could be pixel values from an image, measurements from a sensor, or any other kind of features we want the network to process.",
+        "Next, we have one or more hidden layers. Each neuron in a hidden layer takes the outputs from the previous layer, applies its weights, sums them up, passes the result through its activation function, and then sends the output to the next layer. These hidden layers are where the network learns increasingly complex patterns.",
+        "Finally, at the far right, we have the output layer. In a classification task, each neuron here might represent a possible label — for example, “dog,” “cat,” or “car.” The neuron with the highest output value would be the network’s prediction.",
+        "Here’s the key idea:",
+        "A single neuron can only separate very simple patterns.",
+        "By stacking many layers, the network can build up a hierarchy of features.",
+        "The first layer might detect basic edges or colors.",
+        "The next layer might detect shapes like wheels or ears.",
+        "Higher layers combine these into entire objects, like a car or a cat.",
+        "Training the network works like this: we start with random weights, so the predictions are essentially guesses. We compare the network’s output to the correct answer and compute the error. Then, using a process called backpropagation, we send this error backward through the network, adjusting the weights slightly to reduce the error next time.",
+        "With enough data, enough layers, and many training cycles, the network learns to recognize very complex patterns — the kind of capability that powers things like self-driving cars, medical image analysis, and voice recognition."
+      ],
+      "fullText": "Now that we understand a single perceptron, let’s see what happens when we connect many of them. This gives us an artificial neural network.\n\nAt the far left, we have the input layer — each circle here receives one piece of information from our data. These could be pixel values from an image, measurements from a sensor, or any other kind of features we want the network to process.\nNext, we have one or more hidden layers. Each neuron in a hidden layer takes the outputs from the previous layer, applies its weights, sums them up, passes the result through its activation function, and then sends the output to the next layer. These hidden layers are where the network learns increasingly complex patterns.\n\nFinally, at the far right, we have the output layer. In a classification task, each neuron here might represent a possible label — for example, “dog,” “cat,” or “car.” The neuron with the highest output value would be the network’s prediction.\n\nHere’s the key idea:\nA single neuron can only separate very simple patterns.\nBy stacking many layers, the network can build up a hierarchy of features.\nThe first layer might detect basic edges or colors.\nThe next layer might detect shapes like wheels or ears.\nHigher layers combine these into entire objects, like a car or a cat.\n\nTraining the network works like this: we start with random weights, so the predictions are essentially guesses. We compare the network’s output to the correct answer and compute the error. Then, using a process called backpropagation, we send this error backward through the network, adjusting the weights slightly to reduce the error next time.\nWith enough data, enough layers, and many training cycles, the network learns to recognize very complex patterns — the kind of capability that powers things like self-driving cars, medical image analysis, and voice recognition.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide40.JPG",
+      "script": "Now that we understand a single perceptron, let's see what happens when we connect many of them. This gives us an artificial neural network. We start with the input layer, where each circle receives one piece of information from our data, such as pixel values from an image or measurements from a sensor. The next layer is the hidden layer, where each neuron takes the outputs from the previous layer, applies its weights, sums them up, passes the result through its activation function, and sends the output to the next layer.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Input Layer"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Hidden Layers"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Output Layer"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "Once you have the basic idea of how a neural network works, you can imagine that",
+      "bullets": [
+        "Here in this chart, you can see a variety of examples.",
+        "At the simplest level, we have the perceptron and feed-forward networks, where information flows in one direction from input to output.",
+        "Then there are radial basis networks and more specialized architectures like recurrent neural networks or RNNs, which loop information back so the network can remember past inputs.",
+        "Long Short-Term Memory networks — LSTMs — and Gated Recurrent Units, or GRUs, are powerful variants for processing sequences, such as speech or time-series data.",
+        "Other designs, like autoencoders and variational autoencoders, are used for compressing data and then reconstructing it, often to find hidden patterns or generate new examples.",
+        "You also see Boltzmann machines, Hopfield networks, and deep belief networks, which are useful for certain types of learning and pattern recognition.",
+        "The key point is that these different architectures are like tools in a toolbox. Some are better for images, some for language, some for prediction over time. Once you understand the fundamentals — inputs, weights, activation functions, and training — all these variations are just different ways of wiring those same building blocks together."
+      ],
+      "fullText": "Once you have the basic idea of how a neural network works, you can imagine that there’s no single way to connect the neurons. In fact, researchers have developed many different network topologies, each suited for specific tasks.\n\nHere in this chart, you can see a variety of examples.\nAt the simplest level, we have the perceptron and feed-forward networks, where information flows in one direction from input to output.\nThen there are radial basis networks and more specialized architectures like recurrent neural networks or RNNs, which loop information back so the network can remember past inputs.\nLong Short-Term Memory networks — LSTMs — and Gated Recurrent Units, or GRUs, are powerful variants for processing sequences, such as speech or time-series data.\n\nOther designs, like autoencoders and variational autoencoders, are used for compressing data and then reconstructing it, often to find hidden patterns or generate new examples.\nYou also see Boltzmann machines, Hopfield networks, and deep belief networks, which are useful for certain types of learning and pattern recognition.\n\nThe key point is that these different architectures are like tools in a toolbox. Some are better for images, some for language, some for prediction over time. Once you understand the fundamentals — inputs, weights, activation functions, and training — all these variations are just different ways of wiring those same building blocks together.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide41.JPG",
+      "script": "As you grasp the fundamental concept of neural networks, you can envision various ways to design the network architecture, each tailored to address specific problems. This chart illustrates the diversity of network topologies, ranging from simple perceptrons to more complex designs like RNNs, which enable the network to retain information over time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 23000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Neural Network Architectures"
+        },
+        {
+          "timeMs": 25000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Perceptron"
+        },
+        {
+          "timeMs": 27000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "RNNs and Variants"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "It’s important to realize that not every neural network configuration will be eq",
+      "bullets": [
+        "For example, a simple feed-forward structure can be thought of as a kind of multi-scale analysis, similar to how wavelet transforms work in signal processing. If your data has features at different scales, you need a structure that can capture them.",
+        "Convolutional operations, widely used in image and signal processing, are rooted in the mathematics of linear systems. They’re excellent for recognizing local patterns that repeat across space or time.",
+        "Shortcut connections and feedback loops, inspired by control theory, can help stabilize training and improve learning in very deep networks.",
+        "In some cases, we even borrow ideas from game theory — for example, adversarial mechanisms like GANs, where two networks compete to improve each other.",
+        "And when we’re working with oscillations, waveforms, or electromagnetic signals, concepts from complex analysis — such as amplitude and phase — can be built directly into the network using complex-valued weights.",
+        "The takeaway here is that neural network design is not guesswork. It’s about choosing the right principles from mathematics and engineering, and embedding them into the architecture so that it’s well-matched to the problem at hand."
+      ],
+      "fullText": "It’s important to realize that not every neural network configuration will be equally useful. Designing an effective network requires engineering insight — the architecture has to match the nature of the problem.\n\nFor example, a simple feed-forward structure can be thought of as a kind of multi-scale analysis, similar to how wavelet transforms work in signal processing. If your data has features at different scales, you need a structure that can capture them.\nConvolutional operations, widely used in image and signal processing, are rooted in the mathematics of linear systems. They’re excellent for recognizing local patterns that repeat across space or time.\nShortcut connections and feedback loops, inspired by control theory, can help stabilize training and improve learning in very deep networks.\n\nIn some cases, we even borrow ideas from game theory — for example, adversarial mechanisms like GANs, where two networks compete to improve each other.\nAnd when we’re working with oscillations, waveforms, or electromagnetic signals, concepts from complex analysis — such as amplitude and phase — can be built directly into the network using complex-valued weights.\n\nThe takeaway here is that neural network design is not guesswork. It’s about choosing the right principles from mathematics and engineering, and embedding them into the architecture so that it’s well-matched to the problem at hand.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide42.JPG",
+      "script": "Designing an effective neural network requires engineering insight, as the architecture must match the nature of the problem. A simple feed-forward structure can be thought of as a multi-scale analysis, similar to wavelet transforms, capturing features at different scales. Convolutional operations, rooted in linear system mathematics, are excellent for image and signal processing.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Multi-scale analysis"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Convolutional operations"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Shortcut connections and feedback loops"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "Now, how do we actually optimize a neural network so that it performs well?",
+      "bullets": [
+        "As I mentioned earlier, when you start with a fresh network, its performance is usually terrible — the outputs are essentially random. The idea is to adjust the parameters — the weights, which we represent as a vector w — in such a way that the network’s predictions get closer and closer to the desired results.",
+        "We measure the difference between the network’s current output and the target output using what we call a loss function, or an error function. The goal is to make this error as small as possible.",
+        "One common approach is gradient descent. We start with an initial set of weights — often chosen randomly. Then, in each training step, we look at the slope of the error function with respect to each weight. This slope, or gradient, tells us which direction increases the error — so we move in the opposite direction, reducing the error.",
+        "Mathematically, the new weight vector equals the old weight vector, minus a small fraction of the gradient. That fraction is controlled by the learning rate, a simple scaling factor between zero and one. If the learning rate is too big, the updates may overshoot, and the training becomes unstable. If it’s too small, the network learns very slowly.",
+        "By repeatedly updating the weights in this way, the error decreases step by step. Eventually, if everything is set up well, the process converges and the network produces accurate outputs."
+      ],
+      "fullText": "Now, how do we actually optimize a neural network so that it performs well?\u000bAs I mentioned earlier, when you start with a fresh network, its performance is usually terrible — the outputs are essentially random. The idea is to adjust the parameters — the weights, which we represent as a vector w — in such a way that the network’s predictions get closer and closer to the desired results.\n\nWe measure the difference between the network’s current output and the target output using what we call a loss function, or an error function. The goal is to make this error as small as possible.\nOne common approach is gradient descent. We start with an initial set of weights — often chosen randomly. Then, in each training step, we look at the slope of the error function with respect to each weight. This slope, or gradient, tells us which direction increases the error — so we move in the opposite direction, reducing the error.\n\nMathematically, the new weight vector equals the old weight vector, minus a small fraction of the gradient. That fraction is controlled by the learning rate, a simple scaling factor between zero and one. If the learning rate is too big, the updates may overshoot, and the training becomes unstable. If it’s too small, the network learns very slowly.\n\nBy repeatedly updating the weights in this way, the error decreases step by step. Eventually, if everything is set up well, the process converges and the network produces accurate outputs.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide43.JPG",
+      "script": "We optimize the network by adjusting the weights to minimize the loss, which is calculated by comparing the network's output to the desired output. This process involves finding the right balance of weights that make the network's predictions accurate. The optimization algorithm searches for the optimal weights by iteratively adjusting them and recalculating the loss.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Optimizing Neural Networks"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Loss Function"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Gradient Descent"
+        }
+      ]
+    },
+    {
+      "slideIndex": 43,
+      "slideNumber": 44,
+      "title": "Once you understand the concepts, you might want to try them out in practice. MA",
+      "bullets": [
+        "With this toolbox, you can access a variety of ready-made functions for tasks like feature extraction, classification, and regression. It also comes with tutorials, application notes, and built-in demos, so you can learn by experimenting.",
+        "For example, you can try leaf recognition, fingerprint detection, or even music genre classification — all with the same framework. The advantage is that you don’t have to start coding everything from scratch. Instead, you can focus on understanding the algorithms, adjusting parameters, and seeing how those changes affect performance.",
+        "This makes it an excellent platform for quickly testing ideas, prototyping solutions, and getting a feel for how machine learning techniques behave with real data."
+      ],
+      "fullText": "Once you understand the concepts, you might want to try them out in practice. MATLAB now offers a Machine Learning Toolbox — a powerful package that helps you perform parameter optimization, data clustering, and pattern recognition.\nWith this toolbox, you can access a variety of ready-made functions for tasks like feature extraction, classification, and regression. It also comes with tutorials, application notes, and built-in demos, so you can learn by experimenting.\n\nFor example, you can try leaf recognition, fingerprint detection, or even music genre classification — all with the same framework. The advantage is that you don’t have to start coding everything from scratch. Instead, you can focus on understanding the algorithms, adjusting parameters, and seeing how those changes affect performance.\n\nThis makes it an excellent platform for quickly testing ideas, prototyping solutions, and getting a feel for how machine learning techniques behave with real data.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide44.JPG",
+      "script": "Now that you've grasped the concepts, you can experiment with them in practice using MATLAB's Machine Learning Toolbox. This powerful package enables parameter optimization, data clustering, and pattern recognition, making it ideal for feature extraction, classification, and regression tasks. With tutorials, application notes, and built-in demos, you can learn by doing and exploring real-world examples like leaf recognition, fingerprint detection, or music genre classification.",
+      "spotlightEvents": [
+        {
+          "timeMs": 24000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Machine Learning Toolbox"
+        },
+        {
+          "timeMs": 25000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Feature Extraction"
+        },
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 4000,
+          "label": "Classification and Regression"
+        }
+      ]
+    },
+    {
+      "slideIndex": 44,
+      "slideNumber": 45,
+      "title": "Once we define a loss function — the measure of difference between the network’s",
+      "bullets": [
+        "You can imagine this process like standing on a hilly landscape and trying to reach the lowest valley. At each step, we look around, find the steepest downward direction, and take a small move in that direction. This is the essence of gradient descent.",
+        "Over time, with each update, the loss gets smaller and smaller until the network converges to a good solution — ideally, a point where further changes no longer improve the performance."
+      ],
+      "fullText": "Once we define a loss function — the measure of difference between the network’s output and the ground truth — our goal is to reduce that difference step by step. We do this by adjusting the network’s parameters in a way that moves us downhill on the loss surface.\n\nYou can imagine this process like standing on a hilly landscape and trying to reach the lowest valley. At each step, we look around, find the steepest downward direction, and take a small move in that direction. This is the essence of gradient descent.\nOver time, with each update, the loss gets smaller and smaller until the network converges to a good solution — ideally, a point where further changes no longer improve the performance.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide45.JPG",
+      "script": "Once we define a loss function, our goal is to reduce the difference between the network's output and the ground truth by adjusting the parameters in a way that moves us downhill on the loss surface. This process is like standing on a hilly landscape and trying to reach the lowest valley, where we take small steps in the direction of the steepest downward slope. This is the essence of gradient descent, which helps the network converge towards the optimal solution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Gradient Descent"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Convergence"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Optimal Solution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 45,
+      "slideNumber": 46,
+      "title": "Here, you see a visual demonstration from an online animation that shows how a n",
+      "bullets": [
+        "Think of it like this — the network makes a guess, compares that guess to the correct answer, and measures the error. Then, instead of adjusting everything randomly, it calculates how much each parameter contributed to that error. Using this information, it sends a correction signal backward through the layers, adjusting the parameters step by step.",
+        "With enough training cycles, the network gradually reshapes its decision boundaries, as you see in the animation, until it can classify almost all points correctly.",
+        "If you’re curious, I encourage you to watch the video linked here to see backpropagation in action."
+      ],
+      "fullText": "Here, you see a visual demonstration from an online animation that shows how a neural network learns during training. Backpropagation is the key idea behind this process.\n\nThink of it like this — the network makes a guess, compares that guess to the correct answer, and measures the error. Then, instead of adjusting everything randomly, it calculates how much each parameter contributed to that error. Using this information, it sends a correction signal backward through the layers, adjusting the parameters step by step.\nWith enough training cycles, the network gradually reshapes its decision boundaries, as you see in the animation, until it can classify almost all points correctly.\n\nIf you’re curious, I encourage you to watch the video linked here to see backpropagation in action.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide46.JPG",
+      "script": "The neural network learns by making predictions, comparing them to the correct answers, and adjusting its parameters based on the error. This process involves backpropagation, where the error is calculated and sent backward through the layers to adjust the weights and biases. This iterative process allows the network to learn and improve its predictions over time.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Neural network learns by prediction"
+        },
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Backpropagation"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Correction signal"
+        }
+      ]
+    },
+    {
+      "slideIndex": 46,
+      "slideNumber": 47,
+      "title": "This is an article I wrote for IEEE Access titled A Perspective on Deep Imaging.",
+      "bullets": [
+        "As imaging scientists, we’ve traditionally thought of images as something you start with to process or analyze. But in medical imaging, it’s the opposite — the image is the result of a long reconstruction process.",
+        "What’s exciting is that with machine learning, we can rethink that process entirely. Instead of following the conventional pipeline step by step, we can train neural networks to directly generate high-quality images from the raw data itself. This opens the door to faster reconstructions, better image quality, and even reduced radiation dose in certain applications.",
+        "In short, deep learning isn’t just another tool in the box — it has the potential to transform the way we produce and interpret medical images.",
+        "Now let’s look at one practical example — improving the signal-to-noise ratio in images.",
+        "In medical imaging, noise is inevitable. It can come from the physics of the scanner, from the patient’s movement, or from trying to keep the radiation dose low. Traditionally, we use filtering techniques to clean up an image, but these often blur fine details along with the noise.",
+        "With modern machine learning, we can do better. By training neural networks on large datasets — for example, the thousands of scans acquired every day in hospitals — the system can learn what a “clean” image should look like, without erasing important diagnostic details. Instead of throwing those routine scans away, we can use them to teach the network.",
+        "As a result, we can transform a noisy scan into one that is much clearer, improving both diagnostic confidence and patient safety.",
+        "So that’s the big picture — and we’ll wrap up here for today."
+      ],
+      "fullText": "This is an article I wrote for IEEE Access titled A Perspective on Deep Imaging.\nAs imaging scientists, we’ve traditionally thought of images as something you start with to process or analyze. But in medical imaging, it’s the opposite — the image is the result of a long reconstruction process.\n\nWhat’s exciting is that with machine learning, we can rethink that process entirely. Instead of following the conventional pipeline step by step, we can train neural networks to directly generate high-quality images from the raw data itself. This opens the door to faster reconstructions, better image quality, and even reduced radiation dose in certain applications.\nIn short, deep learning isn’t just another tool in the box — it has the potential to transform the way we produce and interpret medical images.\n\nNow let’s look at one practical example — improving the signal-to-noise ratio in images.\nIn medical imaging, noise is inevitable. It can come from the physics of the scanner, from the patient’s movement, or from trying to keep the radiation dose low. Traditionally, we use filtering techniques to clean up an image, but these often blur fine details along with the noise.\n\nWith modern machine learning, we can do better. By training neural networks on large datasets — for example, the thousands of scans acquired every day in hospitals — the system can learn what a “clean” image should look like, without erasing important diagnostic details. Instead of throwing those routine scans away, we can use them to teach the network.\nAs a result, we can transform a noisy scan into one that is much clearer, improving both diagnostic confidence and patient safety.\nSo that’s the big picture — and we’ll wrap up here for today.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide47.JPG",
+      "script": "In this article, I explore the idea of rethinking medical imaging from the ground up using machine learning. Traditionally, we process images step by step, but with neural networks, we can generate high-quality images directly from raw data, enabling faster and better reconstructions. This perspective challenges the conventional pipeline and offers exciting possibilities for the future of medical imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Article Title"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Rethinking Imaging"
+        },
+        {
+          "timeMs": 800,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Machine Learning"
+        }
+      ]
+    },
+    {
+      "slideIndex": 47,
+      "slideNumber": 48,
+      "title": "Before we close, let me show you a roadmap that pulls together the foundational ",
+      "bullets": [
+        "This diagram is a kind of “big picture” for the mathematical and engineering concepts underlying modern imaging and machine learning. It includes complex numbers, Fourier transforms, convolution, and sampling theory — all of which form the language we use to describe signals and images.",
+        "You can see how these elements connect: from basic mathematics like Euler’s formula, to signal operations such as convolution and correlation, to the Fourier series and transforms that let us work in the frequency domain. We also have system models from electrical engineering, like impedance and circuit laws, and finally, neural network building blocks — showing how the same principles extend into modern AI.",
+        "Think of this as your conceptual map. Each box here represents a tool in your toolbox, and together, they form the foundation for advanced methods in imaging, machine learning, and beyond."
+      ],
+      "fullText": "Before we close, let me show you a roadmap that pulls together the foundational ideas we’ve been discussing.\n\nThis diagram is a kind of “big picture” for the mathematical and engineering concepts underlying modern imaging and machine learning. It includes complex numbers, Fourier transforms, convolution, and sampling theory — all of which form the language we use to describe signals and images.\n\nYou can see how these elements connect: from basic mathematics like Euler’s formula, to signal operations such as convolution and correlation, to the Fourier series and transforms that let us work in the frequency domain. We also have system models from electrical engineering, like impedance and circuit laws, and finally, neural network building blocks — showing how the same principles extend into modern AI.\n\nThink of this as your conceptual map. Each box here represents a tool in your toolbox, and together, they form the foundation for advanced methods in imaging, machine learning, and beyond.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide48.JPG",
+      "script": "Here's a clear spoken narration for the slide:\n\nLet's take a step back and look at the big picture of how these ideas connect and build upon each other. This roadmap shows how mathematical concepts like complex numbers and Fourier transforms are used to describe and analyze signals and images, which is essential for modern imaging and machine learning. It's a high-level view of the foundation that allows us to understand and develop complex imaging and analysis techniques.",
+      "spotlightEvents": [
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 5000,
+          "label": "Roadmap Overview"
+        },
+        {
+          "timeMs": 42000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 3000,
+          "label": "Euler’s Formula"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 4000,
+          "label": "Convolution and Correlation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 48,
+      "slideNumber": 49,
+      "title": "So here, you can see that all of these relationships are brought together in one",
+      "bullets": [
+        "Some of the diagrams—like the one we have here—actually exist in several different published versions. In this case, I’ve redrawn the figure myself to avoid any copyright issues.",
+        "For a classroom lecture, using the original version is generally fine. But if you eventually want to publish your work, you either need to get formal permission to use those copyrighted figures or you should redraw them in your own style so they’re fully original."
+      ],
+      "fullText": "So here, you can see that all of these relationships are brought together in one poster.\n\nSome of the diagrams—like the one we have here—actually exist in several different published versions. In this case, I’ve redrawn the figure myself to avoid any copyright issues.\n\nFor a classroom lecture, using the original version is generally fine. But if you eventually want to publish your work, you either need to get formal permission to use those copyrighted figures or you should redraw them in your own style so they’re fully original.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide49.JPG",
+      "script": "This diagram is a great example of how all the concepts we've covered so far come together, illustrating the relationships between image quality, reconstruction, and human perception. It's a comprehensive view of medical imaging, showing how different aspects are connected and influence each other. I've redrawn this figure to ensure it's original and avoid any copyright issues.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Comprehensive view"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Relationships between concepts"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.4,
+          "durationMs": 2500,
+          "label": "Importance of original work"
+        }
+      ]
+    },
+    {
+      "slideIndex": 49,
+      "slideNumber": 50,
+      "title": "For your homework, I’d like you to work through this sensitivity analysis proble",
+      "bullets": [
+        "The idea is to determine how to choose the resistor values so that the circuit’s sensitivity is as high as possible. Sensitivity here is defined as the derivative of V out​ with respect to x, where x represents a small fractional change in the sensor resistance.",
+        "In other words, if x changes just a little, we want V out​ to change as much as possible. That’s what we mean by “high sensitivity.”",
+        "You’ll be able to adjust both R L​ and R S​. If you work through the math, you’ll find that the sensitivity reaches its maximum when the two resistances are equal."
+      ],
+      "fullText": "For your homework, I’d like you to work through this sensitivity analysis problem.\n\nThe idea is to determine how to choose the resistor values so that the circuit’s sensitivity is as high as possible. Sensitivity here is defined as the derivative of V out​ with respect to x, where x represents a small fractional change in the sensor resistance.\nIn other words, if x changes just a little, we want V out​ to change as much as possible. That’s what we mean by “high sensitivity.”\n\nYou’ll be able to adjust both R L​ and R S​. If you work through the math, you’ll find that the sensitivity reaches its maximum when the two resistances are equal.",
+      "imageURL": "/lectures/Lecture_10/Images/Slide50.JPG",
+      "script": "For your homework, I'd like you to work through this sensitivity analysis problem, where you'll determine how to choose the resistor values to make the circuit's sensitivity as high as possible. Sensitivity is defined as the derivative of V out​ with respect to x, representing a small fractional change in the sensor resistance. You'll find that the sensitivity reaches its maximum when R L​ equals R S​, making the circuit's response more sensitive to changes in the sensor resistance.",
+      "spotlightEvents": [
+        {
+          "timeMs": 65000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Sensitivity Analysis"
+        },
+        {
+          "timeMs": 67000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Choosing Resistor Values"
+        },
+        {
+          "timeMs": 69000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Maximum Sensitivity"
+        }
+      ]
+    }
+  ]
+}

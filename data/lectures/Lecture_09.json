@@ -1,0 +1,1374 @@
+{
+  "lectureId": "Lecture_09",
+  "lectureTitle": "Medical Imaging — Lecture 09",
+  "totalSlides": 28,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Hello everyone, and welcome to MATLAB Tutorial Number Two.",
+      "bullets": [
+        "Before we jump into the MATLAB exercises, let’s take a minute to connect this tutorial to what we have already learned.",
+        "In the past few lectures, we built the core foundation for this course:",
+        "linear systems and shift invariance,",
+        "convolution and the impulse response,",
+        "the delta function as a building block,",
+        "Fourier series and the Fourier transform,",
+        "and the sampling theorem that explains how continuous signals become discrete data.",
+        "These ideas are tightly connected.",
+        "And the point of today’s tutorial is to make them feel concrete,",
+        "by letting you implement them, visualize them, and test your intuition in MATLAB.",
+        "So if any of those topics still feel a bit unclear, that’s normal.",
+        "But this is exactly where hands-on practice helps.",
+        "As we work through the examples, pay attention to the patterns:",
+        "how convolution shapes signals,",
+        "how Fourier analysis reveals hidden frequency content,",
+        "and how sampling and discretization change what we can represent and measure.",
+        "Alright, let’s get started."
+      ],
+      "fullText": "Hello everyone, and welcome to MATLAB Tutorial Number Two.\n\nBefore we jump into the MATLAB exercises, let’s take a minute to connect this tutorial to what we have already learned.\n\nIn the past few lectures, we built the core foundation for this course:\nlinear systems and shift invariance,\nconvolution and the impulse response,\nthe delta function as a building block,\nFourier series and the Fourier transform,\nand the sampling theorem that explains how continuous signals become discrete data.\n\nThese ideas are tightly connected.\nAnd the point of today’s tutorial is to make them feel concrete,\nby letting you implement them, visualize them, and test your intuition in MATLAB.\n\nSo if any of those topics still feel a bit unclear, that’s normal.\nBut this is exactly where hands-on practice helps.\nAs we work through the examples, pay attention to the patterns:\nhow convolution shapes signals,\nhow Fourier analysis reveals hidden frequency content,\nand how sampling and discretization change what we can represent and measure.\n\nAlright, let’s get started.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide1.JPG",
+      "script": "Welcome back to our MATLAB tutorial, where we'll be putting the theoretical foundation into practical use. We've built a solid core foundation in the past few lectures, including linear systems, convolution, the delta function, Fourier series, and the sampling theorem. These ideas are interconnected, and today's tutorial will help make them feel more concrete by applying them in MATLAB.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Connecting the foundation"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Linear systems"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Convolution and impulse response"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "Alright, so this is our course schedule, and we are in good shape.",
+      "bullets": [
+        "We are on track, so no problem.",
+        "Let me walk you through the big picture one more time, using this table.",
+        "Early in the semester, we focus on the foundation.",
+        "We start with systems, then convolution, then Fourier series and Fourier transform,",
+        "and then we move into discrete Fourier transform and FFT.",
+        "You can also see the MATLAB checkpoints built into the schedule,",
+        "because we want you to practice these ideas, not just hear about them.",
+        "Here is the storyline behind those topics.",
+        "A linear system is one where we can predict the output for any input",
+        "by understanding how the system responds to simple building blocks.",
+        "And convolution is the tool that makes that practical.",
+        "It combines the input signal with the system’s impulse response",
+        "to produce the output.",
+        "Then we shift to Fourier ideas.",
+        "Fourier series tells us that a periodic signal can be written as a sum of sinusoids.",
+        "And when we extend that idea to non-periodic signals,",
+        "we arrive at the Fourier transform.",
+        "But in computation, we do not work with truly continuous signals.",
+        "We work with sampled data, which means discrete sequences of numbers.",
+        "So we sample in time, and sometimes we also quantize amplitudes.",
+        "Once we move to sampled signals, we need discrete Fourier tools.",
+        "That is where the discrete Fourier transform comes in,",
+        "and the FFT is simply an efficient way to compute it.",
+        "So yes, it is easy to type “fft” in MATLAB.",
+        "But the real value is understanding what that output means,",
+        "what the frequency axis represents,",
+        "and why the spectrum looks the way it does.",
+        "Now, based on where we are in the schedule,",
+        "today’s goal is to reinforce these concepts with hands-on MATLAB work,",
+        "so you can connect the theory to real discrete data.",
+        "Alright, let’s get started."
+      ],
+      "fullText": "Alright, so this is our course schedule, and we are in good shape.\nWe are on track, so no problem.\n\nLet me walk you through the big picture one more time, using this table.\n\nEarly in the semester, we focus on the foundation.\nWe start with systems, then convolution, then Fourier series and Fourier transform,\nand then we move into discrete Fourier transform and FFT.\nYou can also see the MATLAB checkpoints built into the schedule,\nbecause we want you to practice these ideas, not just hear about them.\n\nHere is the storyline behind those topics.\n\nA linear system is one where we can predict the output for any input\nby understanding how the system responds to simple building blocks.\nAnd convolution is the tool that makes that practical.\nIt combines the input signal with the system’s impulse response\nto produce the output.\n\nThen we shift to Fourier ideas.\nFourier series tells us that a periodic signal can be written as a sum of sinusoids.\nAnd when we extend that idea to non-periodic signals,\nwe arrive at the Fourier transform.\n\nBut in computation, we do not work with truly continuous signals.\nWe work with sampled data, which means discrete sequences of numbers.\nSo we sample in time, and sometimes we also quantize amplitudes.\n\nOnce we move to sampled signals, we need discrete Fourier tools.\nThat is where the discrete Fourier transform comes in,\nand the FFT is simply an efficient way to compute it.\n\nSo yes, it is easy to type “fft” in MATLAB.\nBut the real value is understanding what that output means,\nwhat the frequency axis represents,\nand why the spectrum looks the way it does.\n\nNow, based on where we are in the schedule,\ntoday’s goal is to reinforce these concepts with hands-on MATLAB work,\nso you can connect the theory to real discrete data.\n\nAlright, let’s get started.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide2.JPG",
+      "script": "Let me walk you through the big picture one more time, using this table. We start with the foundation, which includes systems, convolution, Fourier series and transform, discrete Fourier transform, and FFT. This is the core of the course, and it's essential to understand these ideas clearly. We also have MATLAB checkpoints built into the schedule, so you can practice what you've learned as you go along.",
+      "spotlightEvents": [
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Course Schedule"
+        },
+        {
+          "timeMs": 42000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Foundation"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Key Ideas"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "Let me give you a quick roadmap for today’s session.",
+      "bullets": [
+        "We’ll begin with discrete convolution. This is simply the convolution operation applied to signals that are already in discrete form — sequences of numbers rather than continuous waveforms. We’ll explore how to compute it, and why sometimes we add extra zeros at the ends of our signals — a technique called zero-padding. We’ll also see the idea of circular convolution, and how it relates to regular, or linear, convolution.",
+        "Next, we’ll move into spectral analysis. This is one of the most common applications of Fourier analysis. Here again, zero-padding plays an important role — but now it’s in the frequency domain. We’ll also talk about refined spectral bins, which allow us to see frequency details more clearly.",
+        "Finally, we’ll take what we’ve learned and apply it to two-dimensional filtering for images. Using the Fourier transform, we’ll perform noise removal to clean up an image, and edge enhancement to bring out important structures.",
+        "So, in short — discrete convolution, spectral analysis, and 2D image filtering. We’ll work through these step by step, connecting the math to hands-on MATLAB demonstrations."
+      ],
+      "fullText": "Let me give you a quick roadmap for today’s session.\n\nWe’ll begin with discrete convolution. This is simply the convolution operation applied to signals that are already in discrete form — sequences of numbers rather than continuous waveforms. We’ll explore how to compute it, and why sometimes we add extra zeros at the ends of our signals — a technique called zero-padding. We’ll also see the idea of circular convolution, and how it relates to regular, or linear, convolution.\nNext, we’ll move into spectral analysis. This is one of the most common applications of Fourier analysis. Here again, zero-padding plays an important role — but now it’s in the frequency domain. We’ll also talk about refined spectral bins, which allow us to see frequency details more clearly.\n\nFinally, we’ll take what we’ve learned and apply it to two-dimensional filtering for images. Using the Fourier transform, we’ll perform noise removal to clean up an image, and edge enhancement to bring out important structures.\nSo, in short — discrete convolution, spectral analysis, and 2D image filtering. We’ll work through these step by step, connecting the math to hands-on MATLAB demonstrations.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide3.JPG",
+      "script": "Let me give you a quick roadmap for today's session. We'll start with discrete convolution, where we apply the convolution operation to discrete signals, and explore how to compute it and why we sometimes add extra zeros at the ends of our signals. Then, we'll move into spectral analysis, one of the most common applications of Fourier analysis.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Roadmap"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Discrete Convolution"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Spectral Analysis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "Now, let’s take a moment to visualize what the discrete Fourier transform — or D",
+      "bullets": [
+        "On this slide, you see two columns. On the left, we have signals in the time domain. On the right, we have their corresponding representations in the frequency domain. The arrows between them remind us that the Fourier transform takes us from one domain to the other, and the inverse Fourier transform brings us back.",
+        "Each row here is a different example. In some cases, we’re multiplying two signals in the time domain. In others, we’re convolving them. And each time, there’s a matching operation in the frequency domain — because multiplication in one domain corresponds to convolution in the other, and vice versa. This is one of the most important dual relationships in Fourier theory.",
+        "You can also see how different shapes in the time domain create specific patterns in the frequency domain. For example:",
+        "A narrow pulse in time spreads out in frequency.",
+        "A broad, smooth shape in time becomes more concentrated in frequency.",
+        "Sampling a continuous signal in time produces repeated copies — or “aliases” — in the frequency domain.",
+        "By moving row by row, you can start to see the bigger picture: every change we make to a signal in one domain has a predictable effect in the other. This is exactly why Fourier analysis is so powerful — it gives us two different but connected ways of looking at the same signal.",
+        "As we go through the rest of today’s examples, keep these relationships in mind. They’ll help you understand not just the MATLAB results, but also the deeper reason why those results look the way they do."
+      ],
+      "fullText": "Now, let’s take a moment to visualize what the discrete Fourier transform — or DFT — really means.\nOn this slide, you see two columns. On the left, we have signals in the time domain. On the right, we have their corresponding representations in the frequency domain. The arrows between them remind us that the Fourier transform takes us from one domain to the other, and the inverse Fourier transform brings us back.\n\nEach row here is a different example. In some cases, we’re multiplying two signals in the time domain. In others, we’re convolving them. And each time, there’s a matching operation in the frequency domain — because multiplication in one domain corresponds to convolution in the other, and vice versa. This is one of the most important dual relationships in Fourier theory.\n\nYou can also see how different shapes in the time domain create specific patterns in the frequency domain. For example:\nA narrow pulse in time spreads out in frequency.\nA broad, smooth shape in time becomes more concentrated in frequency.\nSampling a continuous signal in time produces repeated copies — or “aliases” — in the frequency domain.\nBy moving row by row, you can start to see the bigger picture: every change we make to a signal in one domain has a predictable effect in the other. This is exactly why Fourier analysis is so powerful — it gives us two different but connected ways of looking at the same signal.\nAs we go through the rest of today’s examples, keep these relationships in mind. They’ll help you understand not just the MATLAB results, but also the deeper reason why those results look the way they do.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide4.JPG",
+      "script": "Let's take a moment to visualize what the discrete Fourier transform really means. We have two columns, one for the time domain and one for the frequency domain, with arrows showing the transformation between them. Each row represents a different example, where we're multiplying or convolving signals in the time domain and performing the matching operation in the frequency domain.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Discrete Fourier Transform"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Time Domain"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Frequency Domain"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Here’s a simple visual way to understand convolution.",
+      "bullets": [
+        "Imagine you have two hand shapes.",
+        "One hand stays fixed.",
+        "The other hand is the one we manipulate.",
+        "Step one is the part people often forget:",
+        "we flip one of the signals.",
+        "In the hand analogy, that is like turning a right hand into a left hand,",
+        "so the shape is mirrored.",
+        "Step two is shifting.",
+        "After the flip, we slide that hand left and right across the other hand.",
+        "And at every shift position, we ask one question:",
+        "how much do these two shapes overlap?",
+        "If the overlap is large, the convolution value at that shift is large.",
+        "If the overlap is small, the convolution value is small.",
+        "And if they do not overlap at all, the convolution value is zero.",
+        "That is what this picture is trying to convey.",
+        "The vertical direction reminds you of the flip,",
+        "and the horizontal direction reminds you of the shift.",
+        "So keep this in mind:",
+        "convolution is not magic.",
+        "It is flip one pattern, slide it across the other,",
+        "and measure the overlap at each position.",
+        "And once you understand that visual,",
+        "the same exact idea applies to real signals,",
+        "to waveforms in time,",
+        "and to images in space."
+      ],
+      "fullText": "Here’s a simple visual way to understand convolution.\n\nImagine you have two hand shapes.\nOne hand stays fixed.\nThe other hand is the one we manipulate.\n\nStep one is the part people often forget:\nwe flip one of the signals.\nIn the hand analogy, that is like turning a right hand into a left hand,\nso the shape is mirrored.\n\nStep two is shifting.\nAfter the flip, we slide that hand left and right across the other hand.\n\nAnd at every shift position, we ask one question:\nhow much do these two shapes overlap?\n\nIf the overlap is large, the convolution value at that shift is large.\nIf the overlap is small, the convolution value is small.\nAnd if they do not overlap at all, the convolution value is zero.\n\nThat is what this picture is trying to convey.\nThe vertical direction reminds you of the flip,\nand the horizontal direction reminds you of the shift.\n\nSo keep this in mind:\nconvolution is not magic.\nIt is flip one pattern, slide it across the other,\nand measure the overlap at each position.\n\nAnd once you understand that visual,\nthe same exact idea applies to real signals,\nto waveforms in time,\nand to images in space.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide5.JPG",
+      "script": "Let's break down the process of convolution step by step. We start with two hand shapes, one fixed and one movable. To begin, we flip one of the signals, which is like mirroring the hand shape. Then, we slide the flipped hand across the fixed hand, measuring the overlap at each position. The convolution value at each shift position depends on how much the two shapes overlap.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Convolution Process"
+        },
+        {
+          "timeMs": 500,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.7,
+          "durationMs": 200,
+          "label": "Flip One Signal"
+        },
+        {
+          "timeMs": 700,
+          "type": "laser",
+          "x": 0.35,
+          "y": 0.75,
+          "durationMs": 300,
+          "label": "Slide Flipped Hand"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "Here’s our first step in the convolution process — calculating the value at n eq",
+      "bullets": [
+        "On the top left, the red arrows show f of k, our first discrete signal. On the bottom left, the green arrows show g of negative k, which means we have flipped the second signal in time.",
+        "The formula in the middle tells us what convolution is in mathematical terms: we take the sum over all k of x of k multiplied by h of n minus k.",
+        "Here, x is our input, and h is our system’s impulse response.",
+        "At n equals zero, we line up the flipped signal so that its zero index matches the zero index of the original signal. You can think of this like the hand illustration on the right: one hand flipped, the other fixed, and their starting points aligned at zero.",
+        "Now, at each matching position of the red and green arrows, we multiply the values together and then sum all those products. That sum is the value of the convolution at n equals zero.",
+        "This is the key step — convolution is nothing more than multiplying corresponding values from two aligned sequences, and then summing the results. We repeat this process for each shift of n to get the full convolution."
+      ],
+      "fullText": "Here’s our first step in the convolution process — calculating the value at n equals zero.\n\nOn the top left, the red arrows show f of k, our first discrete signal. On the bottom left, the green arrows show g of negative k, which means we have flipped the second signal in time.\nThe formula in the middle tells us what convolution is in mathematical terms: we take the sum over all k of x of k multiplied by h of n minus k. \n\nHere, x is our input, and h is our system’s impulse response.\nAt n equals zero, we line up the flipped signal so that its zero index matches the zero index of the original signal. You can think of this like the hand illustration on the right: one hand flipped, the other fixed, and their starting points aligned at zero.\n\nNow, at each matching position of the red and green arrows, we multiply the values together and then sum all those products. That sum is the value of the convolution at n equals zero.\nThis is the key step — convolution is nothing more than multiplying corresponding values from two aligned sequences, and then summing the results. We repeat this process for each shift of n to get the full convolution.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide6.JPG",
+      "script": "So, to calculate the value at n equals zero, we need to align the flipped signal g of negative k with the original signal f of k. This means the zero index of the flipped signal matches the zero index of the original signal. The value at n equals zero is then the sum of the product of each sample of f of k and the corresponding sample of g of negative k.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Flipped signal alignment"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Convolution formula"
+        },
+        {
+          "timeMs": 7000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Hand illustration"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "Now let’s look at one specific convolution step: n equals eight.",
+      "bullets": [
+        "On the top plot, the red arrows are f of k.",
+        "On the bottom plot, the green arrows are g of eight minus k.",
+        "That notation, “eight minus k,” is your reminder that the second sequence has been flipped and shifted,",
+        "and we are evaluating it at the shift position n equals eight.",
+        "Now connect it to the hand picture.",
+        "At n equals eight, the shifted hand is pushed far to the right.",
+        "So we are close to the end of the convolution,",
+        "where the two shapes barely overlap.",
+        "You can see that in the plots too.",
+        "Only a small number of red arrows line up with green arrows.",
+        "Everything else misses, so it contributes nothing.",
+        "So what do we do at this position?",
+        "We take only the overlapping pairs,",
+        "multiply each red value by the corresponding green value,",
+        "and then add those products.",
+        "That sum is the convolution output at n equals eight.",
+        "And this is a nice way to see why the convolution output gets smaller near the ends.",
+        "Near the middle, there is lots of overlap, so the sum is large.",
+        "Near the edges, the overlap shrinks, so the sum becomes smaller.",
+        "If you repeat this same routine for every n,",
+        "you build the entire convolution sequence one sample at a time:",
+        "shift, multiply, sum."
+      ],
+      "fullText": "Now let’s look at one specific convolution step: n equals eight.\n\nOn the top plot, the red arrows are f of k.\nOn the bottom plot, the green arrows are g of eight minus k.\nThat notation, “eight minus k,” is your reminder that the second sequence has been flipped and shifted,\nand we are evaluating it at the shift position n equals eight.\n\nNow connect it to the hand picture.\nAt n equals eight, the shifted hand is pushed far to the right.\nSo we are close to the end of the convolution,\nwhere the two shapes barely overlap.\n\nYou can see that in the plots too.\nOnly a small number of red arrows line up with green arrows.\nEverything else misses, so it contributes nothing.\n\nSo what do we do at this position?\nWe take only the overlapping pairs,\nmultiply each red value by the corresponding green value,\nand then add those products.\nThat sum is the convolution output at n equals eight.\n\nAnd this is a nice way to see why the convolution output gets smaller near the ends.\nNear the middle, there is lots of overlap, so the sum is large.\nNear the edges, the overlap shrinks, so the sum becomes smaller.\n\nIf you repeat this same routine for every n,\nyou build the entire convolution sequence one sample at a time:\nshift, multiply, sum.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide7.JPG",
+      "script": "Let's take a closer look at this specific convolution step where n equals eight. The top plot shows the red arrows representing the sampled values of f of k, while the bottom plot shows the green arrows representing the sampled values of g of eight minus k, which has been flipped and shifted. As we move to the right, the overlap between the two shapes becomes smaller and smaller. This is reflected in the plots, where only a few red arrows line up with the green arrows at n equals eight. This is a key point in the convolution process, where the two shapes barely overlap.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Red arrows: sampled values of f of k"
+        },
+        {
+          "timeMs": 44000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.35,
+          "durationMs": 2000,
+          "label": "Green arrows: sampled values of g of eight minus k"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 2000,
+          "label": "Notation: eight minus k, flipped and shifted"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "Let’s walk through this functional example, because it explains a very practical",
+      "bullets": [
+        "the difference between linear convolution and circular convolution, and why we often need zero padding.",
+        "Start at the top.",
+        "First, we have h of n.",
+        "It is a short pulse, basically a little rectangular block.",
+        "Second, we have x of n.",
+        "In this example x has a few separated pulses, shown in different colors just to help you see them.",
+        "Now look at the third row.",
+        "That is the linear convolution result, x of n convolved with h of n.",
+        "Each pulse in x gets “spread out” by h,",
+        "so you see these triangular-looking responses.",
+        "That matches the intuition that a rectangle convolved with a rectangle gives a triangle,",
+        "and multiple pulses give multiple triangles.",
+        "Now here is where things change.",
+        "In the fourth row, we build X sub N of n.",
+        "That means we take x of n and we extend it periodically with period N.",
+        "So the signal repeats again and again.",
+        "This is what people mean by “circularly extended.”",
+        "Once you do that, and then convolve with h of n,",
+        "you get what you see in the fifth row.",
+        "Because the signal repeats, the pieces near the end of one period wrap around",
+        "and overlap with the beginning of the next period.",
+        "Those overlaps are the edge effects the slide is warning you about.",
+        "Finally, in the bottom row, you see the composite output.",
+        "The green portion in the middle is the part that is not contaminated by wrap-around.",
+        "That green section matches the true linear convolution, which is the result we actually want.",
+        "So the lesson is simple and important:",
+        "circular convolution causes wrap-around.",
+        "If you want circular convolution to behave like linear convolution,",
+        "you need to add enough zeros before you convolve.",
+        "That is what zero padding does.",
+        "It creates enough empty space so the wrap-around does not interfere with the part of the output we care about.",
+        "And when we do this in MATLAB later, you’ll see exactly where zero padding fits into the workflow."
+      ],
+      "fullText": "Let’s walk through this functional example, because it explains a very practical issue you will run into in MATLAB:\nthe difference between linear convolution and circular convolution, and why we often need zero padding.\n\nStart at the top.\n\nFirst, we have h of n.\nIt is a short pulse, basically a little rectangular block.\n\nSecond, we have x of n.\nIn this example x has a few separated pulses, shown in different colors just to help you see them.\n\nNow look at the third row.\nThat is the linear convolution result, x of n convolved with h of n.\nEach pulse in x gets “spread out” by h,\nso you see these triangular-looking responses.\nThat matches the intuition that a rectangle convolved with a rectangle gives a triangle,\nand multiple pulses give multiple triangles.\n\nNow here is where things change.\n\nIn the fourth row, we build X sub N of n.\nThat means we take x of n and we extend it periodically with period N.\nSo the signal repeats again and again.\nThis is what people mean by “circularly extended.”\n\nOnce you do that, and then convolve with h of n,\nyou get what you see in the fifth row.\nBecause the signal repeats, the pieces near the end of one period wrap around\nand overlap with the beginning of the next period.\nThose overlaps are the edge effects the slide is warning you about.\n\nFinally, in the bottom row, you see the composite output.\nThe green portion in the middle is the part that is not contaminated by wrap-around.\nThat green section matches the true linear convolution, which is the result we actually want.\n\nSo the lesson is simple and important:\ncircular convolution causes wrap-around.\nIf you want circular convolution to behave like linear convolution,\nyou need to add enough zeros before you convolve.\nThat is what zero padding does.\nIt creates enough empty space so the wrap-around does not interfere with the part of the output we care about.\n\nAnd when we do this in MATLAB later, you’ll see exactly where zero padding fits into the workflow.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide8.JPG",
+      "script": "Let's walk through this functional example, because it explains a very practical issue you will run into in MATLAB: the difference between linear convolution and circular convolution, and why we often need zero padding. We have h of n, a short pulse that's basically a little rectangular block. We have x of n, which has a few separated pulses, shown in different colors to help you see them. The linear convolution result, x of n convolved with h of n, is shown in the third row, where each pulse in x gets \"spread out\" by h.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Linear Convolution"
+        },
+        {
+          "timeMs": 1800,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Circular Convolution"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 400,
+          "label": "Zero Padding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Here’s a simple MATLAB example you can try right away.",
+      "bullets": [
+        "First, we define two discrete signals, just as vectors in MATLAB.",
+        "We set:",
+        "x equals [5 4 3 2 1]",
+        "and",
+        "h equals [1 2 3 4 5]",
+        "Next, we compute the linear convolution using MATLAB’s built-in function:",
+        "y equals conv(x, h)",
+        "And then we plot it:",
+        "plot(y)",
+        "and we set the y-axis range with:",
+        "ylim([0 100])",
+        "Now look at the shape of the result.",
+        "It starts small, rises to a peak around the middle, and then falls back down.",
+        "That is exactly what we expect.",
+        "In the middle positions, the two sequences overlap the most,",
+        "so the sum of products is the largest.",
+        "Near the beginning and near the end, there is only partial overlap,",
+        "so the sum is smaller.",
+        "So this is a good reality check.",
+        "Convolution is not mysterious.",
+        "It is the same simple recipe every time:",
+        "flip one sequence, shift it, multiply the overlap, and sum.",
+        "MATLAB just does those steps for you automatically, and the plot lets you see the pattern immediately."
+      ],
+      "fullText": "Here’s a simple MATLAB example you can try right away.\n\nFirst, we define two discrete signals, just as vectors in MATLAB.\nWe set:\nx equals [5 4 3 2 1]\nand\nh equals [1 2 3 4 5]\n\nNext, we compute the linear convolution using MATLAB’s built-in function:\ny equals conv(x, h)\n\nAnd then we plot it:\nplot(y)\nand we set the y-axis range with:\nylim([0 100])\n\nNow look at the shape of the result.\nIt starts small, rises to a peak around the middle, and then falls back down.\nThat is exactly what we expect.\n\nIn the middle positions, the two sequences overlap the most,\nso the sum of products is the largest.\nNear the beginning and near the end, there is only partial overlap,\nso the sum is smaller.\n\nSo this is a good reality check.\nConvolution is not mysterious.\nIt is the same simple recipe every time:\nflip one sequence, shift it, multiply the overlap, and sum.\nMATLAB just does those steps for you automatically, and the plot lets you see the pattern immediately.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide9.JPG",
+      "script": "Let's go through this example step by step. We define two discrete signals, x and h, as vectors in MATLAB. Then, we compute the linear convolution using MATLAB's built-in function, conv. Finally, we plot the result and set the y-axis range to see the shape of the convolution output.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Define discrete signals"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Use MATLAB's built-in conv function"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Plot the result and set y-axis range"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "Now let’s talk about circular convolution, using the hand picture.",
+      "bullets": [
+        "With ordinary, linear convolution, you can think of having one copy of each signal.",
+        "You flip one, you slide it across the other, and when you reach the end, you are done.",
+        "Circular convolution is different because the signals are treated as periodic.",
+        "So instead of one hand, imagine the pattern repeats forever.",
+        "That is why you see multiple copies of the hand shape on the slide.",
+        "Now look at the two vertical lines.",
+        "They are marking a boundary, like the end of one period and the start of the next.",
+        "Here is the key idea:",
+        "when you slide in circular convolution, you never “run out of signal.”",
+        "If you slide past the right edge, the signal wraps around and comes back in from the left.",
+        "So overlap can happen not only in the middle,",
+        "but also across that boundary.",
+        "In other words, part of the end of the signal can overlap with the beginning of the signal.",
+        "And that wrap-around overlap is exactly what creates the edge effects we discussed earlier.",
+        "It is not an error in the math.",
+        "It is the definition of circular convolution.",
+        "Now, in many practical problems, what we actually want is the linear convolution result.",
+        "So if we plan to use circular convolution methods, like FFT-based convolution,",
+        "we usually add enough zeros first, which is called zero padding.",
+        "Zero padding creates a buffer region so the wrap-around does not contaminate the part of the output we care about.",
+        "So the takeaway is simple:",
+        "circular convolution assumes periodic repetition,",
+        "and that causes wrap-around.",
+        "If you want it to match linear convolution, you need zero padding."
+      ],
+      "fullText": "Now let’s talk about circular convolution, using the hand picture.\n\nWith ordinary, linear convolution, you can think of having one copy of each signal.\nYou flip one, you slide it across the other, and when you reach the end, you are done.\n\nCircular convolution is different because the signals are treated as periodic.\nSo instead of one hand, imagine the pattern repeats forever.\nThat is why you see multiple copies of the hand shape on the slide.\n\nNow look at the two vertical lines.\nThey are marking a boundary, like the end of one period and the start of the next.\n\nHere is the key idea:\nwhen you slide in circular convolution, you never “run out of signal.”\nIf you slide past the right edge, the signal wraps around and comes back in from the left.\n\nSo overlap can happen not only in the middle,\nbut also across that boundary.\nIn other words, part of the end of the signal can overlap with the beginning of the signal.\n\nAnd that wrap-around overlap is exactly what creates the edge effects we discussed earlier.\nIt is not an error in the math.\nIt is the definition of circular convolution.\n\nNow, in many practical problems, what we actually want is the linear convolution result.\nSo if we plan to use circular convolution methods, like FFT-based convolution,\nwe usually add enough zeros first, which is called zero padding.\nZero padding creates a buffer region so the wrap-around does not contaminate the part of the output we care about.\n\nSo the takeaway is simple:\ncircular convolution assumes periodic repetition,\nand that causes wrap-around.\nIf you want it to match linear convolution, you need zero padding.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide10.JPG",
+      "script": "Now let's talk about circular convolution, using the hand picture. With ordinary, linear convolution, you can think of having one copy of each signal, flipping one, sliding it across the other, and when you reach the end, you're done. Circular convolution is different because the signals are treated as periodic, so instead of one hand, imagine the pattern repeats forever, resulting in multiple copies of the hand shape on the slide. The two vertical lines mark a boundary, like the end of one period and the start of the next.",
+      "spotlightEvents": [
+        {
+          "timeMs": 8000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Hand Picture"
+        },
+        {
+          "timeMs": 10000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 1500,
+          "label": "Linear Convolution"
+        },
+        {
+          "timeMs": 12000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Circular Convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Now let’s see how zero padding fixes the edge-effect problem we just saw with ci",
+      "bullets": [
+        "In circular convolution, the signal is treated as if it repeats.",
+        "So when you slide past the boundary, the end wraps around and overlaps with the beginning.",
+        "That is what creates those unwanted overlaps.",
+        "Zero padding is the simple trick that prevents that.",
+        "It means we extend our sequences by adding zeros at the ends before we do the convolution.",
+        "Those added zeros act like an empty buffer region.",
+        "Now use the hand picture to visualize it.",
+        "Compared to the previous slide, there is more space between the repeated copies.",
+        "So when the lower hand slides and reaches the boundary,",
+        "instead of immediately overlapping with the beginning of the next copy,",
+        "it first passes through a region that is effectively “all zeros.”",
+        "And because zeros contribute nothing to the sum of products,",
+        "that buffer region prevents the wrap-around from contaminating the part of the output we care about.",
+        "So the practical takeaway is this:",
+        "if you pad with enough zeros, the circular convolution result becomes identical to the true linear convolution result,",
+        "at least over the valid output region.",
+        "That is why zero padding is so important in FFT-based convolution.",
+        "FFT naturally gives you circular convolution,",
+        "and zero padding is what converts it into the linear convolution you actually want."
+      ],
+      "fullText": "Now let’s see how zero padding fixes the edge-effect problem we just saw with circular convolution.\n\nIn circular convolution, the signal is treated as if it repeats.\nSo when you slide past the boundary, the end wraps around and overlaps with the beginning.\nThat is what creates those unwanted overlaps.\n\nZero padding is the simple trick that prevents that.\n\nIt means we extend our sequences by adding zeros at the ends before we do the convolution.\nThose added zeros act like an empty buffer region.\n\nNow use the hand picture to visualize it.\nCompared to the previous slide, there is more space between the repeated copies.\nSo when the lower hand slides and reaches the boundary,\ninstead of immediately overlapping with the beginning of the next copy,\nit first passes through a region that is effectively “all zeros.”\n\nAnd because zeros contribute nothing to the sum of products,\nthat buffer region prevents the wrap-around from contaminating the part of the output we care about.\n\nSo the practical takeaway is this:\nif you pad with enough zeros, the circular convolution result becomes identical to the true linear convolution result,\nat least over the valid output region.\n\nThat is why zero padding is so important in FFT-based convolution.\nFFT naturally gives you circular convolution,\nand zero padding is what converts it into the linear convolution you actually want.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide11.JPG",
+      "script": "When we use zero padding, we add zeros at the ends of the sequences before convolving them, creating an empty buffer region that prevents the wrap-around effect and unwanted overlaps. This is in contrast to circular convolution, where the signal is treated as if it repeats, causing the end to wrap around and overlap with the beginning. By adding zeros, we effectively create a buffer region that absorbs the wrap-around effect, producing a linear convolution result.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 3000,
+          "label": "Zero Padding"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Edge-Effect Problem"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Circular Convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "Here’s a straightforward MATLAB example to show linear convolution in action.",
+      "bullets": [
+        "We start with two sequences:",
+        "x equals 5,4,3,2,1,0",
+        "h equals 1,2,3,4,5,6",
+        "The first figure shows both sequences plotted together. The blue line is x — starting high and decreasing. The red line is h — starting low and increasing.",
+        "Now we use MATLAB’s built-in conv function to compute their linear convolution:",
+        "lconv equals conv x, h;",
+        "When we plot the result, we see the familiar triangular shape. It rises as the two signals increasingly overlap, reaches a peak when their centers align, and then falls as the overlap decreases.",
+        "If this feels familiar, it’s because we used the same function — conv — earlier when convolving the RC circuit’s impulse response with the unit step function in your homework. The process is exactly the same here; only the input sequences are different.",
+        "This example is a nice reminder that MATLAB makes it very easy to visualize convolution, and seeing the result in a plot helps reinforce what’s happening mathematically."
+      ],
+      "fullText": "Here’s a straightforward MATLAB example to show linear convolution in action.\n\nWe start with two sequences:\u000bx equals 5,4,3,2,1,0\u000bh equals 1,2,3,4,5,6\nThe first figure shows both sequences plotted together. The blue line is x — starting high and decreasing. The red line is h — starting low and increasing.\nNow we use MATLAB’s built-in conv function to compute their linear convolution:\u000blconv equals conv x, h;\n\nWhen we plot the result, we see the familiar triangular shape. It rises as the two signals increasingly overlap, reaches a peak when their centers align, and then falls as the overlap decreases.\n\nIf this feels familiar, it’s because we used the same function — conv — earlier when convolving the RC circuit’s impulse response with the unit step function in your homework. The process is exactly the same here; only the input sequences are different.\nThis example is a nice reminder that MATLAB makes it very easy to visualize convolution, and seeing the result in a plot helps reinforce what’s happening mathematically.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide12.JPG",
+      "script": "Here's a straightforward MATLAB example to show linear convolution in action. We start with two sequences: x equals 5,4,3,2,1,0 and h equals 1,2,3,4,5,6. The first figure shows both sequences plotted together, with the blue line representing x and the red line representing h. We then use MATLAB's built-in conv function to compute their linear convolution, storing the result in lconv equals conv x, h. When we plot the result, we see the familiar triangular shape that rises as the two signals increasingly overlap, reaches a peak when their centers align, and then falls as the overlap decreases.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 500,
+          "label": "Convolution Example"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "MATLAB Example"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Sequence Plotting"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "Here’s where we can clearly see the difference between linear convolution and ci",
+      "bullets": [
+        "In MATLAB, we can perform circular convolution using the Fourier transform approach. First, we take the FFT of our two sequences, x and h. Then, we multiply their spectra point by point. Finally, we take the inverse FFT to bring the result back into the time domain.",
+        "Mathematically, multiplication in the frequency domain is equivalent to convolution in the time domain — but here’s the key point: if we don’t use zero-padding, the convolution we get is circular by nature.",
+        "In the plot below, the blue curve is the circular convolution result without zero-padding. The red dashed curve is the linear convolution result from our earlier example.",
+        "Notice how the blue curve is distorted — it doesn’t match the clean triangular shape of the red curve. That distortion comes from the wrapping-around effect we talked about earlier: parts of the signal from the end are interfering with parts from the beginning.",
+        "This is why zero-padding is essential when we want the frequency-domain method to give the same result as linear convolution. Without it, circular convolution will give you something different."
+      ],
+      "fullText": "Here’s where we can clearly see the difference between linear convolution and circular convolution without zero padding.\n\nIn MATLAB, we can perform circular convolution using the Fourier transform approach. First, we take the FFT of our two sequences, x and h. Then, we multiply their spectra point by point. Finally, we take the inverse FFT to bring the result back into the time domain.\nMathematically, multiplication in the frequency domain is equivalent to convolution in the time domain — but here’s the key point: if we don’t use zero-padding, the convolution we get is circular by nature.\nIn the plot below, the blue curve is the circular convolution result without zero-padding. The red dashed curve is the linear convolution result from our earlier example.\n\nNotice how the blue curve is distorted — it doesn’t match the clean triangular shape of the red curve. That distortion comes from the wrapping-around effect we talked about earlier: parts of the signal from the end are interfering with parts from the beginning.\nThis is why zero-padding is essential when we want the frequency-domain method to give the same result as linear convolution. Without it, circular convolution will give you something different.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide13.JPG",
+      "script": "When performing circular convolution without zero padding, the result is a circular convolution, which can be visualized as a triangular shape in the time domain. This is in contrast to linear convolution, which produces a more complex shape. The key point is that multiplication in the frequency domain corresponds to circular convolution in the time domain.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Key point"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.4,
+          "durationMs": 1500,
+          "label": "MATLAB implementation"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Distortion in circular convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Here we see why zero-padding is the key to making circular convolution match lin",
+      "bullets": [
+        "We begin by setting N to be the length of x plus the length of h, minus 1. This value of N is exactly the length of the linear convolution result — something you’ve already seen in your RC circuit homework.",
+        "Next, we create padded versions of our two signals:",
+        "x pad starts with the original values of x, followed by enough zeros so that its length is N.",
+        "h pad is created in exactly the same way, starting with h and then adding zeros to reach length N.",
+        "Now, we take the FFT of these zero-padded signals, multiply them point by point in the frequency domain, and take the inverse FFT to return to the time domain.",
+        "When we plot the result, we see that the zero-padded circular convolution — shown in blue — lies exactly on top of the linear convolution — shown in red. This perfect match confirms that zero-padding has removed the unwanted wrap-around effects and given us the correct, undistorted result.",
+        "So the takeaway is clear: if you’re using the FFT method to compute convolution, always add enough zero-padding to get the true linear convolution."
+      ],
+      "fullText": "Here we see why zero-padding is the key to making circular convolution match linear convolution.\n\nWe begin by setting N to be the length of x plus the length of h, minus 1. This value of N is exactly the length of the linear convolution result — something you’ve already seen in your RC circuit homework.\nNext, we create padded versions of our two signals:\nx pad starts with the original values of x, followed by enough zeros so that its length is N.\nh pad is created in exactly the same way, starting with h and then adding zeros to reach length N.\n\nNow, we take the FFT of these zero-padded signals, multiply them point by point in the frequency domain, and take the inverse FFT to return to the time domain.\n\nWhen we plot the result, we see that the zero-padded circular convolution — shown in blue — lies exactly on top of the linear convolution — shown in red. This perfect match confirms that zero-padding has removed the unwanted wrap-around effects and given us the correct, undistorted result.\n\nSo the takeaway is clear: if you’re using the FFT method to compute convolution, always add enough zero-padding to get the true linear convolution.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide14.JPG",
+      "script": "By setting N to the length of x plus the length of h minus 1, we ensure that the circular convolution result matches the linear convolution result. We create padded versions of our signals by adding zeros to the end of x and h, making sure both signals are now N samples long. Then, we take the FFT of these zero-padded signals, which will be used for the circular convolution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Why zero-padding is necessary"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Creating padded versions of signals"
+        },
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 400,
+          "label": "Ensuring N matches linear convolution result"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "Now that we’ve explored convolution in detail — both in the time domain and thro",
+      "bullets": [
+        "Spectral analysis is about looking at a signal in the frequency domain to see what frequencies are present and how strong they are. This is incredibly useful in engineering, science, and even everyday technology — from analyzing audio signals, to detecting features in images, to identifying patterns in biomedical data.",
+        "In the upcoming slides, we’ll take an example signal, examine its spectrum, and then see how techniques like zero-padding and refining spectral bins help us get a clearer, more detailed view of its frequency content.",
+        "Let’s start by looking at our example signal and breaking it down step by step."
+      ],
+      "fullText": "Now that we’ve explored convolution in detail — both in the time domain and through the FFT method — let’s move into one of the most common and powerful applications of the Fourier transform: spectral analysis.\n\nSpectral analysis is about looking at a signal in the frequency domain to see what frequencies are present and how strong they are. This is incredibly useful in engineering, science, and even everyday technology — from analyzing audio signals, to detecting features in images, to identifying patterns in biomedical data.\n\nIn the upcoming slides, we’ll take an example signal, examine its spectrum, and then see how techniques like zero-padding and refining spectral bins help us get a clearer, more detailed view of its frequency content.\nLet’s start by looking at our example signal and breaking it down step by step.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide15.JPG",
+      "script": "Now that we've explored convolution in detail, both in the time domain and through the FFT method, let's move into one of the most common and powerful applications of the Fourier transform: spectral analysis. Spectral analysis is about looking at a signal in the frequency domain to see what frequencies are present and how strong they are. This is incredibly useful in engineering, science, and even everyday technology, from analyzing audio signals to detecting features in images to identifying patterns in biomedical data. We'll take an example signal and examine its frequency components using the Fourier transform.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Spectral analysis"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Frequency content"
+        },
+        {
+          "timeMs": 4200,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Zero-padding"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Let’s start our spectral analysis with a simple but quite subtle example.",
+      "bullets": [
+        "We’ll create a signal that contains two different pure tones — one at one hundred hertz and the other at two hundred two point five hertz.",
+        "In MATLAB, we first set the sampling frequency, F s, to one thousand hertz. That means we take one thousand samples every second.",
+        "Next, we create the time vector, t. It starts at zero seconds and increases in steps of zero, zero point zero zero one seconds — that’s one millisecond — until just before one second.",
+        "Now, our signal x is built by adding two parts:",
+        "First, a cosine wave with frequency one hundred hertz. In MATLAB, that’s written as: cosine of open parenthesis two times pi times one hundred times t close parenthesis.",
+        "Second, a sine wave with frequency two hundred two point five hertz. In MATLAB, that’s: sine of open parenthesis two times pi times two hundred two point five times t close parenthesis.",
+        "When we add these two waveforms together, we get x, which contains both frequencies.",
+        "If we plot only the first one hundred samples, we can see the combined oscillations. Sometimes the waves reinforce each other, producing larger peaks; other times they partially cancel out, making smaller peaks.",
+        "This is the time-domain view. Next, we’ll use the Fourier transform to find these frequencies in the frequency domain — and then we’ll explore how zero-padding can help us make those frequencies stand out more clearly.  It takes some effort to appreciate the benefit of zero-padding!"
+      ],
+      "fullText": "Let’s start our spectral analysis with a simple but quite subtle example.\n\nWe’ll create a signal that contains two different pure tones — one at one hundred hertz and the other at two hundred two point five hertz.\nIn MATLAB, we first set the sampling frequency, F s, to one thousand hertz. That means we take one thousand samples every second.\nNext, we create the time vector, t. It starts at zero seconds and increases in steps of zero, zero point zero zero one seconds — that’s one millisecond — until just before one second.\n\nNow, our signal x is built by adding two parts:\nFirst, a cosine wave with frequency one hundred hertz. In MATLAB, that’s written as: cosine of open parenthesis two times pi times one hundred times t close parenthesis.\nSecond, a sine wave with frequency two hundred two point five hertz. In MATLAB, that’s: sine of open parenthesis two times pi times two hundred two point five times t close parenthesis.\nWhen we add these two waveforms together, we get x, which contains both frequencies.\n\nIf we plot only the first one hundred samples, we can see the combined oscillations. Sometimes the waves reinforce each other, producing larger peaks; other times they partially cancel out, making smaller peaks.\nThis is the time-domain view. Next, we’ll use the Fourier transform to find these frequencies in the frequency domain — and then we’ll explore how zero-padding can help us make those frequencies stand out more clearly.  It takes some effort to appreciate the benefit of zero-padding!",
+      "imageURL": "/lectures/Lecture_09/Images/Slide16.JPG",
+      "script": "Let's start our spectral analysis with a simple but quite subtle example. We'll create a signal that contains two different pure tones — one at one hundred hertz and the other at two hundred two point five hertz. In MATLAB, we first set the sampling frequency, F s, to one thousand hertz, taking one thousand samples every second. We then create the time vector, t, starting at zero seconds and increasing in steps of one millisecond until just before one second. Our signal x is built by adding two parts: a cosine wave with a frequency of one hundred hertz and another cosine wave with a frequency of two hundred two point five hertz.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Sampling Frequency"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.2,
+          "durationMs": 2000,
+          "label": "Time Vector"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.25,
+          "durationMs": 2000,
+          "label": "Signal Components"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Now, let’s look at the spectrum of our synthetic signal without applying any zer",
+      "bullets": [
+        "We perform the Fourier transform of our signal using the FFT function. This gives us the discrete frequency components of the signal. Then, we plot the magnitude of the FFT against frequency, with frequency in hertz along the horizontal axis.",
+        "From the plot, we can clearly see a sharp spike at one hundred hertz. That spike corresponds exactly to the first or cosine component we built into the signal.",
+        "But notice something important — the second or sine component, at two hundred two point five hertz, does not appear as a clear spike. Instead, it’s blurred and not well-resolved. This happens because two hundred two point five hertz is not exactly aligned with one of the FFT’s default spectral bins, which are spaced one hertz apart.",
+        "So, without zero-padding, the FFT resolution is limited by the number of samples we have. The first frequency happens to align perfectly with a bin, so it looks sharp. The second one falls between bins, so its energy is spread out over multiple points in the plot, making it appear a bit blurry and less distinct.",
+        "We’ll see in the next slide how zero-padding helps us refine the spectral bins and make that second frequency stand out much more clearly."
+      ],
+      "fullText": "Now, let’s look at the spectrum of our synthetic signal without applying any zero-padding.\n\nWe perform the Fourier transform of our signal using the FFT function. This gives us the discrete frequency components of the signal. Then, we plot the magnitude of the FFT against frequency, with frequency in hertz along the horizontal axis.\nFrom the plot, we can clearly see a sharp spike at one hundred hertz. That spike corresponds exactly to the first or cosine component we built into the signal.\n\nBut notice something important — the second or sine component, at two hundred two point five hertz, does not appear as a clear spike. Instead, it’s blurred and not well-resolved. This happens because two hundred two point five hertz is not exactly aligned with one of the FFT’s default spectral bins, which are spaced one hertz apart.\n\nSo, without zero-padding, the FFT resolution is limited by the number of samples we have. The first frequency happens to align perfectly with a bin, so it looks sharp. The second one falls between bins, so its energy is spread out over multiple points in the plot, making it appear a bit blurry and less distinct.\nWe’ll see in the next slide how zero-padding helps us refine the spectral bins and make that second frequency stand out much more clearly.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide17.JPG",
+      "script": "Now, let's look at the spectrum of our synthetic signal without applying any zero-padding. We perform the Fourier transform of our signal using the FFT function, which gives us the discrete frequency components of the signal. The plot shows the magnitude of the FFT against frequency, with frequency in hertz along the horizontal axis. We see a sharp spike at one hundred hertz, corresponding to the first or cosine component, but the second or sine component at two hundred two point five hertz is not as distinct.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Spectrum without zero-padding"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.7,
+          "durationMs": 1000,
+          "label": "Sharp spike at 100 Hz"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.6,
+          "durationMs": 1000,
+          "label": "Blurred spike at 202.5 Hz"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Now let’s see what happens when we add zero-padding before taking the Fourier tr",
+      "bullets": [
+        "This time, when we call the FFT function, we specify a length of two thousand. That means we take our original signal and append enough zeros to make it two thousand points long before computing the FFT.",
+        "By doing this, we change the spacing between frequency bins. Previously, without padding, the bins were one hertz apart. Now, the bin spacing is F s divided by two thousand, which equals zero point five hertz. This finer spacing allows us to more accurately pinpoint frequencies that fall between the old one-hertz bins.",
+        "When we plot the result, we still see the sharp spike at one hundred hertz. Also, we now see a very clear spike at two hundred two point five hertz — the second frequency in our original signal.",
+        "The reason is simple: with zero-padding, we’ve increased the frequency resolution of the spectrum, making it possible to distinguish both components of our signal cleanly.",
+        "So, zero-padding doesn’t create new information — it simply lets us view the spectrum at a finer scale, revealing details that would otherwise be hidden between coarse frequency bins."
+      ],
+      "fullText": "Now let’s see what happens when we add zero-padding before taking the Fourier transform.\n\nThis time, when we call the FFT function, we specify a length of two thousand. That means we take our original signal and append enough zeros to make it two thousand points long before computing the FFT.\nBy doing this, we change the spacing between frequency bins. Previously, without padding, the bins were one hertz apart. Now, the bin spacing is F s divided by two thousand, which equals zero point five hertz. This finer spacing allows us to more accurately pinpoint frequencies that fall between the old one-hertz bins.\n\nWhen we plot the result, we still see the sharp spike at one hundred hertz. Also, we now see a very clear spike at two hundred two point five hertz — the second frequency in our original signal.\nThe reason is simple: with zero-padding, we’ve increased the frequency resolution of the spectrum, making it possible to distinguish both components of our signal cleanly.\n\nSo, zero-padding doesn’t create new information — it simply lets us view the spectrum at a finer scale, revealing details that would otherwise be hidden between coarse frequency bins.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide18.JPG",
+      "script": "Now let's see what happens when we add zero-padding before taking the Fourier transform. We append enough zeros to make the signal two thousand points long, changing the spacing between frequency bins from one hertz to zero point five hertz. This finer spacing enables us to more accurately pinpoint frequencies that fall between the original one-hertz bins.",
+      "spotlightEvents": [
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Zero-padding effect"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 3000,
+          "label": "Finer bin spacing"
+        },
+        {
+          "timeMs": 55000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 4000,
+          "label": "Improved frequency resolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "Now let’s look at a slightly more complex example, still in continuous time.",
+      "bullets": [
+        "On this slide, we are building a signal by adding several sinusoids together.",
+        "You can see the MATLAB code at the top, and the time-domain plot at the bottom.",
+        "We set the sampling rate, Fs, to one thousand samples per second.",
+        "Then we build a time vector from zero to one second.",
+        "And then we define x of t as a sum of multiple frequency components.",
+        "In this example, the signal includes:",
+        "a cosine at 100 hertz,",
+        "a sine at 202.5 hertz,",
+        "a cosine at 45 hertz,",
+        "a cosine at 407 hertz,",
+        "and a sine at 445.8 hertz.",
+        "When you add all of those together, the time-domain waveform looks pretty messy.",
+        "It oscillates rapidly, the amplitude seems to rise and fall,",
+        "and it is not obvious by eye which frequencies are inside.",
+        "And that is exactly the point of this example.",
+        "In the time domain, a multi-frequency signal can look complicated.",
+        "But in the frequency domain, the structure becomes clear.",
+        "When we apply the Fourier transform, each sinusoidal component shows up as a distinct peak,",
+        "and we can read off both the frequencies and their relative strengths.",
+        "So in the next step, we are going to take this same signal",
+        "and compute its Fourier transform,",
+        "and you will see how the frequency-domain view reveals what is hidden in the time-domain plot."
+      ],
+      "fullText": "Now let’s look at a slightly more complex example, still in continuous time.\n\nOn this slide, we are building a signal by adding several sinusoids together.\nYou can see the MATLAB code at the top, and the time-domain plot at the bottom.\n\nWe set the sampling rate, Fs, to one thousand samples per second.\nThen we build a time vector from zero to one second.\n\nAnd then we define x of t as a sum of multiple frequency components.\n\nIn this example, the signal includes:\na cosine at 100 hertz,\na sine at 202.5 hertz,\na cosine at 45 hertz,\na cosine at 407 hertz,\nand a sine at 445.8 hertz.\n\nWhen you add all of those together, the time-domain waveform looks pretty messy.\nIt oscillates rapidly, the amplitude seems to rise and fall,\nand it is not obvious by eye which frequencies are inside.\n\nAnd that is exactly the point of this example.\n\nIn the time domain, a multi-frequency signal can look complicated.\nBut in the frequency domain, the structure becomes clear.\nWhen we apply the Fourier transform, each sinusoidal component shows up as a distinct peak,\nand we can read off both the frequencies and their relative strengths.\n\nSo in the next step, we are going to take this same signal\nand compute its Fourier transform,\nand you will see how the frequency-domain view reveals what is hidden in the time-domain plot.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide19.JPG",
+      "script": "Now let's look at a slightly more complex example, still in continuous time. We're building a signal by adding several sinusoids together, and you can see the MATLAB code at the top and the time-domain plot at the bottom. We set the sampling rate, Fs, to one thousand samples per second, then build a time vector from zero to one second, and finally define x of t as a sum of multiple frequency components.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Building a signal"
+        },
+        {
+          "timeMs": 1800,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "MATLAB code"
+        },
+        {
+          "timeMs": 2300,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 400,
+          "label": "Time-domain plot"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "Alright, here is what the spectrum looks like when we take the FFT in the most b",
+      "bullets": [
+        "with no zero padding and no attempt to refine the frequency bins.",
+        "We compute the FFT, take the magnitude, and plot it versus frequency in hertz.",
+        "Some components show up as very clean, sharp spikes,",
+        "and some do not.",
+        "Look at the frequencies that land neatly on FFT bins.",
+        "For example, 45 hertz and 100 hertz are nicely resolved here.",
+        "They align well with the discrete frequency grid used by the FFT,",
+        "so their energy concentrates into a single bin, and the peaks look tall and sharp.",
+        "But now look at 202.5 hertz and 445.8 hertz.",
+        "Those do not sit exactly on an FFT bin location.",
+        "So their energy cannot fall into just one bin.",
+        "Instead, it spreads out across neighboring bins.",
+        "That spreading is why the peaks look lower than you might expect",
+        "and why they are not as sharply defined.",
+        "The slide is calling these “unrefined bins,” meaning the frequency grid is still coarse.",
+        "So the takeaway is simple:",
+        "with a finite-length time record, the FFT gives you samples on a discrete frequency grid.",
+        "If a true sinusoid falls between those grid points,",
+        "it does not show up as a single perfect spike.",
+        "In the next step, we will use zero padding to create a finer set of frequency samples,",
+        "so those in-between frequencies become easier to locate and interpret."
+      ],
+      "fullText": "Alright, here is what the spectrum looks like when we take the FFT in the most basic way,\nwith no zero padding and no attempt to refine the frequency bins.\n\nWe compute the FFT, take the magnitude, and plot it versus frequency in hertz.\nSome components show up as very clean, sharp spikes,\nand some do not.\n\nLook at the frequencies that land neatly on FFT bins.\nFor example, 45 hertz and 100 hertz are nicely resolved here.\nThey align well with the discrete frequency grid used by the FFT,\nso their energy concentrates into a single bin, and the peaks look tall and sharp.\n\nBut now look at 202.5 hertz and 445.8 hertz.\nThose do not sit exactly on an FFT bin location.\nSo their energy cannot fall into just one bin.\nInstead, it spreads out across neighboring bins.\n\nThat spreading is why the peaks look lower than you might expect\nand why they are not as sharply defined.\nThe slide is calling these “unrefined bins,” meaning the frequency grid is still coarse.\n\nSo the takeaway is simple:\nwith a finite-length time record, the FFT gives you samples on a discrete frequency grid.\nIf a true sinusoid falls between those grid points,\nit does not show up as a single perfect spike.\n\nIn the next step, we will use zero padding to create a finer set of frequency samples,\nso those in-between frequencies become easier to locate and interpret.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide20.JPG",
+      "script": "This frequency does not align perfectly with the discrete frequency grid, resulting in its energy being spread across multiple bins, making the peak appear shorter and wider. This is because the FFT can't capture the exact frequency, leading to a less defined peak.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13100,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Frequency Spikes"
+        },
+        {
+          "timeMs": 13100,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Energy Spread"
+        },
+        {
+          "timeMs": 13100,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "FFT Limitations"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Now, let’s refine our frequency bins by a factor of two — the same idea we used ",
+      "bullets": [
+        "We do this by setting a bin-refine factor equal to two, and then increasing the FFT length to be two times the number of samples in our original time vector. In practice, this means appending enough zeros to double the length of the signal before computing the FFT.",
+        "When we plot the result, the improvement is clear: the frequency at two hundred two point five hertz is now well resolved, showing a sharp and distinct peak.",
+        "However, notice that the frequency at four hundred forty-five point eight hertz is still not well resolved. Even with a bin spacing of zero-point-five hertz, this frequency does not fall exactly on one of the discrete FFT bins, so its energy is still spread across multiple bins. The peak is visible but not as sharp or as tall as the perfectly aligned frequencies.",
+        "The takeaway is that zero-padding and bin refinement improve resolution, but they cannot create a perfectly sharp spike unless the frequency exactly matches a discrete bin location."
+      ],
+      "fullText": "Now, let’s refine our frequency bins by a factor of two — the same idea we used earlier when going from one-hertz bins to zero-point-five-hertz bins.\n\nWe do this by setting a bin-refine factor equal to two, and then increasing the FFT length to be two times the number of samples in our original time vector. In practice, this means appending enough zeros to double the length of the signal before computing the FFT.\nWhen we plot the result, the improvement is clear: the frequency at two hundred two point five hertz is now well resolved, showing a sharp and distinct peak.\n\nHowever, notice that the frequency at four hundred forty-five point eight hertz is still not well resolved. Even with a bin spacing of zero-point-five hertz, this frequency does not fall exactly on one of the discrete FFT bins, so its energy is still spread across multiple bins. The peak is visible but not as sharp or as tall as the perfectly aligned frequencies.\n\nThe takeaway is that zero-padding and bin refinement improve resolution, but they cannot create a perfectly sharp spike unless the frequency exactly matches a discrete bin location.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide21.JPG",
+      "script": "Now, let's refine our frequency bins by a factor of two, using the same idea as before. We set the bin-refine factor to two and increase the FFT length to twice the original number of samples. This means appending enough zeros to double the length of the signal before computing the FFT. The result is a clearer, sharper peak at 202.5 hertz.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Refine frequency bins by a factor of two"
+        },
+        {
+          "timeMs": 45000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Improve frequency resolution with zero-padding"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2000,
+          "label": "Limitations of zero-padding and bin refinement"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "Now, let’s refine our frequency bins even further — this time by a factor of fou",
+      "bullets": [
+        "In MATLAB, that means setting the bin-refine factor to four and increasing the FFT length to four times the length of our original time vector. In other words, we append enough zeros so that the signal length is quadrupled before computing the FFT.",
+        "By doing this, our frequency bin spacing changes from one hertz to zero-point-two hertz. This very fine resolution means that even frequencies like four hundred forty-five point eight hertz — which were previously hard to resolve — now align closely with a bin and show a sharp, well-defined spike.",
+        "When we plot the result, every frequency in our multi-component signal — forty-five hertz, one hundred hertz, two hundred two point five hertz, four hundred seven hertz, and four hundred forty-five point eight hertz — is clearly visible, each with a maximum amplitude of one.",
+        "This example confirms that refining the bin spacing through zero-padding greatly improves our ability to detect non-integer frequencies. With enough refinement, even challenging frequencies can be resolved as sharply as those that naturally align with the original bin spacing."
+      ],
+      "fullText": "Now, let’s refine our frequency bins even further — this time by a factor of four.\n\nIn MATLAB, that means setting the bin-refine factor to four and increasing the FFT length to four times the length of our original time vector. In other words, we append enough zeros so that the signal length is quadrupled before computing the FFT.\nBy doing this, our frequency bin spacing changes from one hertz to zero-point-two hertz. This very fine resolution means that even frequencies like four hundred forty-five point eight hertz — which were previously hard to resolve — now align closely with a bin and show a sharp, well-defined spike.\n\nWhen we plot the result, every frequency in our multi-component signal — forty-five hertz, one hundred hertz, two hundred two point five hertz, four hundred seven hertz, and four hundred forty-five point eight hertz — is clearly visible, each with a maximum amplitude of one.\nThis example confirms that refining the bin spacing through zero-padding greatly improves our ability to detect non-integer frequencies. With enough refinement, even challenging frequencies can be resolved as sharply as those that naturally align with the original bin spacing.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide22.JPG",
+      "script": "Now, let's refine our frequency bins even further, this time by a factor of four. In MATLAB, we set the bin-refine factor to four and increase the FFT length to four times the length of our original time vector. This means appending enough zeros so that the signal length is quadrupled before computing the FFT. As a result, our frequency bin spacing changes from one hertz to zero-point-two hertz.",
+      "spotlightEvents": [
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Refine frequency bins"
+        },
+        {
+          "timeMs": 31000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Bin-refine factor to four"
+        },
+        {
+          "timeMs": 33000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 3000,
+          "label": "Frequency bin spacing changes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "Alright, here is our outline for the rest of this section.",
+      "bullets": [
+        "We have three main parts.",
+        "First, we will finish discrete convolution,",
+        "and in particular we will focus on zero padding,",
+        "and on the idea that with the right padding,",
+        "circular convolution can be made equivalent to linear convolution.",
+        "Second, we will do spectral analysis.",
+        "Again, zero padding shows up,",
+        "because it helps refine the frequency grid and gives us finer spectral bins.",
+        "And then we move to the part that matters most for images: 2D filtering.",
+        "Up to now, we’ve mostly talked about Fourier analysis in one dimension,",
+        "where a signal varies with time.",
+        "But images are naturally two-dimensional.",
+        "They vary across horizontal and vertical spatial coordinates.",
+        "So the 2D Fourier transform does the same job as the 1D transform,",
+        "except now it tells us the spatial frequency content of an image.",
+        "In plain language, it tells us what kinds of patterns are present:",
+        "slow, smooth variations versus rapid changes like edges and fine texture.",
+        "And the reason this is so useful is that many image-processing tasks",
+        "become cleaner in the frequency domain.",
+        "For example, noise removal often corresponds to suppressing certain frequency ranges.",
+        "And edge enhancement often corresponds to emphasizing higher spatial frequencies.",
+        "So in the next slides, we will apply these ideas to 2D filtering,",
+        "starting with noise removal and then moving on to edge enhancement."
+      ],
+      "fullText": "Alright, here is our outline for the rest of this section.\n\nWe have three main parts.\n\nFirst, we will finish discrete convolution,\nand in particular we will focus on zero padding,\nand on the idea that with the right padding,\ncircular convolution can be made equivalent to linear convolution.\n\nSecond, we will do spectral analysis.\nAgain, zero padding shows up,\nbecause it helps refine the frequency grid and gives us finer spectral bins.\n\nAnd then we move to the part that matters most for images: 2D filtering.\n\nUp to now, we’ve mostly talked about Fourier analysis in one dimension,\nwhere a signal varies with time.\nBut images are naturally two-dimensional.\nThey vary across horizontal and vertical spatial coordinates.\n\nSo the 2D Fourier transform does the same job as the 1D transform,\nexcept now it tells us the spatial frequency content of an image.\nIn plain language, it tells us what kinds of patterns are present:\nslow, smooth variations versus rapid changes like edges and fine texture.\n\nAnd the reason this is so useful is that many image-processing tasks\nbecome cleaner in the frequency domain.\n\nFor example, noise removal often corresponds to suppressing certain frequency ranges.\nAnd edge enhancement often corresponds to emphasizing higher spatial frequencies.\n\nSo in the next slides, we will apply these ideas to 2D filtering,\nstarting with noise removal and then moving on to edge enhancement.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide23.JPG",
+      "script": "Now that we have the outline, let's walk through the remaining topics in this section. We'll first revisit discrete convolution, focusing on zero padding and its role in making circular convolution equivalent to linear convolution. Then, we'll move on to spectral analysis, where zero padding helps refine the frequency grid and provides finer spectral bins. Finally, we'll apply these concepts to 2D filtering, which is crucial for image processing and analysis.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Discrete Convolution"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 300,
+          "label": "Zero Padding"
+        },
+        {
+          "timeMs": 3200,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 400,
+          "label": "Circular Convolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "Here we see the concept of the two-dimensional Fourier transform.",
+      "bullets": [
+        "The equations at the top describe two processes:",
+        "The forward 2D Fourier transform, which takes a spatial-domain function — something that varies in the x and y directions — and expresses it in terms of its spatial frequency components.",
+        "The inverse 2D Fourier transform takes that frequency-domain representation and reconstructs the original spatial-domain function.",
+        "In our example, the starting function is shown as a sideways rectangle in the spatial domain. When we perform the 2D Fourier transform, we obtain a frequency-domain representation — shown here in the rainbow-colored plot. The colors represent the amplitude of different spatial frequency components, and the values can be complex, with both real and imaginary parts.",
+        "Just as in the one-dimensional case, the Fourier transform lets us switch back and forth between two perspectives:",
+        "In the spatial domain, we see shapes and patterns directly.",
+        "In the frequency domain, we see how much of each spatial frequency is present in the image.",
+        "Understanding this relationship is essential for image processing, because many operations — such as filtering, noise removal, and edge detection — can be performed more effectively in the frequency domain."
+      ],
+      "fullText": "Here we see the concept of the two-dimensional Fourier transform.\n\nThe equations at the top describe two processes:\nThe forward 2D Fourier transform, which takes a spatial-domain function — something that varies in the x and y directions — and expresses it in terms of its spatial frequency components.\nThe inverse 2D Fourier transform takes that frequency-domain representation and reconstructs the original spatial-domain function.\n\nIn our example, the starting function is shown as a sideways rectangle in the spatial domain. When we perform the 2D Fourier transform, we obtain a frequency-domain representation — shown here in the rainbow-colored plot. The colors represent the amplitude of different spatial frequency components, and the values can be complex, with both real and imaginary parts.\nJust as in the one-dimensional case, the Fourier transform lets us switch back and forth between two perspectives:\nIn the spatial domain, we see shapes and patterns directly.\n\nIn the frequency domain, we see how much of each spatial frequency is present in the image.\nUnderstanding this relationship is essential for image processing, because many operations — such as filtering, noise removal, and edge detection — can be performed more effectively in the frequency domain.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide24.JPG",
+      "script": "The two-dimensional Fourier transform is a mathematical operation that allows us to analyze and manipulate two-dimensional signals, such as images. It consists of two parts: the forward transform, which takes a spatial-domain function and expresses it in terms of its frequency components, and the inverse transform, which takes the frequency-domain representation and reconstructs the original spatial-domain function. In our example, the starting function is a sideways rectangle in the spatial domain, which, when transformed, produces a frequency-domain pattern.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Two-dimensional Fourier transform"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Forward and inverse transforms"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Spatial-domain and frequency-domain representations"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "In image processing, noise can often hide important details. This is a common pr",
+      "bullets": [
+        "Here, we start with an image — the well-known “Lena” test image — that has been corrupted by noise. In the top left, you can see the noisy image in the spatial domain.",
+        "When we take the two-dimensional Fourier transform of this image, shown in the bottom left, we see its frequency-domain representation. The bright spot in the center corresponds to low-frequency components, which carry the main shapes and structures of the image. The scattered speckles throughout the spectrum represent higher-frequency noise.",
+        "If we want to reduce noise, we can selectively remove certain frequency components. One simple way is to set the outer regions of the spectrum to zero, while keeping only the frequencies near the center — this is essentially a low-pass filter in the frequency domain. In the bottom right, you can see this filtered spectrum.",
+        "Finally, applying the inverse Fourier transform gives us the restored image in the top right. The noise is greatly reduced, and the underlying features — such as the woman’s face and hat — become much clearer.",
+        "This kind of frequency-domain noise suppression is a powerful technique in imaging, allowing us to recover important details that would otherwise be lost."
+      ],
+      "fullText": "In image processing, noise can often hide important details. This is a common problem in real-world applications, especially when images are captured in low light, transmitted over noisy channels, or acquired using sensors in a challenging environment.\nHere, we start with an image — the well-known “Lena” test image — that has been corrupted by noise. In the top left, you can see the noisy image in the spatial domain.\n\nWhen we take the two-dimensional Fourier transform of this image, shown in the bottom left, we see its frequency-domain representation. The bright spot in the center corresponds to low-frequency components, which carry the main shapes and structures of the image. The scattered speckles throughout the spectrum represent higher-frequency noise.\nIf we want to reduce noise, we can selectively remove certain frequency components. One simple way is to set the outer regions of the spectrum to zero, while keeping only the frequencies near the center — this is essentially a low-pass filter in the frequency domain. In the bottom right, you can see this filtered spectrum.\n\nFinally, applying the inverse Fourier transform gives us the restored image in the top right. The noise is greatly reduced, and the underlying features — such as the woman’s face and hat — become much clearer.\nThis kind of frequency-domain noise suppression is a powerful technique in imaging, allowing us to recover important details that would otherwise be lost.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide25.JPG",
+      "script": "In image processing, noise can often hide important details, making it challenging to distinguish real features from noise. This is a common problem in real-world applications, especially when images are captured in low light, transmitted over noisy channels, or acquired using sensors in a challenging environment. We'll explore how to separate the signal from the noise using the Fourier transform. By analyzing the frequency-domain representation, we can isolate the noise and recover the original image.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 500,
+          "label": "Lena image"
+        },
+        {
+          "timeMs": 4000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Frequency domain"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.5,
+          "durationMs": 400,
+          "label": "Filtered spectrum"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "We’ve just seen how Fourier transforms can be used to remove noise. Now, let’s l",
+      "bullets": [
+        "Starting with the original image of the building, shown in the top left, we first take its two-dimensional Fourier transform. This gives us the frequency-domain representation, shown in the bottom left.",
+        "If we want to blur the image or remove fine details, we apply a low-pass filter. In the frequency domain, this means keeping only the low-frequency components near the center of the spectrum — as shown in the middle bottom image — and setting the high frequencies to zero. After applying the inverse Fourier transform, we get the middle top image: the overall structure is preserved, but the sharp edges are softened.",
+        "On the other hand, if we want to highlight edges and fine details, we use a high-pass filter. This is done by removing the low-frequency center and keeping only the higher frequencies in the spectrum, as shown in the bottom right. The resulting image, in the top right, emphasizes edges and textures, but loses smooth gradients.",
+        "Low-pass and high-pass filters are fundamental tools in image processing — whether we want to smooth an image, detect edges, or prepare data for further analysis."
+      ],
+      "fullText": "We’ve just seen how Fourier transforms can be used to remove noise. Now, let’s look at two related techniques — low-pass filtering and high-pass filtering — and how they affect an image.\n\nStarting with the original image of the building, shown in the top left, we first take its two-dimensional Fourier transform. This gives us the frequency-domain representation, shown in the bottom left.\nIf we want to blur the image or remove fine details, we apply a low-pass filter. In the frequency domain, this means keeping only the low-frequency components near the center of the spectrum — as shown in the middle bottom image — and setting the high frequencies to zero. After applying the inverse Fourier transform, we get the middle top image: the overall structure is preserved, but the sharp edges are softened.\n\nOn the other hand, if we want to highlight edges and fine details, we use a high-pass filter. This is done by removing the low-frequency center and keeping only the higher frequencies in the spectrum, as shown in the bottom right. The resulting image, in the top right, emphasizes edges and textures, but loses smooth gradients.\nLow-pass and high-pass filters are fundamental tools in image processing — whether we want to smooth an image, detect edges, or prepare data for further analysis.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide26.JPG",
+      "script": "Now that we've seen how Fourier transforms can remove noise, let's explore two related techniques: low-pass filtering and high-pass filtering. These techniques can be used to adjust the level of detail in an image. By applying a low-pass filter, we can blur the image or remove fine details, keeping only the low-frequency components near the center of the spectrum. This is achieved by modifying the frequency-domain representation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Original Image"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Frequency-Domain Representation"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Low-Pass Filter"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "In image processing, we often use specialized filters to enhance certain feature",
+      "bullets": [
+        "First, the Unsharp Filter. Despite the name, this filter is used to sharpen images. It works by subtracting a blurred version of the image from the original, which enhances the edges. In the spatial domain, you can see the filter kernel — dark around the edges, light in the center — designed to emphasize changes in intensity.",
+        "Next, the Gaussian Filter. This is a smoothing filter, which reduces noise and small details. In the spatial domain, it appears as a soft, bell-shaped pattern — bright in the middle, fading smoothly outward. Its frequency-domain representation shows that it preserves low frequencies while gradually suppressing high frequencies.",
+        "Finally, the Sobel Filter. This is an edge detection filter, which highlights regions of rapid intensity change. In the spatial domain, you can see its distinctive pattern — one side light, the other dark — which responds strongly to vertical or horizontal edges depending on its orientation. In the frequency domain, its pattern reflects the fact that it suppresses low frequencies and emphasizes specific directional components.",
+        "MATLAB provides built-in functions for these filters, including fspecial for 2D and fspecial3 for 3D filtering, as well as options to design your own custom kernels. By choosing the right filter and domain of application — spatial or frequency — we can control exactly what features of an image are enhanced or suppressed."
+      ],
+      "fullText": "In image processing, we often use specialized filters to enhance certain features or to suppress unwanted information. Here are three common examples, shown both in the spatial domain and in the frequency domain.\n\nFirst, the Unsharp Filter. Despite the name, this filter is used to sharpen images. It works by subtracting a blurred version of the image from the original, which enhances the edges. In the spatial domain, you can see the filter kernel — dark around the edges, light in the center — designed to emphasize changes in intensity.\n\nNext, the Gaussian Filter. This is a smoothing filter, which reduces noise and small details. In the spatial domain, it appears as a soft, bell-shaped pattern — bright in the middle, fading smoothly outward. Its frequency-domain representation shows that it preserves low frequencies while gradually suppressing high frequencies.\n\nFinally, the Sobel Filter. This is an edge detection filter, which highlights regions of rapid intensity change. In the spatial domain, you can see its distinctive pattern — one side light, the other dark — which responds strongly to vertical or horizontal edges depending on its orientation. In the frequency domain, its pattern reflects the fact that it suppresses low frequencies and emphasizes specific directional components.\n\nMATLAB provides built-in functions for these filters, including fspecial for 2D and fspecial3 for 3D filtering, as well as options to design your own custom kernels. By choosing the right filter and domain of application — spatial or frequency — we can control exactly what features of an image are enhanced or suppressed.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide27.JPG",
+      "script": "Let's take a closer look at these specialized filters, which are essential tools in image processing. They help us enhance important features or reduce noise in images. The Unsharp Filter, for instance, sharpens edges by subtracting a blurred version of the image from the original. Its kernel is designed to emphasize changes in intensity, with darker values around the edges and lighter values in the center.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Unsharp Filter"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Gaussian Filter"
+        },
+        {
+          "timeMs": 51000,
+          "type": "spotlight",
+          "x": 0.9,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Sobel Filter"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "Here we have an example showing the effects of different image filters, both in ",
+      "bullets": [
+        "In the top left is our original image — a close-up of an eye. Next to it, in the top right, we see its two-dimensional Fourier transform, which shows the frequency content of the image.",
+        "On the second row, we have three filtered versions of the image in the spatial domain:",
+        "Unsharp Image — produced by applying an unsharp filter, which enhances edges and fine details by subtracting a blurred version of the image from the original.",
+        "Gaussian Blurred Image — generated using a Gaussian filter, which smooths the image by reducing high-frequency details, resulting in a softer appearance.",
+        "Sobel Filtered Image — created using the Sobel operator, which emphasizes edges, particularly strong intensity changes. In the eye image, you can clearly see the contours of the iris, eyelid, and surrounding features.",
+        "The third row shows the corresponding frequency-domain representations for each filter.",
+        "For the Gaussian blur, you can see that high-frequency components are greatly reduced, as indicated by the darker edges in the spectrum.",
+        "For the unsharp filter, higher frequencies are more pronounced, showing stronger edge components.",
+        "For the Sobel filter, the spectrum highlights frequencies associated with sharp transitions in the image, which is why it’s effective for edge detection.",
+        "By choosing different filters, we can highlight or suppress specific image features — whether we want to sharpen details, blur textures, or extract edges for further analysis."
+      ],
+      "fullText": "Here we have an example showing the effects of different image filters, both in the spatial domain and in the frequency domain.\n\nIn the top left is our original image — a close-up of an eye. Next to it, in the top right, we see its two-dimensional Fourier transform, which shows the frequency content of the image.\n\nOn the second row, we have three filtered versions of the image in the spatial domain:\nUnsharp Image — produced by applying an unsharp filter, which enhances edges and fine details by subtracting a blurred version of the image from the original.\nGaussian Blurred Image — generated using a Gaussian filter, which smooths the image by reducing high-frequency details, resulting in a softer appearance.\nSobel Filtered Image — created using the Sobel operator, which emphasizes edges, particularly strong intensity changes. In the eye image, you can clearly see the contours of the iris, eyelid, and surrounding features.\nThe third row shows the corresponding frequency-domain representations for each filter.\n\nFor the Gaussian blur, you can see that high-frequency components are greatly reduced, as indicated by the darker edges in the spectrum.\nFor the unsharp filter, higher frequencies are more pronounced, showing stronger edge components.\nFor the Sobel filter, the spectrum highlights frequencies associated with sharp transitions in the image, which is why it’s effective for edge detection.\n\nBy choosing different filters, we can highlight or suppress specific image features — whether we want to sharpen details, blur textures, or extract edges for further analysis.",
+      "imageURL": "/lectures/Lecture_09/Images/Slide28.JPG",
+      "script": "Let's take a look at this example together. We have an original image of an eye, paired with its two-dimensional Fourier transform, which reveals the frequency content of the image. In the spatial domain, we see three filtered versions of the image: the unsharp image, which enhances edges and fine details, the Gaussian blurred image, which smooths out the picture, and the median filtered image, which cleans up the noise. These filters alter the image in different ways, and their effects are visible in both the spatial and frequency domains.",
+      "spotlightEvents": [
+        {
+          "timeMs": 4300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Original Image"
+        },
+        {
+          "timeMs": 6300,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.2,
+          "durationMs": 2000,
+          "label": "2D Fourier Transform"
+        },
+        {
+          "timeMs": 8300,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.5,
+          "durationMs": 2000,
+          "label": "Unsharp Image"
+        }
+      ]
+    }
+  ]
+}

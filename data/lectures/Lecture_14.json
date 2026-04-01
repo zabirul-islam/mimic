@@ -1,0 +1,2528 @@
+{
+  "lectureId": "Lecture_14",
+  "lectureTitle": "Medical Imaging — Lecture 14",
+  "totalSlides": 60,
+  "slides": [
+    {
+      "slideIndex": 0,
+      "slideNumber": 1,
+      "title": "Good afternoon.",
+      "bullets": [
+        "Today, we will explain the system aspects of computed tomography. Since the CT data acquisition is a scanning process, a CT system is typically called a CT scanner."
+      ],
+      "fullText": "Good afternoon.\u000bToday, we will explain the system aspects of computed tomography. Since the CT data acquisition is a scanning process, a CT system is typically called a CT scanner.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide1.JPG",
+      "script": "Good afternoon, everyone. Today, we're going to dive into the system aspects of computed tomography, and I'm excited to share the details with you. We'll explore the CT scanner, which is essentially a specialized machine designed to capture the data needed for tomographic reconstruction.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": ""
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "CT scanner"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "system aspects"
+        }
+      ]
+    },
+    {
+      "slideIndex": 1,
+      "slideNumber": 2,
+      "title": "As you can see, the topic of this lecture is called CT scanner.",
+      "bullets": [
+        "Next time, we will have a MATLAB session.",
+        "During that, we’ll talk about filtered backprojection and related concepts.",
+        "You’ll have the opportunity to review MATLAB commands and functions so you can perform filtered back projection."
+      ],
+      "fullText": "As you can see, the topic of this lecture is called CT scanner.\u000bNext time, we will have a MATLAB session.\u000bDuring that, we’ll talk about filtered backprojection and related concepts.\u000bYou’ll have the opportunity to review MATLAB commands and functions so you can perform filtered back projection.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide2.JPG",
+      "script": "Now, let's talk about the CT scanner. This is the main topic of today's lecture. Next time, we'll have a MATLAB session, where we'll discuss filtered backprojection and related concepts, and you'll get to review the necessary commands and functions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 5000,
+          "label": "Lecture Topic"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 3000,
+          "label": "Main Topic"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 4000,
+          "label": "MATLAB Session"
+        }
+      ]
+    },
+    {
+      "slideIndex": 2,
+      "slideNumber": 3,
+      "title": "So, let’s look at the outline for today’s lecture.",
+      "bullets": [
+        "First, we’ll talk about projection data truncation—the issue when the X-ray projections don’t fully cover the object, which can cause artifacts.",
+        "Next, we’ll discuss different scanning modes used in CT technology.",
+        "Then, we will move on to common image artifacts that can degrade image quality.",
+        "Finally, we’ll cover X-ray radiation dose, which is important because it can be harmful to patients if not properly managed."
+      ],
+      "fullText": "So, let’s look at the outline for today’s lecture.\n\nFirst, we’ll talk about projection data truncation—the issue when the X-ray projections don’t fully cover the object, which can cause artifacts.\n\nNext, we’ll discuss different scanning modes used in CT technology.\n\nThen, we will move on to common image artifacts that can degrade image quality.\n\nFinally, we’ll cover X-ray radiation dose, which is important because it can be harmful to patients if not properly managed.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide3.JPG",
+      "script": "Let's take a look at the outline for today's lecture. We'll cover four main topics: projection data truncation, scanning modes, common image artifacts, and X-ray radiation dose. These topics are crucial in understanding the limitations and challenges of CT imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Lecture Outline"
+        },
+        {
+          "timeMs": 1550,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Projection Data Truncation"
+        },
+        {
+          "timeMs": 1850,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Scanning Modes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 3,
+      "slideNumber": 4,
+      "title": "As we discussed in the previous lecture, when you collect X-ray projection data ",
+      "bullets": [
+        "It’s like peeling an onion, gradually revealing each layer beneath the surface.",
+        "To achieve this, you need to have X-ray measurements along every line passing through the region of interest.",
+        "For each X-ray, you want to record the line integral—the total attenuation along that path.",
+        "This situation pertains to 2D image reconstruction.",
+        "Always keep in mind the principle of unimpeded data acquisition.",
+        "We say there must be at least one point on the X-ray source trajectory for every line passing through the object.",
+        "In other words, you need a measured projection corresponding to every line through the cross-section.",
+        "This ensures you have complete data for accurate reconstruction.",
+        "."
+      ],
+      "fullText": "As we discussed in the previous lecture, when you collect X-ray projection data from an unimpeded perspective, you aim to reconstruct the image layer by layer, starting from the outermost shell.\n\nIt’s like peeling an onion, gradually revealing each layer beneath the surface.\nTo achieve this, you need to have X-ray measurements along every line passing through the region of interest.\nFor each X-ray, you want to record the line integral—the total attenuation along that path.\nThis situation pertains to 2D image reconstruction.\n\nAlways keep in mind the principle of unimpeded data acquisition.\nWe say there must be at least one point on the X-ray source trajectory for every line passing through the object.\nIn other words, you need a measured projection corresponding to every line through the cross-section.\nThis ensures you have complete data for accurate reconstruction.\n\n\n.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide4.JPG",
+      "script": "When collecting X-ray projection data, the goal is to reconstruct the image layer by layer, starting from the outermost shell, similar to peeling an onion. This requires X-ray measurements along every line passing through the region of interest, recording the line integral for each X-ray. This situation applies to 2D image reconstruction, where the principle of unimpeded data acquisition is crucial.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Peeling an onion"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "X-ray measurements"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Line integral"
+        }
+      ]
+    },
+    {
+      "slideIndex": 4,
+      "slideNumber": 5,
+      "title": "Now, in the 3D CT case, the X-ray source remains a point source. But instead of ",
+      "bullets": [
+        "This configuration results in a cone beam geometry originating from the point source.",
+        "The X-ray source emits radiation in a cone-shaped beam, which should be wide enough to cover the entire object.",
+        "In other words, the object must be fully contained within the cone beam to ensure complete data acquisition.",
+        "This concept is similar to the 2D case but extended to volumetric imaging.",
+        "Once you have all the rays, as shown here, you can rearrange, reorganize, or re-bin the X-rays into parallel beam geometry.",
+        "In parallel beam geometry, you can apply Fourier transform-based imaging methods.",
+        "The Fourier slice theorem allows the use of the one-dimensional Fourier transform on projections to recover the two-dimensional Fourier spectrum.",
+        "Each projection recovers a profile in Fourier space, and by changing the viewing angle, you sample different radial lines sweeping over the entire Fourier domain.",
+        "Likewise, in 3D imaging, an extended version of the Fourier slice theorem is required.",
+        "This involves applying Fourier transforms in higher dimensions to recover the 3D spatial frequency information of the object."
+      ],
+      "fullText": "Now, in the 3D CT case, the X-ray source remains a point source. But instead of using a linear detector array, you use a planar or two-dimensional detector array.\n\nThis configuration results in a cone beam geometry originating from the point source.\nThe X-ray source emits radiation in a cone-shaped beam, which should be wide enough to cover the entire object.\nIn other words, the object must be fully contained within the cone beam to ensure complete data acquisition.\nThis concept is similar to the 2D case but extended to volumetric imaging.\n\nOnce you have all the rays, as shown here, you can rearrange, reorganize, or re-bin the X-rays into parallel beam geometry.\nIn parallel beam geometry, you can apply Fourier transform-based imaging methods.\nThe Fourier slice theorem allows the use of the one-dimensional Fourier transform on projections to recover the two-dimensional Fourier spectrum.\nEach projection recovers a profile in Fourier space, and by changing the viewing angle, you sample different radial lines sweeping over the entire Fourier domain.\n\nLikewise, in 3D imaging, an extended version of the Fourier slice theorem is required.\nThis involves applying Fourier transforms in higher dimensions to recover the 3D spatial frequency information of the object.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide5.JPG",
+      "script": "Now, in the 3D CT case, the X-ray source remains a point source, but instead of using a linear detector array, you use a planar or two-dimensional detector array. This configuration results in a cone beam geometry originating from the point source, where the X-ray source emits radiation in a cone-shaped beam. The beam must be wide enough to cover the entire object, ensuring complete data acquisition.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Cone Beam Geometry"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Wide Enough Beam"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Complete Data Acquisition"
+        }
+      ]
+    },
+    {
+      "slideIndex": 5,
+      "slideNumber": 6,
+      "title": "The Fourier transform, as we learned, is the foundation of classic CT theory. It",
+      "bullets": [
+        "The whole cross-section or entire object must be fully covered by the X-ray beam. No matter the shape of the beam, you can always re-bin the data into parallel beam geometry. Then, the collected data can be inversely transformed back to the original image domain. That’s the fundamental way image reconstruction is performed.",
+        "As we learned, filtered back projection is essentially just the inverse Fourier transform represented in polar coordinates. This core concept explains the process pretty well. If you follow this, you should grasp the essential idea. In my opinion, the key question is: what is the difference between classic CT theory and modern CT theory?"
+      ],
+      "fullText": "The Fourier transform, as we learned, is the foundation of classic CT theory. It requires complete coverage of an entire cross-section or the whole object. When you have projection data, you can use the Fourier slice theorem in 2D or 3D, and then perform the inverse Fourier transform also in 2D or 3D. This classical framework is called the central dogma.\n\nThe whole cross-section or entire object must be fully covered by the X-ray beam. No matter the shape of the beam, you can always re-bin the data into parallel beam geometry. Then, the collected data can be inversely transformed back to the original image domain. That’s the fundamental way image reconstruction is performed.\n\nAs we learned, filtered back projection is essentially just the inverse Fourier transform represented in polar coordinates. This core concept explains the process pretty well. If you follow this, you should grasp the essential idea. In my opinion, the key question is: what is the difference between classic CT theory and modern CT theory?",
+      "imageURL": "/lectures/Lecture_14/Images/Slide6.JPG",
+      "script": "The Fourier transform is the foundation of classic CT theory, requiring complete coverage of an entire cross-section or the whole object. When projection data is available, the Fourier slice theorem can be applied in 2D or 3D, followed by an inverse Fourier transform in 2D or 3D. This classical framework is known as the central dogma.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Classic CT Theory"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Inverse Fourier Transform"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Parallel Beam Geometry"
+        }
+      ]
+    },
+    {
+      "slideIndex": 6,
+      "slideNumber": 7,
+      "title": "This leads us to the issue of data truncation. If the data is incomplete, the Fo",
+      "bullets": [
+        "What happens if part of the data is missing? If some portion of the projection profile is lost, the Fourier transformation cannot be performed fully. This is called the data truncation problem. Much of modern CT theory has been developed to address this data truncation problem, finding ways to reconstruct images even with incomplete data.",
+        "Before we delve into the types of data truncation, let me give you some context."
+      ],
+      "fullText": "This leads us to the issue of data truncation. If the data is incomplete, the Fourier slice theorem— which assumes a full projection profile for each one-dimensional Fourier transform—can no longer be applied straightforwardly.\n\nWhat happens if part of the data is missing? If some portion of the projection profile is lost, the Fourier transformation cannot be performed fully. This is called the data truncation problem. Much of modern CT theory has been developed to address this data truncation problem, finding ways to reconstruct images even with incomplete data.\n\nBefore we delve into the types of data truncation, let me give you some context.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide7.JPG",
+      "script": "If part of the data is missing, the Fourier transformation cannot be performed fully, leading to the data truncation problem. This is a common issue in real-world CT scans, where the available data may not cover the entire object.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Data Truncation Problem"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Incomplete Data"
+        },
+        {
+          "timeMs": 3500,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 2500,
+          "label": "Data Truncation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 7,
+      "slideNumber": 8,
+      "title": "First, let me show you the four generations of CT scanning geometry, often calle",
+      "bullets": [
+        "In the first generation, you have a single point X-ray source and a single point detector. Each measurement records one line, one line integral. The setup moves by translation, producing one parallel beam projection in one direction. Then the entire apparatus rotates slightly to a new angular position, producing another parallel beam projection. This process depends on the viewing angle, often labeled theta. That’s the first generation.",
+        "The second generation improves data acquisition efficiency. Instead of measuring one line integral at a time, you use a small detector array with a narrow fan beam. This detector array collects multiple lines simultaneously as it translates, covering the cross-section completely. Each translation collects multiple parallel beam projections, depending on how many detector shells you have. For example, if you have five detector shells, you get five parallel beam projections per translation. After a small rotation, you repeat this process.",
+        "The third generation further improves efficiency dramatically. Instead of a few detector elements, you have hundreds or thousands along a linear or arc-shaped wide detector array. This is a full fan beam imaging geometry. The detector array continuously rotates to collect data. This configuration satisfies the data sufficiency condition: performing a full 360-degree scan ensures every line through the patient’s cross-section is measured somewhere, so the line integrals are known. This third-generation geometry is still very popular. Modern CT scanners mostly use this geometry but have expanded the one-dimensional detector arrays into multi-row or cone-beam configurations. We’ll discuss those later.",
+        "The fourth generation differs by making the detector array a full stationary ring. Instead of rotating the detectors, only the X-ray source rotates around the patient. The detector ring stays fixed, continuously collecting signals. This fourth-generation geometry solves some mechanical problems associated with rotating the detector array."
+      ],
+      "fullText": "First, let me show you the four generations of CT scanning geometry, often called generations or modes. This basically refers to how you systematically collect X-ray projection data.\n\nIn the first generation, you have a single point X-ray source and a single point detector. Each measurement records one line, one line integral. The setup moves by translation, producing one parallel beam projection in one direction. Then the entire apparatus rotates slightly to a new angular position, producing another parallel beam projection. This process depends on the viewing angle, often labeled theta. That’s the first generation.\nThe second generation improves data acquisition efficiency. Instead of measuring one line integral at a time, you use a small detector array with a narrow fan beam. This detector array collects multiple lines simultaneously as it translates, covering the cross-section completely. Each translation collects multiple parallel beam projections, depending on how many detector shells you have. For example, if you have five detector shells, you get five parallel beam projections per translation. After a small rotation, you repeat this process.\n\nThe third generation further improves efficiency dramatically. Instead of a few detector elements, you have hundreds or thousands along a linear or arc-shaped wide detector array. This is a full fan beam imaging geometry. The detector array continuously rotates to collect data. This configuration satisfies the data sufficiency condition: performing a full 360-degree scan ensures every line through the patient’s cross-section is measured somewhere, so the line integrals are known. This third-generation geometry is still very popular. Modern CT scanners mostly use this geometry but have expanded the one-dimensional detector arrays into multi-row or cone-beam configurations. We’ll discuss those later.\n\nThe fourth generation differs by making the detector array a full stationary ring. Instead of rotating the detectors, only the X-ray source rotates around the patient. The detector ring stays fixed, continuously collecting signals. This fourth-generation geometry solves some mechanical problems associated with rotating the detector array.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide8.JPG",
+      "script": "Let's go through the evolution of CT scanning geometry, which is essentially about how we collect X-ray projection data. The first generation uses a single point X-ray source and a single point detector, recording one line integral at a time as the setup moves. This process involves translating the setup to change the viewing angle, labeled theta.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "First Generation"
+        },
+        {
+          "timeMs": 5000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 5000,
+          "label": "Second Generation"
+        },
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 5000,
+          "label": "Third Generation"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.1,
+          "y": 0.9,
+          "durationMs": 5000,
+          "label": "Fourth Generation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 8,
+      "slideNumber": 9,
+      "title": "Next, we have electron beam CT, which uses a different approach. Instead of a me",
+      "bullets": [
+        "Each arc produces X-rays upward, forming the scanning beam. The electron beam is steered by electromagnetic fields very rapidly without moving parts mechanically. This allows for much faster imaging speeds.",
+        "The driving force behind the evolution of scanning generations is increasing data acquisition efficiency: collecting the same amount of data in a shorter time to improve temporal resolution.",
+        "Cardiac imaging is the most challenging application for CT, since the heart beats fast, anywhere between 60 and 100 beats per minute. Tomographic reconstruction assumes the object is stationary, but the heart is constantly moving. So, we need to shorten the data acquisition time drastically.",
+        "The electron beam CT scanner was designed specifically for cardiac imaging due to its high speed. However, it is costly, and image noise is often higher. Additionally, the fourth-generation geometry faces problems with scattered signals affecting other detectors, which causes degradation in image quality.",
+        "Because of these limitations, the third-generation geometry remains more widely used today, and electron beam CT scanners are now mostly considered outdated."
+      ],
+      "fullText": "Next, we have electron beam CT, which uses a different approach. Instead of a mechanical X-ray tube rotation like earlier generations, this system uses an electron beam that’s electromagnetically steered to hit a fixed target shaped as multiple metallic arcs.\nEach arc produces X-rays upward, forming the scanning beam. The electron beam is steered by electromagnetic fields very rapidly without moving parts mechanically. This allows for much faster imaging speeds.\n\nThe driving force behind the evolution of scanning generations is increasing data acquisition efficiency: collecting the same amount of data in a shorter time to improve temporal resolution.\nCardiac imaging is the most challenging application for CT, since the heart beats fast, anywhere between 60 and 100 beats per minute. Tomographic reconstruction assumes the object is stationary, but the heart is constantly moving. So, we need to shorten the data acquisition time drastically.\n\nThe electron beam CT scanner was designed specifically for cardiac imaging due to its high speed. However, it is costly, and image noise is often higher. Additionally, the fourth-generation geometry faces problems with scattered signals affecting other detectors, which causes degradation in image quality.\nBecause of these limitations, the third-generation geometry remains more widely used today, and electron beam CT scanners are now mostly considered outdated.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide9.JPG",
+      "script": "Electron beam CT uses an electron beam that's electromagnetically steered to hit a fixed target shaped as multiple metallic arcs, producing X-rays and forming the scanning beam. This approach enables very fast imaging speeds without moving parts mechanically. The electron beam is steered rapidly using electromagnetic fields, allowing for high-speed imaging. This design improvement enables faster data acquisition.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Electron beam CT"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Scanning beam formation"
+        },
+        {
+          "timeMs": 2200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Challenges in cardiac imaging"
+        }
+      ]
+    },
+    {
+      "slideIndex": 9,
+      "slideNumber": 10,
+      "title": "Defining CT scanning modes, or how many generations to count, varies depending o",
+      "bullets": [
+        "However, beyond these, the classification becomes a matter of opinion and varies by source."
+      ],
+      "fullText": "Defining CT scanning modes, or how many generations to count, varies depending on the source. Different textbooks categorize them differently. Usually, the first three generations are well established: the first generation, the second generation, and the third generation.\n\nHowever, beyond these, the classification becomes a matter of opinion and varies by source.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide10.JPG",
+      "script": "The definition of CT scanning modes, or generations, is not universally agreed upon, and different textbooks categorize them differently. However, the first three generations – first, second, and third – are well-established and widely recognized. Beyond these, the classification becomes a matter of opinion and varies by source.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 3000,
+          "label": "Definition of CT scanning modes"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "First three generations established"
+        },
+        {
+          "timeMs": 4500,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Beyond three generations, classification varies"
+        }
+      ]
+    },
+    {
+      "slideIndex": 10,
+      "slideNumber": 11,
+      "title": "Let's look at scanning modes. Here, you can visualize a diamond that helps you r",
+      "bullets": [
+        "Helical scanning is quite an innovative, out-of-the-box idea. Traditionally, with one-dimensional detector arrays, imaging is done by rotating the source around the patient—often a half circle or full circle—to collect sufficient data for reconstructing one cross-section using filtered back projection or iterative reconstruction algorithms. After reconstructing one slice, the patient table is translated slightly to image the next cross-section. This process is known as the “step and shoot” mode.",
+        "You scan one cross-section, then move the patient, accelerate or decelerate the table, perform another full rotation, and repeat. This approach is time-consuming, especially because anatomical and pathological features exist in three dimensions, and patients can only hold still for limited times. Scanning slice by slice leads to low throughput and motion artifacts.",
+        "Spiral scanning solves many of these issues. You ask the patient to remain still, often holding their breath. Then, the table moves continuously while the X-ray source rotates, and data acquisition happens simultaneously and continuously. From the patient’s perspective, the source follows a helical trajectory, which is why this mode is called helical imaging.",
+        "However, helical scanning introduces data truncation issues. In second-generation scanning, the data may be transversely truncated due to the small detector size. In helical scanning, data is longitudinally truncated because the source follows a helical path within any transverse plane, meaning a full two-dimensional data set for image reconstruction is absent."
+      ],
+      "fullText": "Let's look at scanning modes. Here, you can visualize a diamond that helps you remember the progression of CT generations. The first generation uses a parallel beam, then a narrow fan beam in the second generation, followed by a wide fan beam with rotation in the third generation. The third generation features fan beam geometry with rotating detectors. Beyond that, we have the fourth and fifth generations. The next stages are called the sixth or seventh generation, which involve helical scanning.\n\nHelical scanning is quite an innovative, out-of-the-box idea. Traditionally, with one-dimensional detector arrays, imaging is done by rotating the source around the patient—often a half circle or full circle—to collect sufficient data for reconstructing one cross-section using filtered back projection or iterative reconstruction algorithms. After reconstructing one slice, the patient table is translated slightly to image the next cross-section. This process is known as the “step and shoot” mode.\n\nYou scan one cross-section, then move the patient, accelerate or decelerate the table, perform another full rotation, and repeat. This approach is time-consuming, especially because anatomical and pathological features exist in three dimensions, and patients can only hold still for limited times. Scanning slice by slice leads to low throughput and motion artifacts.\nSpiral scanning solves many of these issues. You ask the patient to remain still, often holding their breath. Then, the table moves continuously while the X-ray source rotates, and data acquisition happens simultaneously and continuously. From the patient’s perspective, the source follows a helical trajectory, which is why this mode is called helical imaging.\n\nHowever, helical scanning introduces data truncation issues. In second-generation scanning, the data may be transversely truncated due to the small detector size. In helical scanning, data is longitudinally truncated because the source follows a helical path within any transverse plane, meaning a full two-dimensional data set for image reconstruction is absent.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide11.JPG",
+      "script": "Let's look at scanning modes. Here, you can visualize a diamond that helps you remember the progression of CT generations. The first generation uses a parallel beam, then a narrow fan beam in the second generation, followed by a wide fan beam with rotation in the third generation. The third generation features fan beam geometry with rotating detectors. Beyond that, we have the fourth and fifth generations. The next stages are called the sixth or seventh generation, which involve helical scanning.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Parallel beam"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.6,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Narrow fan beam"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Wide fan beam with rotation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 11,
+      "slideNumber": 12,
+      "title": "This slide illustrates a spiral, single-slice CT scan, showing the imaging geome",
+      "bullets": [
+        "Now, the question is: how do we perform image reconstruction effectively despite this geometry?",
+        "How do we handle the challenges posed by the helical scan?"
+      ],
+      "fullText": "This slide illustrates a spiral, single-slice CT scan, showing the imaging geometry. You see the helical path around the patient clearly. \n\nNow, the question is: how do we perform image reconstruction effectively despite this geometry? \n\nHow do we handle the challenges posed by the helical scan?",
+      "imageURL": "/lectures/Lecture_14/Images/Slide12.JPG",
+      "script": "The spiral scan introduces a new level of complexity, but the key idea is to use a wide detector array to capture a large portion of the X-ray spectrum at once, allowing for the use of filtered back-projection algorithms to reconstruct the image. This approach can handle the helical scan geometry and produce accurate images.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10800,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.65,
+          "durationMs": 2000,
+          "label": "Spiral Scan Geometry"
+        },
+        {
+          "timeMs": 11000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Wide Detector Array"
+        },
+        {
+          "timeMs": 11200,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Filtered Back-Projection"
+        }
+      ]
+    },
+    {
+      "slideIndex": 12,
+      "slideNumber": 13,
+      "title": "With helical scanning, when you want to reconstruct an XY cross-section, ideally",
+      "bullets": [
+        "You measure line integrals only along rays that coincide with this helical path. Immediately, the X-ray source moves out of the plane, producing rays above and below it. To reconstruct a cross-section, say in the XY plane, you need every line integral through this section, including along particular rays such as Ray A.",
+        "In practice, you can’t measure the line integral exactly along Ray A because the source never stays on that plane long enough. You only have rays above and below it. That’s the central data truncation problem in helical CT.",
+        "Engineers found a practical solution. Helical scanning benefits from continuous table motion without stops or accelerations. The patient lies flat on the table, which moves steadily through the scanner. The patient simply stays still until done, making the process fast and smooth.",
+        "To compensate for missing data, we perform linear interpolation between the upper and lower rays, which are available. The assumption is that the data varies roughly linearly between these rays. This allows synthesis of an in-plane data set, which then can be used with filtered back-projection algorithms. This was the first trial approach.",
+        "Later improvements involved helical scanning which uses opposite rays, not just the nearest rays in the same direction. Before reaching a certain position, you could use complementary rays shot from an opposite angle to improve interpolation."
+      ],
+      "fullText": "With helical scanning, when you want to reconstruct an XY cross-section, ideally, you’d have rays confined entirely within the XY plane. But the actual green helical scanning path deviates from this ideal.\n\nYou measure line integrals only along rays that coincide with this helical path. Immediately, the X-ray source moves out of the plane, producing rays above and below it. To reconstruct a cross-section, say in the XY plane, you need every line integral through this section, including along particular rays such as Ray A.\n\nIn practice, you can’t measure the line integral exactly along Ray A because the source never stays on that plane long enough. You only have rays above and below it. That’s the central data truncation problem in helical CT.\nEngineers found a practical solution. Helical scanning benefits from continuous table motion without stops or accelerations. The patient lies flat on the table, which moves steadily through the scanner. The patient simply stays still until done, making the process fast and smooth.\nTo compensate for missing data, we perform linear interpolation between the upper and lower rays, which are available. The assumption is that the data varies roughly linearly between these rays. This allows synthesis of an in-plane data set, which then can be used with filtered back-projection algorithms. This was the first trial approach.\n\nLater improvements involved helical scanning which uses opposite rays, not just the nearest rays in the same direction. Before reaching a certain position, you could use complementary rays shot from an opposite angle to improve interpolation.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide13.JPG",
+      "script": "Ideally, rays would be confined entirely within the XY plane for reconstructing a cross-section, but the actual helical scanning path deviates from this ideal. The X-ray source moves out of the plane, producing rays above and below it, making it necessary to measure line integrals along rays that coincide with the helical path. This limitation affects the reconstruction of a cross-section, as line integrals cannot be measured exactly along certain rays.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Ideal vs. Actual Helical Scanning"
+        },
+        {
+          "timeMs": 35000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Line Integrals and Central Data Truncation"
+        },
+        {
+          "timeMs": 40000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 4000,
+          "label": "Practical Solution and Linear Interpolation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 13,
+      "slideNumber": 14,
+      "title": "Using opposite rays that are closer to ray A reduces the distance between the me",
+      "bullets": [
+        "This “half-scan” interpolation enhances longitudinal resolution along the Z-axis compared to linear interpolation. Longitudinal resolution along the Z direction is often lower than in-plane resolution.",
+        "Back when I just graduated and started work at Washington University Medical School in St. Louis, helical CT was introduced. Radiologists appreciated the improved temporal resolution it offered.",
+        "However, they noticed motion blurring along the Z-axis caused by the interpolation process. Since the patient is continuously moved through the scanner, motion blur appears in the longitudinal direction, similar to a photo taken while running.",
+        "As they say, there’s no free lunch—you gain temporal resolution but lose some longitudinal resolution due to motion blur."
+      ],
+      "fullText": "Using opposite rays that are closer to ray A reduces the distance between the measured and estimated line integrals. The narrower this gap, the better the accuracy you can expect.\n\nThis “half-scan” interpolation enhances longitudinal resolution along the Z-axis compared to linear interpolation. Longitudinal resolution along the Z direction is often lower than in-plane resolution.\nBack when I just graduated and started work at Washington University Medical School in St. Louis, helical CT was introduced. Radiologists appreciated the improved temporal resolution it offered.\n\nHowever, they noticed motion blurring along the Z-axis caused by the interpolation process. Since the patient is continuously moved through the scanner, motion blur appears in the longitudinal direction, similar to a photo taken while running.\n\nAs they say, there’s no free lunch—you gain temporal resolution but lose some longitudinal resolution due to motion blur.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide14.JPG",
+      "script": "As we use opposite rays that are closer to ray A, the distance between the measured and estimated line integrals decreases, leading to improved accuracy. This is because the gap between the two datasets becomes narrower, allowing for better interpolation. This interpolation method, called half-scan interpolation, enhances longitudinal resolution along the Z-axis, which is often lower than in-plane resolution.",
+      "spotlightEvents": [
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Half-scan interpolation"
+        },
+        {
+          "timeMs": 27000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Temporal resolution"
+        },
+        {
+          "timeMs": 28000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Longitudinal resolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 14,
+      "slideNumber": 15,
+      "title": "We analyzed helical CT scanning modes further. Traditional step-and-shoot CT use",
+      "bullets": [
+        "In helical CT, instead of discrete circular scans, you have one continuous helical acquisition. For each helical rotation, interpolation creates synthetic data points.",
+        "You can reconstruct images at many arbitrary longitudinal positions along the patient, generating a large number of slices computationally. This technique is called retrospective reconstruction.",
+        "Retrospective reconstruction has a significant clinical advantage. For example, in tumor detection, a lesion may fall between two slices in traditional scanning and go undetected.",
+        "With retrospective reconstruction, densely sampled slices mean one slice will include the tumor, improving detection confidence and diagnostic accuracy."
+      ],
+      "fullText": "We analyzed helical CT scanning modes further. Traditional step-and-shoot CT uses multiple circular scans. For each scan, you reconstruct one CT slice, repeating many times for full coverage.\nIn helical CT, instead of discrete circular scans, you have one continuous helical acquisition. For each helical rotation, interpolation creates synthetic data points.\n\nYou can reconstruct images at many arbitrary longitudinal positions along the patient, generating a large number of slices computationally. This technique is called retrospective reconstruction.\nRetrospective reconstruction has a significant clinical advantage. For example, in tumor detection, a lesion may fall between two slices in traditional scanning and go undetected.\n\nWith retrospective reconstruction, densely sampled slices mean one slice will include the tumor, improving detection confidence and diagnostic accuracy.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide15.JPG",
+      "script": "We've been analyzing helical CT scanning modes, and traditional step-and-shoot CT uses multiple circular scans, where each scan reconstructs one CT slice, repeated many times for full coverage. In contrast, helical CT uses one continuous helical acquisition, with interpolation creating synthetic data points for each rotation. This allows for reconstructing images at many arbitrary positions along the patient, generating a large number of slices computationally, a technique called retrospective reconstruction.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Helical CT vs. Traditional CT"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Retrospective Reconstruction"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 1000,
+          "label": "Advantage in Tumor Detection"
+        }
+      ]
+    },
+    {
+      "slideIndex": 15,
+      "slideNumber": 16,
+      "title": "Next, we have partial volume averaging artifacts. For each slice, if a tumor onl",
+      "bullets": [
+        "However, with spiral CT, you can select longitudinal positions as densely as you want. This gives you a real opportunity to reconstruct images densely enough. One of the reconstructed slices is likely to contain the tumor fully, providing much better contrast resolution and visibility."
+      ],
+      "fullText": "Next, we have partial volume averaging artifacts. For each slice, if a tumor only partially lies within that slice, you might not see it clearly. Small tumors can be especially difficult to detect when they occupy only half of a slice, and image noise further complicates clear visualization.\n\nHowever, with spiral CT, you can select longitudinal positions as densely as you want. This gives you a real opportunity to reconstruct images densely enough. One of the reconstructed slices is likely to contain the tumor fully, providing much better contrast resolution and visibility.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide16.JPG",
+      "script": "Partial volume averaging artifacts are a challenge in traditional CT, where small tumors might not be visible if they only partially lie within a slice. Image noise makes it even harder to detect these tumors. But with spiral CT, you can reconstruct images with much higher resolution, ensuring that at least one slice contains the tumor fully. This provides better contrast and makes the tumor more visible.",
+      "spotlightEvents": [
+        {
+          "timeMs": 42000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Partial volume averaging"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "Spiral CT advantage"
+        },
+        {
+          "timeMs": 46000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Better contrast resolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 16,
+      "slideNumber": 17,
+      "title": "Building on this heuristic idea, we performed a rigorous linear system analysis ",
+      "bullets": [
+        "Our key theoretical conclusion is that, for a given X-ray dose, meaning a fixed number of total incident photons, you can choose to scan in either the conventional step-and-shoot mode or helical mode to have multiple scanning circles or a single helical trajectory. Given the same X-ray dose, helical CT offers substantially better longitudinal resolution than conventional step-and-shoot.",
+        "This improvement comes from the inherent capability of helical CT to perform retrospective reconstruction—that is, reconstructed overlapping slices along the longitudinal axis.",
+        "In our papers, we specifically recommended reconstructing roughly three to four slices per helical turn for the best results.",
+        "Thus, helical CT not only improves temporal resolution but also enhances longitudinal resolution, so there’s no loss in image quality. This important finding helps explain why helical scanning is so beneficial.",
+        "Some believe that you gain temporal resolution with helical scanning but lose longitudinal resolution. However, with proper overlapping reconstruction, both temporal and longitudinal resolution can be improved. This is a key insight from our earlier work and kind of a free-lunch in clinical practice."
+      ],
+      "fullText": "Building on this heuristic idea, we performed a rigorous linear system analysis and published a journal paper in Medical Physics. We performed modeling the signal response of the CT system to compare the two scanning modes as I mentioned earlier in the lecture; that is, multiple scanning circles versus a spiral or helical scanning trajectory.\n\nOur key theoretical conclusion is that, for a given X-ray dose, meaning a fixed number of total incident photons, you can choose to scan in either the conventional step-and-shoot mode or helical mode to have multiple scanning circles or a single helical trajectory. Given the same X-ray dose, helical CT offers substantially better longitudinal resolution than conventional step-and-shoot.\nThis improvement comes from the inherent capability of helical CT to perform retrospective reconstruction—that is, reconstructed overlapping slices along the longitudinal axis.\n\nIn our papers, we specifically recommended reconstructing roughly three to four slices per helical turn for the best results.\nThus, helical CT not only improves temporal resolution but also enhances longitudinal resolution, so there’s no loss in image quality. This important finding helps explain why helical scanning is so beneficial.\n\nSome believe that you gain temporal resolution with helical scanning but lose longitudinal resolution. However, with proper overlapping reconstruction, both temporal and longitudinal resolution can be improved. This is a key insight from our earlier work and kind of a free-lunch in clinical practice.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide17.JPG",
+      "script": "Building on this heuristic idea, we performed a rigorous linear system analysis and published a journal paper in Medical Physics. We modeled the signal response of the CT system to compare the two scanning modes, multiple scanning circles versus a spiral or helical scanning trajectory. Our key theoretical conclusion is that, for a given X-ray dose, you can choose to scan in either mode and still maintain data consistency, as long as the total number of incident photons remains the same. This means that, in theory, both scanning modes can produce identical images, given the same dose.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Key conclusion"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Retrospective reconstruction"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Recommended reconstruction"
+        }
+      ]
+    },
+    {
+      "slideIndex": 17,
+      "slideNumber": 18,
+      "title": "Helical or spiral CT began with single-slice scanning using a linear detector ar",
+      "bullets": [
+        "Expanding this, cone beam helical spiral CT was developed. For cone beam spiral CT, the issue of data truncation is addressed more intricately.",
+        "If you slice through the patient in any plane, the actual X-ray beam forms a fan beam in that plane.",
+        "This fan beam is longitudinally truncated because the patient’s body is quite long, and the detector size limits the coverage. You cannot cover the whole body with a single cone beam at once.",
+        "Often, you focus on smaller regions of interest like the heart or inner ear, so using a huge cone beam isn’t practical.",
+        "Consequently, data truncation naturally occurs in helical cone beam scanning, making it an important consideration in advanced CT imaging."
+      ],
+      "fullText": "Helical or spiral CT began with single-slice scanning using a linear detector array, capturing rays in two dimensions.\nExpanding this, cone beam helical spiral CT was developed. For cone beam spiral CT, the issue of data truncation is addressed more intricately.\nIf you slice through the patient in any plane, the actual X-ray beam forms a fan beam in that plane.\n\nThis fan beam is longitudinally truncated because the patient’s body is quite long, and the detector size limits the coverage. You cannot cover the whole body with a single cone beam at once.\n\nOften, you focus on smaller regions of interest like the heart or inner ear, so using a huge cone beam isn’t practical.\nConsequently, data truncation naturally occurs in helical cone beam scanning, making it an important consideration in advanced CT imaging.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide18.JPG",
+      "script": "The concept of helical or spiral CT scanning began with single-slice scanning using a linear detector array, capturing rays in two dimensions. This design was later expanded to develop cone beam helical spiral CT, which addresses data truncation issues in a more intricate way. When slicing through the patient, the actual X-ray beam forms a fan beam in that plane, which is longitudinally truncated due to the patient's body length and detector size limitations. This truncation issue is particularly relevant when focusing on smaller regions of interest.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Single-slice scanning"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Cone beam helical spiral CT"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Addressing data truncation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 18,
+      "slideNumber": 19,
+      "title": "In the early 1990s, I wrote a paper called the General Cone Beam Reconstruction ",
+      "bullets": [
+        "It explains that for cone beam helical scanning—where the beam geometry is divergent—you cannot simply apply linear interpolation to reconstruct images.",
+        "The mathematics involved is more complicated, requiring specialized algorithms to handle data truncation and beam geometry correctly."
+      ],
+      "fullText": "In the early 1990s, I wrote a paper called the General Cone Beam Reconstruction Algorithm. \n\nIt explains that for cone beam helical scanning—where the beam geometry is divergent—you cannot simply apply linear interpolation to reconstruct images.\n\nThe mathematics involved is more complicated, requiring specialized algorithms to handle data truncation and beam geometry correctly.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide19.JPG",
+      "script": "In the early 1990s, I wrote a paper called the General Cone Beam Reconstruction Algorithm. It highlights the challenge of applying linear interpolation to cone beam helical scanning, where the beam geometry is divergent. The mathematics involved is more complicated, requiring specialized algorithms to handle data truncation and beam geometry correctly. This algorithm is essential for accurate image reconstruction in cone beam helical scanning.",
+      "spotlightEvents": [
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Complicated mathematics"
+        },
+        {
+          "timeMs": 7000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Specialized algorithms needed"
+        },
+        {
+          "timeMs": 8000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Data truncation and beam geometry"
+        }
+      ]
+    },
+    {
+      "slideIndex": 19,
+      "slideNumber": 20,
+      "title": "This particular paper became the first seminal work on helical cone beam scannin",
+      "bullets": [
+        "Today, multi-slice cone beam helical scanning is widely used, with between 100 and 200 million such CT scans performed worldwide each year. This number highlights how prevalent and important this technology has become.",
+        "Reflecting on that time, we didn’t file any patents on this work, which turned out to be a major missed opportunity. Had we filed for intellectual property, it could have been extremely valuable.",
+        "Helical scanning combines multiple technologies, including slip ring transmission, X-ray sources, and sophisticated reconstruction algorithms. The software scanning model itself is crucial to performance.",
+        "To put it in perspective: even if each scan were worth only one cent, with a million scans annually, that’s a million dollars a year in potential revenue.",
+        "So, not securing patent protection was probably the biggest mistake we made. Nonetheless, our original paper still stands as the prototype of this important process and algorithm."
+      ],
+      "fullText": "This particular paper became the first seminal work on helical cone beam scanning and has been widely cited.\n\nToday, multi-slice cone beam helical scanning is widely used, with between 100 and 200 million such CT scans performed worldwide each year. This number highlights how prevalent and important this technology has become.\n\nReflecting on that time, we didn’t file any patents on this work, which turned out to be a major missed opportunity. Had we filed for intellectual property, it could have been extremely valuable.\nHelical scanning combines multiple technologies, including slip ring transmission, X-ray sources, and sophisticated reconstruction algorithms. The software scanning model itself is crucial to performance.\n\nTo put it in perspective: even if each scan were worth only one cent, with a million scans annually, that’s a million dollars a year in potential revenue.\nSo, not securing patent protection was probably the biggest mistake we made. Nonetheless, our original paper still stands as the prototype of this important process and algorithm.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide20.JPG",
+      "script": "This paper was a groundbreaking work on helical cone beam scanning and has had a significant impact on the field. The technology has become incredibly popular, with over 100 million CT scans performed annually using multi-slice cone beam helical scanning. This widespread adoption highlights the importance of this technology.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Groundbreaking work"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Widespread adoption"
+        },
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Missed opportunity"
+        }
+      ]
+    },
+    {
+      "slideIndex": 20,
+      "slideNumber": 21,
+      "title": "Now, let’s discuss longitudinal data truncation from a single slice. When you pe",
+      "bullets": [
+        "However, when you move to a wider angle cone beam, simple interpolation is no longer sufficient, and more advanced algorithms are needed. The first paper I wrote on cone beam helical scanning proposed an approximate algorithm for this challenge."
+      ],
+      "fullText": "Now, let’s discuss longitudinal data truncation from a single slice. When you perform one helical turn with a single slice, you have a parallel beam and adjacent rays, allowing you to perform interpolation.\n\nHowever, when you move to a wider angle cone beam, simple interpolation is no longer sufficient, and more advanced algorithms are needed. The first paper I wrote on cone beam helical scanning proposed an approximate algorithm for this challenge.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide21.JPG",
+      "script": "When performing one helical turn with a single slice, you have a parallel beam and adjacent rays, making interpolation straightforward. However, as you move to a wider angle cone beam, simple interpolation is no longer accurate, requiring more advanced algorithms. This is where things get more complicated, and we need to think beyond simple interpolation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Longitudinal data truncation"
+        },
+        {
+          "timeMs": 44000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Simple interpolation limitation"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Need for advanced algorithms"
+        }
+      ]
+    },
+    {
+      "slideIndex": 21,
+      "slideNumber": 22,
+      "title": "It then took over a decade for the field to develop what is called the exact hel",
+      "bullets": [
+        "The author, Dr. Katsevich, is a mathematician, so the paper is quite dense and challenging for most engineering students. Nonetheless, it demonstrates that modern CT theory can effectively handle longitudinally truncated data.",
+        "Earlier, I mentioned that in the second generation, data truncation happens transversely, while helical CT mainly deals with longitudinal data truncation, which can be seen as a symmetric problem."
+      ],
+      "fullText": "It then took over a decade for the field to develop what is called the exact helical cone beam algorithm. This algorithm still uses the filtered backprojection framework but is mathematically exact.\n\nThe author, Dr. Katsevich, is a mathematician, so the paper is quite dense and challenging for most engineering students. Nonetheless, it demonstrates that modern CT theory can effectively handle longitudinally truncated data.\n\nEarlier, I mentioned that in the second generation, data truncation happens transversely, while helical CT mainly deals with longitudinal data truncation, which can be seen as a symmetric problem.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide22.JPG",
+      "script": "The exact helical cone beam algorithm was developed after over a decade of research, building on the filtered backprojection framework, and is mathematically exact. This algorithm was proposed by Dr. Katsevich, a mathematician, and is a challenging but important contribution to modern CT theory. It shows that with the right mathematical framework, helical CT can effectively handle longitudinal data truncation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Dr. Katsevich's contribution"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "mathematically exact algorithm"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "longitudinally truncated data"
+        }
+      ]
+    },
+    {
+      "slideIndex": 22,
+      "slideNumber": 23,
+      "title": "There is also an interesting transverse data truncation problem.",
+      "bullets": [
+        "Imagine your cross-section represents the green base, while the blue area is a smaller region of interest, or ROI.",
+        "Perhaps you’re only interested in the heart, or in the ear if planning a cochlear implant.",
+        "In this case, the ROI is small. You might use a narrow fan beam targeted only through the ROI, then rotate as in third-generation fan beam geometry. This means the projection data is transversely truncated on both sides.",
+        "With truncation on both edges, the Fourier slice theorem no longer applies, making reconstruction very challenging.",
+        "Mathematically, this “interior problem” has no unique solution, meaning multiple structures could produce identical data, and you wouldn’t know which is correct.",
+        "Several years ago, my group revisited and solved this problem, which we felt very proud of.",
+        "While the classical interior problem’s non-uniqueness holds in unrestricted function spaces, we showed that introducing prior knowledge allows exact reconstruction.",
+        "For example, if you know a small sub-region of the ROI, such as air in the airway or blood in the aorta, you can use that known X-ray attenuation coefficient as a reference. This prior information enables theoretical, exact reconstruction within the ROI from truncated data, a method called interior tomography. Our work was well received, although reviewers raised important questions.",
+        "One student tested whether blood density varies among different races or sexes, finding it consistent across populations.",
+        "This allowed us to use blood density as a stable reference in cardiac imaging, so you only need to scan the heart, reducing radiation dose.",
+        "Later, reviewers pointed out that contrast agents—like iodine injected during CT angiography—change blood density, so you can’t always rely on a fixed reference.",
+        "This challenge led us to develop a new solution."
+      ],
+      "fullText": "There is also an interesting transverse data truncation problem.\nImagine your cross-section represents the green base, while the blue area is a smaller region of interest, or ROI.\nPerhaps you’re only interested in the heart, or in the ear if planning a cochlear implant.\n\nIn this case, the ROI is small. You might use a narrow fan beam targeted only through the ROI, then rotate as in third-generation fan beam geometry. This means the projection data is transversely truncated on both sides.\nWith truncation on both edges, the Fourier slice theorem no longer applies, making reconstruction very challenging.\nMathematically, this “interior problem” has no unique solution, meaning multiple structures could produce identical data, and you wouldn’t know which is correct.\n\nSeveral years ago, my group revisited and solved this problem, which we felt very proud of.\nWhile the classical interior problem’s non-uniqueness holds in unrestricted function spaces, we showed that introducing prior knowledge allows exact reconstruction. \n\nFor example, if you know a small sub-region of the ROI, such as air in the airway or blood in the aorta, you can use that known X-ray attenuation coefficient as a reference. This prior information enables theoretical, exact reconstruction within the ROI from truncated data, a method called interior tomography. Our work was well received, although reviewers raised important questions.\n\nOne student tested whether blood density varies among different races or sexes, finding it consistent across populations.\nThis allowed us to use blood density as a stable reference in cardiac imaging, so you only need to scan the heart, reducing radiation dose.\nLater, reviewers pointed out that contrast agents—like iodine injected during CT angiography—change blood density, so you can’t always rely on a fixed reference.\nThis challenge led us to develop a new solution.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide23.JPG",
+      "script": "When the region of interest is small, like focusing on the heart or preparing for a cochlear implant, the projection data is transversely truncated on both sides, violating the Fourier slice theorem and making reconstruction challenging. This is because the narrow fan beam only covers a small portion of the object, leaving out important information from the surrounding tissue. As a result, the reconstructed image may be of poor quality due to the lack of data from the surrounding tissue.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Small ROI"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Narrow Fan Beam"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Truncation Problem"
+        }
+      ]
+    },
+    {
+      "slideIndex": 23,
+      "slideNumber": 24,
+      "title": "In the new approach, we assume there is no known sub-region.",
+      "bullets": [
+        "Instead, we model the region of interest as composed of finitely many sub-regions, each modeled by piecewise polynomials.",
+        "The boundaries of these sub-regions need not be known in advance. Each sub-region can be approximated by constant, quadratic, or more general multivariable polynomials.",
+        "This assumption matches the idea of band-limited signals from sampling theory.",
+        "With this sparsity-based model, where the ROI is decomposed into a small number of smooth regions, the interior reconstruction problem becomes solvable.",
+        "For example, in a chest CT scan, you can reconstruct the whole chest from all data or just from truncated data restricted to an ROI.",
+        "Here is a real dataset scanned on a Siemens scanner demonstrating this.",
+        "Interior tomography is no longer a mathematical curiosity but delivers practically good reconstruction results."
+      ],
+      "fullText": "In the new approach, we assume there is no known sub-region.\nInstead, we model the region of interest as composed of finitely many sub-regions, each modeled by piecewise polynomials.\n\nThe boundaries of these sub-regions need not be known in advance. Each sub-region can be approximated by constant, quadratic, or more general multivariable polynomials.\nThis assumption matches the idea of band-limited signals from sampling theory.\nWith this sparsity-based model, where the ROI is decomposed into a small number of smooth regions, the interior reconstruction problem becomes solvable.\n\nFor example, in a chest CT scan, you can reconstruct the whole chest from all data or just from truncated data restricted to an ROI.\nHere is a real dataset scanned on a Siemens scanner demonstrating this.\nInterior tomography is no longer a mathematical curiosity but delivers practically good reconstruction results.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide24.JPG",
+      "script": "The new approach assumes no prior knowledge of sub-regions, instead modeling the region of interest as a collection of small, smooth regions, each approximated by piecewise polynomials. This assumption is similar to the idea of band-limited signals from sampling theory. By decomposing the ROI into a few smooth regions, the interior reconstruction problem becomes solvable.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "New Assumption"
+        },
+        {
+          "timeMs": 16000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Piecewise Polynomials"
+        },
+        {
+          "timeMs": 17000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Matching Sampling Theory"
+        }
+      ]
+    },
+    {
+      "slideIndex": 24,
+      "slideNumber": 25,
+      "title": "Let me add some comparison between classic CT and interior tomography.",
+      "bullets": [
+        "According to classical theory, which we learned and which I explained in textbooks, you need to collect all data to satisfy the data sufficiency condition—usually a fan beam or cone beam that covers the entire cross-section or object.",
+        "The data must comprehensively cover the object for accurate reconstruction.",
+        "Interior tomography, however, only requires partial data limited to the region of interest.",
+        "Thus, with filtered backprojection, classic CT reconstructs a global image, like a wholesale business covering the entire area.",
+        "Interior tomography reconstructs a smaller, targeted area—like retail shopping.",
+        "This opens up new opportunities, providing flexibility and precision.",
+        "You only need to shoot X-rays through the important region, reducing dose and focusing on clinical needs."
+      ],
+      "fullText": "Let me add some comparison between classic CT and interior tomography.\n\nAccording to classical theory, which we learned and which I explained in textbooks, you need to collect all data to satisfy the data sufficiency condition—usually a fan beam or cone beam that covers the entire cross-section or object.\nThe data must comprehensively cover the object for accurate reconstruction.\nInterior tomography, however, only requires partial data limited to the region of interest.\n\nThus, with filtered backprojection, classic CT reconstructs a global image, like a wholesale business covering the entire area.\nInterior tomography reconstructs a smaller, targeted area—like retail shopping.\nThis opens up new opportunities, providing flexibility and precision.\nYou only need to shoot X-rays through the important region, reducing dose and focusing on clinical needs.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide25.JPG",
+      "script": "Classic CT collects all data to ensure sufficiency, whereas interior tomography only requires partial data limited to the region of interest, making it a more targeted approach. This is because classic CT aims to reconstruct the entire image, whereas interior tomography focuses on a specific region.",
+      "spotlightEvents": [
+        {
+          "timeMs": 24000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Classic CT vs Interior Tomography"
+        },
+        {
+          "timeMs": 25000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Data Sufficiency Condition"
+        },
+        {
+          "timeMs": 26000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Interior Tomography"
+        }
+      ]
+    },
+    {
+      "slideIndex": 25,
+      "slideNumber": 26,
+      "title": "I have given multiple presentations on interior tomography. One key idea is that",
+      "bullets": [
+        "Why is it faster? All scanning geometries, from first to helical generations, aim to speed up scanning. A cone beam is better than a fan beam because it allows parallel data acquisition. Interior tomography takes this even further by enabling higher-level parallelism with multiple X-ray sources and smaller detector arrays.",
+        "In the extreme, you could have many X-ray focal spots, possibly based on emerging technologies like carbon nanotube cold emission X-ray sources. These enable distributed X-ray cells with small detector elements arranged similarly to the fourth-generation geometry.",
+        "At any instant, such a system could collect multiple truncated projections. Handling data truncation like this allows reconstruction focused on small regions of interest, achieving the fastest possible tomographic imaging speed. You cannot go faster than the speed of light, which governs X-ray photon travel.",
+        "We filed for intellectual property on this concept at Virginia Tech. Later, I will discuss the potential of interior tomography in cardiac imaging."
+      ],
+      "fullText": "I have given multiple presentations on interior tomography. One key idea is that interior tomography uses less data—less is more in many ways. Less data means a deeper understanding of imaging principles. We can handle larger objects, use less radiation dose, and achieve faster scanning.\n\nWhy is it faster? All scanning geometries, from first to helical generations, aim to speed up scanning. A cone beam is better than a fan beam because it allows parallel data acquisition. Interior tomography takes this even further by enabling higher-level parallelism with multiple X-ray sources and smaller detector arrays.\n\nIn the extreme, you could have many X-ray focal spots, possibly based on emerging technologies like carbon nanotube cold emission X-ray sources. These enable distributed X-ray cells with small detector elements arranged similarly to the fourth-generation geometry.\nAt any instant, such a system could collect multiple truncated projections. Handling data truncation like this allows reconstruction focused on small regions of interest, achieving the fastest possible tomographic imaging speed. You cannot go faster than the speed of light, which governs X-ray photon travel.\n\nWe filed for intellectual property on this concept at Virginia Tech. Later, I will discuss the potential of interior tomography in cardiac imaging.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide26.JPG",
+      "script": "Interior tomography is faster because it enables higher-level parallelism with multiple X-ray sources and smaller detectors, allowing for more efficient data acquisition. This parallelism is more pronounced than in traditional cone beam helical scanning. By distributing the radiation sources and detectors in a more efficient way, interior tomography can handle larger objects, reduce radiation dose, and improve scanning speed. This design also facilitates more flexible and adaptable imaging systems.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Why is interior tomography faster?"
+        },
+        {
+          "timeMs": 1700,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 300,
+          "label": "Advantages of cone beam scanning"
+        },
+        {
+          "timeMs": 2100,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Emerging technologies for X-ray sources"
+        }
+      ]
+    },
+    {
+      "slideIndex": 26,
+      "slideNumber": 27,
+      "title": "Now, let me explain CT scanner architecture. To reconstruct images, we rely on l",
+      "bullets": [
+        "To acquire this data, you need hardware: the CT scanner itself. This is a donut-shaped structure called the gantry, which is the framework holding all components.",
+        "Inside, you find X-ray sources and collimators that shape the beam and filter out low-energy X-rays. Low-energy photons won’t penetrate the patient and only add an unwanted dose.",
+        "Collimators also reject scattered radiation to ensure the measured signal corresponds closely to the direct line integrals.",
+        "The scanner is a sophisticated device: you place the patient in the gantry, and from that, you acquire many images that resolve internal structures clearly."
+      ],
+      "fullText": "Now, let me explain CT scanner architecture. To reconstruct images, we rely on line integrals from X-ray projections, using filtered backprojection and Fourier transform-based reconstruction, or interior tomography for region-of-interest reconstruction.\nTo acquire this data, you need hardware: the CT scanner itself. This is a donut-shaped structure called the gantry, which is the framework holding all components.\n\nInside, you find X-ray sources and collimators that shape the beam and filter out low-energy X-rays. Low-energy photons won’t penetrate the patient and only add an unwanted dose.\nCollimators also reject scattered radiation to ensure the measured signal corresponds closely to the direct line integrals.\n\nThe scanner is a sophisticated device: you place the patient in the gantry, and from that, you acquire many images that resolve internal structures clearly.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide27.JPG",
+      "script": "Let me explain the CT scanner architecture. To reconstruct images, we rely on line integrals from X-ray projections, using filtered backprojection and Fourier transform-based reconstruction, or interior tomography for region-of-interest reconstruction. The hardware that acquires this data is the CT scanner itself, a donut-shaped structure called the gantry. The gantry holds all the essential components, including X-ray sources and collimators that shape the beam and filter out low-energy X-rays.",
+      "spotlightEvents": [
+        {
+          "timeMs": 30000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Gantry"
+        },
+        {
+          "timeMs": 32000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 1500,
+          "label": "X-ray Sources"
+        },
+        {
+          "timeMs": 34000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Collimators"
+        }
+      ]
+    },
+    {
+      "slideIndex": 27,
+      "slideNumber": 28,
+      "title": "Let me show you a typical CT scanner layout. You have the X-ray tube, which is q",
+      "bullets": [
+        "Powering the tube requires a high-voltage supply and a cooling system; scanning consumes energy and heats the tube.",
+        "Cooling is done with water or air to keep components at safe operating temperatures.",
+        "This entire setup is called the gantry. It includes the patient table where the patient lies, the detector array opposite the source, and collimators in front of the detectors.",
+        "In conventional CT, the source, detectors, and associated hardware are mounted on the rotating gantry.",
+        "During scanning, the gantry physically rotates, typically half or a full circle, then reverses direction. This back-and-forth rotation is limited by cabling, which can tangle with repeated turns.",
+        "For helical scanning, slip ring technology is employed. The slip ring lets you rotate continuously without cables twisting or breaking.",
+        "It consists of rings with carefully designed contacts to transmit power to the X-ray source and data from the detectors.",
+        "Slip ring technology is critical for continuous and fast scanning. It enables the transfer of data to the scanner’s computer or local storage during rotation.",
+        "When designing a CT scanner, the goal is faster and faster imaging speed, with the most demanding application being cardiac imaging—the holy grail of CT."
+      ],
+      "fullText": "Let me show you a typical CT scanner layout. You have the X-ray tube, which is quite heavy—for example, our lab’s donated GE tube is heavy.\nPowering the tube requires a high-voltage supply and a cooling system; scanning consumes energy and heats the tube.\nCooling is done with water or air to keep components at safe operating temperatures.\nThis entire setup is called the gantry. It includes the patient table where the patient lies, the detector array opposite the source, and collimators in front of the detectors.\n\nIn conventional CT, the source, detectors, and associated hardware are mounted on the rotating gantry.\nDuring scanning, the gantry physically rotates, typically half or a full circle, then reverses direction. This back-and-forth rotation is limited by cabling, which can tangle with repeated turns.\n\nFor helical scanning, slip ring technology is employed. The slip ring lets you rotate continuously without cables twisting or breaking.\nIt consists of rings with carefully designed contacts to transmit power to the X-ray source and data from the detectors.\nSlip ring technology is critical for continuous and fast scanning. It enables the transfer of data to the scanner’s computer or local storage during rotation.\nWhen designing a CT scanner, the goal is faster and faster imaging speed, with the most demanding application being cardiac imaging—the holy grail of CT.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide28.JPG",
+      "script": "Let me show you a typical CT scanner layout. You have the X-ray tube, which is quite heavy, for example, our lab's donated GE tube is heavy. Powering the tube requires a high-voltage supply and a cooling system; scanning consumes energy and heats the tube. Cooling is done with water or air to keep components at safe operating temperatures. This entire setup is called the gantry. It includes the patient table where the patient lies, the detector array opposite the source, and collimators in front of the detectors. In conventional CT, the source, detectors, and associated hardware are mounted on a rotating gantry to collect data from multiple angles.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "X-ray tube"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "High-voltage supply"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 2500,
+          "label": "Cooling system"
+        }
+      ]
+    },
+    {
+      "slideIndex": 28,
+      "slideNumber": 29,
+      "title": "At RPI, we have collaborated with GE Global Research Center and with Bruno Diem ",
+      "bullets": [
+        "We published a paper last year on this topic.",
+        "Designing a CT scanner is much like designing a building or room—you consider architecture and optimal layout.",
+        "Our team is currently preparing a grant proposal to advance this research. The proposal is due soon and covers aspects not addressed in previous reviews."
+      ],
+      "fullText": "At RPI, we have collaborated with GE Global Research Center and with Bruno Diem and others to develop optimized architectures for dedicated cardiac CT scanners.\n\nWe published a paper last year on this topic.\nDesigning a CT scanner is much like designing a building or room—you consider architecture and optimal layout.\nOur team is currently preparing a grant proposal to advance this research. The proposal is due soon and covers aspects not addressed in previous reviews.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide29.JPG",
+      "script": "Our research at RPI has been a collaborative effort, working with the GE Global Research Center and experts like Bruno Diem to design dedicated cardiac CT scanners. We published a paper on this topic last year, exploring optimized architectures for these scanners. The design process is similar to planning a building or room, where you think about the overall architecture and layout to ensure everything works together efficiently. Our team is now preparing a grant proposal to build on this research and address new challenges.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 500,
+          "label": "Collaboration"
+        },
+        {
+          "timeMs": 1000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Design Principles"
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "Grant Proposal"
+        }
+      ]
+    },
+    {
+      "slideIndex": 29,
+      "slideNumber": 30,
+      "title": "I am especially excited about this project, collaborating with GE.",
+      "bullets": [
+        "Currently, cardiac CT scanners mostly use third-generation geometry, but with cone beam helical scanning mode, which some call improved third generation or helical cone beam generation.",
+        "This system is already very fast, capable of rotating three to four times per second.",
+        "The mechanical acceleration involved is astonishing—much higher than what’s involved in launching a space shuttle.",
+        "The current best temporal and spatial resolution for cardiac CT is about 500 microns.",
+        "But according to cardiac surgeons I know, 100 micron resolution would solve many clinical challenges.",
+        "Improving cardiac CT resolution requires higher imaging speed to freeze the heart’s rapid motion on this fine scale.",
+        "However, as you increase rotation speed, the X-ray tube has less time to emit photons, limiting achievable image quality.",
+        "Our out-of-the-box solution uses interior tomography. We designed a stationary ring scanner to boost X-ray flux by orders of magnitude.",
+        "Imagine a cardiac patient lying still while being scanned. You get immediate images.",
+        "When higher resolution is needed, the patient or ring can be translated to focus precisely on the region of interest.",
+        "This stationary ring can move up, down, left, or right to align perfectly with conventional cardiac CT images.",
+        "I believe this design is a promising way forward—an out-of-the-box solution for high-speed, high-resolution cardiac imaging."
+      ],
+      "fullText": "I am especially excited about this project, collaborating with GE.\nCurrently, cardiac CT scanners mostly use third-generation geometry, but with cone beam helical scanning mode, which some call improved third generation or helical cone beam generation.\nThis system is already very fast, capable of rotating three to four times per second.\nThe mechanical acceleration involved is astonishing—much higher than what’s involved in launching a space shuttle.\nThe current best temporal and spatial resolution for cardiac CT is about 500 microns.\n\nBut according to cardiac surgeons I know, 100 micron resolution would solve many clinical challenges.\nImproving cardiac CT resolution requires higher imaging speed to freeze the heart’s rapid motion on this fine scale.\nHowever, as you increase rotation speed, the X-ray tube has less time to emit photons, limiting achievable image quality.\nOur out-of-the-box solution uses interior tomography. We designed a stationary ring scanner to boost X-ray flux by orders of magnitude.\n\nImagine a cardiac patient lying still while being scanned. You get immediate images.\nWhen higher resolution is needed, the patient or ring can be translated to focus precisely on the region of interest.\nThis stationary ring can move up, down, left, or right to align perfectly with conventional cardiac CT images.\nI believe this design is a promising way forward—an out-of-the-box solution for high-speed, high-resolution cardiac imaging.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide30.JPG",
+      "script": "I'm excited about this project because it's a collaboration with GE, a leader in medical imaging technology. Our team is working on innovative scanning geometries, specifically a fourth-generation geometry, to push the boundaries of cardiac CT imaging. This new design enables cone beam helical scanning, allowing for even faster and more precise imaging. The mechanical acceleration required is truly impressive, and we're working to achieve even higher resolution, potentially below 100 microns, to meet the needs of cardiac surgeons.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Collaboration with GE"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 300,
+          "label": "Fourth-generation geometry"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 400,
+          "label": "Cone beam helical scanning mode"
+        }
+      ]
+    },
+    {
+      "slideIndex": 30,
+      "slideNumber": 31,
+      "title": "Now, let’s finish with the last two sections. First, image artifacts. I’ve menti",
+      "bullets": [
+        "If there’s no real structure present, what you see might just be noise. Sometimes, artifacts show up as streaks or stripes in the image, but obviously, there are no stripes inside the human body. They are just artifacts. We’ll discuss CT image quality considerations next, which include how artifacts impact the overall image quality."
+      ],
+      "fullText": "Now, let’s finish with the last two sections. First, image artifacts. I’ve mentioned image artifacts several times throughout this course. Tomographic images are meant to reveal the true underlying anatomical structure. However, for various reasons, the images sometimes show structures that aren’t actually present. These false structures are what we call image artifacts.\n\nIf there’s no real structure present, what you see might just be noise. Sometimes, artifacts show up as streaks or stripes in the image, but obviously, there are no stripes inside the human body. They are just artifacts. We’ll discuss CT image quality considerations next, which include how artifacts impact the overall image quality.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide31.JPG",
+      "script": "Image artifacts are false structures that appear in the image, even though they don't actually exist in the body. These artifacts can be caused by various reasons and can make it difficult to interpret the image accurately. They might look like real structures, but they're actually just noise or distortions in the image. We'll discuss the causes and types of image artifacts in the next few lectures.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Image Artifacts"
+        },
+        {
+          "timeMs": 12000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Noise or Discrepancies"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Streaks or Stripes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 31,
+      "slideNumber": 32,
+      "title": "Starting with data sampling: In modern CT scanners, such as those from GE or Sie",
+      "bullets": [
+        "At each projection, the detector array works like a comb beam or multi-row detector, capturing thousands of data points along each ray path. For example, along one ray direction, you might have about 1,000 detector elements.",
+        "All these detector readings combine to define the scanner’s spatial resolution, often achieving sub-millimeter precision.",
+        "In the future, we are aiming to improve this further, reaching resolutions on the order of 100 microns. This is challenging because every wire and detector element has limits, so current strategies often focus on targeting smaller regions of interest.",
+        "To resolve fine details, the angular sampling intervals and detector element sizes must be small enough, consistent with Fourier analysis and sampling theory.",
+        "If the sampling rate is too low or the detector elements are too big, small features won’t be resolved clearly. For instance, with about 512 rays, you get fairly clear images. With fewer rays, small details become difficult to detect.",
+        "Angular sampling is also critical. If you have nearly 1,000 views around the object, image quality is good. Using fewer views leads to aliasing artifacts and lower image quality."
+      ],
+      "fullText": "Starting with data sampling: In modern CT scanners, such as those from GE or Siemens, a typical rotation collects about 1,000 projections—sometimes slightly fewer, depending on the manufacturer, like 800 or 790.\n\nAt each projection, the detector array works like a comb beam or multi-row detector, capturing thousands of data points along each ray path. For example, along one ray direction, you might have about 1,000 detector elements.\nAll these detector readings combine to define the scanner’s spatial resolution, often achieving sub-millimeter precision.\n\nIn the future, we are aiming to improve this further, reaching resolutions on the order of 100 microns. This is challenging because every wire and detector element has limits, so current strategies often focus on targeting smaller regions of interest.\nTo resolve fine details, the angular sampling intervals and detector element sizes must be small enough, consistent with Fourier analysis and sampling theory.\n\nIf the sampling rate is too low or the detector elements are too big, small features won’t be resolved clearly. For instance, with about 512 rays, you get fairly clear images. With fewer rays, small details become difficult to detect.\nAngular sampling is also critical. If you have nearly 1,000 views around the object, image quality is good. Using fewer views leads to aliasing artifacts and lower image quality.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide32.JPG",
+      "script": "Modern CT scanners collect around 1,000 projections per rotation, with each projection capturing thousands of data points from the detector array, resulting in high spatial resolution, often below one millimeter. The number of detector elements along a single ray direction can be in the thousands, contributing to the scanner's precision. This high resolution enables detailed imaging, and future advancements aim to further improve it.",
+      "spotlightEvents": [
+        {
+          "timeMs": 2000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Detector array details"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Future resolution goals"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.6,
+          "durationMs": 400,
+          "label": "Angular sampling and detector sizes"
+        }
+      ]
+    },
+    {
+      "slideIndex": 32,
+      "slideNumber": 33,
+      "title": "CT reconstruction relies on CT numbers, which are derived from Beer's law. Beer'",
+      "bullets": [
+        "Data processing converts raw measurements into line integrals, which are then used to reconstruct mu values throughout the image.",
+        "On the CT monitor, you don’t see mu values directly but relative values compared to water, since the human body is mostly water.",
+        "Thus, CT numbers indicate how much more or less dense a region is than water.",
+        "For example, bone has a CT number over 1000, air has about -1000, and water is defined as zero. The range is often magnified by 1000 times for visualization.",
+        "This scale is sometimes called Hounsfield units, named after Sir Godfrey Hounsfield, the British engineer who developed the first CT scanner, which earned him a Nobel Prize for its revolutionary capability to reveal internal structures."
+      ],
+      "fullText": "CT reconstruction relies on CT numbers, which are derived from Beer's law. Beer's law relates the incoming and attenuated X-ray intensities via a parameter called the linear attenuation coefficient, mu.\nData processing converts raw measurements into line integrals, which are then used to reconstruct mu values throughout the image.\n\nOn the CT monitor, you don’t see mu values directly but relative values compared to water, since the human body is mostly water.\nThus, CT numbers indicate how much more or less dense a region is than water.\nFor example, bone has a CT number over 1000, air has about -1000, and water is defined as zero. The range is often magnified by 1000 times for visualization.\n\nThis scale is sometimes called Hounsfield units, named after Sir Godfrey Hounsfield, the British engineer who developed the first CT scanner, which earned him a Nobel Prize for its revolutionary capability to reveal internal structures.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide33.JPG",
+      "script": "So, CT numbers are not absolute values of the linear attenuation coefficient, mu, but rather relative values compared to water, which is the body's main composition. These relative values tell us how much more or less dense a region is than water. For instance, bone appears with a high CT number, over 1000, while air has a very low CT number, around minus 1000.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "CT numbers are relative"
+        },
+        {
+          "timeMs": 1600,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Beer's law"
+        },
+        {
+          "timeMs": 1900,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 400,
+          "label": "CT numbers for bone and air"
+        }
+      ]
+    },
+    {
+      "slideIndex": 33,
+      "slideNumber": 34,
+      "title": "Different body regions use different CT number windows for display. These window",
+      "bullets": [
+        "For instance, the full range of CT numbers might be mapped to 256 grayscale levels on a display, from white to black.",
+        "The human eye can typically distinguish about 50 shades within a window.",
+        "If too many shades are presented, subtle differences become difficult to see.",
+        "For lung imaging, for example, you might set the window maximum to about 250 Hounsfield units and the minimum to the air value.",
+        "Within this window, 256 gray levels help render tissues clearly. Anything outside the window appears clipped and is not visible.",
+        "This windowing is critical to tailoring visualization to different clinical needs."
+      ],
+      "fullText": "Different body regions use different CT number windows for display. These windows are defined by minimum and maximum CT numbers, depending on the manufacturer or clinical application.\n\nFor instance, the full range of CT numbers might be mapped to 256 grayscale levels on a display, from white to black.\nThe human eye can typically distinguish about 50 shades within a window.\nIf too many shades are presented, subtle differences become difficult to see.\n\nFor lung imaging, for example, you might set the window maximum to about 250 Hounsfield units and the minimum to the air value.\nWithin this window, 256 gray levels help render tissues clearly. Anything outside the window appears clipped and is not visible.\nThis windowing is critical to tailoring visualization to different clinical needs.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide34.JPG",
+      "script": "The choice of window settings depends on the body region and clinical application, with different windows defined by minimum and maximum CT numbers. These windows are used to enhance contrast and make it easier to see subtle differences in the image. For example, in lung imaging, a window with a maximum of 250 Hounsfield units and a minimum of the air value is often used to bring out the fine details of the lungs. This helps to improve diagnostic accuracy and make it easier to detect disease.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3600,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Window settings vary by region"
+        },
+        {
+          "timeMs": 3800,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 1500,
+          "label": "Lung imaging example"
+        },
+        {
+          "timeMs": 4100,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Shades of gray matter"
+        }
+      ]
+    },
+    {
+      "slideIndex": 34,
+      "slideNumber": 35,
+      "title": "There are multiple resolution measures in CT. High-contrast resolution detects s",
+      "bullets": [
+        "If you want to detect even smaller details, down to 100 microns, you may need advanced methods like interior tomography that we’ve discussed extensively.",
+        "Low-contrast resolution differentiates subtle intensity differences. This is important because tumors may look very similar to surrounding tissue.",
+        "Narrow window settings, chosen carefully with a mean and range, help highlight these subtle differences.",
+        "If the CT number difference is very small—say 5 to 10 Hounsfield units—and noise is comparable, detecting such differences requires boosting contrast effectively.",
+        "Hence, low contrast resolution depends not just on hardware but also on image noise characteristics.",
+        "Temporal resolution is crucial for dynamic organs like the heart. To get high-resolution cardiac images, both spatial and temporal resolution must be adequate.",
+        "If your detector resolves fine details but scanning speed is too slow, motion blurring will reduce effective spatial resolution.",
+        "So, achieving both fast scanning and high spatial resolution is essential.",
+        "Photon-counting detectors with elements as small as 55 microns are available, enabling very high-resolution imaging.",
+        "Combining this with interior tomography concepts and distributed thousands of photon-counting detector elements, it’s feasible to build a “magic ring” scanner that focuses on small regions of interest with resolution down to 100 microns.",
+        "This is an area of active research that we continue to pursue."
+      ],
+      "fullText": "There are multiple resolution measures in CT. High-contrast resolution detects small objects adjacently positioned; for example, cardiac CT currently resolves about 500 microns.\nIf you want to detect even smaller details, down to 100 microns, you may need advanced methods like interior tomography that we’ve discussed extensively.\n\nLow-contrast resolution differentiates subtle intensity differences. This is important because tumors may look very similar to surrounding tissue.\nNarrow window settings, chosen carefully with a mean and range, help highlight these subtle differences.\nIf the CT number difference is very small—say 5 to 10 Hounsfield units—and noise is comparable, detecting such differences requires boosting contrast effectively.\n\nHence, low contrast resolution depends not just on hardware but also on image noise characteristics.\nTemporal resolution is crucial for dynamic organs like the heart. To get high-resolution cardiac images, both spatial and temporal resolution must be adequate.\nIf your detector resolves fine details but scanning speed is too slow, motion blurring will reduce effective spatial resolution.\nSo, achieving both fast scanning and high spatial resolution is essential.\n\nPhoton-counting detectors with elements as small as 55 microns are available, enabling very high-resolution imaging.\nCombining this with interior tomography concepts and distributed thousands of photon-counting detector elements, it’s feasible to build a “magic ring” scanner that focuses on small regions of interest with resolution down to 100 microns.\nThis is an area of active research that we continue to pursue.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide35.JPG",
+      "script": "There are multiple resolution measures in CT, each serving a different purpose. High-contrast resolution is crucial for detecting small objects or structures, such as those found in cardiac CT, which can currently resolve details down to about 500 microns. However, for even smaller details, advanced methods like interior tomography may be necessary to achieve resolutions of 100 microns or smaller.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "High-contrast resolution"
+        },
+        {
+          "timeMs": 1600,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Low-contrast resolution"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.85,
+          "durationMs": 1000,
+          "label": "Narrow window settings"
+        }
+      ]
+    },
+    {
+      "slideIndex": 35,
+      "slideNumber": 36,
+      "title": "The noise you see in CT images is due to quantum effects and other random variat",
+      "bullets": [
+        "Image resolution also plays a key role. Think of pixel or voxel size in a simple way. If you have a large pixel, it collects many photons, resulting in a lower noise level. But if you target a very small, high-resolution pixel or voxel, fewer photons pass through it, so you need even more photons overall to maintain good image quality.",
+        "This is why interior tomography is advantageous. Since it directs photons only through the small region of interest, it reduces unnecessary exposure while maintaining image quality for the target structure."
+      ],
+      "fullText": "The noise you see in CT images is due to quantum effects and other random variations. Several factors influence this noise level, such as the tube current, often referred to as MAS. When the tube current is high, the X-ray tube emits more photons, so the statistical fluctuations decrease, which means less noise.\n\nImage resolution also plays a key role. Think of pixel or voxel size in a simple way. If you have a large pixel, it collects many photons, resulting in a lower noise level. But if you target a very small, high-resolution pixel or voxel, fewer photons pass through it, so you need even more photons overall to maintain good image quality.\n\nThis is why interior tomography is advantageous. Since it directs photons only through the small region of interest, it reduces unnecessary exposure while maintaining image quality for the target structure.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide36.JPG",
+      "script": "The noise you see in CT images is due to quantum effects and other random variations, influenced by factors like the tube current, or MAS. A higher tube current means more photons emitted, reducing statistical fluctuations and resulting in less noise. Image resolution also plays a key role, with larger pixels collecting more photons and producing lower noise, while smaller, high-resolution pixels collect fewer photons.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Noise in CT images"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1500,
+          "label": "Image resolution"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 2500,
+          "label": "Interior tomography"
+        }
+      ]
+    },
+    {
+      "slideIndex": 36,
+      "slideNumber": 37,
+      "title": "Low contrast image resolution can be measured using resolution phantoms containi",
+      "bullets": [
+        "When contrast is poor, like between blood vessels and surrounding tissue, contrast agents such as iodine are injected. These agents highlight the vessels, making blood, tumors, and related structures more visible.",
+        "This approach significantly improves low-contrast resolution, enabling better diagnosis and visualization of soft tissues."
+      ],
+      "fullText": "Low contrast image resolution can be measured using resolution phantoms containing small test objects with subtle differences in density. These phantoms help to assess if the scanner and reconstruction algorithm can visualize objects with minor contrast differences.\n\nWhen contrast is poor, like between blood vessels and surrounding tissue, contrast agents such as iodine are injected. These agents highlight the vessels, making blood, tumors, and related structures more visible.\n\nThis approach significantly improves low-contrast resolution, enabling better diagnosis and visualization of soft tissues.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide37.JPG",
+      "script": "To measure low contrast image resolution, we use resolution phantoms with small test objects that have subtle differences in density. These phantoms help us see if the scanner and reconstruction algorithm can visualize objects with minor contrast differences. When contrast is poor, like between blood vessels and surrounding tissue, we inject contrast agents, such as iodine, to highlight the vessels and make blood, tumors, and related structures more visible. This approach improves low-contrast resolution and helps with better diagnosis and visualization of soft tissues.",
+      "spotlightEvents": [
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Resolution phantoms"
+        },
+        {
+          "timeMs": 17000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 1500,
+          "label": "Contrast agents"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.7,
+          "durationMs": 2500,
+          "label": "Improved diagnosis"
+        }
+      ]
+    },
+    {
+      "slideIndex": 37,
+      "slideNumber": 38,
+      "title": "Temporal resolution, so you see conventional CP scanning. You do one slice at a ",
+      "bullets": [
+        "move the patient into the country by a small increment. Do again, patient, keep pressing.",
+        "So from slice to slice, you see some discontinuity. So this is not due to some pathological feature.",
+        "It's really due to motion artifacts that show the temporal resolution agent is good enough. But",
+        "With helical scanning, it's smoothed out, but you have some longitudinal blurring.",
+        "Here is the earlier algorithm. Later, I mentioned overlapping reconstruction. You really can",
+        "recover an image longitudinally and a better resolution than conventional scanning. Anyway,",
+        "so we wouldn't have time to go into details."
+      ],
+      "fullText": "Temporal resolution, so you see conventional CP scanning. You do one slice at a time. Then you\nmove the patient into the country by a small increment. Do again, patient, keep pressing. \n\nSo from slice to slice, you see some discontinuity. So this is not due to some pathological feature.\nIt's really due to motion artifacts that show the temporal resolution agent is good enough. But\nWith helical scanning, it's smoothed out, but you have some longitudinal blurring.\n\nHere is the earlier algorithm. Later, I mentioned overlapping reconstruction. You really can\nrecover an image longitudinally and a better resolution than conventional scanning. Anyway,\nso we wouldn't have time to go into details.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide38.JPG",
+      "script": "Temporal resolution is related to how well we can freeze motion, and conventional step-and-shoot scanning can introduce motion artifacts due to the time gap between each slice. This is not a pathological feature, but rather a limitation of the scanning method. Helical scanning can smooth out these artifacts, but may result in longitudinal blurring.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Conventional CP scanning"
+        },
+        {
+          "timeMs": 16000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 2000,
+          "label": "Motion artifacts"
+        },
+        {
+          "timeMs": 19000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Helical scanning"
+        }
+      ]
+    },
+    {
+      "slideIndex": 38,
+      "slideNumber": 39,
+      "title": "Scattering artifacts occur due to scattered X-ray photons. Let me explain this w",
+      "bullets": [
+        "However, during measurement, some X-rays scatter in various directions. You might see scattering toward the right, left, or even backward directions. These scattered photons add a background signal that does not correspond to the direct transmission along the beam path.",
+        "Because of this scattered radiation, the detector picks up additional signals on top of the real primary X-rays. This extra background leads to artifacts in the image—usually appearing as low-frequency streaking or haze that reduces contrast and clarity.",
+        "If you correct for scattering components by estimating and subtracting them, you can restore the image quality close to the phantom reconstruction without scatter.",
+        "One common method to reduce scatter is using beam blockers placed strategically. These beam blockers function to block certain parts of the primary radiation, allowing measurement of scatter separately and improved image correction."
+      ],
+      "fullText": "Scattering artifacts occur due to scattered X-ray photons. Let me explain this with an example. Imagine sending an X-ray beam from the south direction through the body. Follow my cursor as I illustrate. The primary X-ray beam travels straight through a data element, creating the expected line integral for reconstruction.\n\nHowever, during measurement, some X-rays scatter in various directions. You might see scattering toward the right, left, or even backward directions. These scattered photons add a background signal that does not correspond to the direct transmission along the beam path.\nBecause of this scattered radiation, the detector picks up additional signals on top of the real primary X-rays. This extra background leads to artifacts in the image—usually appearing as low-frequency streaking or haze that reduces contrast and clarity.\nIf you correct for scattering components by estimating and subtracting them, you can restore the image quality close to the phantom reconstruction without scatter.\n\nOne common method to reduce scatter is using beam blockers placed strategically. These beam blockers function to block certain parts of the primary radiation, allowing measurement of scatter separately and improved image correction.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide39.JPG",
+      "script": "Scattering artifacts happen because of X-ray photons that scatter in different directions, adding background signals that don't represent the direct transmission along the beam path. Let's use an example to illustrate this: when sending an X-ray beam from the south direction, some X-rays scatter toward the right, left, or even backward directions, contaminating the measurement. These scattered photons don't follow the direct path, causing artifacts in the reconstructed image.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Scattering artifacts"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Scattered X-ray photons"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Background signal"
+        }
+      ]
+    },
+    {
+      "slideIndex": 39,
+      "slideNumber": 40,
+      "title": "Beam hardening artifacts occur when X-ray beams pass through an object, resultin",
+      "bullets": [
+        "Imagine an X-ray beam going through the body in a certain direction, forming a parallel beam projection. This is a real and common setup.",
+        "When using a medical X-ray tube and current detector technology, both measure the attenuated signals, resulting in what we call the line integral. However, if you reconstruct the image based on the uncorrected projection profile, the reconstruction may look distorted, often represented by a dotted projection line in diagrams.",
+        "Why does this happen?",
+        "It’s due to beam hardening. X-ray beams are polychromatic, meaning they contain photons of various energies, forming a spectrum. Initially, the beam may have many lower-energy photons that get attenuated more as the beam penetrates the object.",
+        "Lower-energy photons have higher attenuation coefficients, so they are absorbed more readily in tissue.",
+        "As the beam progresses into the body, the relative amount of higher-energy photons increases because they penetrate deeper. This process “hardens” the beam—increasing its average energy.",
+        "Since higher-energy photons are less easily blocked, the beam becomes more penetrating along longer paths.",
+        "Despite this, many reconstruction algorithms assume a monochromatic beam, leading to errors.",
+        "This results in an underestimation of the linear attenuation coefficient mu because the beam appears to pass more easily than expected.",
+        "Consequently, the computed line integrals and preprocessed data are based on a single energy assumption, but the reality is a changing, polychromatic beam.",
+        "This discrepancy causes characteristic artifacts in images, such as streaks and cupping.",
+        "Proper correction methods and models that account for beam hardening are necessary to reduce these artifacts and improve image quality."
+      ],
+      "fullText": "Beam hardening artifacts occur when X-ray beams pass through an object, resulting in changes in beam energy distribution that affect image quality. Let me explain this in some detail.\n\nImagine an X-ray beam going through the body in a certain direction, forming a parallel beam projection. This is a real and common setup.\nWhen using a medical X-ray tube and current detector technology, both measure the attenuated signals, resulting in what we call the line integral. However, if you reconstruct the image based on the uncorrected projection profile, the reconstruction may look distorted, often represented by a dotted projection line in diagrams.\nWhy does this happen?\n\nIt’s due to beam hardening. X-ray beams are polychromatic, meaning they contain photons of various energies, forming a spectrum. Initially, the beam may have many lower-energy photons that get attenuated more as the beam penetrates the object.\nLower-energy photons have higher attenuation coefficients, so they are absorbed more readily in tissue.\nAs the beam progresses into the body, the relative amount of higher-energy photons increases because they penetrate deeper. This process “hardens” the beam—increasing its average energy.\n\nSince higher-energy photons are less easily blocked, the beam becomes more penetrating along longer paths.\nDespite this, many reconstruction algorithms assume a monochromatic beam, leading to errors.\nThis results in an underestimation of the linear attenuation coefficient mu because the beam appears to pass more easily than expected.\nConsequently, the computed line integrals and preprocessed data are based on a single energy assumption, but the reality is a changing, polychromatic beam.\n\nThis discrepancy causes characteristic artifacts in images, such as streaks and cupping.\nProper correction methods and models that account for beam hardening are necessary to reduce these artifacts and improve image quality.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide40.JPG",
+      "script": "Beam hardening artifacts occur because the beam becomes harder, or more penetrating, as it passes through the object, changing the beam energy distribution and affecting the image quality. This happens because the beam is attenuated, or weakened, by the object, causing the remaining photons to have higher energies. If not corrected, this can lead to distorted reconstructions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "Beam hardening artifacts"
+        },
+        {
+          "timeMs": 3500,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.6,
+          "durationMs": 1500,
+          "label": "Parallel beam projection"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Beam hardening"
+        }
+      ]
+    },
+    {
+      "slideIndex": 40,
+      "slideNumber": 41,
+      "title": "This is an example of CT images affected by beam hardening without any correctio",
+      "bullets": [
+        "Beam hardening artifacts originate from the X-ray source and the polychromatic nature of the X-ray beam. When you use a photon-counting detector, it can measure X-ray signals at different energy levels separately.",
+        "By distinguishing between energies, photon-counting detectors effectively eliminate beam hardening artifacts. This technology significantly improves image quality by reducing these artifacts that cause distortions in conventional CT images."
+      ],
+      "fullText": "This is an example of CT images affected by beam hardening without any correction. You can see a darker strip in the image, which obscures details. After applying correction techniques, you can visualize structures like gray matter much more clearly.\n\nBeam hardening artifacts originate from the X-ray source and the polychromatic nature of the X-ray beam. When you use a photon-counting detector, it can measure X-ray signals at different energy levels separately.\n\nBy distinguishing between energies, photon-counting detectors effectively eliminate beam hardening artifacts. This technology significantly improves image quality by reducing these artifacts that cause distortions in conventional CT images.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide41.JPG",
+      "script": "Beam hardening artifacts occur due to the polychromatic nature of the X-ray beam and can be mitigated by using photon-counting detectors that measure X-ray signals at different energy levels separately. This allows for the distinction of energies and the elimination of beam hardening artifacts. Photon-counting detectors are a promising solution for reducing artifacts in CT imaging.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Photon-counting detectors"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Beam hardening artifacts"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Elimination of beam hardening"
+        }
+      ]
+    },
+    {
+      "slideIndex": 41,
+      "slideNumber": 42,
+      "title": "Now, let’s discuss volume averaging and various related artifacts. These artifac",
+      "bullets": [
+        "In CT imaging, volume averaging occurs because of finite detector element size and limitations in the reconstruction matrix’s resolution. These hardware elements are not small enough to capture features smaller than the detector size or the X-ray focal spot.",
+        "Imagine you have a fine detail—a small yellow cross in an image. But your image pixels are arranged in a grid, and this cross might fall entirely within a single pixel.",
+        "That one pixel will then represent an average of all the structures within it, so the small cross may simply blend into a larger, less distinct area.",
+        "For example, if the cross is in one pixel and that pixel appears as a light yellow block, you cannot resolve the cross’s true shape.",
+        "This phenomenon is called volume averaging.",
+        "In CT images, various factors cause blurring and averaging effects, causing images to look less sharp.",
+        "Detector pixels have a limited size, and the X-ray source’s focal spot is not a perfect point but has an elliptical shape, which contributes to image blur.",
+        "To partially counteract this, image processing techniques like deblurring and deconvolution are applied, recovering some lost resolution.",
+        "This relates to our earlier study of linear systems and convolution in imaging.",
+        "So, volume averaging is a fundamental problem intrinsic to CT imaging, limiting the spatial resolution achievable."
+      ],
+      "fullText": "Now, let’s discuss volume averaging and various related artifacts. These artifacts are not difficult to understand conceptually, but effectively removing them can be challenging.\n\nIn CT imaging, volume averaging occurs because of finite detector element size and limitations in the reconstruction matrix’s resolution. These hardware elements are not small enough to capture features smaller than the detector size or the X-ray focal spot.\nImagine you have a fine detail—a small yellow cross in an image. But your image pixels are arranged in a grid, and this cross might fall entirely within a single pixel.\n\nThat one pixel will then represent an average of all the structures within it, so the small cross may simply blend into a larger, less distinct area.\nFor example, if the cross is in one pixel and that pixel appears as a light yellow block, you cannot resolve the cross’s true shape.\nThis phenomenon is called volume averaging.\n\nIn CT images, various factors cause blurring and averaging effects, causing images to look less sharp.\nDetector pixels have a limited size, and the X-ray source’s focal spot is not a perfect point but has an elliptical shape, which contributes to image blur.\n\nTo partially counteract this, image processing techniques like deblurring and deconvolution are applied, recovering some lost resolution.\nThis relates to our earlier study of linear systems and convolution in imaging.\nSo, volume averaging is a fundamental problem intrinsic to CT imaging, limiting the spatial resolution achievable.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide42.JPG",
+      "script": "So, when we have a fine detail, like a small yellow cross, and our image pixels are arranged in a grid, the cross might fall entirely within a single pixel, resulting in a blurred or averaged effect. This is volume averaging, where the detail is spread out over multiple pixels, making it harder to distinguish. It's a real-world limitation that affects the sharpness of our images.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Volume Averaging"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.25,
+          "y": 0.55,
+          "durationMs": 2000,
+          "label": "Detector Size Limitation"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Reconstruction Matrix Resolution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 42,
+      "slideNumber": 43,
+      "title": "Next, we have what are called metal artifacts. Inside the human body, you may ha",
+      "bullets": [
+        "Because of this, X-rays cannot penetrate metal implants well. The attenuated signal behind the metal may be very noisy or even just noise without a clear signal.",
+        "When you perform filtered backprojection reconstruction in such cases, the results are often poor, showing streaking artifacts.",
+        "This happens because the line integral passing through the metal is very long, with many photons blocked or scattered. Beam hardening and other effects further degrade the signal.",
+        "As a result, the detected signals are compromised with a low signal-to-noise ratio. When estimating line integrals, the data is inconsistent and inaccurate.",
+        "Filtered backprojection on such corrupted data generates stripe-like artifacts in the images, which is a typical manifestation of metal artifacts in CT.",
+        "Reducing metal artifacts is an important research topic, and multiple algorithms have been developed, though it remains challenging."
+      ],
+      "fullText": "Next, we have what are called metal artifacts. Inside the human body, you may have metal implants like pacemakers or dental fillings. Metal is much denser than bone, so it can block X-rays effectively.\nBecause of this, X-rays cannot penetrate metal implants well. The attenuated signal behind the metal may be very noisy or even just noise without a clear signal.\n\nWhen you perform filtered backprojection reconstruction in such cases, the results are often poor, showing streaking artifacts.\nThis happens because the line integral passing through the metal is very long, with many photons blocked or scattered. Beam hardening and other effects further degrade the signal.\nAs a result, the detected signals are compromised with a low signal-to-noise ratio. When estimating line integrals, the data is inconsistent and inaccurate.\n\nFiltered backprojection on such corrupted data generates stripe-like artifacts in the images, which is a typical manifestation of metal artifacts in CT.\nReducing metal artifacts is an important research topic, and multiple algorithms have been developed, though it remains challenging.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide43.JPG",
+      "script": "Metal artifacts occur when metal implants, like pacemakers or dental fillings, block X-rays, reducing the attenuated signal behind the metal, which can lead to noisy or non-existent signals. This results in poor reconstruction quality with streaking artifacts when filtered backprojection is used. The long line integral through the metal accumulates many blocked photons, causing the streaking effect.",
+      "spotlightEvents": [
+        {
+          "timeMs": 10800,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Metal artifacts"
+        },
+        {
+          "timeMs": 11000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "X-rays blocked by metal"
+        },
+        {
+          "timeMs": 11200,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Poor reconstruction quality"
+        }
+      ]
+    },
+    {
+      "slideIndex": 43,
+      "slideNumber": 44,
+      "title": "The last topic I’m going to explain is motion artifacts. Imagine you have a phan",
+      "bullets": [
+        "As you slowly increase the projection angle, the X-ray source rotates around the phantom.",
+        "Over time, the data you collect changes. When the angle reaches 90 degrees, the phantom appears compressed, shrunk to a minimum in the projection.",
+        "As the source continues rotating, at 180 degrees, the phantom appears expanded again.",
+        "This back-and-forth pattern creates a sinusoidal oscillation in the data.",
+        "This example illustrates what happens when the object isn’t stationary, but moves periodically.",
+        "You gather projection data while the object moves according to this periodic motion.",
+        "If you then apply filtered backprojection to reconstruct images from this data, you get motion artifacts—blurring or distortion caused by the object’s movement during acquisition.",
+        "However, if you know the object’s motion trajectory, you can incorporate that information into iterative reconstruction algorithms.",
+        "With this additional information, it is possible to recover accurate images despite motion.",
+        "Tomographic reconstruction remains feasible, provided you have either explicit knowledge of motion or use algorithms that infer motion implicitly.",
+        "Due to time constraints in this lecture, we won’t delve deeply into motion artifact correction algorithms.",
+        "For cardiac imaging, one way to reduce motion artifacts is through hardware: performing ultra-fast scanning so the heart doesn’t have significant motion during image acquisition.",
+        "This instantaneous imaging “freezes” the cardiac structure, minimizing motion blur.",
+        "Another way is through smart computational algorithms that predict motion and correct for it during reconstruction.",
+        "Often, cardiac CT patients are given beta blockers to slow the heart rate, reducing motion during scanning.",
+        "Additionally, CT acquisition can be synchronized with the ECG signal, coupling image data with specific cardiac phases.",
+        "The ECG indicates when the heart is largest or smallest. You can select data segments corresponding to the heart’s maximum volume and reconstruct images at that phase.",
+        "Similarly, you regroup data segments for the minimum volume phase and reconstruct images accordingly.",
+        "This approach allows reconstruction of a beating heart in different cardiac phases.",
+        "This gives a rough idea of how motion artifacts are managed in dynamic organ imaging."
+      ],
+      "fullText": "The last topic I’m going to explain is motion artifacts. Imagine you have a phantom object, like this one, viewed at angle zero. The phantom has a taiji pattern, a yin-yang shape.\nAs you slowly increase the projection angle, the X-ray source rotates around the phantom.\nOver time, the data you collect changes. When the angle reaches 90 degrees, the phantom appears compressed, shrunk to a minimum in the projection.\n\nAs the source continues rotating, at 180 degrees, the phantom appears expanded again.\nThis back-and-forth pattern creates a sinusoidal oscillation in the data.\nThis example illustrates what happens when the object isn’t stationary, but moves periodically.\nYou gather projection data while the object moves according to this periodic motion.\nIf you then apply filtered backprojection to reconstruct images from this data, you get motion artifacts—blurring or distortion caused by the object’s movement during acquisition.\n\nHowever, if you know the object’s motion trajectory, you can incorporate that information into iterative reconstruction algorithms.\nWith this additional information, it is possible to recover accurate images despite motion.\nTomographic reconstruction remains feasible, provided you have either explicit knowledge of motion or use algorithms that infer motion implicitly.\nDue to time constraints in this lecture, we won’t delve deeply into motion artifact correction algorithms.\nFor cardiac imaging, one way to reduce motion artifacts is through hardware: performing ultra-fast scanning so the heart doesn’t have significant motion during image acquisition.\n\nThis instantaneous imaging “freezes” the cardiac structure, minimizing motion blur.\nAnother way is through smart computational algorithms that predict motion and correct for it during reconstruction.\nOften, cardiac CT patients are given beta blockers to slow the heart rate, reducing motion during scanning.\nAdditionally, CT acquisition can be synchronized with the ECG signal, coupling image data with specific cardiac phases.\nThe ECG indicates when the heart is largest or smallest. You can select data segments corresponding to the heart’s maximum volume and reconstruct images at that phase.\n\nSimilarly, you regroup data segments for the minimum volume phase and reconstruct images accordingly.\nThis approach allows reconstruction of a beating heart in different cardiac phases.\nThis gives a rough idea of how motion artifacts are managed in dynamic organ imaging.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide44.JPG",
+      "script": "As the X-ray source rotates around the phantom, the projection of the taiji pattern changes, creating a sinusoidal oscillation in the data. This oscillation is due to the periodic variation in the view of the object as the source moves. The resulting signal has a smooth, wave-like shape. This phenomenon is an example of motion artifacts.",
+      "spotlightEvents": [
+        {
+          "timeMs": 39000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Projection Angle"
+        },
+        {
+          "timeMs": 41000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Phantom Appearance"
+        },
+        {
+          "timeMs": 43000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Sinusoidal Oscillation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 44,
+      "slideNumber": 45,
+      "title": "Let’s finish with some important points about X-ray radiation. X-rays are much m",
+      "bullets": [
+        "But X-rays have much shorter wavelengths, roughly from 0.1 nanometers to 10 nanometers, and much higher energy.",
+        "Because X-ray photons carry so much energy, they can break molecular bonds in biological tissues. This damage can potentially cause genetic mutations, which are often harmful.",
+        "In the long term, such mutations may increase the risk of cancer or other genetic diseases.",
+        "There is some debate, though. Some argue that small doses of radiation might even be beneficial, similar to exercise, causing small stress that strengthens the body.",
+        "In this view, controlled, moderate radiation exposure acts like a vitamin, gently challenging the body to repair and strengthen itself.",
+        "While that perspective exists in some articles, the general consensus is caution.",
+        "As CT imaging, especially advanced methods like helical CT for lung cancer screening, becomes more widespread, concerns about radiation dose increase.",
+        "Patients receive higher cumulative doses, and this raises public health questions.",
+        "So, it is crucial to focus on how we can reduce radiation dose and how we measure it in the first place."
+      ],
+      "fullText": "Let’s finish with some important points about X-ray radiation. X-rays are much more energetic than visible light. We experience visible light all the time—sunshine, for example—which is generally considered healthy.\nBut X-rays have much shorter wavelengths, roughly from 0.1 nanometers to 10 nanometers, and much higher energy.\nBecause X-ray photons carry so much energy, they can break molecular bonds in biological tissues. This damage can potentially cause genetic mutations, which are often harmful.\n\nIn the long term, such mutations may increase the risk of cancer or other genetic diseases.\nThere is some debate, though. Some argue that small doses of radiation might even be beneficial, similar to exercise, causing small stress that strengthens the body.\n\nIn this view, controlled, moderate radiation exposure acts like a vitamin, gently challenging the body to repair and strengthen itself.\nWhile that perspective exists in some articles, the general consensus is caution.\nAs CT imaging, especially advanced methods like helical CT for lung cancer screening, becomes more widespread, concerns about radiation dose increase.\n\nPatients receive higher cumulative doses, and this raises public health questions.\nSo, it is crucial to focus on how we can reduce radiation dose and how we measure it in the first place.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide45.JPG",
+      "script": "X-rays are much more energetic than visible light, with much shorter wavelengths and higher energy, which can break molecular bonds in biological tissues, potentially causing genetic mutations and increasing the risk of cancer or other genetic diseases. This is why we need to be careful when working with X-rays. The high energy of X-ray photons makes them a double-edged sword – useful for imaging, but also potentially harmful in large doses.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Important points about X-ray radiation"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "X-ray wavelengths and energy"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Genetic mutations and health risks"
+        }
+      ]
+    },
+    {
+      "slideIndex": 45,
+      "slideNumber": 46,
+      "title": "Let me explain the basic concepts from your Green Book regarding radiation dose.",
+      "bullets": [
+        "X-ray radiation is a form of electromagnetic radiation, and when it passes through your body, energy is deposited into your tissues. This energy deposited is called the absorbed dose.",
+        "The absorbed dose is a physical measurement of energy per unit mass of tissue, expressed in grays. One gray equals one joule per kilogram.",
+        "This is the fundamental concept of radiation dose—the energy your body absorbs from X-rays.",
+        "However, from a health perspective, the effective dose equivalent is more relevant.",
+        "To calculate this, the human body is divided into multiple organs or regions because different organs have different sensitivities to radiation.",
+        "Some tissues, like those involved in reproduction or rapidly regenerating cells, are more sensitive to radiation damage.",
+        "Therefore, younger women, children, and reproductive organs require special caution to avoid excessive exposure.",
+        "This sensitivity is accounted for by weighting factors, denoted by W.",
+        "The dose equivalent, represented by H, combines the absorbed dose with factors related to the type and energy of radiation.",
+        "Higher energy photons or particles generally cause more biological damage per unit of absorbed energy.",
+        "For example, X-rays, gamma rays, and alpha particles differ in their relative biological effectiveness.",
+        "To account for this, a quality factor, QF, is applied to quantify the biological impact of different radiation types.",
+        "For X-ray CT, the QF is normalized to one, but other radiation types have different values.",
+        "Thus, the effective dose equivalent is calculated using these weighted factors, resulting in a more accurate estimation of biological risk.",
+        "This calculation is summarized by a formula sometimes noted as equation 1.30 in radiation safety literature."
+      ],
+      "fullText": "Let me explain the basic concepts from your Green Book regarding radiation dose.\nX-ray radiation is a form of electromagnetic radiation, and when it passes through your body, energy is deposited into your tissues. This energy deposited is called the absorbed dose.\n\nThe absorbed dose is a physical measurement of energy per unit mass of tissue, expressed in grays. One gray equals one joule per kilogram.\nThis is the fundamental concept of radiation dose—the energy your body absorbs from X-rays.\nHowever, from a health perspective, the effective dose equivalent is more relevant.\nTo calculate this, the human body is divided into multiple organs or regions because different organs have different sensitivities to radiation.\nSome tissues, like those involved in reproduction or rapidly regenerating cells, are more sensitive to radiation damage.\nTherefore, younger women, children, and reproductive organs require special caution to avoid excessive exposure.\nThis sensitivity is accounted for by weighting factors, denoted by W.\n\nThe dose equivalent, represented by H, combines the absorbed dose with factors related to the type and energy of radiation.\nHigher energy photons or particles generally cause more biological damage per unit of absorbed energy.\nFor example, X-rays, gamma rays, and alpha particles differ in their relative biological effectiveness.\nTo account for this, a quality factor, QF, is applied to quantify the biological impact of different radiation types.\n\nFor X-ray CT, the QF is normalized to one, but other radiation types have different values.\nThus, the effective dose equivalent is calculated using these weighted factors, resulting in a more accurate estimation of biological risk.\nThis calculation is summarized by a formula sometimes noted as equation 1.30 in radiation safety literature.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide46.JPG",
+      "script": "Let me explain the basic concepts from your Green Book regarding radiation dose. X-ray radiation is a form of electromagnetic radiation, and when it passes through your body, energy is deposited into your tissues. This energy deposited is called the absorbed dose. The absorbed dose is a physical measurement of energy per unit mass of tissue, expressed in grays. One gray equals one joule per kilogram. This is the fundamental concept of radiation dose—the energy your body absorbs from X-rays. However, from a health perspective, the effective dose equivalent is more relevant. To calculate this, we need to consider both the absorbed dose and the sensitivity of different organs and tissues to radiation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "X-ray radiation"
+        },
+        {
+          "timeMs": 1500,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Absorbed dose"
+        },
+        {
+          "timeMs": 2500,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 1000,
+          "label": "Effective dose equivalent"
+        }
+      ]
+    },
+    {
+      "slideIndex": 46,
+      "slideNumber": 47,
+      "title": "Let me share with you some typical radiation dose values.",
+      "bullets": [
+        "For example, in a breast exam, the physical energy absorbed is measured in grays. But when you take biological sensitivity into account and use standard formulas, the unit becomes the sievert, often abbreviated as Sv or sometimes called C-word.",
+        "To clarify, grays measure the pure physical energy deposited, while sieverts factor in biological effects, making them more meaningful for assessing health risk.",
+        "Because a sievert—or the C-word—is a relatively large unit, radiation dose is often expressed in millisieverts (mSv).",
+        "For a typical breast examination, the effective dose is quite low.",
+        "For high-dose CT scans, the effective dose can be in the range of three millisieverts.",
+        "For a full-body CT scan, it could be around ten millisieverts.",
+        "These values give you an idea of the radiation dose magnitude.",
+        "In CT scanning, another important metric is the CT Dose Index, or CTDI, which is used to estimate how much radiation dose is delivered.",
+        "CTDI is not organ-specific; it measures the average dose over one full rotation of the scanner around the patient, providing a rough estimate of radiation exposure.",
+        "Later, I will show you a figure to illustrate this concept visually."
+      ],
+      "fullText": "Let me share with you some typical radiation dose values.\nFor example, in a breast exam, the physical energy absorbed is measured in grays. But when you take biological sensitivity into account and use standard formulas, the unit becomes the sievert, often abbreviated as Sv or sometimes called C-word.\n\nTo clarify, grays measure the pure physical energy deposited, while sieverts factor in biological effects, making them more meaningful for assessing health risk.\nBecause a sievert—or the C-word—is a relatively large unit, radiation dose is often expressed in millisieverts (mSv).\nFor a typical breast examination, the effective dose is quite low.\nFor high-dose CT scans, the effective dose can be in the range of three millisieverts.\nFor a full-body CT scan, it could be around ten millisieverts.\nThese values give you an idea of the radiation dose magnitude.\n\nIn CT scanning, another important metric is the CT Dose Index, or CTDI, which is used to estimate how much radiation dose is delivered.\nCTDI is not organ-specific; it measures the average dose over one full rotation of the scanner around the patient, providing a rough estimate of radiation exposure.\nLater, I will show you a figure to illustrate this concept visually.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide47.JPG",
+      "script": "Let me share with you some typical radiation dose values. For example, in a breast exam, the physical energy absorbed is measured in grays. But when you take biological sensitivity into account and use standard formulas, the unit becomes the sievert, often abbreviated as Sv or sometimes called the C-word.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Gray vs Sievert"
+        },
+        {
+          "timeMs": 46000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Millisievert"
+        },
+        {
+          "timeMs": 49000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "Effective Dose"
+        }
+      ]
+    },
+    {
+      "slideIndex": 47,
+      "slideNumber": 48,
+      "title": "Before we dive deeper, let me give you a natural reference to help put radiation",
+      "bullets": [
+        "If you live in India, you receive an annual natural radiation dose of over 10 millisieverts—or 10 million microsieverts—which comes from natural sources like soil and cosmic rays.",
+        "In China, the natural background radiation exposure is roughly half that of India.",
+        "If you are concerned that radiation is harmful, then living in Toronto would be better, as the natural background radiation there is lower.",
+        "In the United States, the average natural background radiation dose is about three millisieverts per year.",
+        "These background levels are unavoidable since radiation comes from natural sources in the environment.",
+        "Understanding these reference levels helps put medical radiation doses into context."
+      ],
+      "fullText": "Before we dive deeper, let me give you a natural reference to help put radiation dose levels in perspective.\nIf you live in India, you receive an annual natural radiation dose of over 10 millisieverts—or 10 million microsieverts—which comes from natural sources like soil and cosmic rays.\n\nIn China, the natural background radiation exposure is roughly half that of India.\nIf you are concerned that radiation is harmful, then living in Toronto would be better, as the natural background radiation there is lower.\nIn the United States, the average natural background radiation dose is about three millisieverts per year.\n\nThese background levels are unavoidable since radiation comes from natural sources in the environment.\nUnderstanding these reference levels helps put medical radiation doses into context.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide48.JPG",
+      "script": "Let's put radiation dose levels into perspective by comparing them to natural background radiation. In India, people receive over 10 millisieverts per year from natural sources like soil and cosmic rays. In China, the dose is roughly half that amount, while in Toronto, it's even lower. This natural background radiation is a useful reference point for understanding the impact of medical imaging radiation.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Natural Background Radiation"
+        },
+        {
+          "timeMs": 3000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 2000,
+          "label": "India"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 3000,
+          "label": "Toronto"
+        }
+      ]
+    },
+    {
+      "slideIndex": 48,
+      "slideNumber": 49,
+      "title": "Now, let me give you some comparisons to help you understand radiation doses bet",
+      "bullets": [
+        "For example, a chest X-ray typically delivers a radiation dose of about 0.1 millisieverts.",
+        "A whole-body CT scan, on the other hand, can deliver around 10 millisieverts.",
+        "Researchers and medical professionals are working hard to reduce these doses.",
+        "Our goal is to bring CT radiation doses down to about one millisievert or less per scan, which would be considered comparatively safe.",
+        "To put this in perspective, in your everyday life, you naturally receive about two millisieverts of radiation annually from environmental sources.",
+        "So, when you receive a CT scan with a dose around one millisievert, that’s roughly half of your average yearly natural exposure.",
+        "You can think of it like visiting a high natural radiation area, such as parts of India or other regions, where you might be exposed to somewhat higher background radiation if you stay longer.",
+        "There are other units you might encounter, such as M-R or similar, but the gray and sievert (or millisievert) remain the standard units for expressing radiation dose. This comparison helps warm you up and offers a bit of perspective on how these numbers relate to everyday life."
+      ],
+      "fullText": "Now, let me give you some comparisons to help you understand radiation doses better.\nFor example, a chest X-ray typically delivers a radiation dose of about 0.1 millisieverts.\nA whole-body CT scan, on the other hand, can deliver around 10 millisieverts.\nResearchers and medical professionals are working hard to reduce these doses.\n\nOur goal is to bring CT radiation doses down to about one millisievert or less per scan, which would be considered comparatively safe.\nTo put this in perspective, in your everyday life, you naturally receive about two millisieverts of radiation annually from environmental sources.\nSo, when you receive a CT scan with a dose around one millisievert, that’s roughly half of your average yearly natural exposure.\nYou can think of it like visiting a high natural radiation area, such as parts of India or other regions, where you might be exposed to somewhat higher background radiation if you stay longer.\n\nThere are other units you might encounter, such as M-R or similar, but the gray and sievert (or millisievert) remain the standard units for expressing radiation dose. This comparison helps warm you up and offers a bit of perspective on how these numbers relate to everyday life.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide49.JPG",
+      "script": "Let's put these doses into perspective with some comparisons. A chest X-ray gives you about 0.1 millisieverts, while a whole-body CT scan can deliver 10 millisieverts. The good news is that experts are working to reduce these doses, aiming for a safe level of one millisievert or less per scan. To give you a sense of scale, you naturally receive about two millisieverts of radiation annually from environmental sources.",
+      "spotlightEvents": [
+        {
+          "timeMs": 63000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Chest X-ray dose"
+        },
+        {
+          "timeMs": 64000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Whole-body CT scan dose"
+        },
+        {
+          "timeMs": 65000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.65,
+          "durationMs": 2000,
+          "label": "Goal for safe CT dose"
+        }
+      ]
+    },
+    {
+      "slideIndex": 49,
+      "slideNumber": 50,
+      "title": "Now, let me explain three key concepts related to radiation dose.",
+      "bullets": [
+        "First, the absorbed dose. This represents the energy deposited by ionizing radiation into the body’s tissues. It is a purely physical measure.",
+        "Second, the effective dose accounts for the sensitivity of different organs and tissues to radiation. This is where weighting factors come into play.",
+        "For example, certain organs involved in reproduction or rapid cell regeneration are much more sensitive to radiation. We want to protect children and younger women, especially from high doses. While adults may be less sensitive, it is still prudent to minimize exposure.",
+        "The dose equivalent combines dose with information about the type of radiation. Some radiation types cause more damage per unit energy than others.",
+        "However, when discussing CT scans, the radiation type factor is effectively one, so it generally does not alter dose estimates."
+      ],
+      "fullText": "Now, let me explain three key concepts related to radiation dose.\nFirst, the absorbed dose. This represents the energy deposited by ionizing radiation into the body’s tissues. It is a purely physical measure.\nSecond, the effective dose accounts for the sensitivity of different organs and tissues to radiation. This is where weighting factors come into play.\n\nFor example, certain organs involved in reproduction or rapid cell regeneration are much more sensitive to radiation. We want to protect children and younger women, especially from high doses. While adults may be less sensitive, it is still prudent to minimize exposure.\nThe dose equivalent combines dose with information about the type of radiation. Some radiation types cause more damage per unit energy than others.\n\nHowever, when discussing CT scans, the radiation type factor is effectively one, so it generally does not alter dose estimates.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide50.JPG",
+      "script": "Now, let me explain three key concepts related to radiation dose. The absorbed dose represents the energy deposited by ionizing radiation into the body's tissues, a purely physical measure. The effective dose accounts for the sensitivity of different organs and tissues to radiation, where weighting factors come into play. This is important because certain organs, like those involved in reproduction or rapid cell regeneration, are much more sensitive to radiation. We use weighting factors to adjust the absorbed dose and calculate the effective dose, which gives us a more accurate assessment of radiation risk.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 500,
+          "label": "Absorbed Dose"
+        },
+        {
+          "timeMs": 1800,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 300,
+          "label": "Effective Dose"
+        },
+        {
+          "timeMs": 2500,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 200,
+          "label": "Dose Equivalent"
+        }
+      ]
+    },
+    {
+      "slideIndex": 50,
+      "slideNumber": 51,
+      "title": "Now, let me explain the concept of the radiation dose profile, sometimes called ",
+      "bullets": [
+        "Imagine you perform a circular CT scan. This scanning method reconstructs images within a single plane, called the XY plane.",
+        "Ideally, the X-ray beam would be finely collimated so that all photons are confined within the slice thickness, represented as a neat rectangular region—say, highlighted in yellow.",
+        "However, in reality, the system is not perfect.",
+        "You have scattered photons, and the emission is not perfectly confined.",
+        "Therefore, the actual radiation dose profile follows a curve, often shown as a blue curve.",
+        "This means that, even though you intend to irradiate only the slice thickness, some dose extends beyond this region.",
+        "This dose \"tail\" outside the intended slice area also contributes to the total patient radiation exposure."
+      ],
+      "fullText": "Now, let me explain the concept of the radiation dose profile, sometimes called the releasing profile.\n\nImagine you perform a circular CT scan. This scanning method reconstructs images within a single plane, called the XY plane.\nIdeally, the X-ray beam would be finely collimated so that all photons are confined within the slice thickness, represented as a neat rectangular region—say, highlighted in yellow.\n\nHowever, in reality, the system is not perfect.\nYou have scattered photons, and the emission is not perfectly confined.\nTherefore, the actual radiation dose profile follows a curve, often shown as a blue curve.\nThis means that, even though you intend to irradiate only the slice thickness, some dose extends beyond this region.\nThis dose \"tail\" outside the intended slice area also contributes to the total patient radiation exposure.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide51.JPG",
+      "script": "The radiation dose profile, or releasing profile, is not a perfect rectangular shape due to scattered photons and imperfect emission confinement. This results in a curve that extends beyond the intended slice thickness, affecting the surrounding tissue and contributing to the overall patient radiation exposure. The curve's shape and width depend on the scanning geometry and the detector array. It's essential to understand this profile to estimate the actual radiation dose delivered to the patient.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 2000,
+          "label": "Ideal X-ray Beam"
+        },
+        {
+          "timeMs": 14000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.65,
+          "durationMs": 2000,
+          "label": "Reality of Scattered Photons"
+        },
+        {
+          "timeMs": 15000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 1000,
+          "label": "Radiation Dose Profile"
+        }
+      ]
+    },
+    {
+      "slideIndex": 51,
+      "slideNumber": 52,
+      "title": "Now, let's talk about the CT dose index, or CTDI.",
+      "bullets": [
+        "Suppose the slice thickness is represented by T.",
+        "You integrate the radiation dose measurements over the slice thickness, effectively summing the dose contributions from the slice and imaginary adjacent slices—say, seven slices above and seven slices below.",
+        "All these doses are added together, and the total is then averaged by normalizing with the slice thickness T.",
+        "This result is what we call the CT dose index, or CTDI.",
+        "It's a simple yet important concept, as it includes any additional leakage radiation in the dose computation.",
+        "The CTDI provides a standardized measure of radiation output from the CT scanner, reflecting dose distribution within the irradiated volume."
+      ],
+      "fullText": "Now, let's talk about the CT dose index, or CTDI.\n\nSuppose the slice thickness is represented by T.\nYou integrate the radiation dose measurements over the slice thickness, effectively summing the dose contributions from the slice and imaginary adjacent slices—say, seven slices above and seven slices below.\nAll these doses are added together, and the total is then averaged by normalizing with the slice thickness T.\nThis result is what we call the CT dose index, or CTDI.\n\nIt's a simple yet important concept, as it includes any additional leakage radiation in the dose computation.\nThe CTDI provides a standardized measure of radiation output from the CT scanner, reflecting dose distribution within the irradiated volume.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide52.JPG",
+      "script": "The CT dose index, or CTDI, is a measure of the average radiation dose delivered by a CT scanner. It's calculated by integrating radiation dose measurements over the slice thickness, including contributions from adjacent slices, and then averaging the result with the slice thickness. This method ensures that the CTDI includes any additional leakage radiation in the dose computation. The CTDI is a crucial metric for evaluating the safety and effectiveness of CT scanning.",
+      "spotlightEvents": [
+        {
+          "timeMs": 5200,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "CTDIPresentation"
+        },
+        {
+          "timeMs": 5400,
+          "type": "laser",
+          "x": 0.65,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "SliceThicknessT"
+        },
+        {
+          "timeMs": 6000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.9,
+          "durationMs": 2000,
+          "label": "AdjacentSlicesContribution"
+        }
+      ]
+    },
+    {
+      "slideIndex": 52,
+      "slideNumber": 53,
+      "title": "Another way to think about radiation dose is through the dose profile measured o",
+      "bullets": [
+        "When you perform one circular scan, you get a certain dose distribution.",
+        "If you then do a second circular scan, you’ll get a similar dose profile again.",
+        "When multiple scans are performed, each scan adds its own dose profile.",
+        "These multiple dose profiles overlap, contributing to the total radiation dose the patient receives."
+      ],
+      "fullText": "Another way to think about radiation dose is through the dose profile measured over multiple circular scans.\n\nWhen you perform one circular scan, you get a certain dose distribution.\nIf you then do a second circular scan, you’ll get a similar dose profile again.\nWhen multiple scans are performed, each scan adds its own dose profile.\n\nThese multiple dose profiles overlap, contributing to the total radiation dose the patient receives.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide53.JPG",
+      "script": "As we perform multiple circular scans, each scan contributes its own dose profile, which overlaps with the previous ones, resulting in a cumulative radiation dose for the patient. This overlap of dose profiles is what gives us the total radiation dose the patient receives. It's a way to think about radiation dose in terms of the sum of many small, overlapping contributions.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Dose Profile"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.7,
+          "y": 0.85,
+          "durationMs": 1500,
+          "label": "Cumulative Dose"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Multiple Scans"
+        }
+      ]
+    },
+    {
+      "slideIndex": 53,
+      "slideNumber": 54,
+      "title": "This concept of multiple scan average dose, or MSAD, is defined by an integral c",
+      "bullets": [
+        "Radiation dose from neighboring scans contributes to the dose in the current scan.",
+        "The number of adjacent scans considered is represented by N.",
+        "You perform the integration over the radiation dose profile, then normalize it by the slice thickness.",
+        "This normalization accounts for the actual tissue volume receiving radiation.",
+        "MSAD is another classic measure of radiation dose in CT.",
+        "With the rise of helical CT, there are new adaptations of these dose measurements, including for helical scanning and combined bimodal CT systems.",
+        "However, the fundamental principle behind measuring radiation dose remains the same.",
+        "As I mentioned earlier, understanding how we measure the release dose is essential to managing patient exposure."
+      ],
+      "fullText": "This concept of multiple scan average dose, or MSAD, is defined by an integral calculation.\nRadiation dose from neighboring scans contributes to the dose in the current scan.\nThe number of adjacent scans considered is represented by N.\n\nYou perform the integration over the radiation dose profile, then normalize it by the slice thickness.\nThis normalization accounts for the actual tissue volume receiving radiation.\nMSAD is another classic measure of radiation dose in CT.\nWith the rise of helical CT, there are new adaptations of these dose measurements, including for helical scanning and combined bimodal CT systems.\n\nHowever, the fundamental principle behind measuring radiation dose remains the same.\nAs I mentioned earlier, understanding how we measure the release dose is essential to managing patient exposure.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide54.JPG",
+      "script": "The multiple scan average dose, or MSAD, is a measure of radiation dose that takes into account the contribution of neighboring scans, represented by N, and is calculated using an integral formula. This formula performs the integration over the radiation dose profile, normalizing it by the slice thickness to account for the actual tissue volume receiving radiation. MSAD is a more comprehensive measure of radiation dose, especially relevant in helical CT scanning.",
+      "spotlightEvents": [
+        {
+          "timeMs": 1300,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 500,
+          "label": "Radiation dose profile"
+        },
+        {
+          "timeMs": 1500,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 300,
+          "label": "Normalization by slice thickness"
+        },
+        {
+          "timeMs": 1700,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.85,
+          "durationMs": 400,
+          "label": "Tissue volume receiving radiation"
+        }
+      ]
+    },
+    {
+      "slideIndex": 54,
+      "slideNumber": 55,
+      "title": "To measure radiation dose, we use specialized instruments called dosimeters.",
+      "bullets": [
+        "I personally had the opportunity to work on radiation dose measurements for CT scanners during my time at Washington University School of Medicine.",
+        "It was engaging and valuable research work, and I frequently used dosimetry equipment to evaluate radiation output.",
+        "These dosimeters help assess the radiation delivered by the scanner, ensuring safety and proper calibration."
+      ],
+      "fullText": "To measure radiation dose, we use specialized instruments called dosimeters.\nI personally had the opportunity to work on radiation dose measurements for CT scanners during my time at Washington University School of Medicine.\n\nIt was engaging and valuable research work, and I frequently used dosimetry equipment to evaluate radiation output.\nThese dosimeters help assess the radiation delivered by the scanner, ensuring safety and proper calibration.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide55.JPG",
+      "script": "Dosimeters are specialized instruments used to measure the radiation dose delivered by medical imaging devices, ensuring safety and proper calibration. I have personal experience working on radiation dose measurements for CT scanners, using dosimetry equipment to evaluate radiation output. This research was engaging and valuable, and it highlighted the importance of accurate dosimeter measurements.",
+      "spotlightEvents": [
+        {
+          "timeMs": 3000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Dosimeters in action"
+        },
+        {
+          "timeMs": 5000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Personal experience with dosimetry"
+        },
+        {
+          "timeMs": 7000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Importance of dosimeters"
+        }
+      ]
+    },
+    {
+      "slideIndex": 55,
+      "slideNumber": 56,
+      "title": "Now, let’s talk about some general guidelines regarding CT dose.",
+      "bullets": [
+        "Radiation dose measured during multiple scans is roughly proportional to the tube current, or mA. Higher tube current means more photons emitted, resulting in a higher radiation dose.",
+        "Longer scan times also increase dose, as the patient is exposed for a longer period.",
+        "Increasing the tube voltage, or kVp, raises photon energy, which also influences dose. Although higher energy photons are more penetrating, they tend to cause slightly higher patient dose.",
+        "When you reduce slice thickness—that is, make the X-ray beam narrower—you increase spatial resolution. But thinner slices require more photons since the beam is less focused, which can slightly increase the dose due to some photon wastage.",
+        "Many factors affect dose increase or decrease, including patient size or phantom size. For a standard head phantom, the dose at the center and periphery is roughly the same.",
+        "For larger phantoms, like the whole body, the central dose may be lower due to increased attenuation, with a higher dose in peripheral regions.",
+        "In extreme cases, like imagining irradiating the Earth, the very center would receive almost no photons, so the central dose would be very low, while peripheral areas get a higher dose."
+      ],
+      "fullText": "Now, let’s talk about some general guidelines regarding CT dose.\n\nRadiation dose measured during multiple scans is roughly proportional to the tube current, or mA. Higher tube current means more photons emitted, resulting in a higher radiation dose.\nLonger scan times also increase dose, as the patient is exposed for a longer period.\nIncreasing the tube voltage, or kVp, raises photon energy, which also influences dose. Although higher energy photons are more penetrating, they tend to cause slightly higher patient dose.\n\nWhen you reduce slice thickness—that is, make the X-ray beam narrower—you increase spatial resolution. But thinner slices require more photons since the beam is less focused, which can slightly increase the dose due to some photon wastage.\nMany factors affect dose increase or decrease, including patient size or phantom size. For a standard head phantom, the dose at the center and periphery is roughly the same.\n\nFor larger phantoms, like the whole body, the central dose may be lower due to increased attenuation, with a higher dose in peripheral regions.\nIn extreme cases, like imagining irradiating the Earth, the very center would receive almost no photons, so the central dose would be very low, while peripheral areas get a higher dose.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide56.JPG",
+      "script": "As we consider CT dose, it's essential to remember that radiation dose is directly related to the tube current, or mA, with higher values resulting in more photons emitted and a higher dose. Longer scan times also contribute to a higher dose, as the patient is exposed for a longer period. Additionally, increasing the tube voltage, or kVp, can slightly increase the patient dose, although it also makes the X-rays more penetrating.",
+      "spotlightEvents": [
+        {
+          "timeMs": 43000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 5000,
+          "label": "Higher tube current, more photons"
+        },
+        {
+          "timeMs": 45000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.8,
+          "durationMs": 3000,
+          "label": "Longer scan times increase dose"
+        },
+        {
+          "timeMs": 47000,
+          "type": "spotlight",
+          "x": 0.3,
+          "y": 0.6,
+          "durationMs": 4000,
+          "label": "Higher energy photons cause slightly higher dose"
+        }
+      ]
+    },
+    {
+      "slideIndex": 56,
+      "slideNumber": 57,
+      "title": "Let me share some evidence that supports this approach.",
+      "bullets": [
+        "Several experts, including myself a few years ago, co-authored a landmark article.",
+        "This article mapped out strategies and technologies aimed at achieving routine sub-millisievert CT scanning.",
+        "It addresses how low-dose CT scans can be effectively performed while maintaining diagnostic image quality."
+      ],
+      "fullText": "Let me share some evidence that supports this approach.\n\nSeveral experts, including myself a few years ago, co-authored a landmark article.\nThis article mapped out strategies and technologies aimed at achieving routine sub-millisievert CT scanning.\nIt addresses how low-dose CT scans can be effectively performed while maintaining diagnostic image quality.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide57.JPG",
+      "script": "I'd like to share with you a landmark article that our team co-authored, which explored strategies and technologies for achieving routine sub-millisievert CT scanning.\nThis article demonstrated the feasibility of low-dose CT scans that are both safe and effective for diagnostic purposes.\nIt's a great example of how we can make imaging safer and more accessible.",
+      "spotlightEvents": [
+        {
+          "timeMs": 84000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Landmark Article"
+        },
+        {
+          "timeMs": 85000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Expert Opinion"
+        },
+        {
+          "timeMs": 86000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Low-Dose CT"
+        }
+      ]
+    },
+    {
+      "slideIndex": 57,
+      "slideNumber": 58,
+      "title": "We have discussed various technologies to reduce radiation dose in CT scanning, ",
+      "bullets": [
+        "Additionally, iterative reconstruction algorithms play a key role. Unlike traditional analytic algorithms, which do not account for image noise or statistical fluctuations, iterative methods model these factors explicitly.",
+        "By doing so, they improve image quality while allowing dose reduction.",
+        "Those represent technological approaches to lowering patient radiation exposure.",
+        "Now, I’d like to share something not in the slides—a more biological approach.",
+        "Ionizing radiation causes real damage through DNA breaks and other effects.",
+        "Some medications or natural products contain antioxidants, which can help mitigate radiation-induced damage.",
+        "For example, orange juice and blueberries contain antioxidants.",
+        "If you search the literature, you’ll find several studies suggesting that antioxidants may have protective effects against radiation damage.",
+        "While this is not part of any clinical protocol, and doctors don’t routinely prescribe antioxidants before CT scans, I personally believe in their potential benefit.",
+        "Next time I have a CT scan, I plan to drink two bottles of orange juice an hour beforehand.",
+        "If you find this interesting, you might want to do your own research and consider consuming antioxidants before imaging.",
+        "One of my students is setting up experiments to scientifically evaluate the protective effect of antioxidants, like orange juice, against radiation damage during CT scans.",
+        "This is an exciting area of ongoing research, and we hope to quantify the benefits more precisely in the future."
+      ],
+      "fullText": "We have discussed various technologies to reduce radiation dose in CT scanning, including interior tomography and photon counting detectors.\n\nAdditionally, iterative reconstruction algorithms play a key role. Unlike traditional analytic algorithms, which do not account for image noise or statistical fluctuations, iterative methods model these factors explicitly.\nBy doing so, they improve image quality while allowing dose reduction.\nThose represent technological approaches to lowering patient radiation exposure.\n\nNow, I’d like to share something not in the slides—a more biological approach.\nIonizing radiation causes real damage through DNA breaks and other effects.\nSome medications or natural products contain antioxidants, which can help mitigate radiation-induced damage.\nFor example, orange juice and blueberries contain antioxidants.\nIf you search the literature, you’ll find several studies suggesting that antioxidants may have protective effects against radiation damage.\nWhile this is not part of any clinical protocol, and doctors don’t routinely prescribe antioxidants before CT scans, I personally believe in their potential benefit.\n\nNext time I have a CT scan, I plan to drink two bottles of orange juice an hour beforehand.\nIf you find this interesting, you might want to do your own research and consider consuming antioxidants before imaging.\nOne of my students is setting up experiments to scientifically evaluate the protective effect of antioxidants, like orange juice, against radiation damage during CT scans.\n\nThis is an exciting area of ongoing research, and we hope to quantify the benefits more precisely in the future.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide58.JPG",
+      "script": "We've talked about engineering solutions to reduce radiation dose, such as interior tomography and photon counting detectors, and how iterative reconstruction algorithms can improve image quality while allowing dose reduction.\nNow, I'd like to introduce a more biological perspective on reducing radiation exposure in CT scanning.",
+      "spotlightEvents": [
+        {
+          "timeMs": 13000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.7,
+          "durationMs": 2000,
+          "label": "Technological solutions"
+        },
+        {
+          "timeMs": 14000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Iterative reconstruction"
+        },
+        {
+          "timeMs": 15000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Biological perspective"
+        }
+      ]
+    },
+    {
+      "slideIndex": 58,
+      "slideNumber": 59,
+      "title": "Now, let's talk about the last slide and some course housekeeping.",
+      "bullets": [
+        "These three questions in the green book are quite typical and not very difficult.",
+        "Regarding homework, you have one week—seven working days—to complete it.",
+        "On the other hand, for a bit of fun and creativity, you can try designing a futuristic portable CT scanner in an autonomous vehicle—think of it like something fancy and innovative.",
+        "I believe future technology will enable very affordable, fully reconfigurable CT scanners.",
+        "Imagine robotic X-ray detectors integrated into cars—if you want a screening, you just call like ordering an Uber.",
+        "The robotic scanner arrives at your home, performs the scan, and you get your results without leaving the house.",
+        "I think that will be incredibly cool and transformative."
+      ],
+      "fullText": "Now, let's talk about the last slide and some course housekeeping.\nThese three questions in the green book are quite typical and not very difficult.\nRegarding homework, you have one week—seven working days—to complete it.\n\n\nOn the other hand, for a bit of fun and creativity, you can try designing a futuristic portable CT scanner in an autonomous vehicle—think of it like something fancy and innovative.\n\nI believe future technology will enable very affordable, fully reconfigurable CT scanners.\nImagine robotic X-ray detectors integrated into cars—if you want a screening, you just call like ordering an Uber.\nThe robotic scanner arrives at your home, performs the scan, and you get your results without leaving the house.\nI think that will be incredibly cool and transformative.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide59.JPG",
+      "script": "Let's review the last slide and some important course details. We have three questions in the green book to consider, which cover key concepts from the course. Regarding homework, you have a week to complete it, so plan accordingly. Additionally, for a fun and creative challenge, design a futuristic portable CT scanner in an autonomous vehicle, thinking outside the box about what's possible with future technology.",
+      "spotlightEvents": [
+        {
+          "timeMs": 360000,
+          "type": "spotlight",
+          "x": 0.5,
+          "y": 0.75,
+          "durationMs": 2000,
+          "label": "Last Slide Review"
+        },
+        {
+          "timeMs": 380000,
+          "type": "laser",
+          "x": 0.3,
+          "y": 0.8,
+          "durationMs": 1500,
+          "label": "Homework Deadline"
+        },
+        {
+          "timeMs": 400000,
+          "type": "spotlight",
+          "x": 0.7,
+          "y": 0.9,
+          "durationMs": 2500,
+          "label": "Design Challenge"
+        }
+      ]
+    },
+    {
+      "slideIndex": 59,
+      "slideNumber": 60,
+      "title": "Several years ago, we undertook an innovative project and received some news cov",
+      "bullets": [
+        "We built a CT scanner that does not rotate the gantry as in conventional designs.",
+        "Instead, the patient lies on a rotating table—literally a sheet that turns—while the X-ray tube and detector remain fixed in place.",
+        "The gantry is simplified to just a tube and a detector, with no mechanical rotation during imaging.",
+        "We then perform the translation of the table and the scanning components.",
+        "Although this setup limits the viewing angle compared to traditional systems, it still produces good-quality images.",
+        "If you like, you can think creatively or artistically about how this concept could be extended to robotic scanners deployed in autonomous vehicles or portable scanners for versatile use.",
+        "This is all just for fun and imagination.",
+        "That’s all for today.",
+        "Thank you for your attention."
+      ],
+      "fullText": "Several years ago, we undertook an innovative project and received some news coverage about it.\n\nWe built a CT scanner that does not rotate the gantry as in conventional designs.\nInstead, the patient lies on a rotating table—literally a sheet that turns—while the X-ray tube and detector remain fixed in place.\nThe gantry is simplified to just a tube and a detector, with no mechanical rotation during imaging.\nWe then perform the translation of the table and the scanning components.\n\nAlthough this setup limits the viewing angle compared to traditional systems, it still produces good-quality images.\nIf you like, you can think creatively or artistically about how this concept could be extended to robotic scanners deployed in autonomous vehicles or portable scanners for versatile use.\n\nThis is all just for fun and imagination.\nThat’s all for today.\nThank you for your attention.",
+      "imageURL": "/lectures/Lecture_14/Images/Slide60.JPG",
+      "script": "We explored an unconventional CT scanner design where the gantry doesn't rotate, and instead, the patient table spins. This approach simplifies the gantry but requires translating the scanning components and table to capture the image. While it has limitations, it can still produce good-quality images. This innovative design was featured in some news coverage.",
+      "spotlightEvents": [
+        {
+          "timeMs": 0,
+          "type": "spotlight",
+          "x": 0.25,
+          "y": 0.15,
+          "durationMs": 5000,
+          "label": "Unconventional CT Scanner Design"
+        },
+        {
+          "timeMs": 2000,
+          "type": "laser",
+          "x": 0.5,
+          "y": 0.5,
+          "durationMs": 3000,
+          "label": "Gantry Simplification"
+        },
+        {
+          "timeMs": 4000,
+          "type": "spotlight",
+          "x": 0.75,
+          "y": 0.75,
+          "durationMs": 4000,
+          "label": "Translation of Scanning Components"
+        }
+      ]
+    }
+  ]
+}
