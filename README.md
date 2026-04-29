@@ -1,4 +1,4 @@
-# MIMIC: Medical Imaging Multi-Agent Interactive Classroom
+# MIMIC: A Domain-Adapted Interactive Classroom Platform for Medical Imaging Education
 
 A domain-adapted AI classroom platform for medical imaging education, built on top of [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC).
 
@@ -198,7 +198,7 @@ Students can then message your bot to access lectures, quizzes, summaries, and Q
 ## Citation
 ```bibtex
 @article{islam2025mimic,
-  title={MIMIC: Medical Imaging Multi-Agent Interactive Classroom},
+  title={MIMIC: A Domain-Adapted Interactive Classroom Platform for Medical Imaging Education },
   author={Islam, Md Zabirul and Wang, Ge},
   year={2025},
   institution={Rensselaer Polytechnic Institute}
