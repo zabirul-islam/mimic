@@ -5,10 +5,13 @@
 [![License: code MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
 [![License: data CC BY-NC 4.0](https://img.shields.io/badge/data-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![Dataset on HuggingFace](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-zabir1996%2Fmimic--medical--imaging--qa-yellow)](https://huggingface.co/datasets/zabir1996/mimic-medical-imaging-qa)
+[![Built on OpenMAIC](https://img.shields.io/badge/built%20on-OpenMAIC-purple)](https://github.com/THU-MAIC/OpenMAIC)
 [![Paper](https://img.shields.io/badge/Paper-PDF-red)](#paper)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 
-MIMIC (Medical Imaging Multi-Agent Interactive Classroom) is a *course-derivation pipeline* that turns any slide-and-transcript course into (i) a Bloom-stratified question--answer benchmark, (ii) a slide-aligned structured record format, and (iii) a domain-adapted LoRA-tuned Llama-3.1-8B model (MIMIC-LM). On a 23-lecture undergraduate medical imaging course, the resulting model improves answer quality and drops factual errors to 0%, while running ~2.7× faster than the base model.
+MIMIC (Medical Imaging Multi-Agent Interactive Classroom) is a *course-derivation pipeline* that turns any slide-and-transcript course into (i) a Bloom-stratified question--answer benchmark, (ii) a slide-aligned structured record format, and (iii) a domain-adapted LoRA-tuned Llama-3.1-8B model (MIMIC-LM). It runs as a domain extension on top of the open-source [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC) classroom framework. On a 23-lecture undergraduate medical imaging course, the resulting model improves answer quality and drops factual errors to 0%, while running ~2.7× faster than the base model.
+
+> **Built on OpenMAIC.** This repository contains the MIMIC-specific contributions only (medical-imaging dataset, domain-adapted model, classroom skill, RAG retriever, ingestion pipeline). The base classroom framework — playback engine, multi-agent UI, action/scene runtime — comes from OpenMAIC by THU-MAIC and must be installed first. See [Setup](#setup).
 
 ---
 
@@ -41,23 +44,24 @@ Per-table source files are in `results/` with the row-by-row mapping in `results
 | QA dataset (5,207 pairs)       | <https://huggingface.co/datasets/zabir1996/mimic-medical-imaging-qa>                                 |
 | Lecture slides + transcripts   | <https://huggingface.co/datasets/zabir1996/mip-bench/tree/main/Lectures>                              |
 | Evaluation results (per table) | [`results/`](results/) — one JSON per metric, with [`eval_summary.md`](results/eval_summary.md) map |
-| Codebase (this repository)     | Classroom front-end, RAG retriever, skill server, Telegram bot, ingestion pipeline                   |
+| Codebase (this repository)     | MIMIC-specific contributions on top of OpenMAIC                                                      |
 | Reproduction recipe            | [`REPRODUCE.md`](REPRODUCE.md)                                                                       |
 
 ---
 
-## Repository layout
+## What this repository contains
+
+MIMIC-specific contributions only. The base framework is OpenMAIC.
 
 ```
-app/                  Next.js classroom UI + API routes
-  api/medmaic/        Quiz generation, lecture API, Q&A endpoints
-  medmaic/            Classroom and quiz front-end pages
-skills/mimic/         Telegram skill server
+app/api/medmaic/      Quiz generation, lecture API, Q&A endpoints
+app/medmaic/          Classroom and quiz front-end pages
+skills/mimic/         Telegram / OpenClaw skill server
   server.py           Flask webhook with LLM-first intent routing
-  telegram_bot.py     Direct Telegram bot
-  SKILL.md            Skill descriptor
+  rag_retriever.py    FAISS-based course-specific RAG retriever
+  telegram_bot.py     Direct Telegram bot (alternative to OpenClaw gateway)
+  SKILL.md            OpenClaw skill descriptor
 data/lectures/        23 structured medical-imaging lecture JSON files
-rag_retriever.py      FAISS-based course-specific RAG retriever
 tts_server.py         Text-to-speech server for AI narration
 results/              Per-table evaluation JSONs (paper Tables 3, 5, 6, 7)
 REPRODUCE.md          End-to-end reproduction recipe
@@ -65,15 +69,15 @@ REPRODUCE.md          End-to-end reproduction recipe
 
 ---
 
-## Quickstart — load the released artefacts
+## Quickstart — load the released artefacts (no install)
 
 ```bash
 # 1. QA dataset
 python -c "from datasets import load_dataset; ds = load_dataset('zabir1996/mimic-medical-imaging-qa'); print(ds['train'][0])"
 
 # 2. Inspect released evaluation results
-cat results/judge_gpt-4o.summary.json
-cat results/eval_summary.md
+curl -L https://raw.githubusercontent.com/zabirul-islam/mimic/main/results/judge_gpt-4o.summary.json
+curl -L https://raw.githubusercontent.com/zabirul-islam/mimic/main/results/eval_summary.md
 ```
 
 ---
@@ -86,6 +90,8 @@ See [`REPRODUCE.md`](REPRODUCE.md) for the end-to-end course-derivation pipeline
 
 ## Setup — full classroom
 
+The MIMIC classroom requires the OpenMAIC base framework + the MIMIC contributions in this repository.
+
 **Prerequisites**
 
 - Python 3.12 (conda recommended)
@@ -93,32 +99,79 @@ See [`REPRODUCE.md`](REPRODUCE.md) for the end-to-end course-derivation pipeline
 - NVIDIA GPU with 80 GB+ VRAM for vLLM serving of MIMIC-LM
 - Conda environment named `medmaic`
 
-**Install**
+### Step 1 — Install OpenMAIC (base classroom)
 
 ```bash
-git clone https://github.com/zabirul-islam/mimic.git
-cd mimic
-
-# Node toolchain
+git clone https://github.com/THU-MAIC/OpenMAIC.git
+cd OpenMAIC
 nvm install 22 && nvm use 22
 npm install -g pnpm
 pnpm install
-
-# Python environment
-conda create -n medmaic python=3.12
-conda activate medmaic
-pip install -r requirements.txt
 ```
 
-**Adapt to your own course**
-
-1. Organise your slides as JPEG images and per-slide transcripts as plain-text files.
-2. Run the ingestion step (see `REPRODUCE.md`) to produce structured per-lecture JSON files.
-3. Place the resulting JSON files in `data/lectures/`.
-
-**Serve MIMIC-LM (or your own course-derived model) on a GPU host**
+### Step 2 — Add MIMIC contributions
 
 ```bash
+# Clone this repository alongside OpenMAIC
+cd ..
+git clone https://github.com/zabirul-islam/mimic.git mimic-files
+
+# Copy MIMIC contributions into your OpenMAIC tree
+cp -r mimic-files/app/api/medmaic   OpenMAIC/app/api/medmaic
+cp -r mimic-files/app/medmaic       OpenMAIC/app/medmaic
+cp -r mimic-files/skills/mimic      OpenMAIC/skills/mimic
+cp -r mimic-files/data/lectures     OpenMAIC/data/lectures
+cp    mimic-files/tts_server.py     OpenMAIC/
+cp    mimic-files/rag_retriever.py  OpenMAIC/
+```
+
+### Step 3 — Python dependencies
+
+```bash
+conda create -n medmaic python=3.12
+conda activate medmaic
+pip install flask requests python-telegram-bot sentence-transformers faiss-cpu
+```
+
+### Step 4 — Lecture data
+
+Each lecture is a JSON file in `data/lectures/` of the shape:
+
+```json
+{
+  "lectureId": "Lecture_01",
+  "lectureTitle": "Medical Imaging — Lecture 01",
+  "totalSlides": 50,
+  "slides": [
+    {"slideNumber": 1, "title": "Introduction", "fullText": "...", "imageUrl": "..."}
+  ]
+}
+```
+
+To adapt MIMIC to your own course:
+
+1. Organise your slides as JPEG images and per-slide transcripts as plain text.
+2. Run the ingestion step (see [`REPRODUCE.md`](REPRODUCE.md)) to produce structured per-lecture JSON files.
+3. Place the resulting JSON files in `data/lectures/`.
+
+The 23 medical-imaging lectures used in the paper:
+<https://huggingface.co/datasets/zabir1996/mip-bench/tree/main/Lectures>
+
+### Step 5 — Fine-tune MIMIC-LM (optional)
+
+```bash
+# Download the QA dataset
+# https://huggingface.co/datasets/zabir1996/mimic-medical-imaging-qa
+# Then train with LoRA on an H100 (rank=32, alpha=64, epochs=3, batch=16).
+# See REPRODUCE.md for the full configuration.
+```
+
+Or use a pre-trained MIMIC-LM checkpoint — contact the authors.
+
+### Step 6 — Serve MIMIC-LM on the GPU host
+
+```bash
+ssh your-gpu-server
 conda activate vllm_deploy
 CUDA_VISIBLE_DEVICES=0 vllm serve checkpoints/alive-llama-lora/merged \
   --host 127.0.0.1 --port 8010 \
@@ -126,10 +179,14 @@ CUDA_VISIBLE_DEVICES=0 vllm serve checkpoints/alive-llama-lora/merged \
   --gpu-memory-utilization 0.90
 ```
 
-**Run the classroom locally** (5 terminals)
+Wait for `Application startup complete`.
+
+### Step 7 — Run the classroom locally
+
+Open 5 terminals on your local machine:
 
 ```bash
-# T1 — SSH tunnel to the GPU host
+# T1 — SSH tunnel
 ssh -L 8080:localhost:8010 user@your-gpu-server
 
 # T2 — TTS server
@@ -141,11 +198,12 @@ conda activate medmaic && pnpm dev   # http://localhost:3000/medmaic
 # T4 — MIMIC skill server
 conda activate medmaic && python3 skills/mimic/server.py
 
-# T5 — Telegram bot (optional)
-conda activate medmaic && python3 skills/mimic/telegram_bot.py
+# T5 — Telegram bot via OpenClaw (optional)
+export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh" && nvm use 22
+openclaw gateway restart
 ```
 
-**Sanity checks**
+### Step 8 — Sanity checks
 
 ```bash
 curl -s http://localhost:8080/v1/models                  # MIMIC-LM is up
@@ -157,17 +215,13 @@ curl -s http://localhost:3000/api/medmaic/lectures       # classroom API
 
 ## Telegram bot
 
-Create a bot via [@BotFather](https://t.me/BotFather), set the token in `skills/mimic/.env`:
-
-```
-TELEGRAM_BOT_TOKEN=your-bot-token
-```
-
-Then start the bot:
+Create a bot via [@BotFather](https://t.me/BotFather), then route it through OpenClaw:
 
 ```bash
-conda activate medmaic
-python3 skills/mimic/telegram_bot.py
+openclaw config set channels.telegram.botToken "YOUR_BOT_TOKEN"
+openclaw config set channels.telegram.dmPolicy open
+openclaw config set channels.telegram.allowFrom '["*"]'
+openclaw gateway restart
 ```
 
 Students message the bot to access lectures, quizzes, summaries, and free-text Q&A grounded in the active slide.
@@ -198,4 +252,4 @@ Students message the bot to access lectures, quizzes, summaries, and free-text Q
 
 ## Acknowledgements
 
-Computing resources provided by Rensselaer Polytechnic Institute.
+MIMIC is built on top of the open-source [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC) (Open Multi-Agent Interactive Classroom) framework by THU-MAIC. We thank the OpenMAIC authors for releasing the base classroom platform — playback engine, multi-agent UI, action runtime, and orchestration — that made this domain extension possible. Computing resources provided by Rensselaer Polytechnic Institute.
