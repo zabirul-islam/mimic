@@ -46,7 +46,26 @@ Per-table source files are in `results/` with the row-by-row mapping in `results
 
 ---
 
-## Quickstart
+## Repository layout
+
+```
+app/                  Next.js classroom UI + API routes
+  api/medmaic/        Quiz generation, lecture API, Q&A endpoints
+  medmaic/            Classroom and quiz front-end pages
+skills/mimic/         Telegram skill server
+  server.py           Flask webhook with LLM-first intent routing
+  telegram_bot.py     Direct Telegram bot
+  SKILL.md            Skill descriptor
+data/lectures/        23 structured medical-imaging lecture JSON files
+rag_retriever.py      FAISS-based course-specific RAG retriever
+tts_server.py         Text-to-speech server for AI narration
+results/              Per-table evaluation JSONs (paper Tables 3, 5, 6, 7)
+REPRODUCE.md          End-to-end reproduction recipe
+```
+
+---
+
+## Quickstart — load the released artefacts
 
 ```bash
 # 1. QA dataset
@@ -57,8 +76,6 @@ cat results/judge_gpt-4o.summary.json
 cat results/eval_summary.md
 ```
 
-To stand up the full classroom (browser UI + Telegram bot + RAG retriever + vLLM-served MIMIC-LM), see [Setup](#setup) below.
-
 ---
 
 ## Reproducing the paper numbers
@@ -67,9 +84,7 @@ See [`REPRODUCE.md`](REPRODUCE.md) for the end-to-end course-derivation pipeline
 
 ---
 
-## Setup
-
-This repository contains the MIMIC-specific contributions on top of the open-source [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC) classroom framework. To run the full classroom you also need OpenMAIC.
+## Setup — full classroom
 
 **Prerequisites**
 
@@ -81,27 +96,18 @@ This repository contains the MIMIC-specific contributions on top of the open-sou
 **Install**
 
 ```bash
-# 1. OpenMAIC base classroom
-git clone https://github.com/THU-MAIC/OpenMAIC.git
-cd OpenMAIC
+git clone https://github.com/zabirul-islam/mimic.git
+cd mimic
+
+# Node toolchain
 nvm install 22 && nvm use 22
 npm install -g pnpm
 pnpm install
 
-# 2. MIMIC contributions
-cd ..
-git clone https://github.com/zabirul-islam/mimic.git mimic-files
-cp -r mimic-files/app/api/medmaic   OpenMAIC/app/api/medmaic
-cp -r mimic-files/app/medmaic       OpenMAIC/app/medmaic
-cp -r mimic-files/skills/mimic      OpenMAIC/skills/mimic
-cp -r mimic-files/data/lectures     OpenMAIC/data/lectures
-cp    mimic-files/tts_server.py     OpenMAIC/
-cp    mimic-files/rag_retriever.py  OpenMAIC/
-
-# 3. Python deps
+# Python environment
 conda create -n medmaic python=3.12
 conda activate medmaic
-pip install flask requests python-telegram-bot sentence-transformers faiss-cpu
+pip install -r requirements.txt
 ```
 
 **Adapt to your own course**
@@ -135,9 +141,8 @@ conda activate medmaic && pnpm dev   # http://localhost:3000/medmaic
 # T4 — MIMIC skill server
 conda activate medmaic && python3 skills/mimic/server.py
 
-# T5 — Telegram bot via OpenClaw (optional)
-export NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh" && nvm use 22
-openclaw gateway restart
+# T5 — Telegram bot (optional)
+conda activate medmaic && python3 skills/mimic/telegram_bot.py
 ```
 
 **Sanity checks**
@@ -152,13 +157,17 @@ curl -s http://localhost:3000/api/medmaic/lectures       # classroom API
 
 ## Telegram bot
 
-Create a bot via [@BotFather](https://t.me/BotFather), then:
+Create a bot via [@BotFather](https://t.me/BotFather), set the token in `skills/mimic/.env`:
+
+```
+TELEGRAM_BOT_TOKEN=your-bot-token
+```
+
+Then start the bot:
 
 ```bash
-openclaw config set channels.telegram.botToken "YOUR_BOT_TOKEN"
-openclaw config set channels.telegram.dmPolicy open
-openclaw config set channels.telegram.allowFrom '["*"]'
-openclaw gateway restart
+conda activate medmaic
+python3 skills/mimic/telegram_bot.py
 ```
 
 Students message the bot to access lectures, quizzes, summaries, and free-text Q&A grounded in the active slide.
@@ -189,4 +198,4 @@ Students message the bot to access lectures, quizzes, summaries, and free-text Q
 
 ## Acknowledgements
 
-Built on top of the open-source [OpenMAIC](https://github.com/THU-MAIC/OpenMAIC) classroom framework. Computing resources provided by Rensselaer Polytechnic Institute.
+Computing resources provided by Rensselaer Polytechnic Institute.
